@@ -83,6 +83,7 @@ document.getElementById('DisplayChangeDmg10m').textContent = (ChangeDmg10m);
 document.getElementById('DisplayChangeDmgMax').textContent = (ChangeDmgMax);
 document.getElementById('DisplayDuration').textContent = (ResultDuration);
 document.getElementById('DisplayWeight').textContent = (ResultWeight);
+console.log(ResultWeight);
 };
 
 
