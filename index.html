@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+    <title>STRIFE Build Simulator</title>
+</head>
+<body>
+    <font size="10">STRIFE Build Simulator</font>
+    <form id="WeaponForm">
+        <input type="search" name="WeaponSelect" placeholder="武器を選択" list="t_list">
+        <datalist id="t_list">
+            <option value="Serenity Auto Rifle"></option>
+            <option value="F44 Dominance"></option>
+            <option value="Warmonger"></option>
+            <option value="WOUND Auto Rifle"></option>
+            <option value="AVG Auto Rifle"></option>
+        </datalist>
+    </form>
+    <form id="ModForm">
+        <select id="ModSelect">
+            <option value="none" selected>Modを選択</option>
+            <option value="Warlord">Warlord</option>
+            <option value="Emperor">Emperor</option>
+            <option value="Monarch">Monarch</option>
+        </select>
+    </form>
+    <form id="EnchantForm">
+        <select id="EnchantSelect">
+            <option value="none" selected>Enchantを選択</option>
+            <option value="Sunfire">Sunfire</option>
+            <option value="DemonPower">Demon Power</option>
+            <option value="SiphonLife">Siphon Life</option>
+        </select>
+        <select id="EnchantLevSelect">
+            <option value="none" selected>EnchantLevel</option>
+            <option value="EnchLev1">1</option>
+            <option value="EnchLev2">2</option>
+            <option value="EnchLev3">3</option>
+        </select>
+    </form>
+    <form id="OeForm">
+        <select id="OeSelect">
+            <option value="none" selected>OEを選択</option>
+            <option value="OeSunfire">Sunfire</option>
+            <option value="OeDemonPower">Demon Power</option>
+            <option value="OeSiphonLife">Siphon Life</option>
+        </select>
+        <select id="OeLevSelect">
+            <option value="none" selected>OELevel</option>
+            <option value="OeLev1">1</option>
+            <option value="OeLev2">2</option>
+            <option value="OeLev3">3</option>
+        </select>
+    </form>
+    <form id="AncientEnchantForm">
+        <select id="AncientEnchantSelect">
+            <option value="none" selected>AEを選択</option>
+            <option value="Bloodcraze">Bloodcraze</option>
+            <option value="ElementalOverload">Elemental Overload</option>
+            <option value="Mastercrafted">Mastercrafted</option>
+        </select>
+    </form>
+    <form id="AddonForm">
+        <select id="AddonSelect">
+            <option value="none" selected>Addonを選択</option>
+            <option value="ManaPowder">Mana Powder</option>
+            <option value="HeavyBullets">Heavy Bullets</option>
+            <option value="ExtendedMagazine">Extended Magazine</option>
+            <option value="QuickPull">Quick Pull</option>
+        </select>
+        <select id="AddonLevSelect">
+            <option value="none" selected>AddonLevel</option>
+            <option value="AddonLev0">無印</option>
+            <option value="AddonLev1">+</option>
+            <option value="AddonLev2">++</option>
+            <option value="AddonLev3">+++</option>
+        </select>
+    </form>
+    <table>
+        <tbody>
+            <tr>
+            <th>平均dmg</th><th>平均DPS</th><th>射撃機構</th><th>装弾数</th><th>腰撃ち精度</th><th>減衰(10m)</th>
+            </tr>
+            <tr>
+            <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td><td><span id="DisplayDps">0</span></td><td><span>未実装</span></td><td><span id="DisplayCapacity">0</span></td><td><span id="DisplaySpread">0</span></td><td><span id="DisplayChangeDmg10m">0</span></td>
+            </tr>
+            <tr>
+            <th>最高dmg</th><th>射撃時間(s)</th><th>レート(s)</th><th>リロード</th><th>ADS精度</th><th>最大減衰量</th>
+            </tr>
+            <tr>
+            <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td><td><span id="DisplayDuration">0</span></td><td><span id="DisplayRate">0</span></td><td><span id="DisplayReload">0</span></td><td><span id="DisplayAdsSpread">0</span></td><td><span id="DisplayChangeDmgMax">0</span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script src="index.js"></script>
+</html>
