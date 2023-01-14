@@ -68,7 +68,8 @@ ResultSpread = Math.abs(ResultSpread);
 ResultSpread = Math.round(ResultSpread * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
 ResultAdsSpread = Math.abs(ResultAdsSpread);
 ResultAdsSpread = Math.round(ResultAdsSpread * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
-console.log('平均-最高-レート-DPS',ResultAverageDmg+'('+ResultAverageHsDmg+')',ResultHighestDmg+'('+ResultHighestHsDmg+')',ResultRate,ResultDps);
+console.log('平均-最高-レート-DPS',ResultAverageDmg+'('+ResultAverageHsDmg+')',ResultHighestDmg+'('+ResultHighestHsDmg+')',ResultRate,ResultDps);console.log(ResultWeight);
+xconsole.log(ResultWeight);
 document.getElementById('DisplayAverageDmg').textContent = (ResultAverageDmg);
 document.getElementById('DisplayAverageHsDmg').textContent = (ResultAverageHsDmg);
 document.getElementById('DisplayHighestDmg').textContent = (ResultHighestDmg);
@@ -83,7 +84,6 @@ document.getElementById('DisplayChangeDmg10m').textContent = (ChangeDmg10m);
 document.getElementById('DisplayChangeDmgMax').textContent = (ChangeDmgMax);
 document.getElementById('DisplayDuration').textContent = (ResultDuration);
 document.getElementById('DisplayWeight').textContent = (ResultWeight);
-console.log(ResultWeight);
 };
 
 
