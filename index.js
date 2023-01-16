@@ -19,7 +19,8 @@ var WeaponReload = 0;
 var WeaponSpread = 0;
 var WeaponAdsSpread = 0;
 var WeaponWeight=0;
-var ResultWeight=0;
+var WeaponPellets=0;
+var WeaponReloadStyle=0;
 var ModDmg = 0;
 var ModHsBonus = 0;
 var ModRate = 0;
@@ -44,60 +45,57 @@ var ChangeDmgMax = 0;
 
 //最終計算関数
 function ResultCalc(){
-ResultAverageDmg = WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg + CritAverageDmg;
-ResultAverageHsDmg = ResultAverageDmg + WeaponHsBonus + ModHsBonus;
-ResultHighestDmg = WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg;
-ResultHighestHsDmg = ResultHighestDmg + WeaponHsBonus + ModHsBonus;
-ResultWeight = 0.2 + WeaponWeight + ModWeight + AddonWeight;
-ResultWeight = (ResultWeight/0.2);
-ResultRate = WeaponRate + ModRate;
-ResultCapacity = WeaponCapacity + ModCapacity + AddonCapacity;
-ResultReload = WeaponReload + ModReload + AddonReload;
-ResultDps = ResultAverageDmg * ResultRate;
-ResultSpread = WeaponSpread + ModSpread;
-ResultAdsSpread = WeaponAdsSpread + ModSpread;
-ResultDuration = (ResultCapacity / ResultRate);
-ResultDuration = Math.round( ResultDuration * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-ResultAverageDmg = Math.round( ResultAverageDmg * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-ResultAverageHsDmg = Math.round( ResultAverageHsDmg * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-ResultHighestDmg = Math.round( ResultHighestDmg * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-ResultHighestHsDmg = Math.round( ResultHighestHsDmg * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-ResultWeight = Math.round( ResultWeight * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
-ResultDps = Math.round( ResultDps * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
-ResultSpread = Math.abs(ResultSpread);
-ResultSpread = Math.round(ResultSpread * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
-ResultAdsSpread = Math.abs(ResultAdsSpread);
-ResultAdsSpread = Math.round(ResultAdsSpread * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
-console.log('平均-最高-レート-DPS',ResultAverageDmg+'('+ResultAverageHsDmg+')',ResultHighestDmg+'('+ResultHighestHsDmg+')',ResultRate,ResultDps);
-document.getElementById('DisplayAverageDmg').textContent = (ResultAverageDmg);
-document.getElementById('DisplayAverageHsDmg').textContent = (ResultAverageHsDmg);
-document.getElementById('DisplayHighestDmg').textContent = (ResultHighestDmg);
-document.getElementById('DisplayHighestHsDmg').textContent = (ResultHighestHsDmg);
-document.getElementById('DisplayRate').textContent = (ResultRate);
-document.getElementById('DisplayCapacity').textContent = (ResultCapacity);
-document.getElementById('DisplayReload').textContent = (ResultReload);
-document.getElementById('DisplaySpread').textContent = (ResultSpread);
-document.getElementById('DisplayAdsSpread').textContent = (ResultAdsSpread);
-document.getElementById('DisplayDps').textContent = (ResultDps);
-document.getElementById('DisplayChangeDmg10m').textContent = (ChangeDmg10m);
-document.getElementById('DisplayChangeDmgMax').textContent = (ChangeDmgMax);
-document.getElementById('DisplayDuration').textContent = (ResultDuration);
-document.getElementById('DisplayWeight').textContent = (ResultWeight);
+  ResultRate = WeaponRate + ModRate;
+  ResultCapacity = WeaponCapacity + ModCapacity + AddonCapacity;
+  ResultReload = WeaponReload + ModReload + AddonReload;
+  ResultDuration = Math.round( (ResultCapacity / ResultRate) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  ResultAverageDmg = Math.round( (WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg + CritAverageDmg) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  ResultAverageHsDmg = Math.round( (WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg + CritAverageDmg + WeaponHsBonus + ModHsBonus) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  ResultHighestDmg = Math.round( (WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  ResultHighestHsDmg = Math.round( (WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg + WeaponHsBonus + ModHsBonus) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  ResultWeight = Math.round( ((0.2 + WeaponWeight + ModWeight + AddonWeight)/0.2) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
+  ResultDps = Math.round( (ResultAverageDmg * ResultRate) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
+  ResultSpread = Math.round(Math.abs(WeaponSpread + ModSpread) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
+  ResultAdsSpread = Math.round(Math.abs(WeaponAdsSpread + ModSpread) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
+  document.getElementById('DisplayAverageDmg').textContent = (ResultAverageDmg);
+  document.getElementById('DisplayAverageHsDmg').textContent = (ResultAverageHsDmg);
+  document.getElementById('DisplayHighestDmg').textContent = (ResultHighestDmg);
+  document.getElementById('DisplayHighestHsDmg').textContent = (ResultHighestHsDmg);
+  document.getElementById('DisplayRate').textContent = (ResultRate);
+  document.getElementById('DisplayCapacity').textContent = (ResultCapacity);
+  document.getElementById('DisplayReload').textContent = (ResultReload);
+  document.getElementById('DisplaySpread').textContent = (ResultSpread);
+  document.getElementById('DisplayAdsSpread').textContent = (ResultAdsSpread);
+  document.getElementById('DisplayDps').textContent = (ResultDps);
+  document.getElementById('DisplayChangeDmg10m').textContent = (ChangeDmg10m);
+  document.getElementById('DisplayChangeDmgMax').textContent = (ChangeDmgMax);
+  document.getElementById('DisplayDuration').textContent = (ResultDuration);
+  document.getElementById('DisplayWeight').textContent = (ResultWeight);
+  if(WeaponPellets != 1){
+  document.getElementById('DisplayPellets').textContent = ('x'+WeaponPellets)
+  }else{
+    document.getElementById('DisplayPellets').textContent=(null)
+  };
+  if(WeaponReloadStyle != 0){
+    document.getElementById('DisplayReloadStyle').textContent=('/発')
+  }else{
+    document.getElementById('DisplayReloadStyle').textContent=(null)
+  }
 };
 
 
 //武器データ
-//Cs[0Dmg,1HsBonus,2Rate,3CritPer,4CritHighestDmg,5ChangeDmg10m,6MaxChangeDmg,7Capacity,8Reload,9Weight,10Spread,11ADS]
+//Cs[0Dmg,1HsBonus,2Rate,3CritPer,4CritHighestDmg,5ChangeDmg10m,6MaxChangeDmg,7Capacity,8Reload,9Weight,10Spread,11ADS,12ReloadStyle,13pellets]
 //Csp[0MonaDmg,1EmpHs,2MonaRate,3WlCapacity,4EmpCapacity,5WlReload,6MonaSpread,7EmpWeight]
-const SerenityCs = [13,4,15,0,0,-0.89,-6,32,50,0,0.6,0.15];
+const SerenityCs = [13,4,15,0,0,-0.89,-6,32,50,0,0.6,0.15,0,1];
 const SerenityCsp = [2,3,2,20,10,-30,-0.3,0.015];
-const DominanceCs = [9,1,20,0,0,-0.98,-3,25,60,0,0.8,0.1];
+const DominanceCs = [9,1,20,0,0,-0.98,-3,25,60,0,0.8,0.1,0,1];
 const DominanceCsp = [2,3,0,20,10,-30,-0.3,0.015];
-const WarmongerCs = [8,7,10,0.25,6,0,0,28,50,0,0.25,0];
+const WarmongerCs = [8,7,10,0.25,6,0,0,28,50,0,0.25,0,0,1];
 const WarmongerCsp = [2,6,2,20,10,-30,0,0.015];
-const WoundCs = [11,4,8,0.3,8,0,0,20,50,0,0.55,0.2];
+const WoundCs = [11,4,8,0.3,8,0,0,20,50,0,0.55,0.2,0,1];
 const WoundCsp = [3,4,2,20,10,-30,-0.3,0.015];
-const AvgCs = [16,4,12,0.3,3,-0.95,-6,25,50,0,0.6,0.1];
+const AvgCs = [16,4,12,0.3,3,-0.95,-6,25,50,0,0.6,0.1,1,1];
 const AvgCsp = [2,3,2,20,10,-30,-0.3,0.015];
 
 
@@ -117,6 +115,8 @@ document.getElementById('WeaponForm').onchange = function() {
       ChangeDmg10m = SerenityCs[5];
       ChangeDmgMax = SerenityCs[6];
       WeaponWeight = SerenityCs[9];
+      WeaponPellets = SerenityCs[13];
+      WeaponReloadStyle=SerenityCs[12];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = SerenityCsp[0];
@@ -148,6 +148,8 @@ document.getElementById('WeaponForm').onchange = function() {
       ChangeDmg10m = DominanceCs[5];
       ChangeDmgMax = DominanceCs[6];
       WeaponWeight = DominanceCs[9];
+      WeaponPellets = DominanceCs[13];
+      WeaponReloadStyle=DominanceCs[12];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = DominanceCsp[0];
@@ -179,6 +181,8 @@ document.getElementById('WeaponForm').onchange = function() {
       ChangeDmg10m = WarmongerCs[5];
       ChangeDmgMax = WarmongerCs[6];
       WeaponWeight = WarmongerCs[9];
+      WeaponPellets = WarmongerCs[13];
+      WeaponReloadStyle=WarmongerCs[12];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = WarmongerCsp[0];
@@ -210,6 +214,8 @@ document.getElementById('WeaponForm').onchange = function() {
       ChangeDmg10m = WoundCs[5];
       ChangeDmgMax = WoundCs[6];
       WeaponWeight = WoundCs[9];
+      WeaponPellets = WoundCs[13];
+      WeaponReloadStyle=WoundCs[12];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = WoundCsp[0];
@@ -240,6 +246,8 @@ document.getElementById('WeaponForm').onchange = function() {
       ChangeDmg10m = AvgCs[5];
       ChangeDmgMax = AvgCs[6];
       WeaponWeight = AvgCs[9];
+      WeaponPellets = AvgCs[13];
+      WeaponReloadStyle=AvgCs[12];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = AvgCsp[0];
@@ -277,6 +285,7 @@ document.getElementById('WeaponForm').onchange = function() {
       CritHighestDmg = 0;
       ChangeDmg10m = 0;
       ChangeDmgMax = 0;
+      WeaponPellets=0;
       break;
   };
   ResultCalc();
