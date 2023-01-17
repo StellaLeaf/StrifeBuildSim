@@ -53,7 +53,8 @@ function ResultCalc(){
   ResultAverageHsDmg = Math.round( (WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg + CritAverageDmg + WeaponHsBonus + ModHsBonus) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
   ResultHighestDmg = Math.round( (WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
   ResultHighestHsDmg = Math.round( (WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg + WeaponHsBonus + ModHsBonus) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  ResultWeight = Math.round( ((0.2 + WeaponWeight + ModWeight + AddonWeight)/0.2) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
+  ResultWeight = (0.2 + WeaponWeight + ModWeight + AddonWeight)/0.2
+  ResultWeight = Math.round( (ResultWeight) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
   ResultDps = Math.round( (ResultAverageDmg * ResultRate) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
   ResultSpread = Math.round(Math.abs(WeaponSpread + ModSpread) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   ResultAdsSpread = Math.round(Math.abs(WeaponAdsSpread + ModSpread) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
@@ -85,19 +86,18 @@ function ResultCalc(){
 
 
 //武器データ
-//Cs[0Dmg,1HsBonus,2Rate,3CritPer,4CritHighestDmg,5ChangeDmg10m,6MaxChangeDmg,7Capacity,8Reload,9Weight,10Spread,11ADS,12ReloadStyle,13pellets]
-//Csp[0MonaDmg,1EmpHs,2MonaRate,3WlCapacity,4EmpCapacity,5WlReload,6MonaSpread,7EmpWeight]
-const SerenityCs = [13,4,15,0,0,-0.89,-6,32,50,0,0.6,0.15,0,1];
-const SerenityCsp = [2,3,2,20,10,-30,-0.3,0.015];
-const DominanceCs = [9,1,20,0,0,-0.98,-3,25,60,0,0.8,0.1,0,1];
-const DominanceCsp = [2,3,0,20,10,-30,-0.3,0.015];
-const WarmongerCs = [8,7,10,0.25,6,0,0,28,50,0,0.25,0,0,1];
-const WarmongerCsp = [2,6,2,20,10,-30,0,0.015];
-const WoundCs = [11,4,8,0.3,8,0,0,20,50,0,0.55,0.2,0,1];
-const WoundCsp = [3,4,2,20,10,-30,-0.3,0.015];
-const AvgCs = [16,4,12,0.3,3,-0.95,-6,25,50,0,0.6,0.1,1,1];
-const AvgCsp = [2,3,2,20,10,-30,-0.3,0.015];
-
+//Cs[0Dmg,1HsBonus,2Capacity,3Reload,4ReloadStyle,5Rate,6pellets,7Spread,8ADS,9CritPer,10CritHighestDmg,11ChangeDmg10m,12MaxChangeDmg,13Weight]
+//Csp[0MonaDmg,1MonaRate,2MonaSpread,3EmpHs,4EmpCapacity,5EmpWeight,6WlCapacity,7WlReload]
+const SerenityCs = [13,4,32,50,0,15,1,0.6,0.15,0,0,-0.89,-6,0];
+const SerenityCsp = [2,2,-0.3,3,10,0.015,20,-30];
+const DominanceCs = [9,1,25,60,0,20,1,0.8,0.1,0,0,-0.98,-3,0];
+const DominanceCsp = [2,0,-0.3,3,10,0.015,20,-30];
+const WarmongerCs = [8,7,28,50,0,10,1,0.25,0,0.25,6,0,0,0];
+const WarmongerCsp = [2,2,0,6,10,0.015,20,-30];
+const WoundCs = [11,4,20,50,0,8,0.3,0.55,0.2,0.3,8,0,0];
+const WoundCsp = [3,2,-0.3,4,10,0.015,20,-30];
+const AvgCs = [16,4,25,50,1,12,1,0.6,0.1,0.3,3,-0.95,-6,1];
+const AvgCsp = [2,2,-0.3,3,10,0.015,20,-30];
 
 //武器処理
 document.getElementById('WeaponForm').onchange = function() {
@@ -105,163 +105,160 @@ document.getElementById('WeaponForm').onchange = function() {
     case 'Serenity Auto Rifle':
       WeaponDmg = SerenityCs[0];
       WeaponHsBonus = SerenityCs[1];
-      WeaponRate = SerenityCs[2];
-      WeaponCapacity = SerenityCs[7];
-      WeaponReload = SerenityCs[8];
-      WeaponSpread = SerenityCs[10];
-      WeaponAdsSpread = SerenityCs[11];
-      CritAverageDmg = (SerenityCs[3]*SerenityCs[4]);
-      CritHighestDmg = SerenityCs[4];
-      ChangeDmg10m = SerenityCs[5];
-      ChangeDmgMax = SerenityCs[6];
-      WeaponWeight = SerenityCs[9];
-      WeaponPellets = SerenityCs[13];
-      WeaponReloadStyle=SerenityCs[12];
+      WeaponCapacity = SerenityCs[2];
+      WeaponReload = SerenityCs[3];
+      WeaponReloadStyle=SerenityCs[4];
+      WeaponRate = SerenityCs[5];
+      WeaponPellets = SerenityCs[6];
+      WeaponSpread = SerenityCs[7];
+      WeaponAdsSpread = SerenityCs[8];
+      CritAverageDmg = (SerenityCs[9]*SerenityCs[10]);
+      CritHighestDmg = SerenityCs[10];
+      ChangeDmg10m = SerenityCs[11];
+      ChangeDmgMax = SerenityCs[12];
+      WeaponWeight = SerenityCs[13];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = SerenityCsp[0];
-          ModRate = SerenityCsp[2];
-          ModSpread = SerenityCsp[6];
+          ModRate = SerenityCsp[1];
+          ModSpread = SerenityCsp[2];
           break;
         case 'Emperor':
-          ModHsBonus = SerenityCsp[1];
+          ModHsBonus = SerenityCsp[3];
           ModCapacity = SerenityCsp[4];
-          ModWeight = SerenityCsp[7];
+          ModWeight = SerenityCsp[5];
           break;
         case 'Warlord':
-          ModCapacity = SerenityCsp[3];
-          ModReload = SerenityCsp[5];
+          ModCapacity = SerenityCsp[6];
+          ModReload = SerenityCsp[7];
           break;
       };
       break;
     case 'F44 Dominance':
       WeaponDmg = DominanceCs[0];
       WeaponHsBonus = DominanceCs[1];
-      WeaponRate = DominanceCs[2];
-      WeaponCapacity = DominanceCs[7];
-      WeaponReload = DominanceCs[8];
-      WeaponReload = DominanceCs[8];
-      WeaponSpread = DominanceCs[10];
-      WeaponAdsSpread = DominanceCs[11];
-      CritAverageDmg = (DominanceCs[3]*DominanceCs[4]);
-      CritHighestDmg = DominanceCs[4];
-      ChangeDmg10m = DominanceCs[5];
-      ChangeDmgMax = DominanceCs[6];
-      WeaponWeight = DominanceCs[9];
-      WeaponPellets = DominanceCs[13];
-      WeaponReloadStyle=DominanceCs[12];
+      WeaponCapacity = DominanceCs[2];
+      WeaponReload = DominanceCs[3];
+      WeaponReloadStyle=DominanceCs[4];
+      WeaponRate = DominanceCs[5];
+      WeaponPellets = DominanceCs[6];
+      WeaponSpread = DominanceCs[7];
+      WeaponAdsSpread = DominanceCs[8];
+      CritAverageDmg = (DominanceCs[9]*DominanceCs[10]);
+      CritHighestDmg = DominanceCs[10];
+      ChangeDmg10m = DominanceCs[11];
+      ChangeDmgMax = DominanceCs[12];
+      WeaponWeight = DominanceCs[13];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = DominanceCsp[0];
-          ModRate = DominanceCsp[2];
-          ModSpread = DominanceCsp[6];
+          ModRate = DominanceCsp[1];
+          ModSpread = DominanceCsp[2];
           break;
         case 'Emperor':
-          ModHsBonus = DominanceCsp[1];
+          ModHsBonus = DominanceCsp[3];
           ModCapacity = DominanceCsp[4];
-          ModWeight = DominanceCsp[7];
+          ModWeight = DominanceCsp[5];
           break;
         case 'Warlord':
-          ModCapacity = DominanceCsp[3];
-          ModReload = DominanceCsp[5];
+          ModCapacity = DominanceCsp[6];
+          ModReload = DominanceCsp[7];
           break;
       };
       break;
     case 'Warmonger':
       WeaponDmg = WarmongerCs[0];
       WeaponHsBonus = WarmongerCs[1];
-      WeaponRate = WarmongerCs[2];
-      WeaponCapacity = WarmongerCs[7];
-      WeaponReload = WarmongerCs[8];
-      WeaponReload = WarmongerCs[8];
-      WeaponSpread = WarmongerCs[10];
-      WeaponAdsSpread = WarmongerCs[11];
-      CritAverageDmg = (WarmongerCs[3]*WarmongerCs[4]);
-      CritHighestDmg = WarmongerCs[4];
-      ChangeDmg10m = WarmongerCs[5];
-      ChangeDmgMax = WarmongerCs[6];
-      WeaponWeight = WarmongerCs[9];
-      WeaponPellets = WarmongerCs[13];
-      WeaponReloadStyle=WarmongerCs[12];
+      WeaponCapacity = WarmongerCs[2];
+      WeaponReload = WarmongerCs[3];
+      WeaponReloadStyle=WarmongerCs[4];
+      WeaponRate = WarmongerCs[5];
+      WeaponPellets = WarmongerCs[6];
+      WeaponSpread = WarmongerCs[7];
+      WeaponAdsSpread = WarmongerCs[8];
+      CritAverageDmg = (WarmongerCs[9]*WarmongerCs[10]);
+      CritHighestDmg = WarmongerCs[10];
+      ChangeDmg10m = WarmongerCs[11];
+      ChangeDmgMax = WarmongerCs[12];
+      WeaponWeight = WarmongerCs[13];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = WarmongerCsp[0];
-          ModRate = WarmongerCsp[2];
-          ModSpread = WarmongerCsp[6];
+          ModRate = WarmongerCsp[1];
+          ModSpread = WarmongerCsp[2];
           break;
         case 'Emperor':
-          ModHsBonus = WarmongerCsp[1];
+          ModHsBonus = WarmongerCsp[3];
           ModCapacity = WarmongerCsp[4];
-          ModWeight = WarmongerCsp[7];
+          ModWeight = WarmongerCsp[5];
           break;
         case 'Warlord':
-          ModCapacity = WarmongerCsp[3];
-          ModReload = WarmongerCsp[5];
+          ModCapacity = WarmongerCsp[6];
+          ModReload = WarmongerCsp[7];
           break;
       };
       break;
     case 'WOUND Auto Rifle':
       WeaponDmg = WoundCs[0];
       WeaponHsBonus = WoundCs[1];
-      WeaponRate = WoundCs[2];
-      WeaponCapacity = WoundCs[7];
-      WeaponReload = WoundCs[8];
-      WeaponReload = WoundCs[8];
-      WeaponSpread = WoundCs[10];
-      WeaponAdsSpread = WoundCs[11];
-      CritAverageDmg = (WoundCs[3]*WoundCs[4]);
-      CritHighestDmg = WoundCs[4];
-      ChangeDmg10m = WoundCs[5];
-      ChangeDmgMax = WoundCs[6];
-      WeaponWeight = WoundCs[9];
-      WeaponPellets = WoundCs[13];
-      WeaponReloadStyle=WoundCs[12];
+      WeaponCapacity = WoundCs[2];
+      WeaponReload = WoundCs[3];
+      WeaponReloadStyle=WoundCs[4];
+      WeaponRate = WoundCs[5];
+      WeaponPellets = WoundCs[6];
+      WeaponSpread = WoundCs[7];
+      WeaponAdsSpread = WoundCs[8];
+      CritAverageDmg = (WoundCs[9]*WoundCs[10]);
+      CritHighestDmg = WoundCs[10];
+      ChangeDmg10m = WoundCs[11];
+      ChangeDmgMax = WoundCs[12];
+      WeaponWeight = WoundCs[13];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = WoundCsp[0];
-          ModRate = WoundCsp[2];
-          ModSpread = WoundCsp[6];
+          ModRate = WoundCsp[1];
+          ModSpread = WoundCsp[2];
           break;
         case 'Emperor':
-          ModHsBonus = WoundCsp[1];
+          ModHsBonus = WoundCsp[3];
           ModCapacity = WoundCsp[4];
-          ModWeight=WoundCsp[7];
+          ModWeight = WoundCsp[5];
           break;
         case 'Warlord':
-          ModCapacity = WoundCsp[3];
-          ModReload = WoundCsp[5];
+          ModCapacity = WoundCsp[6];
+          ModReload = WoundCsp[7];
           break;
       };
       break;
     case 'AVG Auto Rifle':
       WeaponDmg = AvgCs[0];
       WeaponHsBonus = AvgCs[1];
-      WeaponRate = AvgCs[2];
-      WeaponCapacity = AvgCs[7];
-      WeaponReload = AvgCs[8];
-      WeaponSpread = AvgCs[10];
-      WeaponAdsSpread = AvgCs[11];
-      CritAverageDmg = (AvgCs[3]*AvgCs[4]);
-      CritHighestDmg = AvgCs[4];
-      ChangeDmg10m = AvgCs[5];
-      ChangeDmgMax = AvgCs[6];
-      WeaponWeight = AvgCs[9];
-      WeaponPellets = AvgCs[13];
-      WeaponReloadStyle=AvgCs[12];
+      WeaponCapacity = AvgCs[2];
+      WeaponReload = AvgCs[3];
+      WeaponReloadStyle=AvgCs[4];
+      WeaponRate = AvgCs[5];
+      WeaponPellets = AvgCs[6];
+      WeaponSpread = AvgCs[7];
+      WeaponAdsSpread = AvgCs[8];
+      CritAverageDmg = (AvgCs[9]*AvgCs[10]);
+      CritHighestDmg = AvgCs[10];
+      ChangeDmg10m = AvgCs[11];
+      ChangeDmgMax = AvgCs[12];
+      WeaponWeight = AvgCs[13];
       switch (document.getElementById('ModForm').ModSelect.value){
         case 'Monarch':
           ModDmg = AvgCsp[0];
-          ModRate = AvgCsp[2];
-          ModSpread = AvgCsp[6];
+          ModRate = AvgCsp[1];
+          ModSpread = AvgCsp[2];
           break;
         case 'Emperor':
-          ModHsBonus = AvgCsp[1];
+          ModHsBonus = AvgCsp[3];
           ModCapacity = AvgCsp[4];
-          ModWeight = AvgCsp[7];
+          ModWeight = AvgCsp[5];
           break;
         case 'Warlord':
-          ModCapacity = AvgCsp[3];
-          ModReload = AvgCsp[5];
+          ModCapacity = AvgCsp[6];
+          ModReload = AvgCsp[7];
           break;
       };
       break;
@@ -270,9 +267,16 @@ document.getElementById('WeaponForm').onchange = function() {
       WeaponHsBonus = 0;
       WeaponCapacity = 0;
       WeaponReload = 0;
-      WeaponSpread =0;
+      WeaponReloadStyle=0;
+      WeaponRate = 0;
+      WeaponPellets = 0;
+      WeaponSpread = 0;
       WeaponAdsSpread = 0;
-      WeaponWeight =0;
+      CritAverageDmg = 0;
+      CritHighestDmg = 0;
+      ChangeDmg10m = 0;
+      ChangeDmgMax = 0;
+      WeaponWeight = 0;
       ModHsBonus = 0;
       ModDmg = 0;
       ModSpread = 0;
@@ -281,11 +285,6 @@ document.getElementById('WeaponForm').onchange = function() {
       ModCapacity = 0;
       ModReload = 0;
       ModWeight = 0;
-      CritAverageDmg = 0;
-      CritHighestDmg = 0;
-      ChangeDmg10m = 0;
-      ChangeDmgMax = 0;
-      WeaponPellets=0;
       break;
   };
   ResultCalc();
@@ -303,24 +302,24 @@ document.getElementById('ModForm').onchange = function() {
       ModWeight=0;
       switch (document.getElementById('WeaponForm').WeaponSelect.value) {
         case 'Serenity Auto Rifle':
-          ModCapacity = SerenityCsp[3];
-          ModReload = SerenityCsp[5];
+          ModCapacity = SerenityCsp[6];
+          ModReload = SerenityCsp[7];
           break;
         case 'F44 Dominance':
-          ModCapacity = DominanceCsp[3];
-          ModReload = DominanceCsp[5];
+          ModCapacity = DominanceCsp[6];
+          ModReload = DominanceCsp[7];
           break;
         case 'Warmonger':
-          ModCapacity = WarmongerCsp[3];
-          ModReload = WarmongerCsp[5];
+          ModCapacity = WarmongerCsp[6];
+          ModReload = WarmongerCsp[7];
           break;
         case 'WOUND Auto Rifle':
-          ModCapacity = WoundCsp[3];
-          ModReload = WoundCsp[5];
+          ModCapacity = WoundCsp[6];
+          ModReload = WoundCsp[7];
           break;
         case 'AVG Auto Rifle':
-          ModCapacity = AvgCsp[3];
-          ModReload = AvgCsp[5];
+          ModCapacity = AvgCsp[6];
+          ModReload = AvgCsp[7];
           break;
         default:
           ModCapacity = 0;
@@ -335,29 +334,29 @@ document.getElementById('ModForm').onchange = function() {
       ModSpread =0;
       switch (document.getElementById('WeaponForm').WeaponSelect.value) {
         case 'Serenity Auto Rifle':
-          ModHsBonus = SerenityCsp[1];
+          ModHsBonus = SerenityCsp[3];
           ModCapacity = SerenityCsp[4];
-          ModWeight = SerenityCsp[7];
+          ModWeight = SerenityCsp[5];
           break;
         case 'F44 Dominance':
-          ModHsBonus = DominanceCsp[1];
+          ModHsBonus = DominanceCsp[3];
           ModCapacity = DominanceCsp[4];
-          ModWeight = SerenityCsp[7];
+          ModWeight = SerenityCsp[5];
           break;
         case 'Warmonger':
-          ModHsBonus = WarmongerCsp[1];
+          ModHsBonus = WarmongerCsp[3];
           ModCapacity = WarmongerCsp[4];
-          ModWeight = WarmongerCsp[7];
+          ModWeight = WarmongerCsp[5];
           break;
         case 'WOUND Auto Rifle':
-          ModHsBonus = WoundCsp[1];
+          ModHsBonus = WoundCsp[3];
           ModCapacity = WoundCsp[4];
-          ModWeight = WoundCsp[7];
+          ModWeight = WoundCsp[5];
           break;
         case 'AVG Auto Rifle':
-          ModHsBonus = AvgCsp[1];
+          ModHsBonus = AvgCsp[3];
           ModCapacity = AvgCsp[4];
-          ModWeight = AvgCsp[7];
+          ModWeight = AvgCsp[5];
           break;
         default:
           ModHsBonus = 0;
@@ -374,28 +373,28 @@ document.getElementById('ModForm').onchange = function() {
       switch (document.getElementById('WeaponForm').WeaponSelect.value) {
         case 'Serenity Auto Rifle':
           ModDmg = SerenityCsp[0];
-          ModRate = SerenityCsp[2];
-          ModSpread = SerenityCsp[6];
+          ModRate = SerenityCsp[1];
+          ModSpread = SerenityCsp[2];
           break;
         case 'F44 Dominance':
           ModDmg = DominanceCsp[0];
-          ModRate = DominanceCsp[2];
-          ModSpread = DominanceCsp[6];
+          ModRate = DominanceCsp[1];
+          ModSpread = DominanceCsp[2];
           break;
         case 'Warmonger':
           ModDmg = WarmongerCsp[0];
-          ModRate = WarmongerCsp[2];
-          ModSpread = WarmongerCsp[6];
+          ModRate = WarmongerCsp[1];
+          ModSpread = WarmongerCsp[2];
           break;
         case 'WOUND Auto Rifle':
           ModDmg = WoundCsp[0];
-          ModRate = WoundCsp[2];
-          ModSpread = WoundCsp[6];
+          ModRate = WoundCsp[1];
+          ModSpread = WoundCsp[2];
           break;
         case 'AVG Auto Rifle':
           ModDmg = AvgCsp[0];
-          ModRate = AvgCsp[2];
-          ModSpread = AvgCsp[6];
+          ModRate = AvgCsp[1];
+          ModSpread = AvgCsp[2];
           break;
         default:
           ModDmg = 0;
