@@ -1,13 +1,13 @@
 //Result[0Av,1AvHs,2Hi,3HiHs,4Cap,5Relo,6Rate,7Dps,8Sprd,9Ads,10Wt,11Dura,12CrAv,13CrHi,14C10m,15CMax]
-var Result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+var Result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 //Weapon[0Dmg,1HsB,2Cap,3Relo,4RlSt,5Rate,6Plet,7Sprd,8Ads,9Wt]
 var Weapon = [0,0,0,0,0,0,0,0,0,0];
 //Mod[0Dmg,1HsB,2Cap,3Relo,4Rate,5Sprd,6Wt]
 var Mod = [0,0,0,0,0,0,0];
 //Ench[0Av,1Hi,2OeAv,3OeHi]
 var Ench = [0,0,0,0];
-//AE[0Dmg]
-var Ae = [0];
+//AE[0Av,1Hi]
+var Ae = [0,0];
 //Addon[0Av,1Hi,2Cap,3Relo,4Wt]
 var Addon = [0,0,0,0,0]
 
@@ -15,8 +15,8 @@ var Addon = [0,0,0,0,0]
 function ResultCalc(){
   Result[0] = Math.round( (Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
   Result[1] = Math.round( (Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  Result[2] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[0] + Addon[1] + Result[13]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  Result[3] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[0] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[2] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[1] + Addon[1] + Result[13]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[3] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
   Result[4] = Weapon[2] + Mod[2] + Addon[2];
   Result[5] = Weapon[3] + Mod[3] + Addon[3];
   Result[6] = Weapon[5] + Mod[4];
@@ -24,7 +24,7 @@ function ResultCalc(){
   Result[8] = Math.round(Math.abs(Weapon[7] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   Result[10] = Math.round( ((0.2 + Weapon[9] + Mod[6] + Addon[4])/0.2) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
-  Result[11] = Math.round( (Result[4] / Result[6]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[11] = Math.round((Result[4]/Result[6])*Math.pow( 10, 1 ))/Math.pow( 10, 1 );
   document.getElementById('DisplayAverageDmg').textContent = (Result[0]);
   document.getElementById('DisplayAverageHsDmg').textContent = (Result[1]);
   document.getElementById('DisplayHighestDmg').textContent = (Result[2]);
@@ -37,9 +37,13 @@ function ResultCalc(){
   document.getElementById('DisplayDps').textContent = (Result[7]);
   document.getElementById('DisplayChangeDmg10m').textContent = (Result[14]);
   document.getElementById('DisplayChangeDmgMax').textContent = (Result[15]);
-  document.getElementById('DisplayDuration').textContent = (Result[11]);
   document.getElementById('DisplayWeight').textContent = (Result[10]);
-  if(Weapon[6] != 1){
+  if(Result[11] > 0){
+  document.getElementById('DisplayDuration').textContent = (Result[11]);
+  }else{
+  document.getElementById('DisplayDuration').textContent = 0;
+  };
+  if(Weapon[6] > 1){
   document.getElementById('DisplayPellets').textContent = ('x'+Weapon[6])
   }else{
     document.getElementById('DisplayPellets').textContent=(null)
@@ -284,6 +288,7 @@ function WeaponMod(){
       Weapon[6] = 0;
       Weapon[7] = 0;
       Weapon[8] = 0;
+      Result[11] = 0;
       Result[12] = 0;
       Result[13] = 0;
       Result[14] = 0;
@@ -303,16 +308,16 @@ function WeaponMod(){
 
 //武器データ
 //Cs[0Dmg,1HsBonus,2Capacity,3Reload,4ReloadStyle,5Rate,6pellets,7Spread,8ADS,9CritPer,10CritDmg,11Change10m,12MaxChange,13Weight]
-//Csp[0MonaDmg,1MonaRate,2MonaSpread,3EmpHs,4EmpCapacity,5EmpWeight,6WlCapacity,7WlReload]
 const SerenityCs = [13,4,32,50,0,15,1,0.6,0.15,0,0,-0.89,-6,0];
-const SerenityCsp = [2,2,-0.3,3,10,0.015,20,-30];
 const DominanceCs = [9,1,25,60,0,20,1,0.8,0.1,0,0,-0.98,-3,0];
-const DominanceCsp = [2,0,-0.3,3,10,0.015,20,-30];
 const WarmongerCs = [8,7,28,50,0,10,1,0.25,0,0.25,6,0,0,0];
-const WarmongerCsp = [2,2,0,6,10,0.015,20,-30];
 const WoundCs = [11,4,20,50,0,8,1,0.55,0.2,0.3,8,0,0,0];
-const WoundCsp = [3,2,-0.3,4,10,0.015,20,-30];
 const AvgCs = [16,4,25,50,1,12,1,0.6,0.1,0.3,3,-0.95,-6,0];
+//Csp[0MonaDmg,1MonaRate,2MonaSpread,3EmpHs,4EmpCapacity,5EmpWeight,6WlCapacity,7WlReload]
+const SerenityCsp = [2,2,-0.3,3,10,0.015,20,-30];
+const DominanceCsp = [2,0,-0.3,3,10,0.015,20,-30];
+const WarmongerCsp = [2,2,0,6,10,0.015,20,-30];
+const WoundCsp = [3,2,-0.3,4,10,0.015,20,-30];
 const AvgCsp = [2,2,-0.3,3,10,0.015,20,-30];
 
 //トリガー
@@ -479,21 +484,35 @@ document.getElementById('OeForm').onchange = function() {
 const BcDmg = 7;
 const EoDmg = 6;
 const McDmg = 1;
+const CfDmg = 4;
+const SdAverageDmg = 1;
+const SdHighestDmg = 20;
 
 //AEダメージ処理
 document.getElementById('AncientEnchantForm').onchange = function() {
     switch (document.getElementById('AncientEnchantForm').AncientEnchantSelect.value) {
       case 'Bloodcraze':
         Ae[0] = BcDmg;
+        Ae[1] = BcDmg;
         break;
       case 'ElementalOverload':
         Ae[0] = EoDmg;
+        Ae[1] = EoDmg;
         break;
       case 'Mastercrafted':
         Ae[0] = McDmg;
+        Ae[1] = McDmg;
         break;
+      case 'ConcentratedFire':
+        Ae[0] = CfDmg;
+        Ae[1] = CfDmg;
+        break;
+      case 'SuddenDeath':
+        Ae[0] = SdAverageDmg;
+        Ae[1] = SdHighestDmg;
       default:
         Ae[0] = 0;
+        Ae[1] = 0;
         break;
     };
     ResultCalc();
