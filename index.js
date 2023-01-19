@@ -1,92 +1,308 @@
-//定義リスト
-var ResultAverageDmg = 0;
-var ResultAverageHsDmg = 0;
-var ResultHighestDmg = 0;
-var ResultHighestHsDmg = 0;
-var ResultRate = 0;
-var ResultDps = 0;
-var ResultCapacity = 0;
-var ResultReload = 0;
-var ResultSpread = 0;
-var ResultAdsSpread= 0;
-var ResultDuration=0;
-var ResultWeight =0;
-var WeaponDmg = 0;
-var WeaponHsBonus = 0;
-var WeaponRate = 0;
-var WeaponCapacity = 0;
-var WeaponReload = 0;
-var WeaponSpread = 0;
-var WeaponAdsSpread = 0;
-var WeaponWeight=0;
-var WeaponPellets=0;
-var WeaponReloadStyle=0;
-var ModDmg = 0;
-var ModHsBonus = 0;
-var ModRate = 0;
-var ModCapacity = 0;
-var ModReload = 0;
-var ModSpread = 0;
-var ModWeight = 0;
-var EnchantAverageDmg = 0;
-var EnchantHighestDmg = 0;
-var OeAverageDmg = 0;
-var OeHighestDmg = 0;
-var AeDmg = 0;
-var AddonAverageDmg = 0;
-var AddonHighestDmg = 0;
-var AddonCapacity = 0;
-var AddonReload = 0;
-var AddonWeight = 0;
-var CritAverageDmg = 0;
-var CritHighestDmg = 0;
-var ChangeDmg10m = 0;
-var ChangeDmgMax = 0;
+//Result[0Av,1AvHs,2Hi,3HiHs,4Cap,5Relo,6Rate,7Dps,8Sprd,9Ads,10Wt,11Dura,12CrAv,13CrHi,14C10m,15CMax]
+var Result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+//Weapon[0Dmg,1HsB,2Cap,3Relo,4RlSt,5Rate,6Plet,7Sprd,8Ads,9Wt]
+var Weapon = [0,0,0,0,0,0,0,0,0,0];
+//Mod[0Dmg,1HsB,2Cap,3Relo,4Rate,5Sprd,6Wt]
+var Mod = [0,0,0,0,0,0,0];
+//Ench[0Av,1Hi,2OeAv,3OeHi]
+var Ench = [0,0,0,0];
+//AE[0Dmg]
+var Ae = [0];
+//Addon[0Av,1Hi,2Cap,3Relo,4Wt]
+var Addon = [0,0,0,0,0]
 
-//最終計算関数
+//計算
 function ResultCalc(){
-  ResultRate = WeaponRate + ModRate;
-  ResultCapacity = WeaponCapacity + ModCapacity + AddonCapacity;
-  ResultReload = WeaponReload + ModReload + AddonReload;
-  ResultDuration = Math.round( (ResultCapacity / ResultRate) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  ResultAverageDmg = Math.round( (WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg + CritAverageDmg) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  ResultAverageHsDmg = Math.round( (WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg + CritAverageDmg + WeaponHsBonus + ModHsBonus) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  ResultHighestDmg = Math.round( (WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  ResultHighestHsDmg = Math.round( (WeaponDmg + ModDmg + EnchantHighestDmg + OeHighestDmg + AeDmg + AddonHighestDmg + CritHighestDmg + WeaponHsBonus + ModHsBonus) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
-  ResultWeight = (0.2 + WeaponWeight + ModWeight + AddonWeight)/0.2
-  ResultWeight = Math.round( (ResultWeight) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
-  ResultDps = Math.round( (ResultAverageDmg * ResultRate) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
-  ResultSpread = Math.round(Math.abs(WeaponSpread + ModSpread) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
-  ResultAdsSpread = Math.round(Math.abs(WeaponAdsSpread + ModSpread) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
-  document.getElementById('DisplayAverageDmg').textContent = (ResultAverageDmg);
-  document.getElementById('DisplayAverageHsDmg').textContent = (ResultAverageHsDmg);
-  document.getElementById('DisplayHighestDmg').textContent = (ResultHighestDmg);
-  document.getElementById('DisplayHighestHsDmg').textContent = (ResultHighestHsDmg);
-  document.getElementById('DisplayRate').textContent = (ResultRate);
-  document.getElementById('DisplayCapacity').textContent = (ResultCapacity);
-  document.getElementById('DisplayReload').textContent = (ResultReload);
-  document.getElementById('DisplaySpread').textContent = (ResultSpread);
-  document.getElementById('DisplayAdsSpread').textContent = (ResultAdsSpread);
-  document.getElementById('DisplayDps').textContent = (ResultDps);
-  document.getElementById('DisplayChangeDmg10m').textContent = (ChangeDmg10m);
-  document.getElementById('DisplayChangeDmgMax').textContent = (ChangeDmgMax);
-  document.getElementById('DisplayDuration').textContent = (ResultDuration);
-  document.getElementById('DisplayWeight').textContent = (ResultWeight);
-  if(WeaponPellets != 1){
-  document.getElementById('DisplayPellets').textContent = ('x'+WeaponPellets)
+  Result[0] = Math.round( (Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[1] = Math.round( (Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[2] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[0] + Addon[1] + Result[13]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[3] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[0] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  Result[4] = Weapon[2] + Mod[2] + Addon[2];
+  Result[5] = Weapon[3] + Mod[3] + Addon[3];
+  Result[6] = Weapon[5] + Mod[4];
+  Result[7] = Math.round( (Result[0] * Result[6]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
+  Result[8] = Math.round(Math.abs(Weapon[7] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
+  Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
+  Result[10] = Math.round( ((0.2 + Weapon[9] + Mod[6] + Addon[4])/0.2) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
+  Result[11] = Math.round( (Result[4] / Result[6]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
+  document.getElementById('DisplayAverageDmg').textContent = (Result[0]);
+  document.getElementById('DisplayAverageHsDmg').textContent = (Result[1]);
+  document.getElementById('DisplayHighestDmg').textContent = (Result[2]);
+  document.getElementById('DisplayHighestHsDmg').textContent = (Result[3]);
+  document.getElementById('DisplayRate').textContent = (Result[6]);
+  document.getElementById('DisplayCapacity').textContent = (Result[4]);
+  document.getElementById('DisplayReload').textContent = (Result[5]);
+  document.getElementById('DisplaySpread').textContent = (Result[8]);
+  document.getElementById('DisplayAdsSpread').textContent = (Result[9]);
+  document.getElementById('DisplayDps').textContent = (Result[7]);
+  document.getElementById('DisplayChangeDmg10m').textContent = (Result[14]);
+  document.getElementById('DisplayChangeDmgMax').textContent = (Result[15]);
+  document.getElementById('DisplayDuration').textContent = (Result[11]);
+  document.getElementById('DisplayWeight').textContent = (Result[10]);
+  if(Weapon[6] != 1){
+  document.getElementById('DisplayPellets').textContent = ('x'+Weapon[6])
   }else{
     document.getElementById('DisplayPellets').textContent=(null)
   };
-  if(WeaponReloadStyle != 0){
+  if(Weapon[4] != 0){
     document.getElementById('DisplayReloadStyle').textContent=('/発')
   }else{
     document.getElementById('DisplayReloadStyle').textContent=(null)
   }
 };
+function WeaponMod(){
+  var WeaponSelect2 = document.getElementById('WeaponForm').WeaponSelect.value;
+  var ModSelect2 = document.getElementById('ModForm').ModSelect.value;
+  switch (WeaponSelect2) {
+    case 'Serenity Auto Rifle':
+      Weapon[0] = SerenityCs[0];
+      Weapon[1] = SerenityCs[1];
+      Weapon[2] = SerenityCs[2];
+      Weapon[3] = SerenityCs[3];
+      Weapon[4] = SerenityCs[4];
+      Weapon[5] = SerenityCs[5];
+      Weapon[6] = SerenityCs[6];
+      Weapon[7] = SerenityCs[7];
+      Weapon[8] = SerenityCs[8];
+      Result[12] = (SerenityCs[9]*SerenityCs[10]);
+      Result[13] = SerenityCs[10];
+      Result[14] = SerenityCs[11];
+      Result[15] = SerenityCs[12];
+      Weapon[9] = SerenityCs[13];
+      switch (ModSelect2){
+        case 'Monarch':
+          Mod[0] = SerenityCsp[0];
+          Mod[1] = 0;
+          Mod[2] = 0;
+          Mod[3] = 0;
+          Mod[4] = SerenityCsp[1];
+          Mod[5] = SerenityCsp[2];
+          Mod[6] = 0;
+          break;
+        case 'Emperor':
+          Mod[1] = SerenityCsp[3];
+          Mod[2] = SerenityCsp[4];
+          Mod[3] = 0;
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = SerenityCsp[5];
+          break;
+        case 'Warlord':
+          Mod[0] = 0;
+          Mod[1] = 0;
+          Mod[2] = SerenityCsp[6];
+          Mod[3] = SerenityCsp[7];
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = 0;
+          break;
+      };
+      break;
+    case 'F44 Dominance':
+      Weapon[0] = DominanceCs[0];
+      Weapon[1] = DominanceCs[1];
+      Weapon[2] = DominanceCs[2];
+      Weapon[3] = DominanceCs[3];
+      Weapon[4] = DominanceCs[4];
+      Weapon[5] = DominanceCs[5];
+      Weapon[6] = DominanceCs[6];
+      Weapon[7] = DominanceCs[7];
+      Weapon[8] = DominanceCs[8];
+      Result[12] = (DominanceCs[9]*DominanceCs[10]);
+      Result[13] = DominanceCs[10];
+      Result[14] = DominanceCs[11];
+      Result[15] = DominanceCs[12];
+      Weapon[9] = DominanceCs[13];
+      switch (ModSelect2){
+        case 'Monarch':
+          Mod[0] = DominanceCsp[0];
+          Mod[1] = 0;
+          Mod[2] = 0;
+          Mod[3] = 0;
+          Mod[4] = DominanceCsp[1];
+          Mod[5] = DominanceCsp[2];
+          Mod[6] = 0;
+          break;
+        case 'Emperor':
+          Mod[1] = DominanceCsp[3];
+          Mod[2] = DominanceCsp[4];
+          Mod[3] = 0;
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = DominanceCsp[5];
+          break;
+        case 'Warlord':
+          Mod[0] = 0;
+          Mod[1] = 0;
+          Mod[2] = DominanceCsp[6];
+          Mod[3] = DominanceCsp[7];
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = 0;
+          break;
+      };
+      break;
+    case 'Warmonger':
+      Weapon[0] = WarmongerCs[0];
+      Weapon[1] = WarmongerCs[1];
+      Weapon[2] = WarmongerCs[2];
+      Weapon[3] = WarmongerCs[3];
+      Weapon[4] = WarmongerCs[4];
+      Weapon[5] = WarmongerCs[5];
+      Weapon[6] = WarmongerCs[6];
+      Weapon[7] = WarmongerCs[7];
+      Weapon[8] = WarmongerCs[8];
+      Result[12] = (WarmongerCs[9]*WarmongerCs[10]);
+      Result[13] = WarmongerCs[10];
+      Result[14] = WarmongerCs[11];
+      Result[15] = WarmongerCs[12];
+      Weapon[9] = WarmongerCs[13];
+      switch (ModSelect2){
+        case 'Monarch':
+          Mod[0] = WarmongerCsp[0];
+          Mod[1] = 0;
+          Mod[2] = 0;
+          Mod[3] = 0;
+          Mod[4] = WarmongerCsp[1];
+          Mod[5] = WarmongerCsp[2];
+          Mod[6] = 0;
+          break;
+        case 'Emperor':
+          Mod[1] = WarmongerCsp[3];
+          Mod[2] = WarmongerCsp[4];
+          Mod[3] = 0;
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = WarmongerCsp[5];
+          break;
+        case 'Warlord':
+          Mod[0] = 0;
+          Mod[1] = 0;
+          Mod[2] = WarmongerCsp[6];
+          Mod[3] = WarmongerCsp[7];
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = 0;
+          break;
+      };
+      break;
+    case 'WOUND Auto Rifle':
+      Weapon[0] = WoundCs[0];
+      Weapon[1] = WoundCs[1];
+      Weapon[2] = WoundCs[2];
+      Weapon[3] = WoundCs[3];
+      Weapon[4] = WoundCs[4];
+      Weapon[5] = WoundCs[5];
+      Weapon[6] = WoundCs[6];
+      Weapon[7] = WoundCs[7];
+      Weapon[8] = WoundCs[8];
+      Result[12] = (WoundCs[9]*WoundCs[10]);
+      Result[13] = WoundCs[10];
+      Result[14] = WoundCs[11];
+      Result[15] = WoundCs[12];
+      Weapon[9] = WoundCs[13];
+      switch (ModSelect2){
+        case 'Monarch':
+          Mod[0] = WoundCsp[0];
+          Mod[1] = 0;
+          Mod[2] = 0;
+          Mod[3] = 0;
+          Mod[4] = WoundCsp[1];
+          Mod[5] = WoundCsp[2];
+          Mod[6] = 0;
+          break;
+        case 'Emperor':
+          Mod[1] = WoundCsp[3];
+          Mod[2] = WoundCsp[4];
+          Mod[3] = 0;
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = WoundCsp[5];
+          break;
+        case 'Warlord':
+          Mod[0] = 0;
+          Mod[1] = 0;
+          Mod[2] = WoundCsp[6];
+          Mod[3] = WoundCsp[7];
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = 0;
+          break;
+      };
+      break;
+    case 'AVG Auto Rifle':
+      Weapon[0] = AvgCs[0];
+      Weapon[1] = AvgCs[1];
+      Weapon[2] = AvgCs[2];
+      Weapon[3] = AvgCs[3];
+      Weapon[4] = AvgCs[4];
+      Weapon[5] = AvgCs[5];
+      Weapon[6] = AvgCs[6];
+      Weapon[7] = AvgCs[7];
+      Weapon[8] = AvgCs[8];
+      Result[12] = (AvgCs[9]*AvgCs[10]);
+      Result[13] = AvgCs[10];
+      Result[14] = AvgCs[11];
+      Result[15] = AvgCs[12];
+      Weapon[9] = AvgCs[13];
+      switch (ModSelect2){
+        case 'Monarch':
+          Mod[0] = AvgCsp[0];
+          Mod[1] = 0;
+          Mod[2] = 0;
+          Mod[3] = 0;
+          Mod[4] = AvgCsp[1];
+          Mod[5] = AvgCsp[2];
+          Mod[6] = 0;
+          break;
+        case 'Emperor':
+          Mod[1] = AvgCsp[3];
+          Mod[2] = AvgCsp[4];
+          Mod[3] = 0;
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = AvgCsp[5];
+          break;
+        case 'Warlord':
+          Mod[0] = 0;
+          Mod[1] = 0;
+          Mod[2] = AvgCsp[6];
+          Mod[3] = AvgCsp[7];
+          Mod[4] = 0;
+          Mod[5] = 0;
+          Mod[6] = 0;
+          break;
+      };
+      break;
+    default:
+      Weapon[0] = 0;
+      Weapon[1] = 0;
+      Weapon[2] = 0;
+      Weapon[3] = 0;
+      Weapon[4] = 0;
+      Weapon[5] = 0;
+      Weapon[6] = 0;
+      Weapon[7] = 0;
+      Weapon[8] = 0;
+      Result[12] = 0;
+      Result[13] = 0;
+      Result[14] = 0;
+      Result[15] = 0;
+      Weapon[9] = 0;
+      Mod[1] = 0;
+      Mod[0] = 0;
+      Mod[5] = 0;
+      Mod[4] = 0;
+      Mod[2] = 0;
+      Mod[3] = 0;
+      Mod[6] = 0;
+      break;
+  };
+};
 
 
 //武器データ
-//Cs[0Dmg,1HsBonus,2Capacity,3Reload,4ReloadStyle,5Rate,6pellets,7Spread,8ADS,9CritPer,10CritHighestDmg,11ChangeDmg10m,12MaxChangeDmg,13Weight]
+//Cs[0Dmg,1HsBonus,2Capacity,3Reload,4ReloadStyle,5Rate,6pellets,7Spread,8ADS,9CritPer,10CritDmg,11Change10m,12MaxChange,13Weight]
 //Csp[0MonaDmg,1MonaRate,2MonaSpread,3EmpHs,4EmpCapacity,5EmpWeight,6WlCapacity,7WlReload]
 const SerenityCs = [13,4,32,50,0,15,1,0.6,0.15,0,0,-0.89,-6,0];
 const SerenityCsp = [2,2,-0.3,3,10,0.015,20,-30];
@@ -94,325 +310,18 @@ const DominanceCs = [9,1,25,60,0,20,1,0.8,0.1,0,0,-0.98,-3,0];
 const DominanceCsp = [2,0,-0.3,3,10,0.015,20,-30];
 const WarmongerCs = [8,7,28,50,0,10,1,0.25,0,0.25,6,0,0,0];
 const WarmongerCsp = [2,2,0,6,10,0.015,20,-30];
-const WoundCs = [11,4,20,50,0,8,0.3,0.55,0.2,0.3,8,0,0];
+const WoundCs = [11,4,20,50,0,8,1,0.55,0.2,0.3,8,0,,0];
 const WoundCsp = [3,2,-0.3,4,10,0.015,20,-30];
-const AvgCs = [16,4,25,50,1,12,1,0.6,0.1,0.3,3,-0.95,-6,1];
+const AvgCs = [16,4,25,50,1,12,1,0.6,0.1,0.3,3,-0.95,-6,0];
 const AvgCsp = [2,2,-0.3,3,10,0.015,20,-30];
 
-//武器処理
+//トリガー
 document.getElementById('WeaponForm').onchange = function() {
-  switch (document.getElementById('WeaponForm').WeaponSelect.value) {
-    case 'Serenity Auto Rifle':
-      WeaponDmg = SerenityCs[0];
-      WeaponHsBonus = SerenityCs[1];
-      WeaponCapacity = SerenityCs[2];
-      WeaponReload = SerenityCs[3];
-      WeaponReloadStyle=SerenityCs[4];
-      WeaponRate = SerenityCs[5];
-      WeaponPellets = SerenityCs[6];
-      WeaponSpread = SerenityCs[7];
-      WeaponAdsSpread = SerenityCs[8];
-      CritAverageDmg = (SerenityCs[9]*SerenityCs[10]);
-      CritHighestDmg = SerenityCs[10];
-      ChangeDmg10m = SerenityCs[11];
-      ChangeDmgMax = SerenityCs[12];
-      WeaponWeight = SerenityCs[13];
-      switch (document.getElementById('ModForm').ModSelect.value){
-        case 'Monarch':
-          ModDmg = SerenityCsp[0];
-          ModRate = SerenityCsp[1];
-          ModSpread = SerenityCsp[2];
-          break;
-        case 'Emperor':
-          ModHsBonus = SerenityCsp[3];
-          ModCapacity = SerenityCsp[4];
-          ModWeight = SerenityCsp[5];
-          break;
-        case 'Warlord':
-          ModCapacity = SerenityCsp[6];
-          ModReload = SerenityCsp[7];
-          break;
-      };
-      break;
-    case 'F44 Dominance':
-      WeaponDmg = DominanceCs[0];
-      WeaponHsBonus = DominanceCs[1];
-      WeaponCapacity = DominanceCs[2];
-      WeaponReload = DominanceCs[3];
-      WeaponReloadStyle=DominanceCs[4];
-      WeaponRate = DominanceCs[5];
-      WeaponPellets = DominanceCs[6];
-      WeaponSpread = DominanceCs[7];
-      WeaponAdsSpread = DominanceCs[8];
-      CritAverageDmg = (DominanceCs[9]*DominanceCs[10]);
-      CritHighestDmg = DominanceCs[10];
-      ChangeDmg10m = DominanceCs[11];
-      ChangeDmgMax = DominanceCs[12];
-      WeaponWeight = DominanceCs[13];
-      switch (document.getElementById('ModForm').ModSelect.value){
-        case 'Monarch':
-          ModDmg = DominanceCsp[0];
-          ModRate = DominanceCsp[1];
-          ModSpread = DominanceCsp[2];
-          break;
-        case 'Emperor':
-          ModHsBonus = DominanceCsp[3];
-          ModCapacity = DominanceCsp[4];
-          ModWeight = DominanceCsp[5];
-          break;
-        case 'Warlord':
-          ModCapacity = DominanceCsp[6];
-          ModReload = DominanceCsp[7];
-          break;
-      };
-      break;
-    case 'Warmonger':
-      WeaponDmg = WarmongerCs[0];
-      WeaponHsBonus = WarmongerCs[1];
-      WeaponCapacity = WarmongerCs[2];
-      WeaponReload = WarmongerCs[3];
-      WeaponReloadStyle=WarmongerCs[4];
-      WeaponRate = WarmongerCs[5];
-      WeaponPellets = WarmongerCs[6];
-      WeaponSpread = WarmongerCs[7];
-      WeaponAdsSpread = WarmongerCs[8];
-      CritAverageDmg = (WarmongerCs[9]*WarmongerCs[10]);
-      CritHighestDmg = WarmongerCs[10];
-      ChangeDmg10m = WarmongerCs[11];
-      ChangeDmgMax = WarmongerCs[12];
-      WeaponWeight = WarmongerCs[13];
-      switch (document.getElementById('ModForm').ModSelect.value){
-        case 'Monarch':
-          ModDmg = WarmongerCsp[0];
-          ModRate = WarmongerCsp[1];
-          ModSpread = WarmongerCsp[2];
-          break;
-        case 'Emperor':
-          ModHsBonus = WarmongerCsp[3];
-          ModCapacity = WarmongerCsp[4];
-          ModWeight = WarmongerCsp[5];
-          break;
-        case 'Warlord':
-          ModCapacity = WarmongerCsp[6];
-          ModReload = WarmongerCsp[7];
-          break;
-      };
-      break;
-    case 'WOUND Auto Rifle':
-      WeaponDmg = WoundCs[0];
-      WeaponHsBonus = WoundCs[1];
-      WeaponCapacity = WoundCs[2];
-      WeaponReload = WoundCs[3];
-      WeaponReloadStyle=WoundCs[4];
-      WeaponRate = WoundCs[5];
-      WeaponPellets = WoundCs[6];
-      WeaponSpread = WoundCs[7];
-      WeaponAdsSpread = WoundCs[8];
-      CritAverageDmg = (WoundCs[9]*WoundCs[10]);
-      CritHighestDmg = WoundCs[10];
-      ChangeDmg10m = WoundCs[11];
-      ChangeDmgMax = WoundCs[12];
-      WeaponWeight = WoundCs[13];
-      switch (document.getElementById('ModForm').ModSelect.value){
-        case 'Monarch':
-          ModDmg = WoundCsp[0];
-          ModRate = WoundCsp[1];
-          ModSpread = WoundCsp[2];
-          break;
-        case 'Emperor':
-          ModHsBonus = WoundCsp[3];
-          ModCapacity = WoundCsp[4];
-          ModWeight = WoundCsp[5];
-          break;
-        case 'Warlord':
-          ModCapacity = WoundCsp[6];
-          ModReload = WoundCsp[7];
-          break;
-      };
-      break;
-    case 'AVG Auto Rifle':
-      WeaponDmg = AvgCs[0];
-      WeaponHsBonus = AvgCs[1];
-      WeaponCapacity = AvgCs[2];
-      WeaponReload = AvgCs[3];
-      WeaponReloadStyle=AvgCs[4];
-      WeaponRate = AvgCs[5];
-      WeaponPellets = AvgCs[6];
-      WeaponSpread = AvgCs[7];
-      WeaponAdsSpread = AvgCs[8];
-      CritAverageDmg = (AvgCs[9]*AvgCs[10]);
-      CritHighestDmg = AvgCs[10];
-      ChangeDmg10m = AvgCs[11];
-      ChangeDmgMax = AvgCs[12];
-      WeaponWeight = AvgCs[13];
-      switch (document.getElementById('ModForm').ModSelect.value){
-        case 'Monarch':
-          ModDmg = AvgCsp[0];
-          ModRate = AvgCsp[1];
-          ModSpread = AvgCsp[2];
-          break;
-        case 'Emperor':
-          ModHsBonus = AvgCsp[3];
-          ModCapacity = AvgCsp[4];
-          ModWeight = AvgCsp[5];
-          break;
-        case 'Warlord':
-          ModCapacity = AvgCsp[6];
-          ModReload = AvgCsp[7];
-          break;
-      };
-      break;
-    default:
-      WeaponDmg = 0;
-      WeaponHsBonus = 0;
-      WeaponCapacity = 0;
-      WeaponReload = 0;
-      WeaponReloadStyle=0;
-      WeaponRate = 0;
-      WeaponPellets = 0;
-      WeaponSpread = 0;
-      WeaponAdsSpread = 0;
-      CritAverageDmg = 0;
-      CritHighestDmg = 0;
-      ChangeDmg10m = 0;
-      ChangeDmgMax = 0;
-      WeaponWeight = 0;
-      ModHsBonus = 0;
-      ModDmg = 0;
-      ModSpread = 0;
-      WeaponRate = 0;
-      ModRate = 0;
-      ModCapacity = 0;
-      ModReload = 0;
-      ModWeight = 0;
-      break;
-  };
+  WeaponMod();
   ResultCalc();
 };
-
-
-//Modダメージ処理
 document.getElementById('ModForm').onchange = function() {
-  switch (document.getElementById('ModForm').ModSelect.value) {
-    case 'Warlord':
-      ModDmg = 0;
-      ModHsBonus = 0;
-      ModRate = 0;
-      ModSpread = 0;
-      ModWeight=0;
-      switch (document.getElementById('WeaponForm').WeaponSelect.value) {
-        case 'Serenity Auto Rifle':
-          ModCapacity = SerenityCsp[6];
-          ModReload = SerenityCsp[7];
-          break;
-        case 'F44 Dominance':
-          ModCapacity = DominanceCsp[6];
-          ModReload = DominanceCsp[7];
-          break;
-        case 'Warmonger':
-          ModCapacity = WarmongerCsp[6];
-          ModReload = WarmongerCsp[7];
-          break;
-        case 'WOUND Auto Rifle':
-          ModCapacity = WoundCsp[6];
-          ModReload = WoundCsp[7];
-          break;
-        case 'AVG Auto Rifle':
-          ModCapacity = AvgCsp[6];
-          ModReload = AvgCsp[7];
-          break;
-        default:
-          ModCapacity = 0;
-          ModReload = 0;
-          break;
-      };
-      break;
-    case 'Emperor':
-      ModDmg = 0;
-      ModRate = 0;
-      ModReload = 0;
-      ModSpread =0;
-      switch (document.getElementById('WeaponForm').WeaponSelect.value) {
-        case 'Serenity Auto Rifle':
-          ModHsBonus = SerenityCsp[3];
-          ModCapacity = SerenityCsp[4];
-          ModWeight = SerenityCsp[5];
-          break;
-        case 'F44 Dominance':
-          ModHsBonus = DominanceCsp[3];
-          ModCapacity = DominanceCsp[4];
-          ModWeight = SerenityCsp[5];
-          break;
-        case 'Warmonger':
-          ModHsBonus = WarmongerCsp[3];
-          ModCapacity = WarmongerCsp[4];
-          ModWeight = WarmongerCsp[5];
-          break;
-        case 'WOUND Auto Rifle':
-          ModHsBonus = WoundCsp[3];
-          ModCapacity = WoundCsp[4];
-          ModWeight = WoundCsp[5];
-          break;
-        case 'AVG Auto Rifle':
-          ModHsBonus = AvgCsp[3];
-          ModCapacity = AvgCsp[4];
-          ModWeight = AvgCsp[5];
-          break;
-        default:
-          ModHsBonus = 0;
-          ModCapacity = 0;
-          ModWeight = 0;
-          break;
-      };
-      break;
-    case 'Monarch':
-      ModHsBonus = 0;
-      ModCapacity = 0;
-      ModReload = 0;
-      ModWeight=0;
-      switch (document.getElementById('WeaponForm').WeaponSelect.value) {
-        case 'Serenity Auto Rifle':
-          ModDmg = SerenityCsp[0];
-          ModRate = SerenityCsp[1];
-          ModSpread = SerenityCsp[2];
-          break;
-        case 'F44 Dominance':
-          ModDmg = DominanceCsp[0];
-          ModRate = DominanceCsp[1];
-          ModSpread = DominanceCsp[2];
-          break;
-        case 'Warmonger':
-          ModDmg = WarmongerCsp[0];
-          ModRate = WarmongerCsp[1];
-          ModSpread = WarmongerCsp[2];
-          break;
-        case 'WOUND Auto Rifle':
-          ModDmg = WoundCsp[0];
-          ModRate = WoundCsp[1];
-          ModSpread = WoundCsp[2];
-          break;
-        case 'AVG Auto Rifle':
-          ModDmg = AvgCsp[0];
-          ModRate = AvgCsp[1];
-          ModSpread = AvgCsp[2];
-          break;
-        default:
-          ModDmg = 0;
-          ModRate = 0;
-          ModSpread = 0;
-          break;
-      };
-      break;
-    default:
-      ModDmg = 0;
-      ModHsBonus = 0;
-      ModRate = 0;
-      ModCapacity = 0;
-      ModReload = 0;
-      ModSpread=0;
-      ModWeight=0;
-      break;
-  };
+  WeaponMod();
   ResultCalc();
 };
 
@@ -430,66 +339,66 @@ document.getElementById('EnchantForm').onchange = function() {
       case 'Sunfire':
         switch (document.getElementById('EnchantForm').EnchantLevSelect.value) {
           case 'EnchLev1':
-            EnchantAverageDmg = SfAverageDmg[0];
-            EnchantHighestDmg = SfHighestDmg;
+            Ench[0] = SfAverageDmg[0];
+            Ench[1] = SfHighestDmg;
             break;
           case 'EnchLev2':
-            EnchantAverageDmg = SfAverageDmg[1];
-            EnchantHighestDmg = SfHighestDmg;
+            Ench[0] = SfAverageDmg[1];
+            Ench[1] = SfHighestDmg;
             break;
           case 'EnchLev3':
-            EnchantAverageDmg = SfAverageDmg[2];
-            EnchantHighestDmg = SfHighestDmg;
+            Ench[0] = SfAverageDmg[2];
+            Ench[1] = SfHighestDmg;
             break;
           default:
-            EnchantAverageDmg = 0;
-            EnchantHighestDmg = 0;
+            Ench[0] = 0;
+            Ench[1] = 0;
             break;
         };
         break;
       case 'DemonPower':
         switch (document.getElementById('EnchantForm').EnchantLevSelect.value) {
           case 'EnchLev1':
-            EnchantAverageDmg = DpAverageDmg[0];
-            EnchantHighestDmg = DpHighestDmg;
+            Ench[0] = DpAverageDmg[0];
+            Ench[1] = DpHighestDmg;
             break;
           case 'EnchLev2':
-            EnchantAverageDmg = DpAverageDmg[1];
-            EnchantHighestDmg = DpHighestDmg;
+            Ench[0] = DpAverageDmg[1];
+            Ench[1] = DpHighestDmg;
             break;
           case 'EnchLev3':
-            EnchantAverageDmg = DpAverageDmg[2];
-            EnchantHighestDmg = DpHighestDmg;
+            Ench[0] = DpAverageDmg[2];
+            Ench[1] = DpHighestDmg;
             break;
           default:
-            EnchantAverageDmg = 0;
-            EnchantHighestDmg = 0;
+            Ench[0] = 0;
+            Ench[1] = 0;
             break;
         };
         break;
       case 'SiphonLife':
         switch (document.getElementById('EnchantForm').EnchantLevSelect.value) {
           case 'EnchLev1':
-            EnchantAverageDmg = SlAverageDmg[0];
-            EnchantHighestDmg = SlHighestDmg;
+            Ench[0] = SlAverageDmg[0];
+            Ench[1] = SlHighestDmg;
             break;
           case 'EnchLev2':
-            EnchantAverageDmg = SlAverageDmg[1];
-            EnchantHighestDmg = SlHighestDmg;
+            Ench[0] = SlAverageDmg[1];
+            Ench[1] = SlHighestDmg;
             break;
           case 'EnchLev3':
-            EnchantAverageDmg = SlAverageDmg[2];
-            EnchantHighestDmg = SlHighestDmg;
+            Ench[0] = SlAverageDmg[2];
+            Ench[1] = SlHighestDmg;
             break;
           default:
-            EnchantAverageDmg = 0;
-            EnchantHighestDmg = 0;
+            Ench[0] = 0;
+            Ench[1] = 0;
             break;
         };
         break;
       default:
-        EnchantAverageDmg = 0;
-        EnchantHighestDmg = 0;
+        Ench[0] = 0;
+        Ench[1] = 0;
         break;
     };
     ResultCalc();
@@ -501,70 +410,68 @@ document.getElementById('OeForm').onchange = function() {
     case 'OeSunfire':
       switch (document.getElementById('OeForm').OeLevSelect.value) {
           case 'OeLev1':
-            OeAverageDmg = SfAverageDmg[0];
-            OeHighestDmg = SfHighestDmg;
+            Ench[2] = SfAverageDmg[0];
+            Ench[3] = SfHighestDmg;
             break;
           case 'OeLev2':
-            OeAverageDmg = SfAverageDmg[1];
-            OeHighestDmg = SfHighestDmg;
+            Ench[2] = SfAverageDmg[1];
+            Ench[3] = SfHighestDmg;
             break;
           case 'OeLev3':
-            OeAverageDmg = SfAverageDmg[2];
-            OeHighestDmg = SfHighestDmg;
+            Ench[2] = SfAverageDmg[2];
+            Ench[3] = SfHighestDmg;
             break;
           default:
-            OeAverageDmg = 0;
-            OeHighestDmg = 0;
+            Ench[2] = 0;
+            Ench[3] = 0;
             break;
       };
       break;
     case 'OeDemonPower':
       switch (document.getElementById('OeForm').OeLevSelect.value) {
           case 'OeLev1':
-            OeAverageDmg = DpAverageDmg[0];
-            OeHighestDmg = DpHighestDmg;
+            Ench[2] = DpAverageDmg[0];
+            Ench[3] = DpHighestDmg;
             break;
           case 'OeLev2':
-            OeAverageDmg = DpAverageDmg[1];
-            OeHighestDmg = DpHighestDmg;
+            Ench[2] = DpAverageDmg[1];
+            Ench[3] = DpHighestDmg;
             break;
           case 'OeLev3':
-            OeAverageDmg = DpAverageDmg[2];
-            OeHighestDmg = DpHighestDmg;
+            Ench[2] = DpAverageDmg[2];
+            Ench[3] = DpHighestDmg;
             break;
           default:
-            OeAverageDmg = 0;
-            OeHighestDmg = 0;
+            Ench[2] = 0;
+            Ench[3] = 0;
             break;
       };
       break;
     case 'OeSiphonLife':
       switch (document.getElementById('OeForm').OeLevSelect.value) {
           case 'OeLev1':
-            OeAverageDmg = SlAverageDmg[0];
-            OeHighestDmg = SlHighestDmg;
+            Ench[2] = SlAverageDmg[0];
+            Ench[3] = SlHighestDmg;
             break;
           case 'OeLev2':
-            OeAverageDmg = SlAverageDmg[1];
-            OeHighestDmg = SlHighestDmg;
+            Ench[2] = SlAverageDmg[1];
+            Ench[3] = SlHighestDmg;
             break;
           case 'OeLev3':
-            OeAverageDmg = SlAverageDmg[2];
-            OeHighestDmg = SlHighestDmg;
+            Ench[2] = SlAverageDmg[2];
+            Ench[3] = SlHighestDmg;
             break;
           default:
-            OeAverageDmg = 0;
-            OeHighestDmg = 0;
+            Ench[2] = 0;
+            Ench[3] = 0;
             break;
       };
       break;
     default:
-      OeAverageDmg = 0;
-      OeHighestDmg = 0;
+      Ench[2] = 0;
+      Ench[3] = 0;
       break;
   };
-  ResultAverageDmg = WeaponDmg + ModDmg + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg;
-  ResultAverageHsDmg = WeaponDmg + WeaponHsBonus + ModDmg + ModHsBonus + EnchantAverageDmg + OeAverageDmg + AeDmg + AddonAverageDmg;
   ResultCalc();
 };
 
@@ -577,16 +484,16 @@ const McDmg = 1;
 document.getElementById('AncientEnchantForm').onchange = function() {
     switch (document.getElementById('AncientEnchantForm').AncientEnchantSelect.value) {
       case 'Bloodcraze':
-        AeDmg = BcDmg;
+        Ae[0] = BcDmg;
         break;
       case 'ElementalOverload':
-        AeDmg = EoDmg;
+        Ae[0] = EoDmg;
         break;
       case 'Mastercrafted':
-        AeDmg = McDmg;
+        Ae[0] = McDmg;
         break;
       default:
-        AeDmg = 0;
+        Ae[0] = 0;
         break;
     };
     ResultCalc();
@@ -600,131 +507,131 @@ const EmCapacity =[2,4,6,10]
 const QpReload =[-4,-8,-12,-16]
 const LkWeight =[0.004,0.005,0.010,0.015]
 
-//エンチャダメージ処理
+//Addonダメージ処理
 document.getElementById('AddonForm').onchange = function() {
   switch (document.getElementById('AddonForm').AddonSelect.value) {
     case 'ManaPowder':
-      AddonCapacity =0;
-      AddonReload=0;
-      AddonWeight=0;
+      Addon[2] =0;
+      Addon[3]=0;
+      Addon[4]=0;
       switch (document.getElementById('AddonForm').AddonLevSelect.value) {
         case 'AddonLev0':
-          AddonAverageDmg = MpDmg[0];
-          AddonHighestDmg = MpDmg[0];
+          Addon[0] = MpDmg[0];
+          Addon[1] = MpDmg[0];
           break;
         case 'AddonLev1':
-          AddonAverageDmg = MpDmg[1];
-          AddonHighestDmg = MpDmg[1];
+          Addon[0] = MpDmg[1];
+          Addon[1] = MpDmg[1];
           break;
         case 'AddonLev2':
-          AddonAverageDmg = MpDmg[2];
-          AddonHighestDmg = MpDmg[2];
+          Addon[0] = MpDmg[2];
+          Addon[1] = MpDmg[2];
           break;
         case 'AddonLev3':
-          AddonAverageDmg = MpDmg[3];
-          AddonHighestDmg = MpDmg[3];
+          Addon[0] = MpDmg[3];
+          Addon[1] = MpDmg[3];
           break;
         default:
-          AddonAverageDmg = 0;
-          AddonHighestDmg = 0;
+          Addon[0] = 0;
+          Addon[1] = 0;
           break;
       };
       break;
     case 'HeavyBullets':
-      AddonCapacity = 0;
-      AddonReload=0;
-      AddonWeight=0;
+      Addon[2] = 0;
+      Addon[3]=0;
+      Addon[4]=0;
       switch (document.getElementById('AddonForm').AddonLevSelect.value) {
         case 'AddonLev0':
-          AddonAverageDmg = HbAverageDmg[0];
-          AddonHighestDmg = HbHighestDmg[0];
+          Addon[0] = HbAverageDmg[0];
+          Addon[1] = HbHighestDmg[0];
           break;
         case 'AddonLev1':
-          AddonAverageDmg = HbAverageDmg[1];
-          AddonHighestDmg = HbHighestDmg[1];
+          Addon[0] = HbAverageDmg[1];
+          Addon[1] = HbHighestDmg[1];
         case 'AddonLev2':
-          AddonAverageDmg = HbAverageDmg[2];
-          AddonHighestDmg = HbHighestDmg[2];
+          Addon[0] = HbAverageDmg[2];
+          Addon[1] = HbHighestDmg[2];
           break;
         case 'AddonLev3':
-          AddonAverageDmg = HbAverageDmg[3];
-          AddonHighestDmg = HbHighestDmg[3];
+          Addon[0] = HbAverageDmg[3];
+          Addon[1] = HbHighestDmg[3];
           break;
         default:
-          AddonAverageDmg = 0;
-          AddonHighestDmg = 0;
+          Addon[0] = 0;
+          Addon[1] = 0;
           break;
       };
     case 'ExtendedMagazine':
-      AddonAverageDmg=0;
-      AddonHighestDmg=0;
-      AddonReload=0;
-      AddonWeight=0;
+      Addon[0]=0;
+      Addon[1]=0;
+      Addon[3]=0;
+      Addon[4]=0;
       switch (document.getElementById('AddonForm').AddonLevSelect.value) {
         case 'AddonLev0':
-          AddonCapacity = EmCapacity[0];
+          Addon[2] = EmCapacity[0];
           break;
         case 'AddonLev1':
-          AddonCapacity = EmCapacity[1];
+          Addon[2] = EmCapacity[1];
           break;
         case 'AddonLev2':
-          AddonCapacity = EmCapacity[2];
+          Addon[2] = EmCapacity[2];
           break;
         case 'AddonLev3':
-          AddonCapacity = EmCapacity[3];
+          Addon[2] = EmCapacity[3];
           break;
         default:
-          AddonCapacity = 0;
+          Addon[2] = 0;
       };
       break;
     case 'QuickPull':
-      AddonAverageDmg=0;
-      AddonHighestDmg=0;
-      AddonReload=0;
-      AddonWeight=0;
+      Addon[0]=0;
+      Addon[1]=0;
+      Addon[3]=0;
+      Addon[4]=0;
       switch (document.getElementById('AddonForm').AddonLevSelect.value) {
         case 'AddonLev0':
           Addonr = QpReload[0];
           break;
         case 'AddonLev1':
-          AddonReload = QpReload[1];
+          Addon[3] = QpReload[1];
           break;
         case 'AddonLev2':
-          AddonReload = QpReload[2];
+          Addon[3] = QpReload[2];
           break;
         case 'AddonLev3':
-          AddonReload = QpReload[3];
+          Addon[3] = QpReload[3];
           break;
         default:
-          AddonReload = 0;
+          Addon[3] = 0;
       };
       case 'LightweightKit':
-      AddonAverageDmg=0;
-      AddonHighestDmg=0;
-      AddonReload=0;
+      Addon[0]=0;
+      Addon[1]=0;
+      Addon[3]=0;
       switch (document.getElementById('AddonForm').AddonLevSelect.value) {
         case 'AddonLev0':
-          AddonWeight = LkWeight[0];
+          Addon[4] = LkWeight[0];
           break;
         case 'AddonLev1':
-          AddonWeight = LkWeight[1];
+          Addon[4] = LkWeight[1];
           break;
         case 'AddonLev2':
-          AddonWeight = LkWeight[2];
+          Addon[4] = LkWeight[2];
           break;
         case 'AddonLev3':
-          AddonWeight = LkWeight[3];
+          Addon[4] = LkWeight[3];
           break;
         default:
-          AddonWeight = 0;
+          Addon[4] = 0;
       };
       break;
     default:
-      AddonAverageDmg = 0;
-      AddonHighestDmg = 0;
-      AddonCapacity = 0;
-      AddonReload=0;
-      AddonWeight=0;
+      Addon[0] = 0;
+      Addon[1] = 0;
+      Addon[2] = 0;
+      Addon[3]=0;
+      Addon[4]=0;
       break;
   };
   ResultCalc();
