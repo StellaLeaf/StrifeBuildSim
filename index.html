@@ -10,16 +10,26 @@
 </head>
 <body>
     <font size="10">STRIFE Build Simulator</font>
-    <form id="WeaponForm">
-        <input type="search" name="WeaponSelect" placeholder="武器を選択" list="t_list">
-        <datalist id="t_list">
-            <option value="Serenity Auto Rifle"></option>
-            <option value="F44 Dominance"></option>
-            <option value="Warmonger"></option>
-            <option value="WOUND Auto Rifle"></option>
-            <option value="AVG Auto Rifle"></option>
-        </datalist>
-    </form>
+    <div class="input-block">
+        <div class="select-block">
+          <label>
+            <form id="TypeForm">
+                <select id="TypeSelect">
+                <option value="none">武器種を選択してください</option>
+                </select>
+            </form>
+          </label>
+        </div>
+        <div class="select-block">
+          <label>
+            <form id="WeaponForm">
+                <select id="WeaponSelect" disabled>
+                    <option>武器を選択してください</option>
+                </select>
+            </form>
+          </label>
+        </div>
+    </div>
     <form id="ModForm">
         <select id="ModSelect">
             <option value="none" selected>Modを選択</option>
@@ -62,6 +72,8 @@
             <option value="Bloodcraze">Bloodcraze</option>
             <option value="ElementalOverload">Elemental Overload</option>
             <option value="Mastercrafted">Mastercrafted</option>
+            <option value="ConcentratedFire">Concentrated Fire</option>
+            <option value="SuddenDeath">Sudden Death</option>
         </select>
     </form>
     <form id="AddonForm">
@@ -82,21 +94,32 @@
         </select>
     </form>
     <table>
-        <tbody>
-            <tr>
-            <th>平均dmg</th><th>平均DPS</th><th>移動速度</th><th>装弾数</th><th>腰撃ち精度</th><th>減衰(10m)</th>
-            </tr>
-            <tr>
-            <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td><td><span id="DisplayDps">0</span></td><td><span id="DisplayWeight">1</span>倍</td><td><span id="DisplayCapacity">0</span></td><td><span id="DisplaySpread">0</span></td><td><span id="DisplayChangeDmg10m">0</span></td>
-            </tr>
-            <tr>
-            <th>最高dmg</th><th>射撃時間(s)</th><th>レート(s)</th><th>リロード<span id="DisplayReloadStyle"></span></th><th>ADS精度</th><th>最大減衰量</th>
-            </tr>
-            <tr>
-            <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td><td><span id="DisplayDuration">0</span></td><td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td><td><span id="DisplayReload">0</span></td><td><span id="DisplayAdsSpread">0</span></td><td><span id="DisplayChangeDmgMax">0</span></td>
-            </tr>
-        </tbody>
+        武器性能
+        <tr>
+        <th>平均dmg</th><th>平均DPS</th><th>移動速度</th><th>装弾数</th><th>腰撃ち精度</th><th>減衰(10m)</th>
+        </tr>
+        <tr>
+        <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td><td><span id="DisplayDps">0</span></td><td><span id="DisplayWeight">1</span>倍</td><td><span id="DisplayCapacity">0</span></td><td><span id="DisplaySpread">0</span></td><td><span id="DisplayChangeDmg10m">0</span></td>
+        </tr>
+        <tr>
+        <th>最高dmg</th><th>射撃時間(s)</th><th>レート(s)</th><th>リロード<span id="DisplayReloadStyle"></span></th><th>ADS精度</th><th>最大減衰量</th>
+        </tr>
+        <tr>
+        <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td><td><span id="DisplayDuration">0</span></td><td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td><td><span id="DisplayReload">0</span></td><td><span id="DisplayAdsSpread">0</span></td><td><span id="DisplayChangeDmgMax">0</span></td>
+        </tr>
     </table>
+    <!-- <table>
+        ステータス
+        <tr>
+        <th>HP</th><th>Atk</th></th><th>Def</th><th>Mana回復</th>
+        </tr>
+        <tr>
+        <td><span id="DisplayHp">0</span></td><td><span id="DisplayAtk">0</span></td><td><span id="DisplayDef">0</span></td>
+        </tr>
+    </table> -->
 </body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="import.js"></script>
 <script src="index.js"></script>
+<script src="main.js"></script>
 </html>
