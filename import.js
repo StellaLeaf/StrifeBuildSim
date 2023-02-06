@@ -1,15 +1,15 @@
 //Result[0Av,1AvHs,2Hi,3HiHs,4Cap,5Relo,6Rate,7Dps,8Sprd,9Ads,10Wt,11Dura,12CrAv,13CrHi,14C10m,15CMax]
-var Result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-//Weapon[0Dmg,1HsB,2Cap,3Relo,4RlSt,5Rate,6Plet,7Sprd,8Ads,9Wt]
-var Weapon = [0,0,0,0,0,0,0,0,0];
+let Result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+// //Weapon[0Dmg,1HsB,2Cap,3Relo,4RlSt,5Rate,6Plet,7Sprd,8Ads,9Wt]
+let Weapon = [0,0,0,0,0,0,0,0,0];
 //Mod[0Dmg,1HsB,2Cap,3Relo,4Rate,5Sprd,6MoWt]
-var Mod = [0,0,0,0,0,0,0,0];
+let Mod = [0,0,0,0,0,0,0,0];
 //Ench[0Av,1Hi,2OeAv,3OeHi]
-var Ench = [0,0,0,0];
+let Ench = [0,0,0,0];
 //AE[0Av,1Hi]
-var Ae = [0,0];
+let Ae = [0,0];
 //Addon[0Av,1Hi,2Cap,3Relo,4Wt]
-var Addon = [0,0,0,0,0]
+let Addon = [0,0,0,0,0]
 //Enchデータ
 const SfAverageDmg =[2.01,2.16,2,31]
 const SfHighestDmg = 3
