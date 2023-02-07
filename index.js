@@ -27,113 +27,160 @@ class Fetches {
   }
 }
 const _path1 = '1_AR.json';
-const _path2 = '3_SMG.json';
+const _path2 = '1_AR_CSP.json';
 const _path3 = '5_SR.json';
 let jsondata;
-let _obj2;
+let jsondata2;
 let _obj3;
 function makeObj(){
   (new Fetches()).jsonObjs([_path1,_path2,_path3])
       .then((res) => {
-          [jsondata,_obj2,_obj3] = res;
+          [jsondata,jsondata2,_obj3] = res;
           render();
       });
 };
 function render() {
-    let WeaponKey =document.getElementById('WeaponForm').WeaponSelect.value
-    let WeaponReloadStyle = 0;
-    let WeaponRateKey = 0;
-    let WeaponAdsKey = 0;
-    let WeaponCcKey = 0;
-    let WeaponCdKey = 0;
-    let WeaponC10mKey = 0;
-    let WeaponCmaxKey = 0;
-    let WeaponDmg = 0;
-    let WeaponHsBonus = 0;
-    let WeaponReloadAmount =0;
-    let WeaponReloadDuration = 0;
-    let WeaponPellets = 0;
-    let WeaponSpread = 0;
-    if(WeaponKey==='none'){
-    }else{
-    if(typeof jsondata[WeaponKey]['Reload']['Reload_Bullets_Individually']==='undefined'){
-      WeaponReloadStyle = 0;
-    }else if(jsondata[WeaponKey]['Reload']['Reload_Bullets_Individually'] === 'true'){
-      WeaponReloadStyle = 1;
-    }else{
-      WeaponReloadStyle = 0;
-    };
+  let WeaponKey =document.getElementById('WeaponForm').WeaponSelect.value
+  let ModKey = document.getElementById('ModForm').ModSelect.value
+  let WeaponReloadStyle = 0;
+  let WeaponRateKey = 0;
+  let WeaponAdsKey = 0;
+  let WeaponCcKey = 0;
+  let WeaponCdKey = 0;
+  let WeaponC10mKey = 0;
+  let WeaponCmaxKey = 0;
+  let WeaponDmg = 0;
+  let WeaponHsBonus = 0;
+  let WeaponReloadAmount =0;
+  let WeaponReloadDuration = 0;
+  let WeaponPellets = 0;
+  let WeaponSpread = 0;
+  let WeaponWeight=0;
+  if(WeaponKey==='none'){
+  }else{
+  if(typeof jsondata[WeaponKey]['Reload']['Reload_Bullets_Individually']==='undefined'){
+    WeaponReloadStyle = 0;
+  }else if(jsondata[WeaponKey]['Reload']['Reload_Bullets_Individually'] === 'true'){
+    WeaponReloadStyle = 1;
+  }else{
+    WeaponReloadStyle = 0;
+  };
 
-    if(jsondata[WeaponKey]['Fully_Automatic']['Enable'] = 'true'){
-      WeaponRateKey = jsondata[WeaponKey]['Fully_Automatic']['Fire_Rate']+4
-    }else if(jsondata[WeaponKey]['Burstfire']['Enable'] = 'true'){
-      WeaponRateKey = (20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots'])*jsondata[WeaponKey]['Burstfire']['Shots_Per_Burst']
-    }else if(jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']){
-      WeaponRateKey = 20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']
-    }else{
-      WeaponRateKey = 0;
-    };
+  if(jsondata[WeaponKey]['Fully_Automatic']['Enable'] === 'true'){
+    WeaponRateKey = jsondata[WeaponKey]['Fully_Automatic']['Fire_Rate']+4
+  }else if(jsondata[WeaponKey]['Burstfire']['Enable'] === 'true'){
+    WeaponRateKey = (20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots'])*jsondata[WeaponKey]['Burstfire']['Shots_Per_Burst']
+  }else if(jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']){
+    WeaponRateKey = 20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']
+  }else{
+    WeaponRateKey = 0;
+  };
 
-    if(typeof jsondata[WeaponKey]['Sneak']==='undefined'){
-      WeaponAdsKey = 0;
-    }else if(jsondata[WeaponKey]['Sneak']['Enable'] = 'true'){
-      WeaponAdsKey = jsondata[WeaponKey]['Sneak']['Zoom_Bullet_Spread'];
-    }else{
-      WeaponAdsKey = 0;
-    };
+  if(typeof jsondata[WeaponKey]['Sneak']==='undefined'){
+    WeaponAdsKey = 0;
+  }else if(jsondata[WeaponKey]['Sneak']['Enable'] === 'true'){
+    WeaponAdsKey = jsondata[WeaponKey]['Sneak']['Zoom_Bullet_Spread'];
+  }else{
+    WeaponAdsKey = 0;
+  };
 
-    if(typeof jsondata[WeaponKey]['Critical_Hits']==='undefined'){
-      WeaponCcKey = 0;
-      WeaponCdKey = 0;
-    }else if(jsondata[WeaponKey]['Critical_Hits']['Enable'] = 'true'){
-      WeaponCcKey = jsondata[WeaponKey]['Critical_Hits']['Chance']/100;
-      WeaponCdKey = jsondata[WeaponKey]['Critical_Hits']['Bonus_Damage'];
-    }else{
-      WeaponCcKey = 0;
-      WeaponCdKey = 0;
-    };
+  if(typeof jsondata[WeaponKey]['Critical_Hits']==='undefined'){
+    WeaponCcKey = 0;
+    WeaponCdKey = 0;
+  }else if(jsondata[WeaponKey]['Critical_Hits']['Enable'] === 'true'){
+    WeaponCcKey = jsondata[WeaponKey]['Critical_Hits']['Chance']/100;
+    WeaponCdKey = jsondata[WeaponKey]['Critical_Hits']['Bonus_Damage'];
+  }else{
+    WeaponCcKey = 0;
+    WeaponCdKey = 0;
+  };
 
-    if(typeof jsondata[WeaponKey]['Damage_Based_On_Flight_Time'] ==='undefined'){
-      WeaponC10mKey = 0;
-      WeaponCmaxKey = 0;
-    }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Enable'] = 'true'){
-      if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage']>0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']>0){
+  if(typeof jsondata[WeaponKey]['Damage_Based_On_Flight_Time'] ==='undefined'){
+    WeaponC10mKey = 0;
+    WeaponCmaxKey = 0;
+  }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Enable'] = 'true'){
+    if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage']>0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']>0){
+    WeaponC10mKey = (jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']/(jsondata[WeaponKey]['Shooting']['Projectile_Speed']/10))*10;
+    WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage'];
+    }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage']<0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']<0){
       WeaponC10mKey = (jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']/(jsondata[WeaponKey]['Shooting']['Projectile_Speed']/10))*10;
       WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage'];
-      }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage']<0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']<0){
-        WeaponC10mKey = (jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']/(jsondata[WeaponKey]['Shooting']['Projectile_Speed']/10))*10;
-        WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage'];
-      }else{
-        WeaponC10mKey = 0;
-        WeaponCmaxKey = 0;
-      };
-
     }else{
       WeaponC10mKey = 0;
       WeaponCmaxKey = 0;
     };
-    WeaponDmg = jsondata[WeaponKey]['Shooting']['Projectile_Damage'];
-    WeaponHsBonus = jsondata[WeaponKey]['Headshot']['Bonus_Damage'];
-    WeaponReloadAmount =jsondata[WeaponKey]['Reload']['Reload_Amount'];
-    WeaponReloadDuration = jsondata[WeaponKey]['Reload']['Reload_Duration']
-    WeaponPellets = jsondata[WeaponKey]['Shooting']['Projectile_Amount'];
-    WeaponSpread = jsondata[WeaponKey]['Shooting']['Bullet_Spread'];
+  }else{
+    WeaponC10mKey = 0;
+    WeaponCmaxKey = 0;
   };
-    const WeaponCs =[
-      WeaponDmg,
-      WeaponHsBonus,
-      WeaponReloadAmount,
-      WeaponReloadDuration,
-      WeaponReloadStyle,
-      WeaponRateKey,
-      WeaponPellets,
-      WeaponSpread,
-      WeaponAdsKey,
-      WeaponCcKey,
-      WeaponCdKey,
-      WeaponC10mKey,
-      WeaponCmaxKey
-    ];
+  WeaponDmg = jsondata[WeaponKey]['Shooting']['Projectile_Damage'];
+  WeaponHsBonus = jsondata[WeaponKey]['Headshot']['Bonus_Damage'];
+  WeaponReloadAmount =jsondata[WeaponKey]['Reload']['Reload_Amount'];
+  WeaponReloadDuration = jsondata[WeaponKey]['Reload']['Reload_Duration']
+  WeaponPellets = jsondata[WeaponKey]['Shooting']['Projectile_Amount'];
+  WeaponSpread = jsondata[WeaponKey]['Shooting']['Bullet_Spread'];
+  WeaponWeight = jsondata2[WeaponKey]['itemHoldEffects']['GunWeight'];
+};
+  let ModCapacity = 0;
+  let ModReload = 0;
+  let ModWeight = 0;
+  let ModHsBonus = 0;
+  let ModRate = 0;
+  let ModSpread = 0;
+  let ModDmg = 0;
+  if(ModKey==='none'||WeaponKey==='none'){
+  }else{
+  let cspAry =null;
+  for (const i in jsondata2[WeaponKey]['Attachments']['AttachmentsAffect']) {
+    cspAry = jsondata2[WeaponKey]['Attachments']['AttachmentsAffect'][i].split(':');
+    if(cspAry[1]===ModKey && cspAry[0]==="CAPACITY"){
+      ModCapacity =Number(cspAry[2])
+    };
+    if(cspAry[1]===ModKey && cspAry[0]==='RELOAD'){
+      ModReload =Number(cspAry[2])
+    };
+    if(cspAry[1]===ModKey && cspAry[0]==='GUNWEIGHT'){
+      ModWeight =Number(cspAry[2])
+    };
+    if(cspAry[1]===ModKey && cspAry[0]==='HEADSHOT'){
+      ModHsBonus =Number(cspAry[2])
+    };
+    if(cspAry[1]===ModKey && cspAry[0]==='FIRERATE'){
+      ModRate =Number(cspAry[2])
+    };
+    if(cspAry[1]===ModKey && cspAry[0]==='PRESHOOT'){
+      ModSpread =Number(cspAry[2])
+    };
+    if(cspAry[1]===ModKey && cspAry[0]==='DAMAGE'){
+      ModDmg =Number(cspAry[2])
+    };
+  };
+  };
+const WeaponCs =[
+  WeaponDmg,
+  WeaponHsBonus,
+  WeaponReloadAmount,
+  WeaponReloadDuration,
+  WeaponReloadStyle,
+  WeaponRateKey,
+  WeaponPellets,
+  WeaponSpread,
+  WeaponAdsKey,
+  WeaponCcKey,
+  WeaponCdKey,
+  WeaponC10mKey,
+  WeaponCmaxKey,
+  WeaponWeight
+];
+  const Mod =[
+    ModDmg,
+    ModHsBonus,
+    ModCapacity,
+    ModReload,
+    ModRate,
+    ModSpread,
+    ModWeight
+  ];
   Weapon[0] = WeaponCs[0];
   Weapon[1] = WeaponCs[1];
   Weapon[2] = WeaponCs[2];
@@ -158,7 +205,7 @@ function render() {
   Result[7] = Math.round( (Result[0] * Result[6]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
   Result[8] = Math.round(Math.abs(Weapon[7] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
-  Result[10] = Math.round( ((0.2 + Mod[6] + Addon[4])/0.2) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
+  Result[10] = Math.round( ((0.2 +Weapon[9]+ Mod[6] + Addon[4])/0.2) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 ) ;
   Result[11] = Math.round((Result[4]/Result[6])*Math.pow( 10, 1 ))/Math.pow( 10, 1 );
   document.getElementById('DisplayAverageDmg').textContent = (Result[0]);
   document.getElementById('DisplayAverageHsDmg').textContent = (Result[1]);
