@@ -109,8 +109,8 @@ const render = () => {
     let WeaponPellets = 0
     let WeaponSpread = 0
     let WeaponWeight = 0
-    if (WeaponKey === "none") {} else {
-        if (typeof jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === "undefined") {
+    if (!(WeaponKey === "none" || jsondata == undefined)) {
+        if (typeof jsondata === "undefined") {
             WeaponReloadStyle = 0
         } else if (jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === "true") {
             WeaponReloadStyle = 1
@@ -186,7 +186,7 @@ const render = () => {
     let ModRate = 0
     let ModSpread = 0
     let ModDmg = 0
-    if (ModKey === "none" || WeaponKey === "none") {} else {
+    if (!(ModKey === "none" || WeaponKey === "none" || jsondata2 == undefined)) {
         let cspAry = null
         for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
             cspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
