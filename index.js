@@ -26,20 +26,75 @@ class Fetches {
       });
   }
 }
-const _path1 = '1_AR.json';
-const _path2 = '1_AR_CSP.json';
-const _path3 = '5_SR.json';
+const _pathAr = '1_AR.json';
+const _pathArp = '1_AR_CSP.json';
+const _pathSmg = '3_SMG.json';
+const _pathSmgp = '3_SMG_CSP.json';
+const _pathLmg = '9_LMG.json';
+const _pathLmgp = '9_LMG_CSP.json';
+const _pathSr = '5_SR.json';
+const _pathSrp = '5_SR_CSP.json';
+const _pathCar = '12_CARBINE.json';
+const _pathCarp = '12_CARBINE_CSP.json';
+const _pathExpl = '7_EXPLOSIVE.json';
+const _pathExplp = '7_EXPLOSIVE_CSP.json';
+const _pathSec = '6_PISTOL.json';
+const _pathSecp = '6_PISTOL_CSP.json';
+const _pathMelee = '4_SG.json';
+const _pathMeleep = '4_SG_CSP.json';
 let jsondata;
 let jsondata2;
-let _obj3;
+let _objAr;
+let _objArp;
+let _objSmg;
+let _objSmgp;
+let _objLmg;
+let _objLmgp;
+let _objSr;
+let _objSrp;
+let _objCar;
+let _objCarp;
+let _objExpl;
+let _objExplp;
+let _objSec;
+let _objSecp;
+let _objMelee;
+let _objMeleep;
 function makeObj(){
-  (new Fetches()).jsonObjs([_path1,_path2,_path3])
+  (new Fetches()).jsonObjs([_pathAr,_pathArp,_pathSmg,_pathSmgp,_pathLmg,_pathLmgp,_pathSr,_pathSrp,_pathCar,_pathCarp,_pathExpl,_pathExplp,_pathSec,_pathSecp,_pathMelee,_pathMeleep])
       .then((res) => {
-          [jsondata,jsondata2,_obj3] = res;
+          [_objAr,_objArp,_objSmg,_objSmgp,_objLmg,_objLmgp,_objSr,_objSrp,_objCar,_objCarp,_objExpl,_objExplp,_objSec,_objSecp,_objMelee,_objMeleep] = res;
           render();
       });
 };
 function render() {
+let TypeKey = document.getElementById('TypeForm').TypeSelect.value;
+if(TypeKey==='none'){
+}else if(TypeKey==='AssaultRifle'){
+  jsondata = _objAr;
+  jsondata2 = _objArp;
+}else if(TypeKey==='SMG'||TypeKey==='Shotgun'){
+  jsondata = _objSmg;
+  jsondata2 = _objSmgp; 
+}else if(TypeKey==='LMG'){
+  jsondata=_objLmg;
+  jsondata2=_objLmgp;
+}else if(TypeKey==='SniperRifle'){
+  jsondata=_objSr;
+  jsondata2=_objSrp;
+}else if(TypeKey==='Carbine'){
+  jsondata=_objCar;
+  jsondata2=_objCarp;
+}else if(TypeKey==='Special'||TypeKey==='Staves'){
+  jsondata=_objExpl;
+  jsondata2=_objExplp;
+}else if(TypeKey==='Secondary'){
+  jsondata=_objSec;
+  jsondata2=_objSecp;
+}else if(TypeKey==='Melee'){
+  jsondata=_objMelee;
+  jsondata2=_objMeleep;
+}
   let WeaponKey =document.getElementById('WeaponForm').WeaponSelect.value
   let ModKey = document.getElementById('ModForm').ModSelect.value
   let WeaponReloadStyle = 0;
@@ -65,17 +120,22 @@ function render() {
   }else{
     WeaponReloadStyle = 0;
   };
-
-  if(jsondata[WeaponKey]['Fully_Automatic']['Enable'] === 'true'){
+  function notFullauto(){
+    if(jsondata[WeaponKey]['Burstfire']==='undefined'){
+      WeaponRateKey = 20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']
+    }else if(jsondata[WeaponKey]['Burstfire']['Enable'] === 'true'){
+      WeaponRateKey = (20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots'])*jsondata[WeaponKey]['Burstfire']['Shots_Per_Burst']
+    }else{
+      WeaponRateKey = 20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']
+    };
+  }
+  if(typeof jsondata[WeaponKey]['Fully_Automatic'] === 'undefined'){
+    notFullauto();
+  }else if(jsondata[WeaponKey]['Fully_Automatic']['Enable'] === 'true'){
     WeaponRateKey = jsondata[WeaponKey]['Fully_Automatic']['Fire_Rate']+4
-  }else if(jsondata[WeaponKey]['Burstfire']['Enable'] === 'true'){
-    WeaponRateKey = (20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots'])*jsondata[WeaponKey]['Burstfire']['Shots_Per_Burst']
-  }else if(jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']){
-    WeaponRateKey = 20/jsondata[WeaponKey]['Shooting']['Delay_Between_Shots']
   }else{
-    WeaponRateKey = 0;
+    notFullauto();
   };
-
   if(typeof jsondata[WeaponKey]['Sneak']==='undefined'){
     WeaponAdsKey = 0;
   }else if(jsondata[WeaponKey]['Sneak']['Enable'] === 'true'){
@@ -99,12 +159,12 @@ function render() {
     WeaponC10mKey = 0;
     WeaponCmaxKey = 0;
   }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Enable'] = 'true'){
-    if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage']>0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']>0){
+    if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Maximum_Damage']>0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']>0){
     WeaponC10mKey = (jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']/(jsondata[WeaponKey]['Shooting']['Projectile_Speed']/10))*10;
-    WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage'];
-    }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage']<0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']<0){
+    WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Maximum_Damage'];
+    }else if(jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Maximum_Damage']<0&&jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']<0){
       WeaponC10mKey = (jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Bonus_Damage_Per_Tick']/(jsondata[WeaponKey]['Shooting']['Projectile_Speed']/10))*10;
-      WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Minimum_Damage'];
+      WeaponCmaxKey = jsondata[WeaponKey]['Damage_Based_On_Flight_Time']['Maximum_Damage'];
     }else{
       WeaponC10mKey = 0;
       WeaponCmaxKey = 0;
@@ -192,7 +252,7 @@ const WeaponCs =[
   Weapon[8] = WeaponCs[8];
   Result[12] = (WeaponCs[9]*WeaponCs[10]);
   Result[13] = WeaponCs[10];
-  Result[14] = WeaponCs[11];
+  Result[14] = Math.round(WeaponCs[11]* Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   Result[15] = WeaponCs[12];
   Weapon[9] = WeaponCs[13];
   Result[0] = Math.round( (Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
@@ -201,7 +261,7 @@ const WeaponCs =[
   Result[3] = Math.round( (Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 ) ;
   Result[4] = Weapon[2] + Mod[2] + Addon[2];
   Result[5] = Weapon[3] + Mod[3] + Addon[3];
-  Result[6] = Weapon[5] + Mod[4];
+  Result[6] = Math.round( (Weapon[5] + Mod[4]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   Result[7] = Math.round( (Result[0] * Result[6]) * Math.pow( 10, 1 ) ) / Math.pow( 10, 1 );
   Result[8] = Math.round(Math.abs(Weapon[7] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
   Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow( 10, 2 ) ) / Math.pow( 10, 2 );
