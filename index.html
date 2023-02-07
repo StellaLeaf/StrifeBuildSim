@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="assets/favicon.ico">
     <title>STRIFE Build Simulator</title>
 </head>
+
 <body>
-    <font size="10">STRIFE Build Simulator</font>
+    <div size="10">STRIFE Build Simulator</div>
     <div class="input-block">
         <div class="select-block">
-          <label>
-            <form id="TypeForm">
-                <select id="TypeSelect">
-                <option value="none">武器種を選択してください</option>
-                </select>
-            </form>
-          </label>
+            <label>
+                <form id="TypeForm">
+                    <select id="TypeSelect">
+                        <option value="none">武器種を選択してください</option>
+                    </select>
+                </form>
+            </label>
         </div>
         <div class="select-block">
-          <label>
-            <form id="WeaponForm">
-                <select id="WeaponSelect" disabled>
-                    <option>武器を選択してください</option>
-                </select>
-            </form>
-          </label>
+            <label>
+                <form id="WeaponForm">
+                    <select id="WeaponSelect" disabled>
+                        <option>武器を選択してください</option>
+                    </select>
+                </form>
+            </label>
         </div>
     </div>
     <form id="ModForm">
@@ -96,16 +98,36 @@
     <table>
         武器性能
         <tr>
-        <th>平均dmg</th><th>平均DPS</th><th>移動速度</th><th>装弾数</th><th>腰撃ち精度</th><th>減衰(10m)</th>
+            <th>平均dmg</th>
+            <th>平均DPS</th>
+            <th>移動速度</th>
+            <th>装弾数</th>
+            <th>腰撃ち精度</th>
+            <th>減衰(10m)</th>
         </tr>
         <tr>
-        <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td><td><span id="DisplayDps">0</span></td><td><span id="DisplayWeight">1</span>倍</td><td><span id="DisplayCapacity">0</span></td><td><span id="DisplaySpread">0</span></td><td><span id="DisplayChangeDmg10m">0</span></td>
+            <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td>
+            <td><span id="DisplayDps">0</span></td>
+            <td><span id="DisplayWeight">1</span>倍</td>
+            <td><span id="DisplayCapacity">0</span></td>
+            <td><span id="DisplaySpread">0</span></td>
+            <td><span id="DisplayChangeDmg10m">0</span></td>
         </tr>
         <tr>
-        <th>最高dmg</th><th>射撃時間(s)</th><th>レート(s)</th><th>リロード<span id="DisplayReloadStyle"></span></th><th>ADS精度</th><th>最大減衰量</th>
+            <th>最高dmg</th>
+            <th>射撃時間(s)</th>
+            <th>レート(s)</th>
+            <th>リロード<span id="DisplayReloadStyle"></span></th>
+            <th>ADS精度</th>
+            <th>最大減衰量</th>
         </tr>
         <tr>
-        <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td><td><span id="DisplayDuration">0</span></td><td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td><td><span id="DisplayReload">0</span></td><td><span id="DisplayAdsSpread">0</span></td><td><span id="DisplayChangeDmgMax">0</span></td>
+            <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td>
+            <td><span id="DisplayDuration">0</span></td>
+            <td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td>
+            <td><span id="DisplayReload">0</span></td>
+            <td><span id="DisplayAdsSpread">0</span></td>
+            <td><span id="DisplayChangeDmgMax">0</span></td>
         </tr>
     </table>
     <!-- <table>
@@ -118,6 +140,7 @@
         </tr>
     </table> -->
 </body>
-<script src="import.js"></script>
-<script src="index.js"></script>
+<script src="js/import.js"></script>
+<script src="js/index.js"></script>
+
 </html>
