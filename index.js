@@ -447,6 +447,85 @@ const WeaponList = [
   {category:'Staves', name:'Staff of Zisca', value:'Zisca'},
   {category:'Staves', name:'Worldender', value:'worldender'},
   {category:'Staves', name:'Yuki Kaze', value:'yuki'},
+  {category:'Secondary', name:'Alien Phaser', value:'alienpistol'},
+  {category:'Secondary', name:'Alpha Phaser', value:'alphaphaser'},
+  {category:'Secondary', name:'Arda Sure Shot', value:'arda'},
+  {category:'Secondary', name:'Aries', value:'aries'},
+  {category:'Secondary', name:'Arizona', value:'arizona'},
+  {category:'Secondary', name:'Beta Phaser', value:'betaphaser'},
+  {category:'Secondary', name:'Book of Mother Earth', value:'bookofmother'},
+  {category:'Secondary', name:'Desert Falcon', value:'desertfalcon'},
+  {category:'Secondary', name:'Desertdog MMG', value:'Desertdog'},
+  {category:'Secondary', name:'Desolation', value:'deso'},
+  {category:'Secondary', name:'Eclipse', value:'Eclipse'},
+  {category:'Secondary', name:'Forty Three Pistol', value:'43'},
+  {category:'Secondary', name:'G7 Self Defence', value:'g7'},
+  {category:'Secondary', name:"Gadrec's Sawed-off", value:'gadrec'},
+  {category:'Secondary', name:'GL1 Grenade Shooter', value:'GL1'},
+  {category:'Secondary', name:'GL4 Compact Launcher', value:'GL4'},
+  {category:'Secondary', name:'GL99 Micro Missile Launcher', value:'gl99'},
+  {category:'Secondary', name:'Golden One', value:'goldenone'},
+  {category:'Secondary', name:'Golden TK[通常]', value:'goldtk'},
+  {category:'Secondary', name:'Golden TK[サイレンサー]', value:'goldtk2'},
+  {category:'Secondary', name:'Golden West', value:'gold'},
+  {category:'Secondary', name:'Golden West 2022', value:'gold2'},
+  {category:'Secondary', name:'H1 Goblin Hunter', value:'goblin'},
+  {category:'Secondary', name:"Harden's Blunderbuss", value:'Harden'},
+  {category:'Secondary', name:'Joker', value:'joker'},
+  {category:'Secondary', name:'Karc-8', value:'Karc'},
+  {category:'Secondary', name:'Limewillow', value:'limewillow'},
+  {category:'Secondary', name:'Lonewolf', value:'lonewolf'},
+  {category:'Secondary', name:'Loveling♥', value:'lovelove'},
+  {category:'Secondary', name:'M-P4 Battlecraft Pistol', value:'battlecraft'},
+  {category:'Secondary', name:'Modernbick Shotgun', value:'modern'},
+  {category:'Secondary', name:'Moria Nagan', value:'morianagan'},
+  {category:'Secondary', name:'N1 Hidden Gun', value:'hiddengun'},
+  {category:'Secondary', name:'Old West', value:'oldwest'},
+  {category:'Secondary', name:'Old West Fanning Shot', value:'oldf'},
+  {category:'Secondary', name:'Old West Triple Action', value:'old3'},
+  {category:'Secondary', name:'P5 Auto Pistol', value:'p5'},
+  {category:'Secondary', name:'P77 Quad Action', value:'quadaction'},
+  {category:'Secondary', name:'P-20 Stormcaller', value:'stormcaller'},
+  {category:'Secondary', name:'PocketCannon', value:'pocketcannon'},
+  {category:'Secondary', name:'Quickcleave', value:'Quickcleave'},
+  {category:'Secondary', name:'Red Mongoose', value:'redmongoose'},
+  {category:'Secondary', name:'Silver Old West', value:'olds'},
+  {category:'Secondary', name:'Sixfinger', value:'sixfinger'},
+  {category:'Secondary', name:'Sling Shot', value:'demonpower'},
+  {category:'Secondary', name:'TC5 Magicka', value:'tc5'},
+  {category:'Secondary', name:'The Etna', value:'etna'},
+  {category:'Secondary', name:'UZH Portable SMG', value:'uzh'},
+  {category:'Secondary', name:'Vunnaq', value:'vunna'},
+  {category:'Secondary', name:'Vunnaq Fullauto', value:'vunnaf'},
+  {category:'Secondary', name:'Wandrak Hand Cannon', value:'wardrak'},
+  {category:'Secondary', name:'Water Pistol', value:'waterpistol'},
+  {category:'Secondary', name:"Wildville ‘75", value:'Wildville'},
+  {category:'Secondary', name:'', value:'thetester'},
+  {category:'Secondary', name:'', value:'thetester2'},
+  {category:'Melee', name:'Aodhlugh, Creator of Volcanoes', value:'Aodhlugh'},
+  {category:'Melee', name:"Az'gan, The matter of darkness[近接]", value:'azz'},
+  {category:'Melee', name:"Az'gan, The matter of darkness[射撃]", value:'azz_at'},
+  {category:'Melee', name:'Bloody Axe', value:'bloodyaxe'},
+  {category:'Melee', name:'Broken Dahlia', value:'dahlia'},
+  {category:'Melee', name:'Cultist Knife', value:'cultist'},
+  {category:'Melee', name:'Gravity Axe', value:'gravity'},
+  {category:'Melee', name:'kanabou', value:'kanabou'},
+  {category:'Melee', name:'Manablade', value:'manablade'},
+  {category:'Melee', name:'Mine Uchi', value:'mineuchi'},
+  {category:'Melee', name:'Ninja Kunai', value:'kunai'},
+  {category:'Melee', name:'Nyr, Thunderblade of Oath Keeper', value:'Nyr'},
+  {category:'Melee', name:'SA-SA', value:'sasa'},
+  {category:'Melee', name:'Shadowfang', value:'Shadowfang'},
+  {category:'Melee', name:'StarBlade', value:'starblade'},
+  {category:'Melee', name:'Sword of Faith', value:'swordoffaith'},
+  {category:'Melee', name:'The Brute', value:'Brute'},
+  {category:'Melee', name:'The Punisher', value:'punisher'},
+  {category:'Melee', name:'Valhalla', value:'Valhalla'},
+  {category:'Melee', name:'Warblade of Thanatos', value:'thanatos'},
+  {category:'Melee', name:'Windsong Polearm', value:'Windsong'},
+  {category:'Melee', name:"Witch's Broom", value:'broom'},
+  {category:'Melee', name:"Xeg'then, Initiator of Sundown", value:'xeg'},
+  {category:'Melee', name:'Zan Getsu', value:'zangetsu'}
 ];
 const categorySelect2 = document.getElementById('TypeSelect');
 const subCategorySelect2 = document.getElementById('WeaponSelect');
@@ -566,7 +645,7 @@ document.getElementById('EnchantForm').onchange = function() {
         Ench[1] = 0;
         break;
     };
-    ResultCalc();
+    makeObj();
 };
 //OEダメージ処理
 document.getElementById('OeForm').onchange = function() {
@@ -636,7 +715,7 @@ document.getElementById('OeForm').onchange = function() {
       Ench[3] = 0;
       break;
   };
-  ResultCalc();
+  makeObj();
 };
 //AEダメージ処理
 document.getElementById('AncientEnchantForm').onchange = function() {
@@ -665,7 +744,7 @@ document.getElementById('AncientEnchantForm').onchange = function() {
         Ae[1] = 0;
         break;
     };
-    ResultCalc();
+    makeObj();
 };
 //Addonダメージ処理
 document.getElementById('AddonForm').onchange = function() {
@@ -794,5 +873,5 @@ document.getElementById('AddonForm').onchange = function() {
       Addon[4]=0;
       break;
   };
-  ResultCalc();
+  makeObj();
 };
