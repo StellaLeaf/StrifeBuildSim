@@ -117,8 +117,7 @@ const render = () => {
         } else {
             WeaponReloadStyle = 0
         }
-
-        function notFullauto() {
+        const notFullauto = () => {
             if (jsondata[WeaponKey]["Burstfire"] === "undefined") {
                 WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
             } else if (jsondata[WeaponKey]["Burstfire"]["Enable"] === "true") {
@@ -277,54 +276,30 @@ const render = () => {
     document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
     document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
     document.getElementById("DisplayWeight").textContent = (Result[10])
-    if (Result[11] > 0) {
-        document.getElementById("DisplayDuration").textContent = (Result[11])
-    } else {
-        document.getElementById("DisplayDuration").textContent = 0
-    }
-    if (Weapon[6] > 1) {
-        document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
-    } else {
-        document.getElementById("DisplayPellets").textContent = (null)
-    }
-    if (Weapon[4] != 0) {
-        document.getElementById("DisplayReloadStyle").textContent = ("/発")
-    } else {
-        document.getElementById("DisplayReloadStyle").textContent = (null)
-    }
+    if (Result[11] > 0) document.getElementById("DisplayDuration").textContent = (Result[11])
+    else document.getElementById("DisplayDuration").textContent = 0
+    if (Weapon[6] > 1) document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
+    else document.getElementById("DisplayPellets").textContent = (null)
+    if (Weapon[4] != 0) document.getElementById("DisplayReloadStyle").textContent = ("/発")
+    else document.getElementById("DisplayReloadStyle").textContent = (null)
+
 }
-//武器選択モジュール
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
 WeaponTypes.forEach(category => {
     const option = document.createElement("option")
     option.textContent = category
-
     categorySelect2.appendChild(option)
 })
 categorySelect2.addEventListener("input", () => {
-
-    // 小分類のプルダウンをリセット
     const options = document.querySelectorAll("#WeaponSelect > option")
-    options.forEach(option => {
-        option.remove()
-    })
-
-    // 小分類のプルダウンに「選択してください」を加える
+    options.forEach(option => option.remove())
     const firstSelect = document.createElement("option")
     firstSelect.textContent = "武器を選択してください"
     firstSelect.setAttribute("value", "none")
     subCategorySelect2.appendChild(firstSelect)
-
-    // 小分類を選択（クリック）できるようにする
     subCategorySelect2.disabled = false
-
-    // 大分類が選択されていない（「選択してください」になっている）とき、小分類を選択（クリック）できないようにする
-    if (categorySelect2.value == "blank") {
-        subCategorySelect2.disabled = true
-        return
-    }
-    // 大分類で選択されたカテゴリーと同じ小分類のみを、プルダウンの選択肢に設定する
+    if (categorySelect2.value == "blank") return subCategorySelect2.disabled = true
     WeaponList.forEach(subCategory => {
         if (categorySelect2.value == subCategory.category) {
             const option = document.createElement("option")
@@ -334,312 +309,246 @@ categorySelect2.addEventListener("input", () => {
         }
     })
 })
-//トリガー
-document.getElementById("TypeForm").onchange = () => render()
-document.getElementById("WeaponForm").onchange = () => render()
-document.getElementById("ModForm").onchange = () => render()
-//エンチャダメージ処理
-document.getElementById("EnchantForm").onchange = function () {
-    switch (document.getElementById("EnchantForm").EnchantSelect.value) {
-        case "Sunfire":
-            switch (document.getElementById("EnchantForm").EnchantLevSelect.value) {
-                case "EnchLev1":
-                    Ench[0] = SfAverageDmg[0]
-                    Ench[1] = SfHighestDmg
-                    break
-                case "EnchLev2":
-                    Ench[0] = SfAverageDmg[1]
-                    Ench[1] = SfHighestDmg
-                    break
-                case "EnchLev3":
-                    Ench[0] = SfAverageDmg[2]
-                    Ench[1] = SfHighestDmg
-                    break
-                default:
-                    Ench[0] = 0
-                    Ench[1] = 0
-                    break
-            }
-            break
-        case "DemonPower":
-            switch (document.getElementById("EnchantForm").EnchantLevSelect.value) {
-                case "EnchLev1":
-                    Ench[0] = DpAverageDmg[0]
-                    Ench[1] = DpHighestDmg
-                    break
-                case "EnchLev2":
-                    Ench[0] = DpAverageDmg[1]
-                    Ench[1] = DpHighestDmg
-                    break
-                case "EnchLev3":
-                    Ench[0] = DpAverageDmg[2]
-                    Ench[1] = DpHighestDmg
-                    break
-                default:
-                    Ench[0] = 0
-                    Ench[1] = 0
-                    break
-            }
-            break
-        case "SiphonLife":
-            switch (document.getElementById("EnchantForm").EnchantLevSelect.value) {
-                case "EnchLev1":
-                    Ench[0] = SlAverageDmg[0]
-                    Ench[1] = SlHighestDmg
-                    break
-                case "EnchLev2":
-                    Ench[0] = SlAverageDmg[1]
-                    Ench[1] = SlHighestDmg
-                    break
-                case "EnchLev3":
-                    Ench[0] = SlAverageDmg[2]
-                    Ench[1] = SlHighestDmg
-                    break
-                default:
-                    Ench[0] = 0
-                    Ench[1] = 0
-                    break
-            }
-            break
-        default:
+
+const CalcEnch = () => {
+    const Ench = document.getElementById("EnchantForm").EnchantSelect.value
+    const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
+    if (Ench == "Sunfire") {
+        if (EnchLv == "EnchLev1") {
+            Ench[0] = SfAverageDmg[0]
+            Ench[1] = SfHighestDmg
+        } else if (EnchLv == "EnchLev2") {
+            Ench[0] = SfAverageDmg[1]
+            Ench[1] = SfHighestDmg
+        } else if (EnchLv == "EnchLev3") {
+            Ench[0] = SfAverageDmg[2]
+            Ench[1] = SfHighestDmg
+        } else {
             Ench[0] = 0
             Ench[1] = 0
-            break
+        }
+    } else if (Ench == "DemonPower") {
+        if (EnchLv == "EnchLev1") {
+            Ench[0] = DpAverageDmg[0]
+            Ench[1] = DpHighestDmg
+        } else if (EnchLv == "EnchLev2") {
+            Ench[0] = DpAverageDmg[1]
+            Ench[1] = DpHighestDmg
+        } else if (EnchLv == "EnchLev3") {
+            Ench[0] = DpAverageDmg[2]
+            Ench[1] = DpHighestDmg
+        } else {
+            Ench[0] = 0
+            Ench[1] = 0
+        }
+    } else if (Ench == "SiphonLife") {
+        if (EnchLv == "EnchLev1") {
+            Ench[0] = SlAverageDmg[0]
+            Ench[1] = SlHighestDmg
+        } else if (EnchLv == "EnchLev2") {
+            Ench[0] = SlAverageDmg[1]
+            Ench[1] = SlHighestDmg
+        } else if (EnchLv == "EnchLev3") {
+            Ench[0] = SlAverageDmg[2]
+            Ench[1] = SlHighestDmg
+        } else {
+            Ench[0] = 0
+            Ench[1] = 0
+        }
+    } else {
+        Ench[0] = 0
+        Ench[1] = 0
     }
     render()
 }
-//OEダメージ処理
-document.getElementById("OeForm").onchange = function () {
-    switch (document.getElementById("OeForm").OeSelect.value) {
-        case "OeSunfire":
-            switch (document.getElementById("OeForm").OeLevSelect.value) {
-                case "OeLev1":
-                    Ench[2] = SfAverageDmg[0]
-                    Ench[3] = SfHighestDmg
-                    break
-                case "OeLev2":
-                    Ench[2] = SfAverageDmg[1]
-                    Ench[3] = SfHighestDmg
-                    break
-                case "OeLev3":
-                    Ench[2] = SfAverageDmg[2]
-                    Ench[3] = SfHighestDmg
-                    break
-                default:
-                    Ench[2] = 0
-                    Ench[3] = 0
-                    break
-            }
-            break
-        case "OeDemonPower":
-            switch (document.getElementById("OeForm").OeLevSelect.value) {
-                case "OeLev1":
-                    Ench[2] = DpAverageDmg[0]
-                    Ench[3] = DpHighestDmg
-                    break
-                case "OeLev2":
-                    Ench[2] = DpAverageDmg[1]
-                    Ench[3] = DpHighestDmg
-                    break
-                case "OeLev3":
-                    Ench[2] = DpAverageDmg[2]
-                    Ench[3] = DpHighestDmg
-                    break
-                default:
-                    Ench[2] = 0
-                    Ench[3] = 0
-                    break
-            }
-            break
-        case "OeSiphonLife":
-            switch (document.getElementById("OeForm").OeLevSelect.value) {
-                case "OeLev1":
-                    Ench[2] = SlAverageDmg[0]
-                    Ench[3] = SlHighestDmg
-                    break
-                case "OeLev2":
-                    Ench[2] = SlAverageDmg[1]
-                    Ench[3] = SlHighestDmg
-                    break
-                case "OeLev3":
-                    Ench[2] = SlAverageDmg[2]
-                    Ench[3] = SlHighestDmg
-                    break
-                default:
-                    Ench[2] = 0
-                    Ench[3] = 0
-                    break
-            }
-            break
-        default:
+
+const CalcOE = () => {
+    const OE = document.getElementById("OeForm").OeSelect.value
+    const OELv = document.getElementById("OeForm").OeLevSelect.value
+    if (OE == "OeSunfire") {
+        if (OELv == "OeLev1") {
+            Ench[2] = SfAverageDmg[0]
+            Ench[3] = SfHighestDmg
+        } else if (OELv == "OeLev2") {
+            Ench[2] = SfAverageDmg[1]
+            Ench[3] = SfHighestDmg
+        } else if (OELv == "OeLev3") {
+            Ench[2] = SfAverageDmg[2]
+            Ench[3] = SfHighestDmg
+        } else {
             Ench[2] = 0
             Ench[3] = 0
-            break
+        }
+    } else if (OE == "OeDemonPower") {
+        if (OELv == "OeLev1") {
+            Ench[2] = DpAverageDmg[0]
+            Ench[3] = DpHighestDmg
+        } else if (OELv == "OeLev2") {
+            Ench[2] = DpAverageDmg[1]
+            Ench[3] = DpHighestDmg
+        } else if (OELv == "OeLev3") {
+            Ench[2] = DpAverageDmg[2]
+            Ench[3] = DpHighestDmg
+        } else {
+            Ench[2] = 0
+            Ench[3] = 0
+        }
+    } else if (OE == "OeSiphonLife") {
+        if (OELv == "OeLev1") {
+            Ench[2] = SlAverageDmg[0]
+            Ench[3] = SlHighestDmg
+        } else if (OELv == "OeLev2") {
+            Ench[2] = SlAverageDmg[1]
+            Ench[3] = SlHighestDmg
+        } else if (OELv == "OeLev3") {
+            Ench[2] = SlAverageDmg[2]
+            Ench[3] = SlHighestDmg
+        } else {
+            Ench[2] = 0
+            Ench[3] = 0
+        }
+    } else {
+        Ench[2] = 0
+        Ench[3] = 0
     }
     render()
 }
-//AEダメージ処理
-document.getElementById("AncientEnchantForm").onchange = function () {
-    switch (document.getElementById("AncientEnchantForm").AncientEnchantSelect.value) {
-        case "Bloodcraze":
-            Ae[0] = BcDmg
-            Ae[1] = BcDmg
-            break
-        case "ElementalOverload":
-            Ae[0] = EoDmg
-            Ae[1] = EoDmg
-            break
-        case "Mastercrafted":
-            Ae[0] = McDmg
-            Ae[1] = McDmg
-            break
-        case "ConcentratedFire":
-            Ae[0] = CfDmg
-            Ae[1] = CfDmg
-            break
-        case "SuddenDeath":
-            Ae[0] = SdAverageDmg
-            Ae[1] = SdHighestDmg
-        default:
-            Ae[0] = 0
-            Ae[1] = 0
-            break
+
+const CalcAE = () => {
+    const AE = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
+    if (AE == "Bloodcraze") {
+        Ae[0] = BcDmg
+        Ae[1] = BcDmg
+    } else if (AE == "ElementalOverload") {
+        Ae[0] = EoDmg
+        Ae[1] = EoDmg
+    } else if (AE == "Mastercrafted") {
+        Ae[0] = McDmg
+        Ae[1] = McDmg
+    } else if (AE == "ConcentratedFire") {
+        Ae[0] = CfDmg
+        Ae[1] = CfDmg
+    } else if (AE == "SuddenDeath") {
+        Ae[0] = SdAverageDmg
+        Ae[1] = SdHighestDmg
+    } else {
+        Ae[0] = 0
+        Ae[1] = 0
     }
     render()
 }
-//Addonダメージ処理
-document.getElementById("AddonForm").onchange = function () {
-    switch (document.getElementById("AddonForm").AddonSelect.value) {
-        case "ManaPowder":
+
+const CalcAddon = () => {
+    const Addon = document.getElementById("AddonForm").AddonSelect.value
+    const AddonLv = document.getElementById("AddonForm").AddonLevSelect.value
+    if (Addon == "ManaPowder") {
+        Addon[2] = 0
+        Addon[3] = 0
+        Addon[4] = 0
+        if (AddonLv == "AddonLev0") {
+            Addon[0] = MpDmg[0]
+            Addon[1] = MpDmg[0]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[0] = MpDmg[0]
+            Addon[1] = MpDmg[0]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[0] = MpDmg[0]
+            Addon[1] = MpDmg[0]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[0] = MpDmg[0]
+            Addon[1] = MpDmg[0]
+        } else {
+            Addon[0] = 0
+            Addon[1] = 0
+        }
+    } else if (Addon == "HeavyBullets") {
+        Addon[2] = 0
+        Addon[3] = 0
+        Addon[4] = 0
+        if (AddonLv == "AddonLev0") {
+            Addon[0] = HbAverageDmg[0]
+            Addon[1] = HbHighestDmg[0]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[0] = HbAverageDmg[1]
+            Addon[1] = HbHighestDmg[1]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[0] = HbAverageDmg[2]
+            Addon[1] = HbHighestDmg[2]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[0] = HbAverageDmg[3]
+            Addon[1] = HbHighestDmg[3]
+        } else {
+            Addon[0] = 0
+            Addon[1] = 0
+        }
+    } else if (Addon == "ExtendedMagazine") {
+        Addon[0] = 0
+        Addon[1] = 0
+        Addon[3] = 0
+        Addon[4] = 0
+        if (AddonLv == "AddonLev0") {
+            Addon[2] = EmCapacity[0]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[2] = EmCapacity[1]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[2] = EmCapacity[2]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[2] = EmCapacity[3]
+        } else {
             Addon[2] = 0
+        }
+    } else if (Addon == "QuickPull") {
+        Addon[0] = 0
+        Addon[1] = 0
+        Addon[3] = 0
+        Addon[4] = 0
+        if (AddonLv == "AddonLev0") {
+            Addonr = QpReload[0]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[3] = QpReload[1]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[3] = QpReload[2]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[3] = QpReload[3]
+        } else {
             Addon[3] = 0
+        }
+    } else if (Addon == "LightweightKit") {
+        Addon[0] = 0
+        Addon[1] = 0
+        Addon[3] = 0
+        if (AddonLv == "AddonLev0") {
+            Addon[4] = LkWeight[0]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[4] = LkWeight[1]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[4] = LkWeight[2]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[4] = LkWeight[3]
+        } else {
             Addon[4] = 0
-            switch (document.getElementById("AddonForm").AddonLevSelect.value) {
-                case "AddonLev0":
-                    Addon[0] = MpDmg[0]
-                    Addon[1] = MpDmg[0]
-                    break
-                case "AddonLev1":
-                    Addon[0] = MpDmg[1]
-                    Addon[1] = MpDmg[1]
-                    break
-                case "AddonLev2":
-                    Addon[0] = MpDmg[2]
-                    Addon[1] = MpDmg[2]
-                    break
-                case "AddonLev3":
-                    Addon[0] = MpDmg[3]
-                    Addon[1] = MpDmg[3]
-                    break
-                default:
-                    Addon[0] = 0
-                    Addon[1] = 0
-                    break
-            }
-            break
-        case "HeavyBullets":
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            switch (document.getElementById("AddonForm").AddonLevSelect.value) {
-                case "AddonLev0":
-                    Addon[0] = HbAverageDmg[0]
-                    Addon[1] = HbHighestDmg[0]
-                    break
-                case "AddonLev1":
-                    Addon[0] = HbAverageDmg[1]
-                    Addon[1] = HbHighestDmg[1]
-                case "AddonLev2":
-                    Addon[0] = HbAverageDmg[2]
-                    Addon[1] = HbHighestDmg[2]
-                    break
-                case "AddonLev3":
-                    Addon[0] = HbAverageDmg[3]
-                    Addon[1] = HbHighestDmg[3]
-                    break
-                default:
-                    Addon[0] = 0
-                    Addon[1] = 0
-                    break
-            }
-            case "ExtendedMagazine":
-                Addon[0] = 0
-                Addon[1] = 0
-                Addon[3] = 0
-                Addon[4] = 0
-                switch (document.getElementById("AddonForm").AddonLevSelect.value) {
-                    case "AddonLev0":
-                        Addon[2] = EmCapacity[0]
-                        break
-                    case "AddonLev1":
-                        Addon[2] = EmCapacity[1]
-                        break
-                    case "AddonLev2":
-                        Addon[2] = EmCapacity[2]
-                        break
-                    case "AddonLev3":
-                        Addon[2] = EmCapacity[3]
-                        break
-                    default:
-                        Addon[2] = 0
-                }
-                break
-            case "QuickPull":
-                Addon[0] = 0
-                Addon[1] = 0
-                Addon[3] = 0
-                Addon[4] = 0
-                switch (document.getElementById("AddonForm").AddonLevSelect.value) {
-                    case "AddonLev0":
-                        Addonr = QpReload[0]
-                        break
-                    case "AddonLev1":
-                        Addon[3] = QpReload[1]
-                        break
-                    case "AddonLev2":
-                        Addon[3] = QpReload[2]
-                        break
-                    case "AddonLev3":
-                        Addon[3] = QpReload[3]
-                        break
-                    default:
-                        Addon[3] = 0
-                }
-                case "LightweightKit":
-                    Addon[0] = 0
-                    Addon[1] = 0
-                    Addon[3] = 0
-                    switch (document.getElementById("AddonForm").AddonLevSelect.value) {
-                        case "AddonLev0":
-                            Addon[4] = LkWeight[0]
-                            break
-                        case "AddonLev1":
-                            Addon[4] = LkWeight[1]
-                            break
-                        case "AddonLev2":
-                            Addon[4] = LkWeight[2]
-                            break
-                        case "AddonLev3":
-                            Addon[4] = LkWeight[3]
-                            break
-                        default:
-                            Addon[4] = 0
-                    }
-                    break
-                default:
-                    Addon[0] = 0
-                    Addon[1] = 0
-                    Addon[2] = 0
-                    Addon[3] = 0
-                    Addon[4] = 0
-                    break
+        }
+    } else {
+        Addon[0] = 0
+        Addon[1] = 0
+        Addon[2] = 0
+        Addon[3] = 0
+        Addon[4] = 0
     }
     render()
 }
+
 
 document.addEventListener("DOMContentLoaded", () => {
     fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
         [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
         console.log(res.concat())
     })
+    document.getElementById("TypeForm").onchange = () => render()
+    document.getElementById("WeaponForm").onchange = () => render()
+    document.getElementById("ModForm").onchange = () => render()
+    document.getElementById("EnchantForm").onchange = () => CalcEnch()
+    document.getElementById("OeForm").onchange = () => CalcOE()
+    document.getElementById("AncientEnchantForm").onchange = () => CalcAE()
+    document.getElementById("AddonForm").onchange = () => CalcAddon()
 })
