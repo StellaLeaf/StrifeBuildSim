@@ -1,43 +1,74 @@
-class Fetches {
-    constructor() {
-        this._responseObjs
-    }
-    jsonObjs(urls) {
-        return new Promise((resolve) => {
-            (async () => {
-                try {
-                    const fetchUrlPromises = urls.map(
-                        url => fetch(url, {
-                            method: "GET"
-                        }).then(response => {
-                            if (response.ok) {
-                                return response.json()
-                            }
-                            throw new Error("Network response was not ok")
-                        })
-                    )
-                    this._responseObjs = await Promise.all(fetchUrlPromises)
-                    resolve()
-                } catch (error) {
-                    console.error(error)
-                }
-            })()
-        }).then(() => {
-            return this._responseObjs
-        })
-    }
-}
+const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
+const Ench = [0, 0, 0, 0]
+const Ae = [0, 0]
+const Addon = [0, 0, 0, 0, 0]
+const SfAverageDmg = [2.01, 2.16, 2, 31]
+const SfHighestDmg = 3
+const DpAverageDmg = [1.4, 1.6, 1.8]
+const DpHighestDmg = 4
+const SlAverageDmg = [0.8, 1.0, 1.2]
+const SlHighestDmg = 2
+const BcDmg = 7
+const EoDmg = 6
+const McDmg = 1
+const CfDmg = 4
+const SdAverageDmg = 1
+const SdHighestDmg = 20
+const MpDmg = [0.25, 0.5, 1.0, 1.5]
+const HbAverageDmg = [0.4, 0.8, 1.2, 1.6]
+const HbHighestDmg = [2, 4, 6, 8]
+const EmCapacity = [2, 4, 6, 10]
+const QpReload = [-4, -8, -12, -16]
+const LkWeight = [0.004, 0.005, 0.010, 0.015]
+const _pathAr = "maps/1_AR.json"
+const _pathArp = "maps/1_AR_CSP.json"
+const _pathSmg = "maps/3_SMG.json"
+const _pathSmgp = "maps/3_SMG_CSP.json"
+const _pathLmg = "maps/9_LMG.json"
+const _pathLmgp = "maps/9_LMG_CSP.json"
+const _pathSr = "maps/5_SR.json"
+const _pathSrp = "maps/5_SR_CSP.json"
+const _pathCar = "maps/12_CARBINE.json"
+const _pathCarp = "maps/12_CARBINE_CSP.json"
+const _pathExpl = "maps/7_EXPLOSIVE.json"
+const _pathExplp = "maps/7_EXPLOSIVE_CSP.json"
+const _pathSec = "maps/6_PISTOL.json"
+const _pathSecp = "maps/6_PISTOL_CSP.json"
+const _pathMelee = "maps/4_SG.json"
+const _pathMeleep = "maps/4_SG_CSP.json"
+let jsondata
+let jsondata2
+let _objAr
+let _objArp
+let _objSmg
+let _objSmgp
+let _objLmg
+let _objLmgp
+let _objSr
+let _objSrp
+let _objCar
+let _objCarp
+let _objExpl
+let _objExplp
+let _objSec
+let _objSecp
+let _objMelee
+let _objMeleep
 
-function makeObj() {
-    (new Fetches()).jsonObjs([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
-        [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
-        render()
-    })
-}
+const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
+    method: "GET"
+}).then(response => {
+    if (!response.ok) throw new Error("Network response was not ok")
+    return response.json()
+})))
 
-function render() {
+const render = () => {
     let TypeKey = document.getElementById("TypeForm").TypeSelect.value
-    if (TypeKey === "none") {} else if (TypeKey === "AssaultRifle") {
+    if (TypeKey === "none") {
+        //none
+    } else if (TypeKey === "AssaultRifle") {
         jsondata = _objAr
         jsondata2 = _objArp
     } else if (TypeKey === "SMG" || TypeKey === "Shotgun") {
@@ -304,15 +335,9 @@ categorySelect2.addEventListener("input", () => {
     })
 })
 //トリガー
-document.getElementById("TypeForm").onchange = function () {
-    makeObj()
-}
-document.getElementById("WeaponForm").onchange = function () {
-    makeObj()
-}
-document.getElementById("ModForm").onchange = function () {
-    makeObj()
-}
+document.getElementById("TypeForm").onchange = () => render()
+document.getElementById("WeaponForm").onchange = () => render()
+document.getElementById("ModForm").onchange = () => render()
 //エンチャダメージ処理
 document.getElementById("EnchantForm").onchange = function () {
     switch (document.getElementById("EnchantForm").EnchantSelect.value) {
@@ -381,7 +406,7 @@ document.getElementById("EnchantForm").onchange = function () {
             Ench[1] = 0
             break
     }
-    makeObj()
+    render()
 }
 //OEダメージ処理
 document.getElementById("OeForm").onchange = function () {
@@ -451,7 +476,7 @@ document.getElementById("OeForm").onchange = function () {
             Ench[3] = 0
             break
     }
-    makeObj()
+    render()
 }
 //AEダメージ処理
 document.getElementById("AncientEnchantForm").onchange = function () {
@@ -480,7 +505,7 @@ document.getElementById("AncientEnchantForm").onchange = function () {
             Ae[1] = 0
             break
     }
-    makeObj()
+    render()
 }
 //Addonダメージ処理
 document.getElementById("AddonForm").onchange = function () {
@@ -609,5 +634,12 @@ document.getElementById("AddonForm").onchange = function () {
                     Addon[4] = 0
                     break
     }
-    makeObj()
+    render()
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
+        [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
+        console.log(res.concat())
+    })
+})
