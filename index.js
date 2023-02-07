@@ -200,7 +200,7 @@ const WeaponTypes=[
   "Special",
   "Staves",
   "Secondary",
-  "Staves"
+  "Melee"
 ]
 const WeaponList = [
   {category:'AssaultRifle', name:'A-12 Plastic Rifle', value:'weird'},
