@@ -66,8 +66,17 @@ const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
 
 const render = () => {
     let TypeKey = document.getElementById("TypeForm").TypeSelect.value
+    let WeaponKey = document.getElementById("WeaponForm").WeaponSelect.value
+    let ModKey = document.getElementById("ModForm").ModSelect.value
     if (TypeKey === "none") {
-        //none
+        jsondata ='none';
+        jsondata2 ='none';
+    }else if(WeaponKey === 'graveless'||WeaponKey === 'Helheim'||WeaponKey === 'horizon'||WeaponKey === 'thirdeye'||WeaponKey === 'Coldfang'){
+        jsondata = _objSr
+        jsondata2 = _objArp
+    }else if(WeaponKey === 'minigun'||WeaponKey === 'awr'){
+        jsondata = _objExpl
+        jsondata2 = _objLmgp
     } else if (TypeKey === "AssaultRifle") {
         jsondata = _objAr
         jsondata2 = _objArp
@@ -93,8 +102,6 @@ const render = () => {
         jsondata = _objMelee
         jsondata2 = _objMeleep
     }
-    let WeaponKey = document.getElementById("WeaponForm").WeaponSelect.value
-    let ModKey = document.getElementById("ModForm").ModSelect.value
     let WeaponReloadStyle = 0
     let WeaponRateKey = 0
     let WeaponAdsKey = 0
@@ -109,16 +116,26 @@ const render = () => {
     let WeaponPellets = 0
     let WeaponSpread = 0
     let WeaponWeight = 0
-    if (!(WeaponKey === "none" || jsondata == undefined)) {
-        if (typeof jsondata === "undefined") {
+    if (!(WeaponKey === "none" || jsondata == 'json')) {
+        //リロード配列の処理
+        if(typeof jsondata[WeaponKey]["Reload"] === 'undefined'){
             WeaponReloadStyle = 0
-        } else if (jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === "true") {
-            WeaponReloadStyle = 1
-        } else {
-            WeaponReloadStyle = 0
-        }
+            WeaponReloadAmount = 0
+            WeaponReloadDuration = 0
+        }else{
+            if(typeof jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === 'undefined'){
+                WeaponReloadStyle = 0
+            } else if (jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === "true") {
+                WeaponReloadStyle = 1
+            } else {
+                WeaponReloadStyle = 0
+            }
+            WeaponReloadAmount = jsondata[WeaponKey]["Reload"]["Reload_Amount"]
+            WeaponReloadDuration = jsondata[WeaponKey]["Reload"]["Reload_Duration"]
+        };
+        //セミ・バーストの処理
         const notFullauto = () => {
-            if (jsondata[WeaponKey]["Burstfire"] === "undefined") {
+            if (typeof jsondata[WeaponKey]["Burstfire"] === 'undefined') {
                 WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
             } else if (jsondata[WeaponKey]["Burstfire"]["Enable"] === "true") {
                 WeaponRateKey = (20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]) * jsondata[WeaponKey]["Burstfire"]["Shots_Per_Burst"]
@@ -126,6 +143,7 @@ const render = () => {
                 WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
             }
         }
+        //フルオートとか
         if (typeof jsondata[WeaponKey]["Fully_Automatic"] === "undefined") {
             notFullauto()
         } else if (jsondata[WeaponKey]["Fully_Automatic"]["Enable"] === "true") {
@@ -140,7 +158,7 @@ const render = () => {
         } else {
             WeaponAdsKey = 0
         }
-
+        //Crit
         if (typeof jsondata[WeaponKey]["Critical_Hits"] === "undefined") {
             WeaponCcKey = 0
             WeaponCdKey = 0
@@ -155,7 +173,7 @@ const render = () => {
         if (typeof jsondata[WeaponKey]["Damage_Based_On_Flight_Time"] === "undefined") {
             WeaponC10mKey = 0
             WeaponCmaxKey = 0
-        } else if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Enable"] = "true") {
+        } else if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Enable"] === "true") {
             if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"] > 0 && jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] > 0) {
                 WeaponC10mKey = (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] / (jsondata[WeaponKey]["Shooting"]["Projectile_Speed"] / 10)) * 10
                 WeaponCmaxKey = jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"]
@@ -170,13 +188,25 @@ const render = () => {
             WeaponC10mKey = 0
             WeaponCmaxKey = 0
         }
-        WeaponDmg = jsondata[WeaponKey]["Shooting"]["Projectile_Damage"]
-        WeaponHsBonus = jsondata[WeaponKey]["Headshot"]["Bonus_Damage"]
-        WeaponReloadAmount = jsondata[WeaponKey]["Reload"]["Reload_Amount"]
-        WeaponReloadDuration = jsondata[WeaponKey]["Reload"]["Reload_Duration"]
-        WeaponPellets = jsondata[WeaponKey]["Shooting"]["Projectile_Amount"]
+        if(typeof jsondata[WeaponKey]["Headshot"] ==='undefined'){
+            WeaponHsBonus = 0;
+        }else{
+            WeaponHsBonus = jsondata[WeaponKey]["Headshot"]["Bonus_Damage"]
+        };
+        if(typeof jsondata[WeaponKey]["Shooting"]["Projectile_Damage"]==='undefined'){
+            WeaponDmg = 0;
+        }else{
+            WeaponDmg = jsondata[WeaponKey]["Shooting"]["Projectile_Damage"]
+        };
+        if(typeof jsondata[WeaponKey]["Shooting"]["Bullet_Spread"]==='undefined'){
+            WeaponSpread = 0;
+        }else{
         WeaponSpread = jsondata[WeaponKey]["Shooting"]["Bullet_Spread"]
+        };
+        WeaponPellets = jsondata[WeaponKey]["Shooting"]["Projectile_Amount"]
         WeaponWeight = jsondata2[WeaponKey]["itemHoldEffects"]["GunWeight"]
+        console.log(jsondata2[WeaponKey]["itemHoldEffects"]["GunWeight"])
+        console.log(WeaponWeight)
     }
     let ModCapacity = 0
     let ModReload = 0
@@ -185,7 +215,7 @@ const render = () => {
     let ModRate = 0
     let ModSpread = 0
     let ModDmg = 0
-    if (!(ModKey === "none" || WeaponKey === "none" || jsondata2 == undefined)) {
+    if (!(ModKey === "none" || WeaponKey === "none" || typeof jsondata2 == 'undefined')) {
         let cspAry = null
         for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
             cspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
