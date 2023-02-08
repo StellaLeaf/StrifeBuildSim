@@ -125,10 +125,13 @@ const render = () => {
         }else{
             if(typeof jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === 'undefined'){
                 WeaponReloadStyle = 0
-            } else if (jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === "true") {
+                document.getElementById("DisplayReloadStyle").textContent = null
+            } else if (jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === true) {
                 WeaponReloadStyle = 1
+                document.getElementById("DisplayReloadStyle").textContent = ("/発")
             } else {
                 WeaponReloadStyle = 0
+                document.getElementById("DisplayReloadStyle").textContent = null
             }
             WeaponReloadAmount = jsondata[WeaponKey]["Reload"]["Reload_Amount"]
             WeaponReloadDuration = jsondata[WeaponKey]["Reload"]["Reload_Duration"]
@@ -205,8 +208,6 @@ const render = () => {
         };
         WeaponPellets = jsondata[WeaponKey]["Shooting"]["Projectile_Amount"]
         WeaponWeight = jsondata2[WeaponKey]["itemHoldEffects"]["GunWeight"]
-        console.log(jsondata2[WeaponKey]["itemHoldEffects"]["GunWeight"])
-        console.log(WeaponWeight)
     }
     let ModCapacity = 0
     let ModReload = 0
@@ -306,13 +307,12 @@ const render = () => {
     document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
     document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
     document.getElementById("DisplayWeight").textContent = (Result[10])
-    if (Result[11] > 0) document.getElementById("DisplayDuration").textContent = (Result[11])
-    else document.getElementById("DisplayDuration").textContent = 0
-    if (Weapon[6] > 1) document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
-    else document.getElementById("DisplayPellets").textContent = (null)
-    if (Weapon[4] != 0) document.getElementById("DisplayReloadStyle").textContent = ("/発")
-    else document.getElementById("DisplayReloadStyle").textContent = (null)
-
+    if (Result[11] > 0){document.getElementById("DisplayDuration").textContent = (Result[11])
+    }else{ document.getElementById("DisplayDuration").textContent = 0
+    };
+    if (Weapon[6] > 1) {document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
+    }else{document.getElementById("DisplayPellets").textContent = (null)
+    };
 }
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
