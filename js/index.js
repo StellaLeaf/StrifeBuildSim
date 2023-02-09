@@ -140,7 +140,7 @@ const render = () => {
         const notFullauto = () => {
             if (typeof jsondata[WeaponKey]["Burstfire"] === 'undefined') {
                 WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
-            } else if (jsondata[WeaponKey]["Burstfire"]["Enable"] === "true") {
+            } else if (jsondata[WeaponKey]["Burstfire"]["Enable"] === true) {
                 WeaponRateKey = (20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]) * jsondata[WeaponKey]["Burstfire"]["Shots_Per_Burst"]
             } else {
                 WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
@@ -149,14 +149,14 @@ const render = () => {
         //フルオートとか
         if (typeof jsondata[WeaponKey]["Fully_Automatic"] === "undefined") {
             notFullauto()
-        } else if (jsondata[WeaponKey]["Fully_Automatic"]["Enable"] === "true") {
+        } else if (jsondata[WeaponKey]["Fully_Automatic"]["Enable"] === true) {
             WeaponRateKey = jsondata[WeaponKey]["Fully_Automatic"]["Fire_Rate"] + 4
         } else {
             notFullauto()
         }
         if (typeof jsondata[WeaponKey]["Sneak"] === "undefined") {
             WeaponAdsKey = 0
-        } else if (jsondata[WeaponKey]["Sneak"]["Enable"] === "true") {
+        } else if (jsondata[WeaponKey]["Sneak"]["Enable"] === true) {
             WeaponAdsKey = jsondata[WeaponKey]["Sneak"]["Zoom_Bullet_Spread"]
         } else {
             WeaponAdsKey = 0
@@ -165,7 +165,7 @@ const render = () => {
         if (typeof jsondata[WeaponKey]["Critical_Hits"] === "undefined") {
             WeaponCcKey = 0
             WeaponCdKey = 0
-        } else if (jsondata[WeaponKey]["Critical_Hits"]["Enable"] === "true") {
+        } else if (jsondata[WeaponKey]["Critical_Hits"]["Enable"] === true) {
             WeaponCcKey = jsondata[WeaponKey]["Critical_Hits"]["Chance"] / 100
             WeaponCdKey = jsondata[WeaponKey]["Critical_Hits"]["Bonus_Damage"]
         } else {
@@ -176,7 +176,7 @@ const render = () => {
         if (typeof jsondata[WeaponKey]["Damage_Based_On_Flight_Time"] === "undefined") {
             WeaponC10mKey = 0
             WeaponCmaxKey = 0
-        } else if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Enable"] === "true") {
+        } else if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Enable"] === true) {
             if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"] > 0 && jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] > 0) {
                 WeaponC10mKey = (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] / (jsondata[WeaponKey]["Shooting"]["Projectile_Speed"] / 10)) * 10
                 WeaponCmaxKey = jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"]
@@ -313,6 +313,7 @@ const render = () => {
     if (Weapon[6] > 1) {document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
     }else{document.getElementById("DisplayPellets").textContent = (null)
     };
+    console.log(Result)
 }
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
@@ -325,7 +326,7 @@ categorySelect2.addEventListener("input", () => {
     const options = document.querySelectorAll("#WeaponSelect > option")
     options.forEach(option => option.remove())
     const firstSelect = document.createElement("option")
-    firstSelect.textContent = "武器を選択してください"
+    firstSelect.textContent = "武器を選択"
     firstSelect.setAttribute("value", "none")
     subCategorySelect2.appendChild(firstSelect)
     subCategorySelect2.disabled = false

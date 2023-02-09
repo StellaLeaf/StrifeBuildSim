@@ -11,65 +11,83 @@
 </head>
 
 <body>
-    <div size="10">STRIFE Build Simulator</div>
-    <div class="input-block">
-        <div class="select-block">
-            <label>
-                <form id="TypeForm">
-                    <select id="TypeSelect">
-                        <option value="none">武器種を選択してください</option>
-                    </select>
-                </form>
-            </label>
-        </div>
-        <div class="select-block">
-            <label>
-                <form id="WeaponForm">
-                    <select id="WeaponSelect" disabled>
-                        <option>武器を選択してください</option>
-                    </select>
-                </form>
-            </label>
-        </div>
-    </div>
-    <form id="ModForm">
-        <select id="ModSelect">
-            <option value="none" selected>Modを選択</option>
-            <option value="Warlord Mod">Warlord</option>
-            <option value="Emperor Mod">Emperor</option>
-            <option value="Monarch Mod">Monarch</option>
+    <div class="title">STRIFE Build Simulator</div>
+    <form id="TypeForm">
+        <span class="custom-pull">
+        <select id="TypeSelect" class="Selecter">
+            <option value="none">武器種を選択</option>
         </select>
+    </span>
+    </form>
+    <form id="WeaponForm">
+        <span class="custom-pull">
+        <select id="WeaponSelect" class="WeaponSelecter" disabled>
+            <option>武器を選択</option>
+        </select>
+    </span>
+    </form>
+    <br>
+    <form id="ModForm">
+        <span class="custom-pull">
+        <select id="ModSelect" class="Selecter">
+            <option value="none" selected>Modを選択</option>
+            <option>Champion Mod</option>
+            <option>Deadeye Mod</option>
+            <option>Emperor Mod</option>
+            <option>Gladiator Mod</option>
+            <option>Hunter Mod</option>
+            <option>Knight Mod</option>
+            <option>Marksman Mod</option>
+            <option>Monarch Mod</option>
+            <option>Raider Mod</option>
+            <option>Ranger Mod</option>
+            <option>Sentinel Mod</option>
+            <option>Stalker Mod</option>
+            <option>Warlord Mod</option>
+            <option>Warrior Mod</option>
+        </select>
+        </span>
     </form>
     <form id="EnchantForm">
-        <select id="EnchantSelect">
+        <span class="custom-pull">
+        <select id="EnchantSelect" class="Selecter">
             <option value="none" selected>Enchantを選択</option>
             <option value="Sunfire">Sunfire</option>
             <option value="DemonPower">Demon Power</option>
             <option value="SiphonLife">Siphon Life</option>
         </select>
-        <select id="EnchantLevSelect">
-            <option value="none" selected>EnchantLevel</option>
+        </span>
+        <span class="custom-pull">
+        <select id="EnchantLevSelect" class="Selecter">
+            <option value="none" selected>Level</option>
             <option value="EnchLev1">1</option>
             <option value="EnchLev2">2</option>
             <option value="EnchLev3">3</option>
         </select>
+        </span>
     </form>
     <form id="OeForm">
-        <select id="OeSelect">
+        <span class="custom-pull">
+        <select id="OeSelect" class="Selecter">
             <option value="none" selected>OEを選択</option>
             <option value="OeSunfire">Sunfire</option>
             <option value="OeDemonPower">Demon Power</option>
             <option value="OeSiphonLife">Siphon Life</option>
         </select>
-        <select id="OeLevSelect">
-            <option value="none" selected>OELevel</option>
+        </span>
+        <span class="custom-pull">
+        <select id="OeLevSelect" class="Selecter">
+            <option value="none" selected>Level</option>
             <option value="OeLev1">1</option>
             <option value="OeLev2">2</option>
             <option value="OeLev3">3</option>
         </select>
+        </span>
+    </span>
     </form>
     <form id="AncientEnchantForm">
-        <select id="AncientEnchantSelect">
+        <span class="custom-pull">
+        <select id="AncientEnchantSelect" class="Selecter">
             <option value="none" selected>AEを選択</option>
             <option value="Bloodcraze">Bloodcraze</option>
             <option value="ElementalOverload">Elemental Overload</option>
@@ -77,9 +95,11 @@
             <option value="ConcentratedFire">Concentrated Fire</option>
             <option value="SuddenDeath">Sudden Death</option>
         </select>
+        </span>
     </form>
     <form id="AddonForm">
-        <select id="AddonSelect">
+        <span class="custom-pull">
+        <select id="AddonSelect" class="Selecter">
             <option value="none" selected>Addonを選択</option>
             <option value="ManaPowder">Mana Powder</option>
             <option value="HeavyBullets">Heavy Bullets</option>
@@ -87,16 +107,19 @@
             <option value="QuickPull">Quick Pull</option>
             <option value="LightweightKit">Lightweight Kit</option>
         </select>
-        <select id="AddonLevSelect">
+    </span>
+    <span class="custom-pull">
+        <select id="AddonLevSelect" class="Selecter">
             <option value="none" selected>AddonLevel</option>
             <option value="AddonLev0">無印</option>
             <option value="AddonLev1">+</option>
             <option value="AddonLev2">++</option>
             <option value="AddonLev3">+++</option>
         </select>
+        </span>
     </form>
+    <br>
     <table>
-        武器性能
         <tr>
             <th>平均dmg</th>
             <th>平均DPS</th>
@@ -117,7 +140,7 @@
             <th>最高dmg</th>
             <th>射撃時間(s)</th>
             <th>レート(s)</th>
-            <th>リロード<span id="DisplayReloadStyle"></span></th>
+            <th>リロード(tick<span id="DisplayReloadStyle"></span>)</th>
             <th>ADS精度</th>
             <th>最大減衰量</th>
         </tr>
