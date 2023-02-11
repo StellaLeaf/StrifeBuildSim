@@ -1,18 +1,14 @@
 const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
-const EnchDmg = [0, 0, 0, 0]
+const EnchDmg = [0, 0, 0, 0, 0, 0];
 const Ae = [0, 0]
 const Addon = [0, 0, 0, 0, 0]
-const SfAverageDmg = [2.01, 2.16, 2, 31]
-const SfHighestDmg = 3
-const DpAverageDmg = [1.4, 1.6, 1.8]
-const DpHighestDmg = 4
-const SlAverageDmg = [0.8, 1.0, 1.2]
-const SlHighestDmg = 2
-const SfDmg = [3,0.67,0.72,0.77,0]
-const DpDmg = [4,0.35,0.4,0.45,0]
-const SlDmg = [2,0.4,0.5,0.6,0]
+const SfDmg = [3, 0.67, 0.72, 0.77, 0]
+const DpDmg = [4, 0.35, 0.4, 0.45, 0]
+const SlDmg = [2, 0.4, 0.5, 0.6, 0]
+const DrDmg = [6, 0.55, 0.6, 0.65, 0.15]
+const EnchActive =[0, 0];
 const BcDmg = 7
 const EoDmg = 6
 const McDmg = 1
@@ -271,13 +267,24 @@ const render = () => {
         ModSpread,
         ModWeight
     ]
-    console.log(EnchDmg)
+    Weapon[5] = WeaponCs[5]
+    Result[6] = Math.round((Weapon[5] + Mod[4]) * Math.pow(10, 2)) / Math.pow(10, 2);
+    if(Result[6] === 0 || EnchDmg[4] === 0){
+        EnchActive[0] = 1;
+    }else{
+        EnchActive[0] = 1/(Math.ceil(EnchDmg[4]*Result[6]));
+    };
+    if(Result[6] === 0 || EnchDmg[5] === 0){
+        EnchActive[1] = 1;
+    }else{
+        EnchActive[1] = 1/(Math.ceil(EnchDmg[5]*Result[6]));
+    };
+    console.log(EnchActive)
     Weapon[0] = WeaponCs[0]
     Weapon[1] = WeaponCs[1]
     Weapon[2] = WeaponCs[2]
     Weapon[3] = WeaponCs[3]
     Weapon[4] = WeaponCs[4]
-    Weapon[5] = WeaponCs[5]
     Weapon[6] = WeaponCs[6]
     Weapon[7] = WeaponCs[7]
     Weapon[8] = WeaponCs[8]
@@ -286,13 +293,12 @@ const render = () => {
     Result[14] = Math.round(WeaponCs[11] * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[15] = WeaponCs[12]
     Weapon[9] = WeaponCs[13]
-    Result[0] = Math.round((Weapon[0] + Mod[0] + EnchDmg[0] + EnchDmg[2] + Ae[0] + Addon[0] + Result[12]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[1] = Math.round((Weapon[0] + Mod[0] + EnchDmg[0] + EnchDmg[2] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[0] = Math.round((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[1] = Math.round((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[2] = Math.round((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[3] = Math.round((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[4] = Weapon[2] + Mod[2] + Addon[2]
     Result[5] = Weapon[3] + Mod[3] + Addon[3]
-    Result[6] = Math.round((Weapon[5] + Mod[4]) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[8] = Math.round(Math.abs(Weapon[7] + Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
@@ -351,52 +357,83 @@ const CalcEnch = () => {
     if (Ench == "Sunfire") {
         if (EnchLv == "EnchLev1") {
             EnchDmg[0] = SfDmg[0]*SfDmg[1];
-            EnchDmg[1] = SfDmg[0]
+            EnchDmg[1] = SfDmg[0];
+            EnchDmg[4] = SfDmg[4];
 
         } else if (EnchLv == "EnchLev2") {
             EnchDmg[0] = SfDmg[0]*SfDmg[2];
             EnchDmg[1] = SfDmg[0]
+            EnchDmg[4] = SfDmg[4];
 
         } else if (EnchLv == "EnchLev3") {
             EnchDmg[0] = SfDmg[0]*SfDmg[3];
             EnchDmg[1] = SfDmg[0]
+            EnchDmg[4] = SfDmg[4];
 
         } else {
             EnchDmg[0] = 0;
             EnchDmg[1] = 0;
+            EnchDmg[4] = 0;
 
         }
     } else if (Ench == "DemonPower") {
         if (EnchLv == "EnchLev1") {
             EnchDmg[0] = DpDmg[0]*DpDmg[1];
             EnchDmg[1] = DpDmg[0];
+            EnchDmg[4] = DpDmg[4];
         } else if (EnchLv == "EnchLev2") {
             EnchDmg[0] = DpDmg[0]*DpDmg[2];
             EnchDmg[1] = DpDmg[0];
+            EnchDmg[4] = DpDmg[4];
         } else if (EnchLv == "EnchLev3") {
             EnchDmg[0] = DpDmg[0]*DpDmg[3];
             EnchDmg[1] = DpDmg[0]
+            EnchDmg[4] = DpDmg[4];
         } else {
             EnchDmg[0] = 0;
             EnchDmg[1] = 0;
+            EnchDmg[4] = 0;
         }
     } else if (Ench == "SiphonLife") {
         if (EnchLv == "EnchLev1") {
             EnchDmg[0] = SlDmg[0]*SlDmg[1];
             EnchDmg[1] = SlDmg[0];
+            EnchDmg[4] = SlDmg[4];
         } else if (EnchLv == "EnchLev2") {
             EnchDmg[0] = SlDmg[0]*SlDmg[2];
             EnchDmg[1] = SlDmg[0];
+            EnchDmg[4] = SlDmg[4];
         } else if (EnchLv == "EnchLev3") {
             EnchDmg[0] = SlDmg[0]*SlDmg[3];
             EnchDmg[1] = SlDmg[0];
+            EnchDmg[4] = SlDmg[4];
         } else {
             EnchDmg[0] = 0;
             EnchDmg[1] = 0;
+            EnchDmg[4] = 0;
+        }
+    } else if (Ench == "DeathsRuin") {
+        if (EnchLv == "EnchLev1") {
+            EnchDmg[0] = DrDmg[0]*DrDmg[1];
+            EnchDmg[1] = DrDmg[0];
+            EnchDmg[4] = DrDmg[4];
+        } else if (EnchLv == "EnchLev2") {
+            EnchDmg[0] = DrDmg[0]*DrDmg[2];
+            EnchDmg[1] = DrDmg[0];
+            EnchDmg[4] = DrDmg[4];
+        } else if (EnchLv == "EnchLev3") {
+            EnchDmg[0] = DrDmg[0]*DrDmg[3];
+            EnchDmg[1] = DrDmg[0];
+            EnchDmg[4] = DrDmg[4];
+        } else {
+            EnchDmg[0] = 0;
+            EnchDmg[1] = 0;
+            EnchDmg[4] = 0;
         }
     } else {
         EnchDmg[0] = 0
         EnchDmg[1] = 0
+        EnchDmg[4] = 0;
     }
     render()
 }
@@ -408,47 +445,60 @@ const CalcOE = () => {
         if (OELv == "OeLev1") {
             EnchDmg[2] = SfDmg[0]*SfDmg[1]
             EnchDmg[3] = SfDmg[0]
+            EnchDmg[5] = SfDmg[4];
         } else if (OELv == "OeLev2") {
             EnchDmg[2] = SfDmg[0]*SfDmg[2]
             EnchDmg[3] = SfDmg[0]
+            EnchDmg[5] = SfDmg[4];
         } else if (OELv == "OeLev3") {
             EnchDmg[2] = SfDmg[0]*SfDmg[3];
             EnchDmg[3] = SfDmg[0]
+            EnchDmg[4] = SfDmg[4];
         } else {
             EnchDmg[2] = 0;
             EnchDmg[3] = 0;
+            EnchDmg[5] = 0;
         }
     } else if (OE == "OeDemonPower") {
         if (OELv == "OeLev1") {
             EnchDmg[2] = DpDmg[0]*DpDmg[1]
             EnchDmg[3] = DpDmg[0]
+            EnchDmg[5] = DpDmg[4];
         } else if (OELv == "OeLev2") {
             EnchDmg[2] = DpDmg[0]*DpDmg[2]
             EnchDmg[3] = DpDmg[0]
+            EnchDmg[5] = DpDmg[4];
         } else if (OELv == "OeLev3") {
             EnchDmg[2] = DpDmg[0]*DpDmg[3]
             EnchDmg[3] = DpDmg[0]
+            EnchDmg[5] = DpDmg[4];
         } else {
             EnchDmg[2] = 0;
             EnchDmg[3] = 0;
+            EnchDmg[5] = 0;
         }
     } else if (OE == "OeSiphonLife") {
         if (OELv == "OeLev1") {
-            EnchDmg[2] = DpDmg[0]*DpDmg[1]
-            EnchDmg[3] = DpDmg[0]
+            EnchDmg[2] = SlDmg[0]*SlDmg[1]
+            EnchDmg[3] = SlDmg[0]
+            EnchDmg[5] = SlDmg[4];
         } else if (OELv == "OeLev2") {
-            EnchDmg[2] = DpDmg[0]*DpDmg[2]
-            EnchDmg[3] = DpDmg[0]
+            EnchDmg[2] = SlDmg[0]*SlDmg[2]
+            EnchDmg[3] = SlDmg[0]
+            EnchDmg[5] = SlDmg[4];
         } else if (OELv == "OeLev3") {
-            EnchDmg[2] = DpDmg[0]*DpDmg[3]
-            EnchDmg[3] = DpDmg[0]
+            EnchDmg[2] = SlDmg[0]*SlDmg[3]
+            EnchDmg[3] = SlDmg[0]
+            EnchDmg[5] = SlDmg[4];
         } else {
             EnchDmg[2] = 0;
             EnchDmg[3] = 0;
+            EnchDmg[5] = 0;
         }
     } else {
         EnchDmg[2] = 0
         EnchDmg[3] = 0
+        EnchDmg[5] = 0
     }
     render()
 }
