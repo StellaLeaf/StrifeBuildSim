@@ -12,6 +12,9 @@
 
 <body>
     <div class="title">STRIFE Build Simulator</div>
+    <div class="grid">
+        <div class="forms"></div>
+    <p class="formHead">武器設定</p>
     <form id="TypeForm">
         <span class="custom-pull">
         <select id="TypeSelect" class="Selecter">
@@ -26,7 +29,6 @@
         </select>
     </span>
     </form>
-    <br>
     <form id="ModForm">
         <span class="custom-pull">
         <select id="ModSelect" class="Selecter">
@@ -110,7 +112,7 @@
     </span>
     <span class="custom-pull">
         <select id="AddonLevSelect" class="Selecter">
-            <option value="none" selected>AddonLevel</option>
+            <option value="none" selected>Level</option>
             <option value="AddonLev0">無印</option>
             <option value="AddonLev1">+</option>
             <option value="AddonLev2">++</option>
@@ -118,8 +120,8 @@
         </select>
         </span>
     </form>
-    <br>
-    <table>
+    </div>
+    <table class="WeaponTable">
         <tr>
             <th>平均dmg</th>
             <th>平均DPS</th>
@@ -140,7 +142,7 @@
             <th>最高dmg</th>
             <th>射撃時間(s)</th>
             <th>レート(s)</th>
-            <th>リロード(tick<span id="DisplayReloadStyle"></span>)</th>
+            <th>リロード<br>(tick<span id="DisplayReloadStyle"></span>)</th>
             <th>ADS精度</th>
             <th>最大減衰量</th>
         </tr>
@@ -153,6 +155,7 @@
             <td><span id="DisplayChangeDmgMax">0</span></td>
         </tr>
     </table>
+    </div>
     <!-- <table>
         ステータス
         <tr>
