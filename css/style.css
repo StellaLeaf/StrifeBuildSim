@@ -62,7 +62,7 @@ width: 280px;
 }
 .title{
     margin: 0px 5px;
-    font: 3em "Fira Sans", sans-serif;
+    font: 45px "Fira Sans", sans-serif;
     font-weight: 200;
 }
 .custom-pull:after {
@@ -95,3 +95,22 @@ width: 280px;
     grid-template-columns: 1.5fr 1fr;
   grid-template-rows: 180px 100px 80px 120px auto;
 } */
+@media screen and ( max-width:479px )
+{
+	.title
+	{
+		font-size:30px;	/* 赤色 */
+        font-weight: 300;
+	}
+    .formHead{
+        font-size: 22px;
+    }
+    th,td {
+    border-left: solid 1px rgba(0, 0, 0, 0.15);
+    border-right: solid 1px rgba(0, 0, 0, 0.15);
+    padding: 10px 15px;
+    height:30px;
+    width:auto;
+    font-size: 14px;
+}
+}

@@ -1,7 +1,7 @@
 const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
-const Ench = [0, 0, 0, 0]
+const EnchDmg = [0, 0, 0, 0]
 const Ae = [0, 0]
 const Addon = [0, 0, 0, 0, 0]
 const SfAverageDmg = [2.01, 2.16, 2, 31]
@@ -10,6 +10,9 @@ const DpAverageDmg = [1.4, 1.6, 1.8]
 const DpHighestDmg = 4
 const SlAverageDmg = [0.8, 1.0, 1.2]
 const SlHighestDmg = 2
+const SfDmg = [3,0.67,0.72,0.77,0]
+const DpDmg = [4,0.35,0.4,0.45,0]
+const SlDmg = [2,0.4,0.5,0.6,0]
 const BcDmg = 7
 const EoDmg = 6
 const McDmg = 1
@@ -116,7 +119,7 @@ const render = () => {
     let WeaponPellets = 0
     let WeaponSpread = 0
     let WeaponWeight = 0
-    if (!(WeaponKey === "none" || jsondata == 'json')) {
+    if (!(WeaponKey === "none" || jsondata == 'none')) {
         //リロード配列の処理
         if(typeof jsondata[WeaponKey]["Reload"] === 'undefined'){
             WeaponReloadStyle = 0
@@ -216,7 +219,7 @@ const render = () => {
     let ModRate = 0
     let ModSpread = 0
     let ModDmg = 0
-    if (!(ModKey === "none" || WeaponKey === "none" || typeof jsondata2 == 'undefined')) {
+    if (!(ModKey === "none" || WeaponKey === "none" || jsondata2 == 'none')) {
         let cspAry = null
         for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
             cspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
@@ -268,6 +271,7 @@ const render = () => {
         ModSpread,
         ModWeight
     ]
+    console.log(EnchDmg)
     Weapon[0] = WeaponCs[0]
     Weapon[1] = WeaponCs[1]
     Weapon[2] = WeaponCs[2]
@@ -282,10 +286,10 @@ const render = () => {
     Result[14] = Math.round(WeaponCs[11] * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[15] = WeaponCs[12]
     Weapon[9] = WeaponCs[13]
-    Result[0] = Math.round((Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[1] = Math.round((Weapon[0] + Mod[0] + Ench[0] + Ench[2] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[2] = Math.round((Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[1] + Addon[1] + Result[13]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[3] = Math.round((Weapon[0] + Mod[0] + Ench[1] + Ench[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[0] = Math.round((Weapon[0] + Mod[0] + EnchDmg[0] + EnchDmg[2] + Ae[0] + Addon[0] + Result[12]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[1] = Math.round((Weapon[0] + Mod[0] + EnchDmg[0] + EnchDmg[2] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[2] = Math.round((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[3] = Math.round((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[4] = Weapon[2] + Mod[2] + Addon[2]
     Result[5] = Weapon[3] + Mod[3] + Addon[3]
     Result[6] = Math.round((Weapon[5] + Mod[4]) * Math.pow(10, 2)) / Math.pow(10, 2)
@@ -346,49 +350,53 @@ const CalcEnch = () => {
     const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
     if (Ench == "Sunfire") {
         if (EnchLv == "EnchLev1") {
-            Ench[0] = SfAverageDmg[0]
-            Ench[1] = SfHighestDmg
+            EnchDmg[0] = SfDmg[0]*SfDmg[1];
+            EnchDmg[1] = SfDmg[0]
+
         } else if (EnchLv == "EnchLev2") {
-            Ench[0] = SfAverageDmg[1]
-            Ench[1] = SfHighestDmg
+            EnchDmg[0] = SfDmg[0]*SfDmg[2];
+            EnchDmg[1] = SfDmg[0]
+
         } else if (EnchLv == "EnchLev3") {
-            Ench[0] = SfAverageDmg[2]
-            Ench[1] = SfHighestDmg
+            EnchDmg[0] = SfDmg[0]*SfDmg[3];
+            EnchDmg[1] = SfDmg[0]
+
         } else {
-            Ench[0] = 0
-            Ench[1] = 0
+            EnchDmg[0] = 0;
+            EnchDmg[1] = 0;
+
         }
     } else if (Ench == "DemonPower") {
         if (EnchLv == "EnchLev1") {
-            Ench[0] = DpAverageDmg[0]
-            Ench[1] = DpHighestDmg
+            EnchDmg[0] = DpDmg[0]*DpDmg[1];
+            EnchDmg[1] = DpDmg[0];
         } else if (EnchLv == "EnchLev2") {
-            Ench[0] = DpAverageDmg[1]
-            Ench[1] = DpHighestDmg
+            EnchDmg[0] = DpDmg[0]*DpDmg[2];
+            EnchDmg[1] = DpDmg[0];
         } else if (EnchLv == "EnchLev3") {
-            Ench[0] = DpAverageDmg[2]
-            Ench[1] = DpHighestDmg
+            EnchDmg[0] = DpDmg[0]*DpDmg[3];
+            EnchDmg[1] = DpDmg[0]
         } else {
-            Ench[0] = 0
-            Ench[1] = 0
+            EnchDmg[0] = 0;
+            EnchDmg[1] = 0;
         }
     } else if (Ench == "SiphonLife") {
         if (EnchLv == "EnchLev1") {
-            Ench[0] = SlAverageDmg[0]
-            Ench[1] = SlHighestDmg
+            EnchDmg[0] = SlDmg[0]*SlDmg[1];
+            EnchDmg[1] = SlDmg[0];
         } else if (EnchLv == "EnchLev2") {
-            Ench[0] = SlAverageDmg[1]
-            Ench[1] = SlHighestDmg
+            EnchDmg[0] = SlDmg[0]*SlDmg[2];
+            EnchDmg[1] = SlDmg[0];
         } else if (EnchLv == "EnchLev3") {
-            Ench[0] = SlAverageDmg[2]
-            Ench[1] = SlHighestDmg
+            EnchDmg[0] = SlDmg[0]*SlDmg[3];
+            EnchDmg[1] = SlDmg[0];
         } else {
-            Ench[0] = 0
-            Ench[1] = 0
+            EnchDmg[0] = 0;
+            EnchDmg[1] = 0;
         }
     } else {
-        Ench[0] = 0
-        Ench[1] = 0
+        EnchDmg[0] = 0
+        EnchDmg[1] = 0
     }
     render()
 }
@@ -398,49 +406,49 @@ const CalcOE = () => {
     const OELv = document.getElementById("OeForm").OeLevSelect.value
     if (OE == "OeSunfire") {
         if (OELv == "OeLev1") {
-            Ench[2] = SfAverageDmg[0]
-            Ench[3] = SfHighestDmg
+            EnchDmg[2] = SfDmg[0]*SfDmg[1]
+            EnchDmg[3] = SfDmg[0]
         } else if (OELv == "OeLev2") {
-            Ench[2] = SfAverageDmg[1]
-            Ench[3] = SfHighestDmg
+            EnchDmg[2] = SfDmg[0]*SfDmg[2]
+            EnchDmg[3] = SfDmg[0]
         } else if (OELv == "OeLev3") {
-            Ench[2] = SfAverageDmg[2]
-            Ench[3] = SfHighestDmg
+            EnchDmg[2] = SfDmg[0]*SfDmg[3];
+            EnchDmg[3] = SfDmg[0]
         } else {
-            Ench[2] = 0
-            Ench[3] = 0
+            EnchDmg[2] = 0;
+            EnchDmg[3] = 0;
         }
     } else if (OE == "OeDemonPower") {
         if (OELv == "OeLev1") {
-            Ench[2] = DpAverageDmg[0]
-            Ench[3] = DpHighestDmg
+            EnchDmg[2] = DpDmg[0]*DpDmg[1]
+            EnchDmg[3] = DpDmg[0]
         } else if (OELv == "OeLev2") {
-            Ench[2] = DpAverageDmg[1]
-            Ench[3] = DpHighestDmg
+            EnchDmg[2] = DpDmg[0]*DpDmg[2]
+            EnchDmg[3] = DpDmg[0]
         } else if (OELv == "OeLev3") {
-            Ench[2] = DpAverageDmg[2]
-            Ench[3] = DpHighestDmg
+            EnchDmg[2] = DpDmg[0]*DpDmg[3]
+            EnchDmg[3] = DpDmg[0]
         } else {
-            Ench[2] = 0
-            Ench[3] = 0
+            EnchDmg[2] = 0;
+            EnchDmg[3] = 0;
         }
     } else if (OE == "OeSiphonLife") {
         if (OELv == "OeLev1") {
-            Ench[2] = SlAverageDmg[0]
-            Ench[3] = SlHighestDmg
+            EnchDmg[2] = DpDmg[0]*DpDmg[1]
+            EnchDmg[3] = DpDmg[0]
         } else if (OELv == "OeLev2") {
-            Ench[2] = SlAverageDmg[1]
-            Ench[3] = SlHighestDmg
+            EnchDmg[2] = DpDmg[0]*DpDmg[2]
+            EnchDmg[3] = DpDmg[0]
         } else if (OELv == "OeLev3") {
-            Ench[2] = SlAverageDmg[2]
-            Ench[3] = SlHighestDmg
+            EnchDmg[2] = DpDmg[0]*DpDmg[3]
+            EnchDmg[3] = DpDmg[0]
         } else {
-            Ench[2] = 0
-            Ench[3] = 0
+            EnchDmg[2] = 0;
+            EnchDmg[3] = 0;
         }
     } else {
-        Ench[2] = 0
-        Ench[3] = 0
+        EnchDmg[2] = 0
+        EnchDmg[3] = 0
     }
     render()
 }
