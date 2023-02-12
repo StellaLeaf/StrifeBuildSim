@@ -4,10 +4,14 @@ const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
 const EnchDmg = [0, 0, 0, 0, 0, 0];
 const Ae = [0, 0]
 const Addon = [0, 0, 0, 0, 0]
-const SfDmg = [3, 0.67, 0.72, 0.77, 0]
-const DpDmg = [4, 0.35, 0.4, 0.45, 0]
-const SlDmg = [2, 0.4, 0.5, 0.6, 0]
-const DrDmg = [6, 0.55, 0.6, 0.65, 0.15]
+const Sunfire = [3, 0.67, 0.72, 0.77, 0]
+const DemonPower = [4, 0.35, 0.4, 0.45, 0]
+const SiphonLife = [2, 0.4, 0.5, 0.6, 0]
+const DeathsRuin = [6, 0.55, 0.6, 0.65, 0.15]
+const ArcaneBrilliance = [3, 0.35, 0.45, 0.55, 0.2]
+const NorthernWind = [5, 0.45, 0.5, 0.55, 0.1]
+const FlexibleResonance = [4, 0.65, 0.70, 0.75, 0]
+const PhoenixFlame = [10, 0.05, 0.06, 0.07, 0]
 const EnchActive =[0, 0];
 const BcDmg = 7
 const EoDmg = 6
@@ -279,7 +283,6 @@ const render = () => {
     }else{
         EnchActive[1] = 1/(Math.ceil(EnchDmg[5]*Result[6]));
     };
-    console.log(EnchActive)
     Weapon[0] = WeaponCs[0]
     Weapon[1] = WeaponCs[1]
     Weapon[2] = WeaponCs[2]
@@ -354,85 +357,61 @@ categorySelect2.addEventListener("input", () => {
 const CalcEnch = () => {
     const Ench = document.getElementById("EnchantForm").EnchantSelect.value
     const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
-    if (Ench == "Sunfire") {
+    function EnchLevelsCalc(EnchKey){
         if (EnchLv == "EnchLev1") {
-            EnchDmg[0] = SfDmg[0]*SfDmg[1];
-            EnchDmg[1] = SfDmg[0];
-            EnchDmg[4] = SfDmg[4];
+            EnchDmg[0] = EnchKey[0]*EnchKey[1];
+            EnchDmg[1] = EnchKey[0];
+            EnchDmg[4] = EnchKey[4];
 
         } else if (EnchLv == "EnchLev2") {
-            EnchDmg[0] = SfDmg[0]*SfDmg[2];
-            EnchDmg[1] = SfDmg[0]
-            EnchDmg[4] = SfDmg[4];
+            EnchDmg[0] = EnchKey[0]*EnchKey[2];
+            EnchDmg[1] = EnchKey[0]
+            EnchDmg[4] = EnchKey[4];
 
         } else if (EnchLv == "EnchLev3") {
-            EnchDmg[0] = SfDmg[0]*SfDmg[3];
-            EnchDmg[1] = SfDmg[0]
-            EnchDmg[4] = SfDmg[4];
+            EnchDmg[0] = EnchKey[0]*EnchKey[3];
+            EnchDmg[1] = EnchKey[0]
+            EnchDmg[4] = EnchKey[4];
 
         } else {
             EnchDmg[0] = 0;
             EnchDmg[1] = 0;
             EnchDmg[4] = 0;
-
         }
-    } else if (Ench == "DemonPower") {
-        if (EnchLv == "EnchLev1") {
-            EnchDmg[0] = DpDmg[0]*DpDmg[1];
-            EnchDmg[1] = DpDmg[0];
-            EnchDmg[4] = DpDmg[4];
-        } else if (EnchLv == "EnchLev2") {
-            EnchDmg[0] = DpDmg[0]*DpDmg[2];
-            EnchDmg[1] = DpDmg[0];
-            EnchDmg[4] = DpDmg[4];
-        } else if (EnchLv == "EnchLev3") {
-            EnchDmg[0] = DpDmg[0]*DpDmg[3];
-            EnchDmg[1] = DpDmg[0]
-            EnchDmg[4] = DpDmg[4];
-        } else {
-            EnchDmg[0] = 0;
-            EnchDmg[1] = 0;
-            EnchDmg[4] = 0;
-        }
-    } else if (Ench == "SiphonLife") {
-        if (EnchLv == "EnchLev1") {
-            EnchDmg[0] = SlDmg[0]*SlDmg[1];
-            EnchDmg[1] = SlDmg[0];
-            EnchDmg[4] = SlDmg[4];
-        } else if (EnchLv == "EnchLev2") {
-            EnchDmg[0] = SlDmg[0]*SlDmg[2];
-            EnchDmg[1] = SlDmg[0];
-            EnchDmg[4] = SlDmg[4];
-        } else if (EnchLv == "EnchLev3") {
-            EnchDmg[0] = SlDmg[0]*SlDmg[3];
-            EnchDmg[1] = SlDmg[0];
-            EnchDmg[4] = SlDmg[4];
-        } else {
-            EnchDmg[0] = 0;
-            EnchDmg[1] = 0;
-            EnchDmg[4] = 0;
-        }
-    } else if (Ench == "DeathsRuin") {
-        if (EnchLv == "EnchLev1") {
-            EnchDmg[0] = DrDmg[0]*DrDmg[1];
-            EnchDmg[1] = DrDmg[0];
-            EnchDmg[4] = DrDmg[4];
-        } else if (EnchLv == "EnchLev2") {
-            EnchDmg[0] = DrDmg[0]*DrDmg[2];
-            EnchDmg[1] = DrDmg[0];
-            EnchDmg[4] = DrDmg[4];
-        } else if (EnchLv == "EnchLev3") {
-            EnchDmg[0] = DrDmg[0]*DrDmg[3];
-            EnchDmg[1] = DrDmg[0];
-            EnchDmg[4] = DrDmg[4];
-        } else {
-            EnchDmg[0] = 0;
-            EnchDmg[1] = 0;
-            EnchDmg[4] = 0;
-        }
-    } else {
-        EnchDmg[0] = 0
-        EnchDmg[1] = 0
+    };
+    if (Ench == "ArcaneBrilliance") {
+        EnchLevelsCalc(ArcaneBrilliance);
+    }else if(Ench == 'DeathsRuin'){
+        EnchLevelsCalc(DeathsRuin);
+    }else if(Ench == 'DemonPower'){
+        EnchLevelsCalc(DemonPower);
+    }else if(Ench == 'Evershade'){
+        EnchLevelsCalc(Evershade);
+    }else if(Ench == 'FlexibleResonance'){
+        EnchLevelsCalc(FlexibleResonance);
+    }else if(Ench == 'ManaFountain'){
+        EnchLevelsCalc(ManaFountain);
+    }else if(Ench == 'NightStalker'){
+        EnchLevelsCalc(NightStalker);
+    }else if(Ench == 'NorthernWind'){
+        EnchLevelsCalc(NorthernWind);
+    }else if(Ench == 'PhoenixFlame'){
+        EnchLevelsCalc(PhoenixFlame);
+    }else if(Ench == 'ShadowStrike'){
+        EnchLevelsCalc(ShadowStrike);
+    }else if(Ench == 'ShieldWall'){
+        EnchLevelsCalc(ShieldWall);
+    }else if(Ench == 'SiphonLife'){
+        EnchLevelsCalc(SiphonLife);
+    }else if(Ench == 'Sunfire'){
+        EnchLevelsCalc(Sunfire);
+    }else if(Ench == 'VictoryRush'){
+        EnchLevelsCalc(VictoryRush);
+    }else if(Ench == 'ZephyrsBlessing'){
+        EnchLevelsCalc(ZephyrsBlessing);
+    }else{
+        EnchDmg[0] = 0;
+        EnchDmg[1] = 0;
         EnchDmg[4] = 0;
     }
     render()
@@ -441,68 +420,62 @@ const CalcEnch = () => {
 const CalcOE = () => {
     const OE = document.getElementById("OeForm").OeSelect.value
     const OELv = document.getElementById("OeForm").OeLevSelect.value
-    if (OE == "OeSunfire") {
+    function OELevelsCalc(OeKey){
         if (OELv == "OeLev1") {
-            EnchDmg[2] = SfDmg[0]*SfDmg[1]
-            EnchDmg[3] = SfDmg[0]
-            EnchDmg[5] = SfDmg[4];
+            EnchDmg[2] = OeKey[0]*OeKey[1]
+            EnchDmg[3] = OeKey[0]
+            EnchDmg[5] = OeKey[4];
         } else if (OELv == "OeLev2") {
-            EnchDmg[2] = SfDmg[0]*SfDmg[2]
-            EnchDmg[3] = SfDmg[0]
-            EnchDmg[5] = SfDmg[4];
+            EnchDmg[2] = OeKey[0]*OeKey[2]
+            EnchDmg[3] = OeKey[0]
+            EnchDmg[5] = OeKey[4];
         } else if (OELv == "OeLev3") {
-            EnchDmg[2] = SfDmg[0]*SfDmg[3];
-            EnchDmg[3] = SfDmg[0]
-            EnchDmg[4] = SfDmg[4];
+            EnchDmg[2] = OeKey[0]*OeKey[3]
+            EnchDmg[3] = OeKey[0]
+            EnchDmg[5] = OeKey[4];
         } else {
             EnchDmg[2] = 0;
             EnchDmg[3] = 0;
             EnchDmg[5] = 0;
         }
-    } else if (OE == "OeDemonPower") {
-        if (OELv == "OeLev1") {
-            EnchDmg[2] = DpDmg[0]*DpDmg[1]
-            EnchDmg[3] = DpDmg[0]
-            EnchDmg[5] = DpDmg[4];
-        } else if (OELv == "OeLev2") {
-            EnchDmg[2] = DpDmg[0]*DpDmg[2]
-            EnchDmg[3] = DpDmg[0]
-            EnchDmg[5] = DpDmg[4];
-        } else if (OELv == "OeLev3") {
-            EnchDmg[2] = DpDmg[0]*DpDmg[3]
-            EnchDmg[3] = DpDmg[0]
-            EnchDmg[5] = DpDmg[4];
-        } else {
-            EnchDmg[2] = 0;
-            EnchDmg[3] = 0;
-            EnchDmg[5] = 0;
-        }
-    } else if (OE == "OeSiphonLife") {
-        if (OELv == "OeLev1") {
-            EnchDmg[2] = SlDmg[0]*SlDmg[1]
-            EnchDmg[3] = SlDmg[0]
-            EnchDmg[5] = SlDmg[4];
-        } else if (OELv == "OeLev2") {
-            EnchDmg[2] = SlDmg[0]*SlDmg[2]
-            EnchDmg[3] = SlDmg[0]
-            EnchDmg[5] = SlDmg[4];
-        } else if (OELv == "OeLev3") {
-            EnchDmg[2] = SlDmg[0]*SlDmg[3]
-            EnchDmg[3] = SlDmg[0]
-            EnchDmg[5] = SlDmg[4];
-        } else {
-            EnchDmg[2] = 0;
-            EnchDmg[3] = 0;
-            EnchDmg[5] = 0;
-        }
-    } else {
-        EnchDmg[2] = 0
-        EnchDmg[3] = 0
-        EnchDmg[5] = 0
+    };
+    if (OE == "ArcaneBrilliance") {
+        OELevelsCalc(ArcaneBrilliance);
+    }else if(OE == 'DeathsRuin'){
+        OELevelsCalc(DeathsRuin);
+    }else if(OE == 'DemonPower'){
+        OELevelsCalc(DemonPower);
+    }else if(OE == 'Evershade'){
+        OELevelsCalc(Evershade);
+    }else if(OE == 'FlexibleResonance'){
+        OELevelsCalc(FlexibleResonance);
+    }else if(OE == 'ManaFountain'){
+        OELevelsCalc(ManaFountain);
+    }else if(OE == 'NightStalker'){
+        OELevelsCalc(NightStalker);
+    }else if(OE == 'NorthernWind'){
+        OELevelsCalc(NorthernWind);
+    }else if(OE == 'PhoenixFlame'){
+        OELevelsCalc(PhoenixFlame);
+    }else if(OE == 'ShadowStrike'){
+        OELevelsCalc(ShadowStrike);
+    }else if(OE == 'ShieldWall'){
+        OELevelsCalc(ShieldWall);
+    }else if(OE == 'SiphonLife'){
+        OELevelsCalc(SiphonLife);
+    }else if(OE == 'Sunfire'){
+        OELevelsCalc(Sunfire);
+    }else if(OE == 'VictoryRush'){
+        OELevelsCalc(VictoryRush);
+    }else if(OE == 'ZephyrsBlessing'){
+        OELevelsCalc(ZephyrsBlessing);
+    }else{
+        EnchDmg[2] = 0;
+        EnchDmg[3] = 0;
+        EnchDmg[5] = 0;
     }
     render()
-}
-
+};
 const CalcAE = () => {
     const AE = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
     if (AE == "Bloodcraze") {

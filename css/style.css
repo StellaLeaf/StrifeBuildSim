@@ -34,7 +34,7 @@ label {
 }
 select{
     background-color: white;
-    margin:2px;
+    margin:0px 0px 3px 0px;
     padding: 0px 30px 0px 10px;
     width:auto;
   -webkit-appearance: none;
