@@ -10,7 +10,8 @@ const WeaponTypes = [
     "Secondary",
     "Melee"
 ]
-const WeaponList = [{
+const WeaponList = [
+    {
         category: "AssaultRifle",
         name: "A-12 Plastic Rifle",
         value: "weird"
