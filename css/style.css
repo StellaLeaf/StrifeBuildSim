@@ -83,9 +83,6 @@ width: 280px;
   font-size: 20px;
   pointer-events: none;
 }
-.forms{
-    margin: 0px 0px 0px 0px;
-}
 .custom-table{
     margin:120px 0px 0px 0px
 }
@@ -125,8 +122,8 @@ input[type="range"] {
     appearance: none;
     cursor: pointer; /* カーソルを分かりやすく */
     outline: none; /* スライダーのアウトラインは見た目がキツイので消す */
-    height: 8px; /* バーの高さ */
-    width: 70%; /* バーの幅 */
+    height: 10px; /* バーの高さ */
+    width: 68%; /* バーの幅 */
     background: #8acdff; /* バーの背景色 */
     border-radius: 10px; /* バーの両端の丸み */
     border: solid 3px whitesmoke; /* バー周囲の線 */
@@ -163,4 +160,32 @@ input[type="range"] {
     gap: 10px;
     grid-template-columns:1fr 1fr;
     grid-template-rows: 180px 100px 80px 120px auto;
+  }
+  label{
+    font-size: 18px;
+  }
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 30px;
+  }
+  .CheckBoxes {
+    margin-top: 30px;
+    font-size: 20px;
+  }
+  label{
+    margin-top:30px;
+    margin-bottom: 30px;
+  }
+  .BcLabel {
+    display: none;
+  }
+  .CfLabel {
+    display: none;
+  }
+  .SdLabel {
+    display: none;
+  }
+  .WsLabel {
+    display: none;
   }

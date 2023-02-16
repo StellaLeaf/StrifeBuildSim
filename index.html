@@ -108,6 +108,10 @@
                 <option value="Mastercrafted">Mastercrafted</option>
                 <option value="ConcentratedFire">Concentrated Fire</option>
                 <option value="SuddenDeath">Sudden Death</option>
+                <option value="ManaBurn">Mana Burn</option>
+                <option value="Manaflood">Manaflood</option>
+                <option value="EchoOfDeath">Echo of Death</option>
+                <option value="Windsong">Windsong</option>
             </select>
             </span>
         </form>
@@ -133,7 +137,7 @@
             </span>
         </form>
     </div>
-    <div>
+<div>
     <label for="myMana">自身のMana残量
         <input type="range" id="myMana"  min="0" max="100" step="1" value="50">
         <span id="myMana-value">0</span>%
@@ -141,6 +145,18 @@
     <label for="enemyMana">相手のMana残量
         <input type="range" id="enemyMana"  min="0" max="100" step="1" value="50">
         <span id="enemyMana-value">0</span>%
+    </label><br>
+    <label for="BcCheck" class="BcLabel" id="BcLabel">
+        <input type="checkbox" id="BcCheck">Bloodcrazeを発動
+    </label>
+    <label for="CfCheck" class="CfLabel" id="CfLabel">
+        <input type="checkbox" id="CfCheck">Concentrated Fireを発動
+    </label>
+    <label for="SdCheck" class="SdLabel" id="SdLabel">
+        <input type="checkbox" id="SdCheck">Sudden Deathを発動
+    </label>
+    <label for="WsCheck" class="WsLabel" id="WsLabel">
+        <input type="checkbox" id="WsCheck">Windsongを発動
     </label>
 </div>
     <div class="custom-table">
@@ -178,13 +194,6 @@
             <td><span id="DisplayChangeDmgMax">0</span></td>
         </tr>
     </table>
-    </div>
-    <div class="effect-detail">
-        <table class="EffectTable">
-            <tr>
-                <td>aaaa</td>
-            </tr>
-        </table>
     </div>
     <!-- <table>
         ステータス
