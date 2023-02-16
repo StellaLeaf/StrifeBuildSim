@@ -729,7 +729,7 @@ const WeaponList = [
     },
     {
         category: "SniperRifle",
-        name: "PMG HékateⅡ",
+        name: "PMG Hékate Ⅱ",
         value: "hekate"
     },
     {
@@ -1641,3 +1641,15 @@ const ShadowStrike0 = [6, 0.7, 0.75, 0.8, 0]
 const ShadowStrike1 = [2, 0.7, 0.75, 0.8, 0]
 const ShadowStrike2 = [2, 0.4, 0.45, 0.5, 0]
 //AEdata
+const BcDmg = 7
+const EoDmg = 6
+const McDmg = 1
+const CfDmg = 4
+const MbDmg = 5
+const WsDmg = 2
+const SdAverageDmg = 1
+const SdHighestDmg = 20
+const MflDmg0 = 1;
+const MflDmg1 = 2;
+const MflDmg2 = 3;
+const EodDmg = 100;

@@ -5,12 +5,6 @@ const EnchDmg = [0, 0, 0, 0, 0, 0];
 const Ae = [0, 0]
 const Addon = [0, 0, 0, 0, 0]
 const EnchActive =[0, 0];
-const BcDmg = 7
-const EoDmg = 6
-const McDmg = 1
-const CfDmg = 4
-const SdAverageDmg = 1
-const SdHighestDmg = 20
 const MpDmg = [0.25, 0.5, 1.0, 1.5]
 const HbAverageDmg = [0.4, 0.8, 1.2, 1.6]
 const HbHighestDmg = [2, 4, 6, 8]
@@ -275,6 +269,7 @@ const render = () => {
     }else{
         EnchActive[1] = 1/(Math.ceil(EnchDmg[5]*Result[6]));
     };
+    CalcAE(WeaponDmg);
     Weapon[0] = WeaponCs[0]
     Weapon[1] = WeaponCs[1]
     Weapon[2] = WeaponCs[2]
@@ -312,12 +307,14 @@ const render = () => {
     document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
     document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
     document.getElementById("DisplayWeight").textContent = (Result[10])
+    //テキスト系
     if (Result[11] > 0){document.getElementById("DisplayDuration").textContent = (Result[11])
     }else{ document.getElementById("DisplayDuration").textContent = 0
     };
     if (Weapon[6] > 1) {document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
     }else{document.getElementById("DisplayPellets").textContent = (null)
     };
+    //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax
 }
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
@@ -474,9 +471,41 @@ const CalcOE = () => {
     }
     render()
 };
-const CalcAE = () => {
+const CalcAE = (WeaponDmg) => {
     const AE = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
-    if (AE == "Bloodcraze") {
+    const BcToggle = document.getElementById("BcCheck");
+    const CfToggle = document.getElementById("CfCheck");
+    const SdToggle = document.getElementById("SdCheck");
+    const WsToggle = document.getElementById("WsCheck");
+    if(AE == "Bloodcraze"){
+        BcLabel.style.display = 'inline';
+    }else{
+        BcLabel.style.display = 'none';
+        BcToggle.checked = false;
+    };
+
+    if(AE == "ConcentratedFire"){
+        CfLabel.style.display = 'inline';
+    }else{
+        CfLabel.style.display = 'none';
+        CfToggle.checked = false;
+    };
+
+    if(AE == "SuddenDeath"){
+        SdLabel.style.display = 'inline';
+    }else{
+        SdLabel.style.display = 'none';
+        SdToggle.checked = false;
+    };
+
+    if(AE == "Windsong"){
+        WsLabel.style.display = 'inline';
+    }else{
+        WsLabel.style.display = 'none';
+        WsToggle.checked = false;
+    };
+
+    if (AE == "Bloodcraze" && BcToggle.checked) {
         Ae[0] = BcDmg
         Ae[1] = BcDmg
     } else if (AE == "ElementalOverload"&&myManaElem.value > 30) {
@@ -485,17 +514,34 @@ const CalcAE = () => {
     } else if (AE == "Mastercrafted") {
         Ae[0] = McDmg
         Ae[1] = McDmg
-    } else if (AE == "ConcentratedFire") {
+    } else if (AE == "ConcentratedFire" && CfToggle.checked) {
         Ae[0] = CfDmg
         Ae[1] = CfDmg
-    } else if (AE == "SuddenDeath") {
+    } else if (AE == "SuddenDeath" && SdToggle.checked) {
         Ae[0] = SdAverageDmg
         Ae[1] = SdHighestDmg
+    } else if (AE == "ManaBurn" && myManaElem.value <= 35) {
+        Ae[0] = MbDmg
+        Ae[1] = MbDmg
+    } else if (AE == "Manaflood" && myManaElem.value == 100) {
+        Ae[0] = MflDmg2
+        Ae[1] = MflDmg2
+    } else if (AE == "Manaflood" && myManaElem.value >= 75) {
+        Ae[0] = MflDmg1
+        Ae[1] = MflDmg1
+    } else if (AE == "Manaflood" && myManaElem.value >= 50) {
+        Ae[0] = MflDmg0
+        Ae[1] = MflDmg0
+    } else if (AE == "EchoOfDeath" && WeaponDmg >= 50){
+        Ae[0] = EodDmg
+        Ae[1] = EodDmg
+    } else if (AE == "Windsong" && WsToggle.checked) {
+        Ae[0] = WsDmg
+        Ae[1] = WsDmg
     } else {
         Ae[0] = 0
         Ae[1] = 0
     }
-    render()
 }
 
 const CalcAddon = () => {
@@ -609,7 +655,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("ModForm").onchange = () => render()
     document.getElementById("EnchantForm").onchange = () => CalcEnch()
     document.getElementById("OeForm").onchange = () => CalcOE()
-    document.getElementById("AncientEnchantForm").onchange = () => CalcAE()
+    document.getElementById("AncientEnchantForm").onchange = () => render()
     document.getElementById("AddonForm").onchange = () => CalcAddon()
 })
 const myManaElem = document.getElementById('myMana');
@@ -626,14 +672,20 @@ const setEnemyManaValue = (val) => {
 
 const myManaOnChange = (e) =>{
     setMyManaValue(e.target.value);
-    CalcAE();
+    render();
 }
 const enemyManaOnChange = (e) =>{
     setEnemyManaValue(e.target.value);
     CalcEnch();
     CalcOE();
 }
-
+const AeCheckOnChange = (e) =>{
+    render();
+}
+document.getElementById("BcCheck").addEventListener('change', AeCheckOnChange);
+document.getElementById("CfCheck").addEventListener('change', AeCheckOnChange);
+document.getElementById("SdCheck").addEventListener('change', AeCheckOnChange);
+document.getElementById("WsCheck").addEventListener('change', AeCheckOnChange);
 window.onload = () => {
   myManaElem.addEventListener('input', myManaOnChange);
   enemyManaElem.addEventListener('input', enemyManaOnChange);
