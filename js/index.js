@@ -12,6 +12,9 @@ const ArcaneBrilliance = [3, 0.35, 0.45, 0.55, 0.2]
 const NorthernWind = [5, 0.45, 0.5, 0.55, 0.1]
 const FlexibleResonance = [4, 0.65, 0.70, 0.75, 0]
 const PhoenixFlame = [10, 0.05, 0.06, 0.07, 0]
+const ShadowStrike0 = [6, 0.7, 0.75, 0.8, 0]
+const ShadowStrike1 = [2, 0.7, 0.75, 0.8, 0]
+const ShadowStrike2 = [2, 0.4, 0.45, 0.5, 0]
 const EnchActive =[0, 0];
 const BcDmg = 7
 const EoDmg = 6
@@ -326,7 +329,6 @@ const render = () => {
     if (Weapon[6] > 1) {document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
     }else{document.getElementById("DisplayPellets").textContent = (null)
     };
-    console.log(Result)
 }
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
@@ -397,8 +399,12 @@ const CalcEnch = () => {
         EnchLevelsCalc(NorthernWind);
     }else if(Ench == 'PhoenixFlame'){
         EnchLevelsCalc(PhoenixFlame);
-    }else if(Ench == 'ShadowStrike'){
-        EnchLevelsCalc(ShadowStrike);
+    }else if(Ench == 'ShadowStrike'&&enemyManaElem.value < 50){
+        EnchLevelsCalc(ShadowStrike0);
+    }else if(Ench == 'ShadowStrike'&&enemyManaElem.value < 75){
+        EnchLevelsCalc(ShadowStrike1);
+    }else if(Ench == 'ShadowStrike'&&enemyManaElem.value <= 100){
+        EnchLevelsCalc(ShadowStrike2);
     }else if(Ench == 'ShieldWall'){
         EnchLevelsCalc(ShieldWall);
     }else if(Ench == 'SiphonLife'){
@@ -457,8 +463,12 @@ const CalcOE = () => {
         OELevelsCalc(NorthernWind);
     }else if(OE == 'PhoenixFlame'){
         OELevelsCalc(PhoenixFlame);
-    }else if(OE == 'ShadowStrike'){
-        OELevelsCalc(ShadowStrike);
+    }else if(OE == 'ShadowStrike'&&enemyManaElem.value < 50){
+        OELevelsCalc(ShadowStrike0);
+    }else if(OE == 'ShadowStrike'&&enemyManaElem.value < 75){
+        OELevelsCalc(ShadowStrike1);
+    }else if(OE == 'ShadowStrike'&&enemyManaElem.value <= 100){
+        OELevelsCalc(ShadowStrike2);
     }else if(OE == 'ShieldWall'){
         OELevelsCalc(ShieldWall);
     }else if(OE == 'SiphonLife'){
@@ -614,3 +624,30 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("AncientEnchantForm").onchange = () => CalcAE()
     document.getElementById("AddonForm").onchange = () => CalcAddon()
 })
+const myManaElem = document.getElementById('myMana');
+const enemyManaElem = document.getElementById('enemyMana');
+const myManaValueElem = document.getElementById('myMana-value');
+const enemyManaValueElem = document.getElementById('enemyMana-value');
+
+const setMyManaValue = (val) => {
+  myManaValueElem.innerText = val;
+}
+const setEnemyManaValue = (val) => {
+    enemyManaValueElem.innerText = val;
+  }
+
+const myManaOnChange = (e) =>{
+  setMyManaValue(e.target.value);
+}
+const enemyManaOnChange = (e) =>{
+    setEnemyManaValue(e.target.value);
+    CalcEnch();
+    CalcOE();
+}
+
+window.onload = () => {
+  myManaElem.addEventListener('input', myManaOnChange);
+  enemyManaElem.addEventListener('input', enemyManaOnChange);
+  setMyManaValue(myManaElem.value);
+  setEnemyManaValue(enemyManaElem.value);
+}
