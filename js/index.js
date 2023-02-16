@@ -4,17 +4,6 @@ const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
 const EnchDmg = [0, 0, 0, 0, 0, 0];
 const Ae = [0, 0]
 const Addon = [0, 0, 0, 0, 0]
-const Sunfire = [3, 0.67, 0.72, 0.77, 0]
-const DemonPower = [4, 0.35, 0.4, 0.45, 0]
-const SiphonLife = [2, 0.4, 0.5, 0.6, 0]
-const DeathsRuin = [6, 0.55, 0.6, 0.65, 0.15]
-const ArcaneBrilliance = [3, 0.35, 0.45, 0.55, 0.2]
-const NorthernWind = [5, 0.45, 0.5, 0.55, 0.1]
-const FlexibleResonance = [4, 0.65, 0.70, 0.75, 0]
-const PhoenixFlame = [10, 0.05, 0.06, 0.07, 0]
-const ShadowStrike0 = [6, 0.7, 0.75, 0.8, 0]
-const ShadowStrike1 = [2, 0.7, 0.75, 0.8, 0]
-const ShadowStrike2 = [2, 0.4, 0.45, 0.5, 0]
 const EnchActive =[0, 0];
 const BcDmg = 7
 const EoDmg = 6
@@ -421,8 +410,7 @@ const CalcEnch = () => {
         EnchDmg[4] = 0;
     }
     render()
-}
-
+};
 const CalcOE = () => {
     const OE = document.getElementById("OeForm").OeSelect.value
     const OELv = document.getElementById("OeForm").OeLevSelect.value
@@ -491,7 +479,7 @@ const CalcAE = () => {
     if (AE == "Bloodcraze") {
         Ae[0] = BcDmg
         Ae[1] = BcDmg
-    } else if (AE == "ElementalOverload") {
+    } else if (AE == "ElementalOverload"&&myManaElem.value > 30) {
         Ae[0] = EoDmg
         Ae[1] = EoDmg
     } else if (AE == "Mastercrafted") {
@@ -511,9 +499,9 @@ const CalcAE = () => {
 }
 
 const CalcAddon = () => {
-    const Addon = document.getElementById("AddonForm").AddonSelect.value
+    const AddonKey = document.getElementById("AddonForm").AddonSelect.value
     const AddonLv = document.getElementById("AddonForm").AddonLevSelect.value
-    if (Addon == "ManaPowder") {
+    if (AddonKey == "ManaPowder") {
         Addon[2] = 0
         Addon[3] = 0
         Addon[4] = 0
@@ -533,7 +521,7 @@ const CalcAddon = () => {
             Addon[0] = 0
             Addon[1] = 0
         }
-    } else if (Addon == "HeavyBullets") {
+    } else if (AddonKey == "HeavyBullets") {
         Addon[2] = 0
         Addon[3] = 0
         Addon[4] = 0
@@ -553,7 +541,7 @@ const CalcAddon = () => {
             Addon[0] = 0
             Addon[1] = 0
         }
-    } else if (Addon == "ExtendedMagazine") {
+    } else if (AddonKey == "ExtendedMagazine") {
         Addon[0] = 0
         Addon[1] = 0
         Addon[3] = 0
@@ -569,7 +557,7 @@ const CalcAddon = () => {
         } else {
             Addon[2] = 0
         }
-    } else if (Addon == "QuickPull") {
+    } else if (AddonKey == "QuickPull") {
         Addon[0] = 0
         Addon[1] = 0
         Addon[3] = 0
@@ -585,7 +573,7 @@ const CalcAddon = () => {
         } else {
             Addon[3] = 0
         }
-    } else if (Addon == "LightweightKit") {
+    } else if (AddonKey == "LightweightKit") {
         Addon[0] = 0
         Addon[1] = 0
         Addon[3] = 0
@@ -637,7 +625,8 @@ const setEnemyManaValue = (val) => {
   }
 
 const myManaOnChange = (e) =>{
-  setMyManaValue(e.target.value);
+    setMyManaValue(e.target.value);
+    CalcAE();
 }
 const enemyManaOnChange = (e) =>{
     setEnemyManaValue(e.target.value);
