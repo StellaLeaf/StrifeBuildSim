@@ -1,3 +1,4 @@
+//WeaponData
 const WeaponTypes = [
     "AssaultRifle",
     "SMG",
@@ -1627,3 +1628,16 @@ const WeaponList = [
         value: "zangetsu"
     }
 ]
+//EnchData
+const Sunfire = [3, 0.67, 0.72, 0.77, 0]
+const DemonPower = [4, 0.35, 0.4, 0.45, 0]
+const SiphonLife = [2, 0.4, 0.5, 0.6, 0]
+const DeathsRuin = [6, 0.55, 0.6, 0.65, 0.15]
+const ArcaneBrilliance = [3, 0.35, 0.45, 0.55, 0.2]
+const NorthernWind = [5, 0.45, 0.5, 0.55, 0.1]
+const FlexibleResonance = [4, 0.65, 0.70, 0.75, 0]
+const PhoenixFlame = [10, 0.05, 0.06, 0.07, 0]
+const ShadowStrike0 = [6, 0.7, 0.75, 0.8, 0]
+const ShadowStrike1 = [2, 0.7, 0.75, 0.8, 0]
+const ShadowStrike2 = [2, 0.4, 0.45, 0.5, 0]
+//AEdata
