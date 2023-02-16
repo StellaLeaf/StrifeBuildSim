@@ -13,124 +13,137 @@
 <body>
     <div class="title">STRIFE Build Simulator</div>
     <div class="grid">
-        <div class="forms"></div>
-    <p class="formHead">武器設定</p>
-    <form id="TypeForm">
-        <span class="custom-pull">
-        <select id="TypeSelect" class="Selecter">
-            <option value="none">武器種を選択</option>
-        </select>
-    </span>
-    </form>
-    <form id="WeaponForm">
-        <span class="custom-pull">
-        <select id="WeaponSelect" class="WeaponSelecter" disabled>
-            <option>武器を選択</option>
-        </select>
-    </span>
-    </form>
-    <form id="ModForm">
-        <span class="custom-pull">
-        <select id="ModSelect" class="Selecter">
-            <option value="none" selected>Modを選択</option>
-            <option>Champion Mod</option>
-            <option>Deadeye Mod</option>
-            <option>Emperor Mod</option>
-            <option>Gladiator Mod</option>
-            <option>Hunter Mod</option>
-            <option>Knight Mod</option>
-            <option>Marksman Mod</option>
-            <option>Monarch Mod</option>
-            <option>Raider Mod</option>
-            <option>Ranger Mod</option>
-            <option>Sentinel Mod</option>
-            <option>Stalker Mod</option>
-            <option>Warlord Mod</option>
-            <option>Warrior Mod</option>
-        </select>
+    <div class="forms">
+        <p class="formHead">武器設定</p>
+        <form id="TypeForm">
+            <span class="custom-pull">
+            <select id="TypeSelect" class="Selecter">
+                <option value="none">武器種を選択</option>
+            </select>
         </span>
-    </form>
-    <form id="EnchantForm">
-        <span class="custom-pull">
-        <select id="EnchantSelect" class="Selecter">
-            <option value="none" selected>Enchantを選択</option>
-            <option value="ArcaneBrilliance">Arcane Brilliance</option>
-            <option value="DeathsRuin">Death's Ruin</option>
-            <option value="DemonPower">Demon Power</option>
-            <option value="FlexibleResonance">Flexible Resonance</option>
-            <option value="NorthernWind">Northern Wind</option>
-            <option value="PhoenixFlame">Phoenix Flame</option>
-            <option value="SiphonLife">Siphon Life</option>
-            <option value="Sunfire">Sunfire</option>
-        </select>
+        </form>
+        <form id="WeaponForm">
+            <span class="custom-pull">
+            <select id="WeaponSelect" class="WeaponSelecter" disabled>
+                <option>武器を選択</option>
+            </select>
+        </span>
+        </form>
+        <form id="ModForm">
+            <span class="custom-pull">
+            <select id="ModSelect" class="Selecter">
+                <option value="none" selected>Modを選択</option>
+                <option>Champion Mod</option>
+                <option>Deadeye Mod</option>
+                <option>Emperor Mod</option>
+                <option>Gladiator Mod</option>
+                <option>Hunter Mod</option>
+                <option>Knight Mod</option>
+                <option>Marksman Mod</option>
+                <option>Monarch Mod</option>
+                <option>Raider Mod</option>
+                <option>Ranger Mod</option>
+                <option>Sentinel Mod</option>
+                <option>Stalker Mod</option>
+                <option>Warlord Mod</option>
+                <option>Warrior Mod</option>
+            </select>
+            </span>
+        </form>
+        <form id="EnchantForm">
+            <span class="custom-pull">
+            <select id="EnchantSelect" class="Selecter">
+                <option value="none" selected>Enchantを選択</option>
+                <option value="ArcaneBrilliance">Arcane Brilliance</option>
+                <option value="DeathsRuin">Death's Ruin</option>
+                <option value="DemonPower">Demon Power</option>
+                <option value="FlexibleResonance">Flexible Resonance</option>
+                <option value="NorthernWind">Northern Wind</option>
+                <option value="PhoenixFlame">Phoenix Flame</option>
+                <option value="ShadowStrike">Shadow Strike</option>
+                <option value="SiphonLife">Siphon Life</option>
+                <option value="Sunfire">Sunfire</option>
+            </select>
+            </span>
+            <span class="custom-pull">
+            <select id="EnchantLevSelect" class="Selecter">
+                <option value="none" selected>Level</option>
+                <option value="EnchLev1">1</option>
+                <option value="EnchLev2">2</option>
+                <option value="EnchLev3">3</option>
+            </select>
+            </span>
+        </form>
+        <form id="OeForm">
+            <span class="custom-pull">
+            <select id="OeSelect" class="Selecter">
+                <option value="none" selected>OEを選択</option>
+                <option value="ArcaneBrilliance">Arcane Brilliance</option>
+                <option value="DeathsRuin">Death's Ruin</option>
+                <option value="DemonPower">Demon Power</option>
+                <option value="FlexibleResonance">Flexible Resonance</option>
+                <option value="NorthernWind">Northern Wind</option>
+                <option value="PhoenixFlame">Phoenix Flame</option>
+                <option value="ShadowStrike">Shadow Strike</option>
+                <option value="SiphonLife">Siphon Life</option>
+                <option value="Sunfire">Sunfire</option>
+            </select>
+            </span>
+            <span class="custom-pull">
+            <select id="OeLevSelect" class="Selecter">
+                <option value="none" selected>Level</option>
+                <option value="OeLev1">1</option>
+                <option value="OeLev2">2</option>
+                <option value="OeLev3">3</option>
+            </select>
+            </span>
+        </span>
+        </form>
+        <form id="AncientEnchantForm">
+            <span class="custom-pull">
+            <select id="AncientEnchantSelect" class="Selecter">
+                <option value="none" selected>AEを選択</option>
+                <option value="Bloodcraze">Bloodcraze</option>
+                <option value="ElementalOverload">Elemental Overload</option>
+                <option value="Mastercrafted">Mastercrafted</option>
+                <option value="ConcentratedFire">Concentrated Fire</option>
+                <option value="SuddenDeath">Sudden Death</option>
+            </select>
+            </span>
+        </form>
+        <form id="AddonForm">
+            <span class="custom-pull">
+            <select id="AddonSelect" class="Selecter">
+                <option value="none" selected>Addonを選択</option>
+                <option value="ManaPowder">Mana Powder</option>
+                <option value="HeavyBullets">Heavy Bullets</option>
+                <option value="ExtendedMagazine">Extended Magazine</option>
+                <option value="QuickPull">Quick Pull</option>
+                <option value="LightweightKit">Lightweight Kit</option>
+            </select>
         </span>
         <span class="custom-pull">
-        <select id="EnchantLevSelect" class="Selecter">
-            <option value="none" selected>Level</option>
-            <option value="EnchLev1">1</option>
-            <option value="EnchLev2">2</option>
-            <option value="EnchLev3">3</option>
-        </select>
-        </span>
-    </form>
-    <form id="OeForm">
-        <span class="custom-pull">
-        <select id="OeSelect" class="Selecter">
-            <option value="none" selected>OEを選択</option>
-            <option value="ArcaneBrilliance">Arcane Brilliance</option>
-            <option value="DeathsRuin">Death's Ruin</option>
-            <option value="DemonPower">Demon Power</option>
-            <option value="FlexibleResonance">Flexible Resonance</option>
-            <option value="NorthernWind">Northern Wind</option>
-            <option value="PhoenixFlame">Phoenix Flame</option>
-            <option value="SiphonLife">Siphon Life</option>
-            <option value="Sunfire">Sunfire</option>
-        </select>
-        </span>
-        <span class="custom-pull">
-        <select id="OeLevSelect" class="Selecter">
-            <option value="none" selected>Level</option>
-            <option value="OeLev1">1</option>
-            <option value="OeLev2">2</option>
-            <option value="OeLev3">3</option>
-        </select>
-        </span>
-    </span>
-    </form>
-    <form id="AncientEnchantForm">
-        <span class="custom-pull">
-        <select id="AncientEnchantSelect" class="Selecter">
-            <option value="none" selected>AEを選択</option>
-            <option value="Bloodcraze">Bloodcraze</option>
-            <option value="ElementalOverload">Elemental Overload</option>
-            <option value="Mastercrafted">Mastercrafted</option>
-            <option value="ConcentratedFire">Concentrated Fire</option>
-            <option value="SuddenDeath">Sudden Death</option>
-        </select>
-        </span>
-    </form>
-    <form id="AddonForm">
-        <span class="custom-pull">
-        <select id="AddonSelect" class="Selecter">
-            <option value="none" selected>Addonを選択</option>
-            <option value="ManaPowder">Mana Powder</option>
-            <option value="HeavyBullets">Heavy Bullets</option>
-            <option value="ExtendedMagazine">Extended Magazine</option>
-            <option value="QuickPull">Quick Pull</option>
-            <option value="LightweightKit">Lightweight Kit</option>
-        </select>
-    </span>
-    <span class="custom-pull">
-        <select id="AddonLevSelect" class="Selecter">
-            <option value="none" selected>Level</option>
-            <option value="AddonLev0">無印</option>
-            <option value="AddonLev1">+</option>
-            <option value="AddonLev2">++</option>
-            <option value="AddonLev3">+++</option>
-        </select>
-        </span>
-    </form>
+            <select id="AddonLevSelect" class="Selecter">
+                <option value="none" selected>Level</option>
+                <option value="AddonLev0">無印</option>
+                <option value="AddonLev1">+</option>
+                <option value="AddonLev2">++</option>
+                <option value="AddonLev3">+++</option>
+            </select>
+            </span>
+        </form>
     </div>
+    <div>
+    <label for="myMana">自身のMana残量
+        <input type="range" id="myMana"  min="0" max="100" step="1" value="50">
+        <span id="myMana-value">0</span>%
+    </label><br>
+    <label for="enemyMana">相手のMana残量
+        <input type="range" id="enemyMana"  min="0" max="100" step="1" value="50">
+        <span id="enemyMana-value">0</span>%
+    </label>
+</div>
+    <div class="custom-table">
     <table class="WeaponTable">
         <tr>
             <th>平均dmg</th>
@@ -152,7 +165,7 @@
             <th>最高dmg</th>
             <th>射撃時間(s)</th>
             <th>レート(s)</th>
-            <th>リロード<br>(tick<span id="DisplayReloadStyle"></span>)</th>
+            <th>リロード(tick<span id="DisplayReloadStyle"></span>)</th>
             <th>ADS精度</th>
             <th>最大減衰量</th>
         </tr>
@@ -166,6 +179,13 @@
         </tr>
     </table>
     </div>
+    <div class="effect-detail">
+        <table class="EffectTable">
+            <tr>
+                <td>aaaa</td>
+            </tr>
+        </table>
+    </div>
     <!-- <table>
         ステータス
         <tr>
@@ -178,5 +198,4 @@
 </body>
 <script src="js/import.js"></script>
 <script src="js/index.js"></script>
-
 </html>
