@@ -141,11 +141,11 @@
         </div>
         <div>
             <p class="formHead">詳細設定</p>
-            <label for="myMana">自身のMana残量
+            <label for="myMana">自身のMana残量<br>
                 <input type="range" id="myMana"  min="0" max="100" step="1" value="50">
                 <span id="myMana-value">0</span>%
             </label><br>
-            <label for="enemyMana">相手のMana残量
+            <label for="enemyMana">相手のMana残量<br>
                 <input type="range" id="enemyMana"  min="0" max="100" step="1" value="50">
                 <span id="enemyMana-value">0</span>%
             </label>
@@ -174,7 +174,7 @@
                 <input type="checkbox" id="SbCheck">Shield Breakerを発動
             </label>
         </div>
-        <div class="custom-table">
+        <div class="custom-table-desktop">
             <table class="WeaponTable">
                 <tr>
                     <th>平均dmg</th>
@@ -211,6 +211,55 @@
             </table>
         </div>
     </div>
+    <div class="custom-table-mobile0">
+        <table class="WeaponTable">
+            <tr>
+                <th>平均dmg</th>
+                <th>平均DPS</th>
+                <th>移動速度</th>
+            </tr>
+            <tr>
+                <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td>
+                <td><span id="DisplayDps">0</span></td>
+                <td><span id="DisplayWeight">1</span>倍</td>
+            </tr>
+            <tr>
+                <th>最高dmg</th>
+                <th>射撃時間(s)</th>
+                <th>レート(s)</th>
+            </tr>
+            <tr>
+                <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td>
+                <td><span id="DisplayDuration">0</span></td>
+                <td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td>
+            </tr>
+        </table>
+    </div>
+    <div class="custom-table-mobile1">
+        <table class="WeaponTable">
+            <tr>
+                <th>装弾数</th>
+                <th>腰撃ち精度</th>
+                <th>距離減衰<br>(10m)</th>
+            </tr>
+            <tr>
+                <td><span id="DisplayCapacity">0</span></td>
+                <td><span id="DisplaySpread">0</span></td>
+                <td><span id="DisplayChangeDmg10m">0</span></td>
+            </tr>
+            <tr>
+                <th>リロード<br>(tick<span id="DisplayReloadStyle"></span>)</th>
+                <th>ADS精度</th>
+                <th>最大減衰量</th>
+            </tr>
+            <tr>
+                <td><span id="DisplayReload">0</span></td>
+                <td><span id="DisplayAdsSpread">0</span></td>
+                <td><span id="DisplayChangeDmgMax">0</span></td>
+            </tr>
+        </table>
+    </div>
+</div>
     <!-- <table>
         ステータス
         <tr>
