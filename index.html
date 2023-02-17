@@ -124,6 +124,7 @@
                 <option value="ExtendedMagazine">Extended Magazine</option>
                 <option value="QuickPull">Quick Pull</option>
                 <option value="LightweightKit">Lightweight Kit</option>
+                <option value="SupersonicAmmo">Supersonic Ammo</option>
             </select>
         </span>
         <span class="custom-pull">
@@ -138,6 +139,7 @@
         </form>
     </div>
 <div>
+    <p class="formHead">詳細設定</p>
     <label for="myMana">自身のMana残量
         <input type="range" id="myMana"  min="0" max="100" step="1" value="50">
         <span id="myMana-value">0</span>%
@@ -146,6 +148,12 @@
         <input type="range" id="enemyMana"  min="0" max="100" step="1" value="50">
         <span id="enemyMana-value">0</span>%
     </label><br>
+    <label for="FrCheck" class="FrLabel" id="FrLabel">
+        <input type="checkbox" id="FrCheck">Flexible Resonanceを発動
+    </label>
+    <label for="OeFrCheck" class="OeFrLabel" id="OeFrLabel">
+        <input type="checkbox" id="OeFrCheck">Flexible Resonanceを発動
+    </label>
     <label for="BcCheck" class="BcLabel" id="BcLabel">
         <input type="checkbox" id="BcCheck">Bloodcrazeを発動
     </label>
@@ -167,7 +175,7 @@
             <th>移動速度</th>
             <th>装弾数</th>
             <th>腰撃ち精度</th>
-            <th>減衰(10m)</th>
+            <th>距離減衰<br>(10m)</th>
         </tr>
         <tr>
             <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td>
@@ -181,7 +189,7 @@
             <th>最高dmg</th>
             <th>射撃時間(s)</th>
             <th>レート(s)</th>
-            <th>リロード(tick<span id="DisplayReloadStyle"></span>)</th>
+            <th>リロード<br>(tick<span id="DisplayReloadStyle"></span>)</th>
             <th>ADS精度</th>
             <th>最大減衰量</th>
         </tr>

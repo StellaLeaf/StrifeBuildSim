@@ -7,21 +7,23 @@ body {
 th {
     background-color: rgba(0, 0, 0, 0.2);
     font-weight: 400;
+    padding-top:5px;
+    padding-bottom:5px;
 }
 
 th,
 td {
     border-left: solid 1px rgba(0, 0, 0, 0.15);
     border-right: solid 1px rgba(0, 0, 0, 0.15);
-    padding-top:15px;
-    padding-bottom:15px;
     text-align:center;
     height:30px;
     width:auto;
     font-size: 18px;
 }
 td{
-    background-color:whitesmoke
+    background-color:whitesmoke;
+    padding-top:13px;
+    padding-bottom:13px;
 }
 
 table {
@@ -187,5 +189,11 @@ input[type="range"] {
     display: none;
   }
   .WsLabel {
+    display: none;
+  }
+  .FrLabel {
+    display: none;
+  }
+  .OeFrLabel {
     display: none;
   }
