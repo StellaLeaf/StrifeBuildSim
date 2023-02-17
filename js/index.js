@@ -12,6 +12,7 @@ const EmCapacity = [2, 4, 6, 10]
 const QpReload = [-4, -8, -12, -16]
 const LkWeight = [0.004, 0.005, 0.010, 0.015]
 const SsaDmg = [1.25, 1.5, 1.75, 2.2]
+const SbDmg = [7, 8, 9, 10]
 const _pathAr = "maps/1_AR.json"
 const _pathArp = "maps/1_AR_CSP.json"
 const _pathSmg = "maps/3_SMG.json"
@@ -348,7 +349,7 @@ const CalcEnch = () => {
     const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
     const FrToggle = document.getElementById("FrCheck");
     if(Ench == 'FlexibleResonance'){
-        FrLabel.style.display = 'inline';
+        FrLabel.style.display = "inline-block";
     }else{
         FrLabel.style.display = 'none';
         FrToggle.checked = false;
@@ -421,7 +422,7 @@ const CalcOE = () => {
     const OELv = document.getElementById("OeForm").OeLevSelect.value
     const OeFrToggle = document.getElementById("OeFrCheck");
     if(OE == 'FlexibleResonance'){
-        OeFrLabel.style.display = 'inline';
+        OeFrLabel.style.display = 'inline-block';
     }else{
         OeFrLabel.style.display = 'none';
         OeFrToggle.checked = false;
@@ -493,28 +494,28 @@ const CalcAE = (WeaponDmg) => {
     const SdToggle = document.getElementById("SdCheck");
     const WsToggle = document.getElementById("WsCheck");
     if(AE == "Bloodcraze"){
-        BcLabel.style.display = 'inline';
+        BcLabel.style.display = 'inline-block';
     }else{
         BcLabel.style.display = 'none';
         BcToggle.checked = false;
     };
 
     if(AE == "ConcentratedFire"){
-        CfLabel.style.display = 'inline';
+        CfLabel.style.display = 'inline-block';
     }else{
         CfLabel.style.display = 'none';
         CfToggle.checked = false;
     };
 
     if(AE == "SuddenDeath"){
-        SdLabel.style.display = 'inline';
+        SdLabel.style.display = 'inline-block';
     }else{
         SdLabel.style.display = 'none';
         SdToggle.checked = false;
     };
 
     if(AE == "Windsong"){
-        WsLabel.style.display = 'inline';
+        WsLabel.style.display = 'inline-block';
     }else{
         WsLabel.style.display = 'none';
         WsToggle.checked = false;
@@ -562,6 +563,20 @@ const CalcAE = (WeaponDmg) => {
 const CalcAddon = () => {
     const AddonKey = document.getElementById("AddonForm").AddonSelect.value
     const AddonLv = document.getElementById("AddonForm").AddonLevSelect.value
+    const SsaToggle = document.getElementById("SsaCheck");
+    const SbToggle = document.getElementById("SbCheck");
+    if(AddonKey == 'SupersonicAmmo'){
+        SsaLabel.style.display = 'inline-block';
+    }else{
+        SsaLabel.style.display = 'none';
+        SsaToggle.checked = false;
+    };
+    if(AddonKey == 'ShieldBreaker'){
+        SbLabel.style.display = 'inline-block';
+    }else{
+        SbLabel.style.display = 'none';
+        SbToggle.checked = false;
+    };
     if (AddonKey == "ManaPowder") {
         Addon[2] = 0
         Addon[3] = 0
@@ -571,14 +586,14 @@ const CalcAddon = () => {
             Addon[0] = MpDmg[0]
             Addon[1] = MpDmg[0]
         } else if (AddonLv == "AddonLev1") {
-            Addon[0] = MpDmg[0]
-            Addon[1] = MpDmg[0]
+            Addon[0] = MpDmg[1]
+            Addon[1] = MpDmg[1]
         } else if (AddonLv == "AddonLev2") {
-            Addon[0] = MpDmg[0]
-            Addon[1] = MpDmg[0]
+            Addon[0] = MpDmg[2]
+            Addon[1] = MpDmg[2]
         } else if (AddonLv == "AddonLev3") {
-            Addon[0] = MpDmg[0]
-            Addon[1] = MpDmg[0]
+            Addon[0] = MpDmg[3]
+            Addon[1] = MpDmg[3]
         } else {
             Addon[0] = 0
             Addon[1] = 0
@@ -624,11 +639,12 @@ const CalcAddon = () => {
     } else if (AddonKey == "QuickPull") {
         Addon[0] = 0
         Addon[1] = 0
+        Addon[2] = 0
         Addon[3] = 0
         Addon[4] = 0
         Addon[5] = 1
         if (AddonLv == "AddonLev0") {
-            Addonr = QpReload[0]
+            Addon[3] = QpReload[0]
         } else if (AddonLv == "AddonLev1") {
             Addon[3] = QpReload[1]
         } else if (AddonLv == "AddonLev2") {
@@ -641,6 +657,7 @@ const CalcAddon = () => {
     } else if (AddonKey == "LightweightKit") {
         Addon[0] = 0
         Addon[1] = 0
+        Addon[2] = 0
         Addon[3] = 0
         Addon[5] = 1
         if (AddonLv == "AddonLev0") {
@@ -654,9 +671,10 @@ const CalcAddon = () => {
         } else {
             Addon[4] = 0
         }
-    } else if (AddonKey == "SupersonicAmmo") {
+    } else if (AddonKey == "SupersonicAmmo" && SsaToggle.checked) {
         Addon[0] = 0
         Addon[1] = 0
+        Addon[2] = 0
         Addon[3] = 0
         Addon[4] = 0
         if (AddonLv == "AddonLev0") {
@@ -669,6 +687,27 @@ const CalcAddon = () => {
             Addon[5] = SsaDmg[3]
         } else {
             Addon[5] = 1
+        }
+    } else if (AddonKey == "ShieldBreaker" && SbToggle.checked) {
+        Addon[2] = 0
+        Addon[3] = 0
+        Addon[4] = 0
+        Addon[5] = 1
+        if (AddonLv == "AddonLev0") {
+            Addon[0] = SbDmg[0]
+            Addon[1] = SbDmg[0]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[0] = SbDmg[1]
+            Addon[1] = SbDmg[1]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[0] = SbDmg[2]
+            Addon[1] = SbDmg[2]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[0] = SbDmg[3]
+            Addon[1] = SbDmg[3]
+        } else {
+            Addon[0] = 0;
+            Addon[1] = 0;
         }
     } else {
         Addon[0] = 0
@@ -725,12 +764,17 @@ const OeCheckOnChange = (e) =>{
 const AeCheckOnChange = (e) =>{
     render();
 }
+const AddonCheckOnChange = (e) =>{
+    CalcAddon();
+}
 document.getElementById("FrCheck").addEventListener('change', EnchCheckOnChange);
 document.getElementById("OeFrCheck").addEventListener('change', OeCheckOnChange);
 document.getElementById("BcCheck").addEventListener('change', AeCheckOnChange);
 document.getElementById("CfCheck").addEventListener('change', AeCheckOnChange);
 document.getElementById("SdCheck").addEventListener('change', AeCheckOnChange);
 document.getElementById("WsCheck").addEventListener('change', AeCheckOnChange);
+document.getElementById("SsaCheck").addEventListener('change', AddonCheckOnChange);
+document.getElementById("SbCheck").addEventListener('change', AddonCheckOnChange);
 window.onload = () => {
   myManaElem.addEventListener('input', myManaOnChange);
   enemyManaElem.addEventListener('input', enemyManaOnChange);

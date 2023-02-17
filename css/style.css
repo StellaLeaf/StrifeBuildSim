@@ -30,8 +30,6 @@ table {
     border-collapse: collapse;
     width: 100%;
 }
-
-
 select,
 label {
     height: 32px;
@@ -85,9 +83,6 @@ width: 280px;
   font-size: 20px;
   pointer-events: none;
 }
-.custom-table{
-    margin:120px 0px 0px 0px
-}
 .formHead{
     padding: 0px 3px;
     font-size: 25px;
@@ -129,7 +124,8 @@ input[type="range"] {
     background: #8acdff; /* バーの背景色 */
     border-radius: 10px; /* バーの両端の丸み */
     border: solid 3px whitesmoke; /* バー周囲の線 */
-    margin: 10px 0px;
+    margin-top: 5px;
+    margin-bottom: 10px;
   }
   /* WebKit向けのつまみ */
   input[type="range"]::-webkit-slider-thumb {
@@ -159,9 +155,7 @@ input[type="range"] {
   }
   .grid {
     display: grid;
-    gap: 10px;
     grid-template-columns:1fr 1fr;
-    grid-template-rows: 180px 100px 80px 120px auto;
   }
   label{
     font-size: 18px;
@@ -169,31 +163,44 @@ input[type="range"] {
   input[type="checkbox"] {
     width: 20px;
     height: 20px;
-    margin-top: 30px;
+    text-align:center;
   }
   .CheckBoxes {
-    margin-top: 30px;
     font-size: 20px;
   }
   label{
-    margin-top:30px;
-    margin-bottom: 30px;
+    margin-top:10px;
+    margin-bottom: 10px;
   }
   .BcLabel {
     display: none;
+    width: 45%;
   }
   .CfLabel {
     display: none;
+    width: 45%;
   }
   .SdLabel {
     display: none;
+    width: 45%;
   }
   .WsLabel {
     display: none;
+    width: 45%;
   }
   .FrLabel {
     display: none;
+    width: 45%;
   }
   .OeFrLabel {
     display: none;
+    width: 45%;
+  }
+  .SsaLabel {
+    display: none;
+    width: 45%;
+  }
+  .SbLabel {
+    display: none;
+    width: 45%;
   }
