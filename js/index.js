@@ -296,6 +296,8 @@ const render = () => {
     Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[10] = Math.round(((0.2 + Weapon[9] + Mod[6] + Addon[4]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax
+    //DesktopDisplay
     document.getElementById("DisplayAverageDmg").textContent = (Result[0])
     document.getElementById("DisplayAverageHsDmg").textContent = (Result[1])
     document.getElementById("DisplayHighestDmg").textContent = (Result[2])
@@ -309,14 +311,35 @@ const render = () => {
     document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
     document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
     document.getElementById("DisplayWeight").textContent = (Result[10])
+    //MobileDisplay
+    document.getElementById("MobileDisplayAverageDmg").textContent = (Result[0])
+    document.getElementById("MobileDisplayAverageHsDmg").textContent = (Result[1])
+    document.getElementById("MobileDisplayHighestDmg").textContent = (Result[2])
+    document.getElementById("MobileDisplayHighestHsDmg").textContent = (Result[3])
+    document.getElementById("MobileDisplayRate").textContent = (Result[6])
+    document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
+    document.getElementById("MobileDisplayReload").textContent = (Result[5])
+    document.getElementById("MobileDisplaySpread").textContent = (Result[8])
+    document.getElementById("MobileDisplayAdsSpread").textContent = (Result[9])
+    document.getElementById("MobileDisplayDps").textContent = (Result[7])
+    document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
+    document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
+    document.getElementById("MobileDisplayWeight").textContent = (Result[10])
     //テキスト系
-    if (Result[11] > 0){document.getElementById("DisplayDuration").textContent = (Result[11])
-    }else{ document.getElementById("DisplayDuration").textContent = 0
+    if (Result[11] > 0) {
+        document.getElementById("DisplayDuration").textContent = (Result[11])
+        document.getElementById("MobileDisplayDuration").textContent = (Result[11])
+    } else {
+        document.getElementById("DisplayDuration").textContent = 0
+        document.getElementById("MobileDisplayDuration").textContent = 0
     };
-    if (Weapon[6] > 1) {document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
-    }else{document.getElementById("DisplayPellets").textContent = (null)
+    if (Weapon[6] > 1) {
+        document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
+        document.getElementById("MobileDisplayPellets").textContent = ("x" + Weapon[6])
+    }else{
+        document.getElementById("DisplayPellets").textContent = (null)
+        document.getElementById("MobileDisplayPellets").textContent = (null)
     };
-    //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax
 }
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
