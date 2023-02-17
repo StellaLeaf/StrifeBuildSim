@@ -1,196 +1,196 @@
 body {
-    font-size: 16px;
-    font-family: sans-serif;
-    margin: 20px;
+  font-size: 16px;
+  font-family: sans-serif;
+  margin: 20px;
 }
 
 th {
-    background-color: rgba(0, 0, 0, 0.2);
-    font-weight: 400;
-    padding-top:5px;
-    padding-bottom:5px;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+  padding-top:5px;
+  padding-bottom:5px;
 }
 
 th,
 td {
-    border-left: solid 1px rgba(0, 0, 0, 0.15);
-    border-right: solid 1px rgba(0, 0, 0, 0.15);
-    text-align:center;
-    height:30px;
-    width:auto;
-    font-size: 18px;
+  border-left: solid 1px rgba(0, 0, 0, 0.15);
+  border-right: solid 1px rgba(0, 0, 0, 0.15);
+  text-align:center;
+  height:30px;
+  width:auto;
+  font-size: 18px;
 }
 td{
-    background-color:whitesmoke;
-    padding-top:13px;
-    padding-bottom:13px;
+  background-color:whitesmoke;
+  padding-top:13px;
+  padding-bottom:13px;
 }
 
 table {
-    border-collapse: collapse;
-    width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 }
 select,
 label {
-    height: 32px;
-    font-size: 16px;
+  height: 32px;
+  font-size: 16px;
 }
 select{
-    background-color: white;
-    margin:0px 0px 3px 0px;
-    padding: 0px 30px 0px 10px;
-    width:auto;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  }
-  .WeaponSelect{
+  background-color: white;
+  margin:0px 0px 3px 0px;
+  padding: 0px 30px 0px 10px;
+  width:auto;
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+}
+.WeaponSelect{
 width: 280px;
-  }
+}
 .WeaponSelecter{
-    width: 300px;
-    font-size: 17px;
-    border-radius: 0;
-    border: none;
-    border-bottom: 2px solid rgba(0,0,0, 0.3);
+  width: 300px;
+  font-size: 17px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0, 0.3);
 }
 .Selecter{
-    font-size: 18px;
-    border-radius: 0;
-    border: none;
-    border-bottom: 2px solid rgba(0,0,0, 0.3);
+  font-size: 18px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 2px solid rgba(0,0,0, 0.3);
 }
 .custom-pull {
-    position: relative;
+  position: relative;
 }
 .title{
-    margin: 0px 5px;
-    font: 45px "Fira Sans", sans-serif;
-    font-weight: 200;
+  margin: 0px 5px;
+  font: 45px "Fira Sans", sans-serif;
+  font-weight: 200;
 }
 .custom-pull:after {
-  content: "";
-    position: absolute;
-    right: 10px;
-    top: 6px;
-    width: 10px;
-    height: 10px;
-    border-top: 2px solid rgba(0,0,0, 0.3);
-    border-left: 2px solid rgba(0,0,0, 0.3);
-    transform: translateY(-50%) rotate(
+content: "";
+  position: absolute;
+  right: 10px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid rgba(0,0,0, 0.3);
+  border-left: 2px solid rgba(0,0,0, 0.3);
+  transform: translateY(-50%) rotate(
 -135deg
 );
-  font-size: 20px;
-  pointer-events: none;
+font-size: 20px;
+pointer-events: none;
 }
 .formHead{
-    padding: 0px 3px;
-    font-size: 25px;
-    border-bottom: solid 2px black;
-    width: 150px;
-    margin: 0px 0px 8px 0px;
+  padding: 0px 3px;
+  font-size: 25px;
+  border-bottom: solid 2px black;
+  width: 150px;
+  margin: 0px 0px 8px 0px;
 }
 /* .grid{
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-  grid-template-rows: 180px 100px 80px 120px auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+grid-template-rows: 180px 100px 80px 120px auto;
 } */
 @media screen and ( max-width:600px ) {
-  .grid {
-    display: grid;
-    grid-template-columns:1fr;
-    grid-template-rows: auto;
-    gap: 10px;
-  }
-    .CheckBoxes {
-    font-size: 15px;
-  }
-  label{
-    margin-top:0px;
-    margin-bottom: 0px;
-  }
-  .custom-table-desktop {
-    display: none;
-  }
-  .custom-table-mobile0,
-  .custom-table-mobile1 {
-    display: block;
-  }
+.grid {
+  display: grid;
+  grid-template-columns:1fr;
+  grid-template-rows: auto;
+  gap: 10px;
+}
+  .CheckBoxes {
+  font-size: 15px;
+}
+label{
+  margin-top:0px;
+  margin-bottom: 0px;
+}
+.custom-table-desktop {
+  display: none;
+}
+.custom-table-mobile0,
+.custom-table-mobile1 {
+  display: block;
+}
 }
 @media screen and ( min-width:601px ) {
-  .grid {
-    display: grid;
-    grid-template-columns:1fr 1fr;
-    grid-template-rows: auto;
-    gap: 5px;
-  }
-  .CheckBoxes {
-    font-size: 20px;
-  }
-  label{
-    margin-top:10px;
-    margin-bottom: 10px;
-  }
-  .custom-table-mobile0,
-  .custom-table-mobile1 {
-    display: none;
-  }
-  .custom-table-desktop {
-    display: block;
-  }
+.grid {
+  display: grid;
+  grid-template-columns:1fr 1fr;
+  grid-template-rows: auto;
+  gap: 5px;
+}
+.CheckBoxes {
+  font-size: 20px;
+}
+label{
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+.custom-table-mobile0,
+.custom-table-mobile1 {
+  display: none;
+}
+.custom-table-desktop {
+  display: block;
+}
 }
 input[type="range"] {
-    -webkit-appearance: none; /* 🚩これ無しだとスタイルがほぼ全く反映されないので注意 */
-    appearance: none;
-    cursor: pointer; /* カーソルを分かりやすく */
-    outline: none; /* スライダーのアウトラインは見た目がキツイので消す */
-    height: 10px; /* バーの高さ */
-    width: calc( 95% - 50px ); /* バーの幅 */
-    background: #8acdff; /* バーの背景色 */
-    border-radius: 10px; /* バーの両端の丸み */
-    border: solid 3px whitesmoke; /* バー周囲の線 */
-  }
-  /* WebKit向けのつまみ */
-  input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none; /*  🚩デフォルトのつまみのスタイルを解除 */
-    background: #CCCCCC; /* 背景色 */
-    width: 20px; /* 幅 */
-    height: 20px; /* 高さ */
-    border-radius: 50%; /* 円形に */
-    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
-  }
-  /* Moz向けのつまみ */
-  input[type="range"]::-moz-range-thumb {
-    background: #CCCCCC; /* 背景色 */
-    width: 20px; /* 幅 */
-    height: 20px; /* 高さ */
-    border-radius: 50%; /* 円形に */
-    box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
-    border: none; /* デフォルトの線を消す */
-  }
-  /* Firefoxで点線が周りに表示されてしまう問題の解消 */
-  input[type="range"]::-moz-focus-outer {
-    border: 0;
-  }
-  /* つまみをドラッグしているときのスタイル */
-  input[type="range"]:active::-webkit-slider-thumb {
-    box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
-  }
-  label{
-    font-size: 18px;
-  }
-  input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    text-align:center;
-  }
-  .BcLabel,
-  .CfLabel,
-  .SdLabel,
-  .WsLabel,
-  .FrLabel,
-  .OeFrLabel,
-  .SsaLabel,
-  .SbLabel {
-    display: none;
-  }
+  -webkit-appearance: none; /* 🚩これ無しだとスタイルがほぼ全く反映されないので注意 */
+  appearance: none;
+  cursor: pointer; /* カーソルを分かりやすく */
+  outline: none; /* スライダーのアウトラインは見た目がキツイので消す */
+  height: 10px; /* バーの高さ */
+  width: calc( 95% - 55px ); /* バーの幅 */
+  background: #8acdff; /* バーの背景色 */
+  border-radius: 10px; /* バーの両端の丸み */
+  border: solid 3px whitesmoke; /* バー周囲の線 */
+}
+/* WebKit向けのつまみ */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none; /*  🚩デフォルトのつまみのスタイルを解除 */
+  background: #CCCCCC; /* 背景色 */
+  width: 20px; /* 幅 */
+  height: 20px; /* 高さ */
+  border-radius: 50%; /* 円形に */
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
+}
+/* Moz向けのつまみ */
+input[type="range"]::-moz-range-thumb {
+  background: #CCCCCC; /* 背景色 */
+  width: 20px; /* 幅 */
+  height: 20px; /* 高さ */
+  border-radius: 50%; /* 円形に */
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15); /* 影 */
+  border: none; /* デフォルトの線を消す */
+}
+/* Firefoxで点線が周りに表示されてしまう問題の解消 */
+input[type="range"]::-moz-focus-outer {
+  border: 0;
+}
+/* つまみをドラッグしているときのスタイル */
+input[type="range"]:active::-webkit-slider-thumb {
+  box-shadow: 0px 5px 10px -2px rgba(0, 0, 0, 0.3);
+}
+label{
+  font-size: 18px;
+}
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  text-align:center;
+}
+.BcLabel,
+.CfLabel,
+.SdLabel,
+.WsLabel,
+.FrLabel,
+.OeFrLabel,
+.SsaLabel,
+.SbLabel {
+  display: none;
+}
