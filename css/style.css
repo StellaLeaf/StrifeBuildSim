@@ -84,11 +84,6 @@ pointer-events: none;
   width: 150px;
   margin: 0px 0px 8px 0px;
 }
-/* .grid{
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-grid-template-rows: 180px 100px 80px 120px auto;
-} */
 @media screen and ( max-width:600px ) {
 .grid {
   display: grid;
@@ -119,6 +114,10 @@ input[type="range"] {
 }
 .formHead{
   font-size: 20px;
+}
+.detailText{
+  width: auto;
+  margin: 2px;
 }
 }
 @media screen and ( min-width:601px ) {
@@ -154,6 +153,10 @@ input[type="range"] {
   }
   .formHead{
     font-size: 25px;
+  }
+  .detailText {
+    width: 500px;
+    margin: 10px;
   }
 }
 input[type="range"] {
@@ -212,4 +215,14 @@ input[type="checkbox"] {
 }
 .CheckLabel {
   width: 100%;
+}
+.ChangeDmgTable{
+  display: none;
+}
+.detailText{
+  text-align: left;
+  padding: 20px;
+  font-size: 15px;
+  background-color: whitesmoke;
+  border: solid 1px rgba(0, 0, 0, 0.15);
 }

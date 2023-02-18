@@ -24,10 +24,10 @@
             </form>
             <form id="WeaponForm">
                 <span class="custom-pull">
-                <select id="WeaponSelect" class="WeaponSelecter Selecter" disabled>
-                    <option>武器を選択</option>
-                </select>
-            </span>
+                    <select id="WeaponSelect" class="WeaponSelecter Selecter" disabled>
+                        <option>武器を選択</option>
+                    </select>
+                </span>
             </form>
             <form id="ModForm">
                 <span class="custom-pull">
@@ -184,7 +184,7 @@
                     <th>移動速度</th>
                     <th>装弾数</th>
                     <th>腰撃ち精度</th>
-                    <th>距離減衰<br>(10m)</th>
+                    <th>距離<span id="DisplayChangeDmgStyle">減衰</span><br>(10m)</th></span>
                 </tr>
                 <tr>
                     <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td>
@@ -192,23 +192,23 @@
                     <td><span id="DisplayWeight">1</span>倍</td>
                     <td><span id="DisplayCapacity">0</span></td>
                     <td><span id="DisplaySpread">0</span></td>
-                    <td><span id="DisplayChangeDmg10m">0</span></td>
+                    <td><span id="DisplayChangeDmg10m">0</span></td></span>
                 </tr>
                 <tr>
                     <th>最高dmg</th>
-                    <th>射撃時間(s)</th>
+                    <th>爆発dmg</th>
                     <th>レート(s)</th>
                     <th>リロード<br>(tick<span id="DisplayReloadStyle"></span>)</th>
                     <th>ADS精度</th>
-                    <th>最大減衰量</th>
+                    <th>最大<span id="DisplayChangeDmgStyle1">減衰</span>量</th></span>
                 </tr>
                 <tr>
                     <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td>
-                    <td><span id="DisplayDuration">0</span></td>
+                    <td><span id="DisplayExplDmg">なし</span></td>
                     <td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td>
                     <td><span id="DisplayReload">0</span></td>
                     <td><span id="DisplayAdsSpread">0</span></td>
-                    <td><span id="DisplayChangeDmgMax">0</span></td>
+                    <td><span id="DisplayChangeDmgMax">0</span></td></span>
                 </tr>
             </table>
         </div>
@@ -227,12 +227,12 @@
             </tr>
             <tr>
                 <th>最高dmg</th>
-                <th>射撃時間(s)</th>
+                <th>爆発dmg</th>
                 <th>レート(s)</th>
             </tr>
             <tr>
                 <td><span id="MobileDisplayHighestDmg">0</span>(<span id="MobileDisplayHighestHsDmg">0</span>)</td>
-                <td><span id="MobileDisplayDuration">0</span></td>
+                <td><span id="MobileDisplayExplDmg">なし</span></td>
                 <td><span id="MobileDisplayRate">0</span><span id="MobileDisplayPellets"></span></span></td>
             </tr>
         </table>
@@ -242,7 +242,7 @@
             <tr>
                 <th>装弾数</th>
                 <th>腰撃ち精度</th>
-                <th>距離減衰<br>(10m)</th>
+                <th>距離<span id="DisplayChangeDmgStyle2">減衰</span><br>(10m)</th>
             </tr>
             <tr>
                 <td><span id="MobileDisplayCapacity">0</span></td>
@@ -252,7 +252,7 @@
             <tr>
                 <th>リロード<br>(tick<span id="MobileDisplayReloadStyle"></span>)</th>
                 <th>ADS精度</th>
-                <th>最大減衰量</th>
+                <th>最大<span id="DisplayChangeDmgStyle3">減衰</span>量</th>
             </tr>
             <tr>
                 <td><span id="MobileDisplayReload">0</span></td>
@@ -261,6 +261,21 @@
             </tr>
         </table>
     </div>
+<br>
+<div class="detailText">
+    平均dmg:直撃平均ダメージ<br>
+    最高dmg:直撃最高ダメージ<br>
+    ()内はそれぞれHSでのダメージ<br>
+    爆発Dmg:爆風ダメージ TNT換算<br>
+    移動速度:通常と比べた足の速さ<br>
+    レート:1秒あたりの発射数※<br>
+    平均Dps:一秒あたりの直撃平均ダメージ※<br>
+    リロード:リロードにかかる時間。単位はtick(20tick/s)<br>
+    精度:拡散値で表され、0に近いほど精度が高い<br>
+    距離減衰・増幅:10mあたりに変動する直撃dmg<br>
+    最大減衰・増幅量:直撃dmgが変動する最大値<br>
+    ※セミオートでは理論値であり、長押しだとこれより低い場合がある<br>
+</div>
 </div>
     <!-- <table>
         ステータス
