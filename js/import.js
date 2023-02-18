@@ -1104,12 +1104,12 @@ const WeaponList = [
     },
     {
         category: "Staves",
-        name: "Âconi's Wistfulness",
+        name: "Âconi's Wistfulness[空爆]",
         value: "lame21"
     },
     {
         category: "Staves",
-        name: "Arcane Bomb",
+        name: "Âconi's Wistfulness[射撃]",
         value: "lame22"
     },
     {
@@ -1652,4 +1652,4 @@ const SdHighestDmg = 20
 const MflDmg0 = 1;
 const MflDmg1 = 2;
 const MflDmg2 = 3;
-const EodDmg = 100;
+const EodDmg = 100
