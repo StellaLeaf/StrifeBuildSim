@@ -2,7 +2,7 @@ const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
 const EnchDmg = [0, 0, 0, 0, 0, 0];
-const Ae = [0, 0]
+const Ae = [0, 0, 0]
 const Addon = [0, 0, 0, 0, 0, 1]
 const EnchActive =[0, 0];
 const MpDmg = [0.25, 0.5, 1.0, 1.5]
@@ -260,6 +260,9 @@ const render = () => {
         ModWeight
     ]
     Weapon[5] = WeaponCs[5]
+    if(Weapon[5] === Infinity){
+        Weapon[5] = 20;
+    }
     Result[6] = Math.round((Weapon[5] + Mod[4]) * Math.pow(10, 2)) / Math.pow(10, 2);
     if(Result[6] === 0 || EnchDmg[4] === 0){
         EnchActive[0] = 1;
@@ -271,7 +274,7 @@ const render = () => {
     }else{
         EnchActive[1] = 1/(Math.ceil(EnchDmg[5]*Result[6]));
     };
-    CalcAE(WeaponDmg);
+    CalcAE(WeaponDmg+ModDmg, WeaponDmg+WeaponHsBonus+ModDmg+ModHsBonus);
     Weapon[0] = WeaponCs[0]
     Weapon[1] = WeaponCs[1]
     Weapon[2] = WeaponCs[2]
@@ -286,9 +289,9 @@ const render = () => {
     Result[15] = WeaponCs[12]
     Weapon[9] = WeaponCs[13]
     Result[0] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[1] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[1] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1] + Ae[2])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[2] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[3] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[3] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1] + Ae[2])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[4] = Weapon[2] + Mod[2] + Addon[2]
     Result[5] = Weapon[3] + Mod[3] + Addon[3]
     Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -510,7 +513,7 @@ const CalcOE = () => {
     }
     render()
 };
-const CalcAE = (WeaponDmg) => {
+const CalcAE = (EoDDmg, EoDHsDmg) => {
     const AE = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
     const BcToggle = document.getElementById("BcCheck");
     const CfToggle = document.getElementById("CfCheck");
@@ -571,7 +574,7 @@ const CalcAE = (WeaponDmg) => {
     } else if (AE == "Manaflood" && myManaElem.value >= 50) {
         Ae[0] = MflDmg0
         Ae[1] = MflDmg0
-    } else if (AE == "EchoOfDeath" && WeaponDmg >= 50){
+    } else if (AE == "EchoOfDeath" && EoDDmg >= 50){
         Ae[0] = EodDmg
         Ae[1] = EodDmg
     } else if (AE == "Windsong" && WsToggle.checked) {
@@ -580,6 +583,11 @@ const CalcAE = (WeaponDmg) => {
     } else {
         Ae[0] = 0
         Ae[1] = 0
+    }
+    if (AE == "EchoOfDeath" && EoDHsDmg >= 50){
+        Ae[2] = EodDmg
+    }else{
+        Ae[2] = 0
     }
 }
 

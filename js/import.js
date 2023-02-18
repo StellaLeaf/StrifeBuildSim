@@ -1652,4 +1652,4 @@ const SdHighestDmg = 20
 const MflDmg0 = 1;
 const MflDmg1 = 2;
 const MflDmg2 = 3;
-const EodDmg = 100;
+const EodDmg = 100

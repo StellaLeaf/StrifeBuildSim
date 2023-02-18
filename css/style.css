@@ -128,6 +128,12 @@ input[type="range"] {
     grid-template-rows: auto;
     gap: 5px;
   }
+  .forms {
+    grid-row: 1 / 3;
+  }
+  .Checkboxes {
+    grid-row: 2 / 4;
+  }
   label{
     margin-top:10px;
     margin-bottom: 10px;
@@ -203,12 +209,6 @@ input[type="checkbox"] {
 .SsaLabel,
 .SbLabel {
   display: none;
-}
-.forms {
-  grid-row: 1 / 3;
-}
-.Checkboxes {
-  grid-row: 2 / 4;
 }
 .CheckLabel {
   width: 100%;
