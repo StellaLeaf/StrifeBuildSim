@@ -1104,12 +1104,12 @@ const WeaponList = [
     },
     {
         category: "Staves",
-        name: "Âconi's Wistfulness",
+        name: "Âconi's Wistfulness[空爆]",
         value: "lame21"
     },
     {
         category: "Staves",
-        name: "Arcane Bomb",
+        name: "Âconi's Wistfulness[射撃]",
         value: "lame22"
     },
     {

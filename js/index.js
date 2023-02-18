@@ -559,7 +559,7 @@ const CalcAE = (WeaponDmg) => {
     } else if (AE == "SuddenDeath" && SdToggle.checked) {
         Ae[0] = SdAverageDmg
         Ae[1] = SdHighestDmg
-    } else if (AE == "ManaBurn" && myManaElem.value <= 35) {
+    } else if (AE == "ManaBurn" && enemyManaElem.value <= 35) {
         Ae[0] = MbDmg
         Ae[1] = MbDmg
     } else if (AE == "Manaflood" && myManaElem.value == 100) {
