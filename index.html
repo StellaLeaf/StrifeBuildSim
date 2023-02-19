@@ -184,7 +184,7 @@
                     <th>移動速度</th>
                     <th>装弾数</th>
                     <th>腰撃ち精度</th>
-                    <th>距離<span id="DisplayChangeDmgStyle">減衰</span><br>(10m)</th></span>
+                    <th><span id="DisplayChangeDmgStyle">10m減衰</span></th></span>
                 </tr>
                 <tr>
                     <td><span id="DisplayAverageDmg">0</span>(<span id="DisplayAverageHsDmg">0</span>)</td>
@@ -192,23 +192,23 @@
                     <td><span id="DisplayWeight">1</span>倍</td>
                     <td><span id="DisplayCapacity">0</span></td>
                     <td><span id="DisplaySpread">0</span></td>
-                    <td><span id="DisplayChangeDmg10m">0</span></td></span>
+                    <td><span id="DisplayChangeDmg10m">0</span><span id="DisplayAddDmg"></span></td>
                 </tr>
                 <tr>
                     <th>最高dmg</th>
-                    <th>爆発dmg</th>
-                    <th>レート(s)</th>
-                    <th>リロード<br>(tick<span id="DisplayReloadStyle"></span>)</th>
+                    <th>射撃時間</th>
+                    <th>レート</th>
+                    <th>リロード<span id="DisplayReloadStyle"></span></th>
                     <th>ADS精度</th>
-                    <th>最大<span id="DisplayChangeDmgStyle1">減衰</span>量</th></span>
+                    <th><span id="DisplayChangeMaxStyle">最大減衰量</span></th>
                 </tr>
                 <tr>
                     <td><span id="DisplayHighestDmg">0</span>(<span id="DisplayHighestHsDmg">0</span>)</td>
-                    <td><span id="DisplayExplDmg">なし</span></td>
-                    <td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></span></td>
+                    <td><span id="DisplayDuration">0</span></td>
+                    <td><span id="DisplayRate">0</span><span id="DisplayPellets"></span></td>
                     <td><span id="DisplayReload">0</span></td>
                     <td><span id="DisplayAdsSpread">0</span></td>
-                    <td><span id="DisplayChangeDmgMax">0</span></td></span>
+                    <td><span id="DisplayChangeDmgMax">0</span></td>
                 </tr>
             </table>
         </div>
@@ -227,13 +227,13 @@
             </tr>
             <tr>
                 <th>最高dmg</th>
-                <th>爆発dmg</th>
-                <th>レート(s)</th>
+                <th>射撃時間</th>
+                <th>レート</th>
             </tr>
             <tr>
                 <td><span id="MobileDisplayHighestDmg">0</span>(<span id="MobileDisplayHighestHsDmg">0</span>)</td>
-                <td><span id="MobileDisplayExplDmg">なし</span></td>
-                <td><span id="MobileDisplayRate">0</span><span id="MobileDisplayPellets"></span></span></td>
+                <td><span id="MobileDisplayDuration">なし</span></td>
+                <td><span id="MobileDisplayRate">0</span><span id="MobileDisplayPellets"></span></td>
             </tr>
         </table>
     </div>
@@ -242,17 +242,17 @@
             <tr>
                 <th>装弾数</th>
                 <th>腰撃ち精度</th>
-                <th>距離<span id="DisplayChangeDmgStyle2">減衰</span><br>(10m)</th>
+                <th><span id="MobileDisplayChangeDmgStyle">10m減衰</span></th>
             </tr>
             <tr>
                 <td><span id="MobileDisplayCapacity">0</span></td>
                 <td><span id="MobileDisplaySpread">0</span></td>
-                <td><span id="MobileDisplayChangeDmg10m">0</span></td>
+                <td><span id="MobileDisplayChangeDmg10m">0</span><span id="MobileDisplayAddDmg"></span></td>
             </tr>
             <tr>
-                <th>リロード<br>(tick<span id="MobileDisplayReloadStyle"></span>)</th>
+                <th>リロード<span id="MobileDisplayReloadStyle"></span></th>
                 <th>ADS精度</th>
-                <th>最大<span id="DisplayChangeDmgStyle3">減衰</span>量</th>
+                <th><span id="MobileDisplayChangeMaxStyle">最大減衰量</span></th>
             </tr>
             <tr>
                 <td><span id="MobileDisplayReload">0</span></td>
@@ -261,20 +261,23 @@
             </tr>
         </table>
     </div>
-<br>
 <div class="detailText">
-    平均dmg:直撃平均ダメージ<br>
-    最高dmg:直撃最高ダメージ<br>
-    ()内はそれぞれHSでのダメージ<br>
-    爆発Dmg:爆風ダメージ TNT換算<br>
-    移動速度:通常と比べた足の速さ<br>
-    レート:1秒あたりの発射数※<br>
-    平均Dps:一秒あたりの直撃平均ダメージ※<br>
-    リロード:リロードにかかる時間。単位はtick(20tick/s)<br>
-    精度:拡散値で表され、0に近いほど精度が高い<br>
-    距離減衰・増幅:10mあたりに変動する直撃dmg<br>
-    最大減衰・増幅量:直撃dmgが変動する最大値<br>
-    ※セミオートでは理論値であり、長押しだとこれより低い場合がある<br>
+    <span class='bold'>平均dmg:</span>直撃平均ダメージ<br>
+    <span class='bold'>最高dmg:</span>直撃最高ダメージ<br>
+    &nbsp;&nbsp;()内はそれぞれHSでのダメージ<br>
+    <span class='bold'>レート:</span>1秒あたりの発射数※<br>
+    <span class='bold'>平均Dps:</span>一秒あたりの直撃平均ダメージ※<br>
+    &nbsp;&nbsp;※セミオートは理論値であり、長押しだとこれより低い場合がある<br>
+    <span class='bold'>射撃時間:</span>射撃可能な時間。継戦能力の目安になる<br>
+    <span class='bold'>リロード:</span>リロードにかかる時間。単位はtick(20tick/s)<br>
+    <span class='bold'>精度:</span>拡散値で表され、0に近いほど精度が高い<br>
+    <span class='bold'>移動速度:</span>通常と比べた足の速さ<br>
+    <span class='bold'>10m減衰/増幅:</span>10mあたりに変動する直撃dmg<br>
+    <span class='bold'>最大減衰/増幅量:</span>直撃dmgが変動する最大値<br>
+    <span class='bold'>爆発Dmg:</span>爆風ダメージ TNT換算の割合と追加ダメージで示す<br>
+    &nbsp;&nbsp;追加ダメージは+平均(最高)で表す<br>
+    <span class='bold'>爆風半径:</span>爆風の効果範囲。爆発の当たり判定に直結し、<br>
+    &nbsp;&nbsp;1は着弾地点のみ、2はその隣までというふうに大きくなる<br>
 </div>
 </div>
     <!-- <table>

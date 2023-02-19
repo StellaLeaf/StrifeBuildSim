@@ -1,5 +1,5 @@
-const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
 const EnchDmg = [0, 0, 0, 0, 0, 0];
 const Ae = [0, 0, 0]
@@ -108,6 +108,7 @@ const render = () => {
     let WeaponSpread = 0
     let WeaponWeight = 0
     let WeaponExplDmg = 0
+    let WeaponExplRadius = 0
     if (!(WeaponKey === "none" || jsondata == 'none')) {
         //リロード配列の処理
         if(typeof jsondata[WeaponKey]["Reload"] === 'undefined'){
@@ -167,10 +168,13 @@ const render = () => {
         //ExplDmg
         if (typeof jsondata[WeaponKey]["Explosions"] === "undefined") {
             WeaponExplDmg = 0
+            WeaponExplRadius = 0
         } else if (jsondata[WeaponKey]["Explosions"]["Enable"] === true) {
             WeaponExplDmg = jsondata[WeaponKey]["Explosions"]["Damage_Multiplier"]
+            WeaponExplRadius = jsondata[WeaponKey]["Explosions"]["Explosion_Radius"]
         } else {
-            WeaponExplDmg = 0;
+            WeaponExplDmg = 0
+            WeaponExplRadius = 0
         }
 
         if (typeof jsondata[WeaponKey]["Damage_Based_On_Flight_Time"] === "undefined") {
@@ -258,7 +262,8 @@ const render = () => {
         WeaponC10mKey,
         WeaponCmaxKey,
         WeaponWeight,
-        WeaponExplDmg
+        WeaponExplDmg,
+        WeaponExplRadius
     ]
     const Mod = [
         ModDmg,
@@ -298,6 +303,7 @@ const render = () => {
     Result[14] = Math.round(WeaponCs[11] * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[15] = WeaponCs[12]
     Result[16] = WeaponCs[14]
+    Result[17] = WeaponCs[15]
     Weapon[9] = WeaponCs[13]
     Result[0] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[1] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1] + Ae[2])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -310,7 +316,9 @@ const render = () => {
     Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[10] = Math.round(((0.2 + Weapon[9] + Mod[6] + Addon[4]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg
+    Result[18] = Math.round(((Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    Result[19] = Math.round(((Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+    //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddDmg
     //DesktopDisplay
     document.getElementById("DisplayRate").textContent = (Result[6])
     document.getElementById("DisplayCapacity").textContent = (Result[4])
@@ -320,7 +328,6 @@ const render = () => {
     document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
     document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
     document.getElementById("DisplayWeight").textContent = (Result[10])
-    document.getElementById("DisplayExplDmg").textContent = (Result[16])
     //MobileDisplay
     document.getElementById("MobileDisplayRate").textContent = (Result[6])
     document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
@@ -330,32 +337,47 @@ const render = () => {
     document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
     document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
     document.getElementById("MobileDisplayWeight").textContent = (Result[10])
-    document.getElementById("MobileDisplayExplDmg").textContent = (Result[16])
     //テキスト系
-    // if (Result[11] > 0) {
-    //     document.getElementById("DisplayDuration").textContent = (Result[11])
-    //     document.getElementById("MobileDisplayDuration").textContent = (Result[11])
-    // } else {
-    //     document.getElementById("DisplayDuration").textContent = 0
-    //     document.getElementById("MobileDisplayDuration").textContent = 0
-    // };
-    if(Result[14] > 0){
-        document.getElementById("DisplayChangeDmgStyle").textContent = ('増幅')
-        document.getElementById("DisplayChangeDmgStyle1").textContent = ('増幅')
-        document.getElementById("DisplayChangeDmgStyle2").textContent = ('増幅')
-        document.getElementById("DisplayChangeDmgStyle3").textContent = ('増幅')
-    }else{
-        document.getElementById("DisplayChangeDmgStyle").textContent = ('減衰')
-        document.getElementById("DisplayChangeDmgStyle1").textContent = ('減衰')
-        document.getElementById("DisplayChangeDmgStyle2").textContent = ('減衰')
-        document.getElementById("DisplayChangeDmgStyle3").textContent = ('減衰')
+    if (Result[11] > 0) {
+        document.getElementById("DisplayDuration").textContent = (Result[11])
+        document.getElementById("MobileDisplayDuration").textContent = (Result[11])
+    } else {
+        document.getElementById("DisplayDuration").textContent = 0
+        document.getElementById("MobileDisplayDuration").textContent = 0
     };
     if (Result[16] > 0) {
-        document.getElementById("DisplayExplDmg").textContent = (Result[16]+'%')
-        document.getElementById("MobileDisplayExplDmg").textContent = (Result[16]+'%')
+        document.getElementById("DisplayChangeDmgStyle").textContent = ('爆発dmg')
+        document.getElementById("MobileDisplayChangeDmgStyle").textContent = ('爆発dmg')
+        document.getElementById("DisplayChangeMaxStyle").textContent = ('爆発半径')
+        document.getElementById("MobileDisplayChangeMaxStyle").textContent = ('爆発半径')
+        document.getElementById("DisplayChangeDmg10m").textContent = (Result[16]+'%')
+        document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[16]+'%')
+        document.getElementById("DisplayChangeDmgMax").textContent = (Result[17])
+        document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[17])
+        document.getElementById("DisplayAddDmg").textContent = ("+"+Result[18]+"("+Result[19]+")")
+        document.getElementById("MobileDisplayAddDmg").textContent = ("+"+Result[18]+"("+Result[19]+")")
+    }else if(Result[14] > 0){
+        document.getElementById("DisplayChangeDmgStyle").textContent = ('10m増幅')
+        document.getElementById("MobileDisplayChangeDmgStyle").textContent = ('10m増幅')
+        document.getElementById("DisplayChangeMaxStyle").textContent = ('最大増幅量')
+        document.getElementById("MobileDisplayChangeMaxStyle").textContent = ('最大増幅量')
+        document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
+        document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
+        document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
+        document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
+        document.getElementById("DisplayAddDmg").textContent = null
+        document.getElementById("MobileDisplayAddDmg").textContent = null
     }else{
-        document.getElementById("DisplayExplDmg").textContent = ('なし')
-        document.getElementById("MobileDisplayExplDmg").textContent = ('なし')
+        document.getElementById("DisplayChangeDmgStyle").textContent = ('10m減衰')
+        document.getElementById("MobileDisplayChangeDmgStyle").textContent = ('10m減衰')
+        document.getElementById("DisplayChangeMaxStyle").textContent = ('最大減衰量')
+        document.getElementById("MobileDisplayChangeMaxStyle").textContent = ('最大減衰量')
+        document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
+        document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
+        document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
+        document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
+        document.getElementById("DisplayAddDmg").textContent = null
+        document.getElementById("MobileDisplayAddDmg").textContent = null
     };
     if (Weapon[6] > 1) {
         document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
