@@ -79,7 +79,7 @@ font-size: 20px;
 pointer-events: none;
 }
 .formHead{
-  padding: 0px 3px;
+  padding: 0px 5px;
   border-bottom: solid 2px black;
   width: 150px;
   margin: 0px 0px 8px 0px;
@@ -121,6 +121,12 @@ input[type="range"] {
 }
 }
 @media screen and ( min-width:601px ) {
+  .Explain{
+    display: grid;
+    grid-template-columns:1fr 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+  }
   .grid {
     display: grid;
     grid-template-columns:1fr 1fr;
@@ -230,4 +236,7 @@ input[type="checkbox"] {
 .bold {
   font-size: 16px;
   font-weight: 500;
+}
+a{
+  text-decoration: none;
 }

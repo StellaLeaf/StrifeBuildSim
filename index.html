@@ -11,7 +11,13 @@
 </head>
 
 <body>
-    <div class="title">STRIFE Build Simulator</div>
+    <div class="Explain">
+        <div class="title">STRIFE Build Simulator</div>
+        <div>
+        当サイトはStrife serverのプレイヤーが制作する完全非公式のシミュレータです。<br>
+        このシミュレータはビルドの情報を数値化し、共有するためのものです。<br>
+        </div>
+    </div>
     <div class="grid">
         <div class="forms">
             <p class="formHead">武器設定</p>
@@ -212,74 +218,80 @@
                 </tr>
             </table>
         </div>
+        <div class="custom-table-mobile0">
+            <table class="WeaponTable">
+                <tr>
+                    <th>平均dmg</th>
+                    <th>平均DPS</th>
+                    <th>移動速度</th>
+                </tr>
+                <tr>
+                    <td><span id="MobileDisplayAverageDmg">0</span>(<span id="MobileDisplayAverageHsDmg">0</span>)</td>
+                    <td><span id="MobileDisplayDps">0</span></td>
+                    <td><span id="MobileDisplayWeight">1</span>倍</td>
+                </tr>
+                <tr>
+                    <th>最高dmg</th>
+                    <th>射撃時間</th>
+                    <th>レート</th>
+                </tr>
+                <tr>
+                    <td><span id="MobileDisplayHighestDmg">0</span>(<span id="MobileDisplayHighestHsDmg">0</span>)</td>
+                    <td><span id="MobileDisplayDuration">なし</span></td>
+                    <td><span id="MobileDisplayRate">0</span><span id="MobileDisplayPellets"></span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="custom-table-mobile1">
+            <table class="WeaponTable">
+                <tr>
+                    <th>装弾数</th>
+                    <th>腰撃ち精度</th>
+                    <th><span id="MobileDisplayChangeDmgStyle">10m減衰</span></th>
+                </tr>
+                <tr>
+                    <td><span id="MobileDisplayCapacity">0</span></td>
+                    <td><span id="MobileDisplaySpread">0</span></td>
+                    <td><span id="MobileDisplayChangeDmg10m">0</span><span id="MobileDisplayAddDmg"></span></td>
+                </tr>
+                <tr>
+                    <th>リロード<span id="MobileDisplayReloadStyle"></span></th>
+                    <th>ADS精度</th>
+                    <th><span id="MobileDisplayChangeMaxStyle">最大減衰量</span></th>
+                </tr>
+                <tr>
+                    <td><span id="MobileDisplayReload">0</span></td>
+                    <td><span id="MobileDisplayAdsSpread">0</span></td>
+                    <td><span id="MobileDisplayChangeDmgMax">0</span></td>
+                </tr>
+            </table>
+        </div>
+        <div class="detailText">
+            <p class="formHead">単位等の説明</p>
+            <span class='bold'>平均dmg:</span>直撃平均ダメージ<br>
+            <span class='bold'>最高dmg:</span>直撃最高ダメージ<br>
+            &nbsp;&nbsp;()内はそれぞれHSでのダメージ<br>
+            <span class='bold'>レート:</span>1秒あたりの発射数※<br>
+            <span class='bold'>平均Dps:</span>一秒あたりの直撃平均ダメージ※<br>
+            &nbsp;&nbsp;※セミオートは理論値であり、長押しだとこれより低い場合がある<br>
+            <span class='bold'>射撃時間:</span>射撃可能な時間。継戦能力の目安になる<br>
+            <span class='bold'>リロード:</span>リロードにかかる時間。単位はtick(20tick/s)<br>
+            <span class='bold'>精度:</span>拡散値で表され、0に近いほど精度が高い<br>
+            <span class='bold'>移動速度:</span>通常と比べた足の速さ<br>
+            <span class='bold'>10m減衰/増幅:</span>10mあたりに変動する直撃dmg<br>
+            <span class='bold'>最大減衰/増幅量:</span>直撃dmgが変動する最大値<br>
+            <span class='bold'>爆発Dmg:</span>爆風ダメージ TNT換算の割合と追加ダメージで示す<br>
+            &nbsp;&nbsp;追加ダメージは+平均(最高)で表す<br>
+            <span class='bold'>爆風半径:</span>爆風の効果範囲。爆発の当たり判定に直結し、<br>
+            &nbsp;&nbsp;1は着弾地点のみ、2はその隣までというふうに大きくなる<br>
+        </div>
+        <div>
+            当面の間、要望・修正などは<a href="https://discord.gg/BxGwC5XANz">非公式STRIFEビルド共有鯖</a>へ<br>
+            お急ぎの場合はDiscordDM(Stellaleaf#1123)でも大丈夫です<br>
+            <a href="https://wikiwiki.jp/strifers-lib/">
+            <img src="assets/ShortWikiLogo.png" width="200" height="35"></a>
+        </div>
     </div>
-    <div class="custom-table-mobile0">
-        <table class="WeaponTable">
-            <tr>
-                <th>平均dmg</th>
-                <th>平均DPS</th>
-                <th>移動速度</th>
-            </tr>
-            <tr>
-                <td><span id="MobileDisplayAverageDmg">0</span>(<span id="MobileDisplayAverageHsDmg">0</span>)</td>
-                <td><span id="MobileDisplayDps">0</span></td>
-                <td><span id="MobileDisplayWeight">1</span>倍</td>
-            </tr>
-            <tr>
-                <th>最高dmg</th>
-                <th>射撃時間</th>
-                <th>レート</th>
-            </tr>
-            <tr>
-                <td><span id="MobileDisplayHighestDmg">0</span>(<span id="MobileDisplayHighestHsDmg">0</span>)</td>
-                <td><span id="MobileDisplayDuration">なし</span></td>
-                <td><span id="MobileDisplayRate">0</span><span id="MobileDisplayPellets"></span></td>
-            </tr>
-        </table>
-    </div>
-    <div class="custom-table-mobile1">
-        <table class="WeaponTable">
-            <tr>
-                <th>装弾数</th>
-                <th>腰撃ち精度</th>
-                <th><span id="MobileDisplayChangeDmgStyle">10m減衰</span></th>
-            </tr>
-            <tr>
-                <td><span id="MobileDisplayCapacity">0</span></td>
-                <td><span id="MobileDisplaySpread">0</span></td>
-                <td><span id="MobileDisplayChangeDmg10m">0</span><span id="MobileDisplayAddDmg"></span></td>
-            </tr>
-            <tr>
-                <th>リロード<span id="MobileDisplayReloadStyle"></span></th>
-                <th>ADS精度</th>
-                <th><span id="MobileDisplayChangeMaxStyle">最大減衰量</span></th>
-            </tr>
-            <tr>
-                <td><span id="MobileDisplayReload">0</span></td>
-                <td><span id="MobileDisplayAdsSpread">0</span></td>
-                <td><span id="MobileDisplayChangeDmgMax">0</span></td>
-            </tr>
-        </table>
-    </div>
-<div class="detailText">
-    <span class='bold'>平均dmg:</span>直撃平均ダメージ<br>
-    <span class='bold'>最高dmg:</span>直撃最高ダメージ<br>
-    &nbsp;&nbsp;()内はそれぞれHSでのダメージ<br>
-    <span class='bold'>レート:</span>1秒あたりの発射数※<br>
-    <span class='bold'>平均Dps:</span>一秒あたりの直撃平均ダメージ※<br>
-    &nbsp;&nbsp;※セミオートは理論値であり、長押しだとこれより低い場合がある<br>
-    <span class='bold'>射撃時間:</span>射撃可能な時間。継戦能力の目安になる<br>
-    <span class='bold'>リロード:</span>リロードにかかる時間。単位はtick(20tick/s)<br>
-    <span class='bold'>精度:</span>拡散値で表され、0に近いほど精度が高い<br>
-    <span class='bold'>移動速度:</span>通常と比べた足の速さ<br>
-    <span class='bold'>10m減衰/増幅:</span>10mあたりに変動する直撃dmg<br>
-    <span class='bold'>最大減衰/増幅量:</span>直撃dmgが変動する最大値<br>
-    <span class='bold'>爆発Dmg:</span>爆風ダメージ TNT換算の割合と追加ダメージで示す<br>
-    &nbsp;&nbsp;追加ダメージは+平均(最高)で表す<br>
-    <span class='bold'>爆風半径:</span>爆風の効果範囲。爆発の当たり判定に直結し、<br>
-    &nbsp;&nbsp;1は着弾地点のみ、2はその隣までというふうに大きくなる<br>
-</div>
-</div>
     <!-- <table>
         ステータス
         <tr>
