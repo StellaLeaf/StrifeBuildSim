@@ -518,7 +518,7 @@ const CalcOE = () => {
     if(OE == 'FlexibleResonance'){
         OeFrLabel.style.display = 'inline-block';
     }else{
-        OeFrLabel.style.display = 'none';
+        OeFrLabel.style.display = 'none'
         OeFrToggle.checked = false;
     };
     function OELevelsCalc(OeKey){
