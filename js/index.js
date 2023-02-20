@@ -312,8 +312,8 @@ const render = () => {
     Result[4] = Weapon[2] + Mod[2] + Addon[2]
     Result[5] = Weapon[3] + Mod[3] + Addon[3]
     Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
-    Result[8] = Math.round(Math.abs(Weapon[7] + Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
-    Result[9] = Math.round(Math.abs(Weapon[8] + Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
+    Result[8] = Math.round(Math.abs(Weapon[7] - Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
+    Result[9] = Math.round(Math.abs(Weapon[8] - Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[10] = Math.round(((0.2 + Weapon[9] + Mod[6] + Addon[4]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
     Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
     Result[18] = Math.round(((Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12])*Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -410,7 +410,18 @@ const render = () => {
             document.getElementById("MobileDisplayHighestHsDmg").textContent = (Result[3])   
             document.getElementById("MobileDisplayDps").textContent = (Result[7])
         };
-    };
+    } else {
+            document.getElementById("DisplayAverageDmg").textContent = 0
+            document.getElementById("DisplayAverageHsDmg").textContent = 0
+            document.getElementById("DisplayHighestDmg").textContent = 0
+            document.getElementById("DisplayHighestHsDmg").textContent = 0
+            document.getElementById("DisplayDps").textContent = 0
+            document.getElementById("MobileDisplayAverageDmg").textContent = 0
+            document.getElementById("MobileDisplayAverageHsDmg").textContent = 0
+            document.getElementById("MobileDisplayHighestDmg").textContent = 0
+            document.getElementById("MobileDisplayHighestHsDmg").textContent = 0  
+            document.getElementById("MobileDisplayDps").textContent = 0
+    }
 }
 const categorySelect2 = document.getElementById("TypeSelect")
 const subCategorySelect2 = document.getElementById("WeaponSelect")
