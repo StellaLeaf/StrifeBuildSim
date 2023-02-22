@@ -2,20 +2,41 @@
 <html lang="ja">
 
 <head>
+    <title>STRIFE Build Simulator</title>
     <meta charset="UTF-8">
+    <meta name="google-site-verification" content="60dR2j4frUCNi6wu8mq9lF41hdAUM33qv2oOyWxEkGY" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+    <meta name="description" content="非公式STRIFEビルド共有鯖" />
+    <meta name="keywords" content="Strife, build, ビルド, ビルド共有" />
+    <meta property="og:title" content="非公式STRIFEビルド共有鯖" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://stellaleaf.github.io/StrifeBuildSim/" />
+    <meta property="og:description" content="非公式STRIFEビルド共有鯖は非公式のコミュニケーションの場であり、ビルドを共有出来るサーバーです" />
+    <meta property="og:site_name" content="非公式STRIFEビルド共有鯖" />
+    <meta property="og:image" content="assets/favicon.ico" />
+    <meta http-equiv="Content-Script-Type" content="text/JavaScript" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+    <meta name="subject" content="コミュニティホームページ" />
+    <meta name="abstract" content="コミュニティホームページです。" />
+    <meta name="author" content="Unofficial Strifers" />
+    <meta name="owner" content="Unofficial Strifers" />
     <link rel="icon" href="assets/favicon.ico">
-    <title>STRIFE Build Simulator</title>
+    <link href="css/style.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <script src="js/import.js" defer></script>
+    <script src="js/index.js" defer></script>
 </head>
 
 <body>
     <div class="Explain">
-        <div class="title">STRIFE Build Simulator</div>
+        <div class="title">
+            <span class="yellow">STRIFE</span> Build Simulator
+        </div>
         <div class="SimExplain">
-        当サイトはStrife serverのプレイヤーが制作する完全非公式のシミュレータです。<br>
-        このシミュレータはビルドの情報を数値化し、共有するためのものです。<br>
+            当サイトはStrife serverのプレイヤーが制作する<br>
+            完全非公式のシミュレータです。<br>
+            このシミュレータはビルドの情報を数値化し<br>
+            共有するためのものです。<br>
         </div>
     </div>
     <div class="grid">
@@ -23,10 +44,10 @@
             <p class="formHead">武器設定</p>
             <form id="TypeForm">
                 <span class="custom-pull">
-                <select id="TypeSelect" class="Selecter">
-                    <option value="none">武器種を選択</option>
-                </select>
-            </span>
+                    <select id="TypeSelect" class="Selecter">
+                        <option value="none">武器種を選択</option>
+                    </select>
+                </span>
             </form>
             <form id="WeaponForm">
                 <span class="custom-pull">
@@ -37,122 +58,122 @@
             </form>
             <form id="ModForm">
                 <span class="custom-pull">
-                <select id="ModSelect" class="Selecter">
-                    <option value="none" selected>Modを選択</option>
-                    <option>Champion Mod</option>
-                    <option>Deadeye Mod</option>
-                    <option>Emperor Mod</option>
-                    <option>Gladiator Mod</option>
-                    <option>Hunter Mod</option>
-                    <option>Knight Mod</option>
-                    <option>Marksman Mod</option>
-                    <option>Monarch Mod</option>
-                    <option>Raider Mod</option>
-                    <option>Ranger Mod</option>
-                    <option>Sentinel Mod</option>
-                    <option>Stalker Mod</option>
-                    <option>Warlord Mod</option>
-                    <option>Warrior Mod</option>
-                </select>
+                    <select id="ModSelect" class="Selecter">
+                        <option value="none" selected>Modを選択</option>
+                        <option>Champion Mod</option>
+                        <option>Deadeye Mod</option>
+                        <option>Emperor Mod</option>
+                        <option>Gladiator Mod</option>
+                        <option>Hunter Mod</option>
+                        <option>Knight Mod</option>
+                        <option>Marksman Mod</option>
+                        <option>Monarch Mod</option>
+                        <option>Raider Mod</option>
+                        <option>Ranger Mod</option>
+                        <option>Sentinel Mod</option>
+                        <option>Stalker Mod</option>
+                        <option>Warlord Mod</option>
+                        <option>Warrior Mod</option>
+                    </select>
                 </span>
             </form>
             <form id="EnchantForm">
                 <span class="custom-pull">
-                <select id="EnchantSelect" class="Selecter">
-                    <option value="none" selected>Enchantを選択</option>
-                    <option value="ArcaneBrilliance">Arcane Brilliance</option>
-                    <option value="DeathsRuin">Death's Ruin</option>
-                    <option value="DemonPower">Demon Power</option>
-                    <option value="FlexibleResonance">Flexible Resonance</option>
-                    <option value="NorthernWind">Northern Wind</option>
-                    <option value="PhoenixFlame">Phoenix Flame</option>
-                    <option value="ShadowStrike">Shadow Strike</option>
-                    <option value="SiphonLife">Siphon Life</option>
-                    <option value="Sunfire">Sunfire</option>
-                </select>
+                    <select id="EnchantSelect" class="Selecter">
+                        <option value="none" selected>Enchantを選択</option>
+                        <option value="ArcaneBrilliance">Arcane Brilliance</option>
+                        <option value="DeathsRuin">Death's Ruin</option>
+                        <option value="DemonPower">Demon Power</option>
+                        <option value="FlexibleResonance">Flexible Resonance</option>
+                        <option value="NorthernWind">Northern Wind</option>
+                        <option value="PhoenixFlame">Phoenix Flame</option>
+                        <option value="ShadowStrike">Shadow Strike</option>
+                        <option value="SiphonLife">Siphon Life</option>
+                        <option value="Sunfire">Sunfire</option>
+                    </select>
                 </span>
                 <span class="custom-pull">
-                <select id="EnchantLevSelect" class="Selecter">
-                    <option value="none" selected>Level</option>
-                    <option value="EnchLev1">1</option>
-                    <option value="EnchLev2">2</option>
-                    <option value="EnchLev3">3</option>
-                </select>
+                    <select id="EnchantLevSelect" class="Selecter">
+                        <option value="none" selected>Level</option>
+                        <option value="EnchLev1">1</option>
+                        <option value="EnchLev2">2</option>
+                        <option value="EnchLev3">3</option>
+                    </select>
                 </span>
             </form>
             <form id="OeForm">
                 <span class="custom-pull">
-                <select id="OeSelect" class="Selecter">
-                    <option value="none" selected>OEを選択</option>
-                    <option value="ArcaneBrilliance">Arcane Brilliance</option>
-                    <option value="DeathsRuin">Death's Ruin</option>
-                    <option value="DemonPower">Demon Power</option>
-                    <option value="FlexibleResonance">Flexible Resonance</option>
-                    <option value="NorthernWind">Northern Wind</option>
-                    <option value="PhoenixFlame">Phoenix Flame</option>
-                    <option value="ShadowStrike">Shadow Strike</option>
-                    <option value="SiphonLife">Siphon Life</option>
-                    <option value="Sunfire">Sunfire</option>
-                </select>
+                    <select id="OeSelect" class="Selecter">
+                        <option value="none" selected>OEを選択</option>
+                        <option value="ArcaneBrilliance">Arcane Brilliance</option>
+                        <option value="DeathsRuin">Death's Ruin</option>
+                        <option value="DemonPower">Demon Power</option>
+                        <option value="FlexibleResonance">Flexible Resonance</option>
+                        <option value="NorthernWind">Northern Wind</option>
+                        <option value="PhoenixFlame">Phoenix Flame</option>
+                        <option value="ShadowStrike">Shadow Strike</option>
+                        <option value="SiphonLife">Siphon Life</option>
+                        <option value="Sunfire">Sunfire</option>
+                    </select>
                 </span>
                 <span class="custom-pull">
-                <select id="OeLevSelect" class="Selecter">
-                    <option value="none" selected>Level</option>
-                    <option value="OeLev1">1</option>
-                    <option value="OeLev2">2</option>
-                    <option value="OeLev3">3</option>
-                </select>
+                    <select id="OeLevSelect" class="Selecter">
+                        <option value="none" selected>Level</option>
+                        <option value="OeLev1">1</option>
+                        <option value="OeLev2">2</option>
+                        <option value="OeLev3">3</option>
+                    </select>
                 </span>
-            </span>
+                </span>
             </form>
             <form id="AncientEnchantForm">
                 <span class="custom-pull">
-                <select id="AncientEnchantSelect" class="Selecter">
-                    <option value="none" selected>AEを選択</option>
-                    <option value="Bloodcraze">Bloodcraze</option>
-                    <option value="ElementalOverload">Elemental Overload</option>
-                    <option value="Mastercrafted">Mastercrafted</option>
-                    <option value="ConcentratedFire">Concentrated Fire</option>
-                    <option value="SuddenDeath">Sudden Death</option>
-                    <option value="ManaBurn">Mana Burn</option>
-                    <option value="Manaflood">Manaflood</option>
-                    <option value="EchoOfDeath">Echo of Death</option>
-                    <option value="Windsong">Windsong</option>
-                </select>
+                    <select id="AncientEnchantSelect" class="Selecter">
+                        <option value="none" selected>AEを選択</option>
+                        <option value="Bloodcraze">Bloodcraze</option>
+                        <option value="ElementalOverload">Elemental Overload</option>
+                        <option value="Mastercrafted">Mastercrafted</option>
+                        <option value="ConcentratedFire">Concentrated Fire</option>
+                        <option value="SuddenDeath">Sudden Death</option>
+                        <option value="ManaBurn">Mana Burn</option>
+                        <option value="Manaflood">Manaflood</option>
+                        <option value="EchoOfDeath">Echo of Death</option>
+                        <option value="Windsong">Windsong</option>
+                    </select>
                 </span>
             </form>
             <form id="AddonForm">
                 <span class="custom-pull">
-                <select id="AddonSelect" class="Selecter">
-                    <option value="none" selected>Addonを選択</option>
-                    <option value="ManaPowder">Mana Powder</option>
-                    <option value="HeavyBullets">Heavy Bullets</option>
-                    <option value="ExtendedMagazine">Extended Magazine</option>
-                    <option value="QuickPull">Quick Pull</option>
-                    <option value="LightweightKit">Lightweight Kit</option>
-                    <option value="SupersonicAmmo">Supersonic Ammo</option>
-                    <option value="ShieldBreaker">Shield Breaker</option>
-                </select>
-            </span>
-            <span class="custom-pull">
-                <select id="AddonLevSelect" class="Selecter">
-                    <option value="none" selected>Level</option>
-                    <option value="AddonLev0">無印</option>
-                    <option value="AddonLev1">+</option>
-                    <option value="AddonLev2">++</option>
-                    <option value="AddonLev3">+++</option>
-                </select>
+                    <select id="AddonSelect" class="Selecter">
+                        <option value="none" selected>Addonを選択</option>
+                        <option value="ManaPowder">Mana Powder</option>
+                        <option value="HeavyBullets">Heavy Bullets</option>
+                        <option value="ExtendedMagazine">Extended Magazine</option>
+                        <option value="QuickPull">Quick Pull</option>
+                        <option value="LightweightKit">Lightweight Kit</option>
+                        <option value="SupersonicAmmo">Supersonic Ammo</option>
+                        <option value="ShieldBreaker">Shield Breaker</option>
+                    </select>
+                </span>
+                <span class="custom-pull">
+                    <select id="AddonLevSelect" class="Selecter">
+                        <option value="none" selected>Level</option>
+                        <option value="AddonLev0">無印</option>
+                        <option value="AddonLev1">+</option>
+                        <option value="AddonLev2">++</option>
+                        <option value="AddonLev3">+++</option>
+                    </select>
                 </span>
             </form>
         </div>
         <div>
             <p class="formHead">詳細設定</p>
             <label for="myMana">自身のMana残量<br>
-                <input type="range" id="myMana"  min="0" max="100" step="1" value="50">
+                <input type="range" id="myMana" min="0" max="100" step="1" value="50">
                 <span id="myMana-value">0</span>%
             </label><br>
             <label for="enemyMana">相手のMana残量<br>
-                <input type="range" id="enemyMana"  min="0" max="100" step="1" value="50">
+                <input type="range" id="enemyMana" min="0" max="100" step="1" value="50">
                 <span id="enemyMana-value">0</span>%
             </label>
         </div>
@@ -268,34 +289,36 @@
         </div>
         <div class="detailText">
             <span class="bold sizeup">単位等の説明</span><br>
-            <span class='bold'>平均dmg:</span>直撃平均ダメージ<br>
-            <span class='bold'>最高dmg:</span>直撃最高ダメージ<br>
-            &nbsp;&nbsp;()内はそれぞれHSでのダメージ<br>
-            <span class='bold'>レート:</span>1秒あたりの発射数※<br>
-            <span class='bold'>平均Dps:</span>一秒あたりの直撃平均ダメージ※<br>
-            &nbsp;&nbsp;※セミオートは理論値であり、長押しだとこれより低い場合がある<br>
+            <span class='bold'>平均dmg:</span>直撃平均ダメージ※1<br>
+            <span class='bold'>最高dmg:</span>直撃最高ダメージ※1<br>
+            <span class='bold'>レート:</span>1秒あたりの発射数※2<br>
+            <span class='bold'>平均Dps:</span>一秒あたりの直撃平均ダメージ※2<br>
             <span class='bold'>射撃時間:</span>射撃可能な時間。継戦能力の目安になる<br>
             <span class='bold'>リロード:</span>リロードにかかる時間。単位はtick(20tick/s)<br>
             <span class='bold'>移動速度:</span>通常と比べた足の速さ<br>
             <span class='bold'>10m減衰/増幅:</span>10mあたりに変動する直撃dmg<br>
             <span class='bold'>最大減衰/増幅量:</span>直撃dmgが変動する最大値<br>
-            <span class='bold'>爆発Dmg:</span>爆風ダメージ TNT換算の割合と追加ダメージで示す<br>
-            &nbsp;&nbsp;追加ダメージは+平均(最高)で表す<br>
-            <span class='bold'>爆風半径:</span>爆風の効果範囲。爆発の当たり判定に直結し、<br>
-            &nbsp;&nbsp;1は着弾地点のみ、2はその隣までというふうに大きくなる<br><br>
+            <span class='bold'>爆発Dmg:</span>爆風ダメージ TNT換算の割合と追加ダメージで示す※3<br>
+            <span class='bold'>爆風半径:</span>爆風の効果範囲。爆発の当たり判定(1単位1ブロック)<br>
+            ※1()内はそれぞれHSでのダメージ<br>
+            ※2セミオートは理論値であり、長押しだとこれより低い場合がある<br>
+            ※3追加ダメージは+平均(最高)で表す<br><br>
             <span class='bold'>精度:</span>0に近いほど精度が高い。適正距離↓<br>
-            <span class='bold'>0~0.1:</span>遠距離&nbsp;&nbsp;
-            <span class='bold'>0.1~0.4:</span>中距離&nbsp;&nbsp;
-            <span class='bold'>0.4~0.7:</span>近距離&nbsp;&nbsp;
-            <span class='bold'>0.7~1.0:</span>至近距離&nbsp;&nbsp;
-            <span class='bold'>1.0~3.0:</span>劣悪&nbsp;&nbsp;
-            <span class='bold'>3.0~:</span><span class="sizeup">L</span>
+            0~0.1:遠距離<br>
+            0.1~0.4:中距離<br>
+            0.4~0.7:近距離<br>
+            0.7~1.0:至近距離<br>
+            1.0~3.0:劣悪<br>
+            3.0~: L<br>
         </div>
         <div class="urls">
-            当面の間、要望・修正などは<a href="https://discord.gg/BxGwC5XANz">非公式STRIFEビルド共有鯖</a>へ<br>
-            お急ぎの場合はDiscordDM(Stellaleaf#1123)でも大丈夫です<br>
+            当面の間、要望・修正などは<br>
+            <a href="https://discord.gg/BxGwC5XANz">非公式STRIFEビルド共有鯖</a>へ<br>
+            お急ぎの場合DiscordへDM<br>
+            (Stellaleaf#1123)でも大丈夫です<br>
             <a href="https://wikiwiki.jp/strifers-lib/">
-            <img src="assets/ShortWikiLogo.png" width="200" height="35"></a>
+                <img src="assets/ShortWikiLogo.png" width="200" height="35">
+            </a>
         </div>
     </div>
     <!-- <table>
@@ -308,6 +331,5 @@
         </tr>
     </table> -->
 </body>
-<script src="js/import.js"></script>
-<script src="js/index.js"></script>
+
 </html>
