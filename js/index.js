@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    const Mod = [0, 0, 0, 0, 0, 0, 0, 0]
-    const EnchDmg = [0, 0, 0, 0, 0, 0];
+    //0Dmg 1Prob 2Cooldown 3Def 4Dodge
+    const Ench = [0, 0, 0, 0, 0, 0]
+    const Oe = [0, 0, 0, 0, 0, 0]
     const Ae = [0, 0, 0]
     const Addon = [0, 0, 0, 0, 0, 1]
     const EnchActive = [0, 0];
@@ -280,15 +281,15 @@ document.addEventListener("DOMContentLoaded", () => {
             Weapon[5] = 20;
         }
         Result[6] = Math.round((Weapon[5] + Mod[4]) * Math.pow(10, 2)) / Math.pow(10, 2);
-        if (Result[6] === 0 || EnchDmg[4] === 0) {
+        if (Result[6] === 0 || Ench[2] === 0) {
             EnchActive[0] = 1;
         } else {
-            EnchActive[0] = 1 / (Math.ceil(EnchDmg[4] * Result[6]));
+            EnchActive[0] = 1 / (Math.ceil(Ench[2] * Result[6]));
         };
-        if (Result[6] === 0 || EnchDmg[5] === 0) {
+        if (Result[6] === 0 || Oe[2] === 0) {
             EnchActive[1] = 1;
         } else {
-            EnchActive[1] = 1 / (Math.ceil(EnchDmg[5] * Result[6]));
+            EnchActive[1] = 1 / (Math.ceil(Oe[2] * Result[6]));
         };
         CalcAE(WeaponDmg + ModDmg, WeaponDmg + WeaponHsBonus + ModDmg + ModHsBonus);
         Weapon[0] = WeaponCs[0]
@@ -306,10 +307,10 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[16] = WeaponCs[14]
         Result[17] = WeaponCs[15]
         Weapon[9] = WeaponCs[13]
-        Result[0] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[1] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[2] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[3] = Math.round(((Weapon[0] + Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[0] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[1] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[2] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[3] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[4] = Weapon[2] + Mod[2] + Addon[2]
         Result[5] = Weapon[3] + Mod[3] + Addon[3]
         Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -317,9 +318,12 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[9] = Math.round(Math.abs(Weapon[8] - Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
         Result[10] = Math.round(((0.2 + Weapon[9] + Mod[6] + Addon[4]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[18] = Math.round(((Mod[0] + EnchDmg[0] * EnchActive[0] + EnchDmg[2] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[19] = Math.round(((Mod[0] + EnchDmg[1] + EnchDmg[3] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddDmg
+        Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[20] = Math.round((Ench[3] + Oe[3]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[21] = Math.round((Ench[4] + Oe[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[22] = Math.round((2 + Ench[5] + Oe[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20Def
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
         document.getElementById("DisplayCapacity").textContent = (Result[4])
@@ -329,6 +333,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
         document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
         document.getElementById("DisplayWeight").textContent = (Result[10])
+        document.getElementById("DisplayAveDef").textContent = (Result[20])
+        document.getElementById("DisplayHiDef").textContent = (Result[21])
+        document.getElementById("DisplayMana").textContent = (Result[22])
         //MobileDisplay
         document.getElementById("MobileDisplayRate").textContent = (Result[6])
         document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
@@ -451,147 +458,178 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     const CalcEnch = () => {
-        const Ench = document.getElementById("EnchantForm").EnchantSelect.value
+        const EnchKey = document.getElementById("EnchantForm").EnchantSelect.value
         const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
         const FrToggle = document.getElementById("FrCheck");
-        if (Ench == 'FlexibleResonance') {
+        if (EnchKey == 'FlexibleResonance') {
             FrLabel.style.display = "inline-block";
         } else {
             FrLabel.style.display = 'none';
             FrToggle.checked = false;
         };
 
-        function EnchLevelsCalc(EnchKey) {
+        function EnchLevelsCalc(EnchName) {
             if (EnchLv == "EnchLev1") {
-                EnchDmg[0] = EnchKey[0] * EnchKey[1];
-                EnchDmg[1] = EnchKey[0];
-                EnchDmg[4] = EnchKey[4];
-
+                Ench[0] = EnchName[0] * EnchName[1];
+                Ench[1] = EnchName[0];
+                Ench[2] = EnchName[4];
+                Ench[3] = EnchName[5] * EnchName[8];
+                Ench[4] = EnchName[5];
+                Ench[5] = EnchName[11];
             } else if (EnchLv == "EnchLev2") {
-                EnchDmg[0] = EnchKey[0] * EnchKey[2];
-                EnchDmg[1] = EnchKey[0]
-                EnchDmg[4] = EnchKey[4];
-
+                Ench[0] = EnchName[0] * EnchName[2];
+                Ench[1] = EnchName[0]
+                Ench[2] = EnchName[4];
+                Ench[3] = EnchName[6] * EnchName[9];
+                Ench[4] = EnchName[6];
+                Ench[5] = EnchName[12];
             } else if (EnchLv == "EnchLev3") {
-                EnchDmg[0] = EnchKey[0] * EnchKey[3];
-                EnchDmg[1] = EnchKey[0]
-                EnchDmg[4] = EnchKey[4];
-
+                Ench[0] = EnchName[0] * EnchName[3];
+                Ench[1] = EnchName[0]
+                Ench[2] = EnchName[4];
+                Ench[3] = EnchName[7] * EnchName[10];
+                Ench[4] = EnchName[7];
+                Ench[5] = EnchName[13];
             } else {
-                EnchDmg[0] = 0;
-                EnchDmg[1] = 0;
-                EnchDmg[4] = 0;
+                Ench[0] = 0;
+                Ench[1] = 0;
+                Ench[2] = 0;
+                Ench[3] = 0;
+                Ench[4] = 0;
+                Ench[5] = 0;
             }
         };
-        if (Ench == "ArcaneBrilliance") {
+        if (EnchKey == "ArcaneBrilliance") {
             EnchLevelsCalc(ArcaneBrilliance);
-        } else if (Ench == 'DeathsRuin') {
+        } else if (EnchKey == 'DeathsRuin') {
             EnchLevelsCalc(DeathsRuin);
-        } else if (Ench == 'DemonPower') {
+        } else if (EnchKey == 'DemonPower') {
             EnchLevelsCalc(DemonPower);
-        } else if (Ench == 'Evershade') {
+        } else if (EnchKey == 'Evershade') {
             EnchLevelsCalc(Evershade);
-        } else if (Ench == 'FlexibleResonance' && FrToggle.checked) {
+        } else if (EnchKey == 'FlexibleResonance' && FrToggle.checked) {
             EnchLevelsCalc(FlexibleResonance);
-        } else if (Ench == 'ManaFountain') {
+        } else if (EnchKey == 'ManaFountain') {
             EnchLevelsCalc(ManaFountain);
-        } else if (Ench == 'NightStalker') {
+        } else if (EnchKey == 'NightStalker') {
             EnchLevelsCalc(NightStalker);
-        } else if (Ench == 'NorthernWind') {
+        } else if (EnchKey == 'NorthernWind') {
             EnchLevelsCalc(NorthernWind);
-        } else if (Ench == 'PhoenixFlame') {
+        } else if (EnchKey == 'PhoenixFlame') {
             EnchLevelsCalc(PhoenixFlame);
-        } else if (Ench == 'ShadowStrike' && enemyManaElem.value < 50) {
+        } else if (EnchKey == 'ShadowStrike' && enemyManaElem.value < 50) {
             EnchLevelsCalc(ShadowStrike0);
-        } else if (Ench == 'ShadowStrike' && enemyManaElem.value < 75) {
+        } else if (EnchKey == 'ShadowStrike' && enemyManaElem.value < 75) {
             EnchLevelsCalc(ShadowStrike1);
-        } else if (Ench == 'ShadowStrike' && enemyManaElem.value <= 100) {
+        } else if (EnchKey == 'ShadowStrike' && enemyManaElem.value <= 100) {
             EnchLevelsCalc(ShadowStrike2);
-        } else if (Ench == 'ShieldWall') {
+        } else if (EnchKey == 'ShieldWall') {
             EnchLevelsCalc(ShieldWall);
-        } else if (Ench == 'SiphonLife') {
+        } else if (EnchKey == 'SiphonLife') {
             EnchLevelsCalc(SiphonLife);
-        } else if (Ench == 'Sunfire') {
+        } else if (EnchKey == 'Sunfire') {
             EnchLevelsCalc(Sunfire);
-        } else if (Ench == 'VictoryRush') {
+        } else if (EnchKey == 'VictoryRush') {
             EnchLevelsCalc(VictoryRush);
-        } else if (Ench == 'ZephyrsBlessing') {
+        } else if (EnchKey == 'ZephyrsBlessing') {
             EnchLevelsCalc(ZephyrsBlessing);
+        } else if (EnchKey == 'ManaFountain') {
+            EnchLevelsCalc(ManaFountain);
         } else {
-            EnchDmg[0] = 0;
-            EnchDmg[1] = 0;
-            EnchDmg[4] = 0;
+            Ench[0] = 0;
+            Ench[1] = 0;
+            Ench[2] = 0;
+            Ench[3] = 0;
+            Ench[4] = 0;
+            Ench[5] = 0;
         }
         render()
     };
     const CalcOE = () => {
-        const OE = document.getElementById("OeForm").OeSelect.value
+        const OeKey = document.getElementById("OeForm").OeSelect.value
         const OELv = document.getElementById("OeForm").OeLevSelect.value
         const OeFrToggle = document.getElementById("OeFrCheck");
-        if (OE == 'FlexibleResonance') {
+        if (OeKey == 'FlexibleResonance') {
             OeFrLabel.style.display = 'inline-block';
         } else {
             OeFrLabel.style.display = 'none'
             OeFrToggle.checked = false;
         };
 
-        function OELevelsCalc(OeKey) {
+        function OELevelsCalc(OeName) {
             if (OELv == "OeLev1") {
-                EnchDmg[2] = OeKey[0] * OeKey[1]
-                EnchDmg[3] = OeKey[0]
-                EnchDmg[5] = OeKey[4];
+                Oe[0] = OeName[0] * OeName[1]
+                Oe[1] = OeName[0]
+                Oe[2] = OeName[4];
+                Oe[3] = OeName[5] * OeName[8];
+                Oe[4] = OeName[5];
+                Oe[5] = OeName[11];
             } else if (OELv == "OeLev2") {
-                EnchDmg[2] = OeKey[0] * OeKey[2]
-                EnchDmg[3] = OeKey[0]
-                EnchDmg[5] = OeKey[4];
+                Oe[0] = OeName[0] * OeName[2]
+                Oe[1] = OeName[0]
+                Oe[2] = OeName[4];
+                Oe[3] = OeName[6] * OeName[9];
+                Oe[4] = OeName[6];
+                Oe[5] = OeName[12];
             } else if (OELv == "OeLev3") {
-                EnchDmg[2] = OeKey[0] * OeKey[3]
-                EnchDmg[3] = OeKey[0]
-                EnchDmg[5] = OeKey[4];
+                Oe[0] = OeName[0] * OeName[3]
+                Oe[1] = OeName[0]
+                Oe[2] = OeName[4];
+                Oe[3] = OeName[7] * OeName[10];
+                Oe[4] = OeName[7];
+                Oe[5] = OeName[13];
             } else {
-                EnchDmg[2] = 0;
-                EnchDmg[3] = 0;
-                EnchDmg[5] = 0;
+                Oe[0] = 0;
+                Oe[1] = 0;
+                Oe[2] = 0;
+                Oe[3] = 0;
+                Oe[4] = 0;
+                Oe[5] = 0;
             }
         };
-        if (OE == "ArcaneBrilliance") {
+        if (OeKey == "ArcaneBrilliance") {
             OELevelsCalc(ArcaneBrilliance);
-        } else if (OE == 'DeathsRuin') {
+        } else if (OeKey == 'DeathsRuin') {
             OELevelsCalc(DeathsRuin);
-        } else if (OE == 'DemonPower') {
+        } else if (OeKey == 'DemonPower') {
             OELevelsCalc(DemonPower);
-        } else if (OE == 'Evershade') {
+        } else if (OeKey == 'Evershade') {
             OELevelsCalc(Evershade);
-        } else if (OE == 'FlexibleResonance' && OeFrToggle.checked) {
+        } else if (OeKey == 'FlexibleResonance' && OeFrToggle.checked) {
             OELevelsCalc(FlexibleResonance);
-        } else if (OE == 'ManaFountain') {
+        } else if (OeKey == 'ManaFountain') {
             OELevelsCalc(ManaFountain);
-        } else if (OE == 'NightStalker') {
+        } else if (OeKey == 'NightStalker') {
             OELevelsCalc(NightStalker);
-        } else if (OE == 'NorthernWind') {
+        } else if (OeKey == 'NorthernWind') {
             OELevelsCalc(NorthernWind);
-        } else if (OE == 'PhoenixFlame') {
+        } else if (OeKey == 'PhoenixFlame') {
             OELevelsCalc(PhoenixFlame);
-        } else if (OE == 'ShadowStrike' && enemyManaElem.value < 50) {
+        } else if (OeKey == 'ShadowStrike' && enemyManaElem.value < 50) {
             OELevelsCalc(ShadowStrike0);
-        } else if (OE == 'ShadowStrike' && enemyManaElem.value < 75) {
+        } else if (OeKey == 'ShadowStrike' && enemyManaElem.value < 75) {
             OELevelsCalc(ShadowStrike1);
-        } else if (OE == 'ShadowStrike' && enemyManaElem.value <= 100) {
+        } else if (OeKey == 'ShadowStrike' && enemyManaElem.value <= 100) {
             OELevelsCalc(ShadowStrike2);
-        } else if (OE == 'ShieldWall') {
+        } else if (OeKey == 'ShieldWall') {
             OELevelsCalc(ShieldWall);
-        } else if (OE == 'SiphonLife') {
+        } else if (OeKey == 'SiphonLife') {
             OELevelsCalc(SiphonLife);
-        } else if (OE == 'Sunfire') {
+        } else if (OeKey == 'Sunfire') {
             OELevelsCalc(Sunfire);
-        } else if (OE == 'VictoryRush') {
+        } else if (OeKey == 'VictoryRush') {
             OELevelsCalc(VictoryRush);
-        } else if (OE == 'ZephyrsBlessing') {
+        } else if (OeKey == 'ZephyrsBlessing') {
             OELevelsCalc(ZephyrsBlessing);
+        } else if (OeKey == 'ManaFountain') {
+            OELevelsCalc(ManaFountain);
         } else {
-            EnchDmg[2] = 0;
-            EnchDmg[3] = 0;
-            EnchDmg[5] = 0;
+            Oe[0] = 0;
+            Oe[1] = 0;
+            Oe[2] = 0;
+            Oe[3] = 0;
+            Oe[4] = 0;
+            Oe[5] = 0;
         }
         render()
     };
