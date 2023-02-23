@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     //0Dmg 1Prob 2Cooldown 3Def 4Dodge
-    const Ench = [0, 0, 0, 0, 0, 0]
-    const Oe = [0, 0, 0, 0, 0, 0]
+    const Ench = [0, 0, 0, 0, 0, 0, 0]
+    const Oe = [0, 0, 0, 0, 0, 0, 0]
     const Ae = [0, 0, 0]
     const Addon = [0, 0, 0, 0, 0, 1]
     const EnchActive = [0, 0];
@@ -323,7 +323,8 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[20] = Math.round((Ench[3] + Oe[3]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[21] = Math.round((Ench[4] + Oe[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[22] = Math.round((2 + Ench[5] + Oe[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20Def
+        Result[23] = Math.round((Ench[6] + Oe[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20AveDef 21HiDef 22Mana 23Dodge
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
         document.getElementById("DisplayCapacity").textContent = (Result[4])
@@ -345,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
         document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
         document.getElementById("MobileDisplayWeight").textContent = (Result[10])
-        //テキスト系
+        //if系
         if (Result[11] > 0) {
             document.getElementById("DisplayDuration").textContent = (Result[11])
             document.getElementById("MobileDisplayDuration").textContent = (Result[11])
@@ -430,6 +431,11 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("MobileDisplayHighestHsDmg").textContent = 0
             document.getElementById("MobileDisplayDps").textContent = 0
         }
+        if (Result[23] <= 0.6){
+            document.getElementById("DisplayDodge").textContent = (Result[23] * 100)
+            }else{
+                document.getElementById("DisplayDodge").textContent = 60
+            }
     }
     const categorySelect2 = document.getElementById("TypeSelect")
     const subCategorySelect2 = document.getElementById("WeaponSelect")
@@ -476,6 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Ench[3] = EnchName[5] * EnchName[8];
                 Ench[4] = EnchName[5];
                 Ench[5] = EnchName[11];
+                Ench[6] = EnchName[14];
             } else if (EnchLv == "EnchLev2") {
                 Ench[0] = EnchName[0] * EnchName[2];
                 Ench[1] = EnchName[0]
@@ -483,6 +490,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Ench[3] = EnchName[6] * EnchName[9];
                 Ench[4] = EnchName[6];
                 Ench[5] = EnchName[12];
+                Ench[6] = EnchName[14];
             } else if (EnchLv == "EnchLev3") {
                 Ench[0] = EnchName[0] * EnchName[3];
                 Ench[1] = EnchName[0]
@@ -490,6 +498,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Ench[3] = EnchName[7] * EnchName[10];
                 Ench[4] = EnchName[7];
                 Ench[5] = EnchName[13];
+                Ench[6] = EnchName[14];
             } else {
                 Ench[0] = 0;
                 Ench[1] = 0;
@@ -497,6 +506,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Ench[3] = 0;
                 Ench[4] = 0;
                 Ench[5] = 0;
+                Ench[6] = 0;
             }
         };
         if (EnchKey == "ArcaneBrilliance") {
@@ -542,6 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Ench[3] = 0;
             Ench[4] = 0;
             Ench[5] = 0;
+            Ench[6] = 0;
         }
         render()
     };
@@ -564,6 +575,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Oe[3] = OeName[5] * OeName[8];
                 Oe[4] = OeName[5];
                 Oe[5] = OeName[11];
+                Oe[6] = OeName[14];
             } else if (OELv == "OeLev2") {
                 Oe[0] = OeName[0] * OeName[2]
                 Oe[1] = OeName[0]
@@ -571,6 +583,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Oe[3] = OeName[6] * OeName[9];
                 Oe[4] = OeName[6];
                 Oe[5] = OeName[12];
+                Oe[6] = OeName[15];
             } else if (OELv == "OeLev3") {
                 Oe[0] = OeName[0] * OeName[3]
                 Oe[1] = OeName[0]
@@ -578,6 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Oe[3] = OeName[7] * OeName[10];
                 Oe[4] = OeName[7];
                 Oe[5] = OeName[13];
+                Oe[6] = OeName[16];
             } else {
                 Oe[0] = 0;
                 Oe[1] = 0;
@@ -585,6 +599,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Oe[3] = 0;
                 Oe[4] = 0;
                 Oe[5] = 0;
+                Oe[6] = 0;
             }
         };
         if (OeKey == "ArcaneBrilliance") {
@@ -630,6 +645,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Oe[3] = 0;
             Oe[4] = 0;
             Oe[5] = 0;
+            Oe[6] = 0;
         }
         render()
     };
