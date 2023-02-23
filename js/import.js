@@ -1629,17 +1629,25 @@ const WeaponList = [
     }
 ]
 //EnchData
-const Sunfire = [3, 0.67, 0.72, 0.77, 0]
-const DemonPower = [4, 0.35, 0.4, 0.45, 0]
-const SiphonLife = [2, 0.4, 0.5, 0.6, 0]
-const DeathsRuin = [6, 0.55, 0.6, 0.65, 0.15]
-const ArcaneBrilliance = [3, 0.35, 0.45, 0.55, 0.2]
-const NorthernWind = [5, 0.45, 0.5, 0.55, 0.1]
-const FlexibleResonance = [4, 0.65, 0.70, 0.75, 0]
-const PhoenixFlame = [10, 0.05, 0.06, 0.07, 0]
-const ShadowStrike0 = [6, 0.7, 0.75, 0.8, 0]
-const ShadowStrike1 = [2, 0.7, 0.75, 0.8, 0]
-const ShadowStrike2 = [2, 0.4, 0.45, 0.5, 0]
+//0Dmg 1ProbLv1 2ProbLv2 3ProbLv3 4Cooldown 5DefLv1 6DefLv2 7DefLv3 8DefProbLv1 9DefProbLv2 10DefProbLv3
+//    Name              = [Dmg,DmgLv     ,     , CD,   DefLv  ,    , DefProbLv     , ManaLv]
+const Sunfire           = [3,  0.67, 0.72, 0.77, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const DemonPower        = [4,  0.35, 0.4,  0.45, 0,    1, 1.5,  2,   1,   1,    1,   0, 0, 0,]
+const SiphonLife        = [2,  0.4,  0.5,  0.6,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const DeathsRuin        = [6,  0.55, 0.6,  0.65, 0.15, 0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const ArcaneBrilliance  = [3,  0.35, 0.45, 0.55, 0.2,  0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const NorthernWind      = [5,  0.45, 0.5,  0.55, 0.1,  0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const FlexibleResonance = [4,  0.65, 0.70, 0.75, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const PhoenixFlame      = [10, 0.05, 0.06, 0.07, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const ShadowStrike0     = [6,  0.7,  0.75, 0.8,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const ShadowStrike1     = [2,  0.7,  0.75, 0.8,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const ShadowStrike2     = [2,  0.4,  0.45, 0.5,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const ShieldWall        = [0,  0,    0,    0,    0,    2, 2.25, 2.5, 1,   1,    1,   0, 0, 0,]
+const Evershade         = [0,  0,    0,    0,    0,    1, 1.5,  2,   1,   1,    1,   0, 0, 0,]
+const ZephyrsBlessing   = [0,  0,    0,    0,    0,    2, 2,    2,   0.6, 0.65, 0.7, 0, 0, 0,]
+const ManaFountain      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   4, 5, 6,]
+const NightStalker      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
+const VictoryRush       = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0,]
 //AEdata
 const BcDmg = 7
 const EoDmg = 6
