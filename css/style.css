@@ -7,8 +7,8 @@ body {
 th {
     background-color: rgba(0, 0, 0, 0.2);
     font-weight: 400;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 12px;
+    padding-bottom: 12px;
 }
 
 th,
@@ -266,7 +266,11 @@ input[type="checkbox"] {
 .FrLabel,
 .OeFrLabel,
 .SsaLabel,
-.SbLabel {
+.SbLabel,
+.BsLabel,
+.MsLabel,
+.FfLabel,
+.IsLabel{
     display: none;
 }
 
