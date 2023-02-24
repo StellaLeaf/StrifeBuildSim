@@ -2,9 +2,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     //0Dmg 1Prob 2Cooldown 3Def 4Dodge
-    const Ench = [0, 0, 0, 0, 0, 0, 0]
-    const Oe = [0, 0, 0, 0, 0, 0, 0]
-    const Ae = [0, 0, 0]
+    const Ench = [0, 0, 0, 0, 0, 0, 0, 0]
+    const Oe = [0, 0, 0, 0, 0, 0, 0, 0]
+    const Ae = [0, 0, 0, 0]
     const Addon = [0, 0, 0, 0, 0, 1]
     const EnchActive = [0, 0];
     const MpDmg = [0.25, 0.5, 1.0, 1.5]
@@ -57,10 +57,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return response.json()
     })))
 
-    const render = () => {
+    const render = (renderCheck) => {
         let TypeKey = document.getElementById("TypeForm").TypeSelect.value
         let WeaponKey = document.getElementById("WeaponForm").WeaponSelect.value
         let ModKey = document.getElementById("ModForm").ModSelect.value
+        const BsToggle = document.getElementById("BsCheck");
+        const MsToggle = document.getElementById("MsCheck");
         if (TypeKey === "none") {
             jsondata = 'none';
             jsondata2 = 'none';
@@ -95,6 +97,18 @@ document.addEventListener("DOMContentLoaded", () => {
             jsondata = _objMelee
             jsondata2 = _objMeleep
         }
+        if (TypeKey == "SMG") {
+            BsLabel.style.display = "inline-block";
+        } else {
+            BsLabel.style.display = 'none';
+            BsToggle.checked = false;
+        };
+        if (TypeKey == "LMG") {
+            MsLabel.style.display = "inline-block";
+        } else {
+            MsLabel.style.display = 'none';
+            MsToggle.checked = false;
+        };
         let WeaponReloadStyle = 0
         let WeaponRateKey = 0
         let WeaponAdsKey = 0
@@ -111,6 +125,17 @@ document.addEventListener("DOMContentLoaded", () => {
         let WeaponWeight = 0
         let WeaponExplDmg = 0
         let WeaponExplRadius = 0
+        let WeaponShiftEffect = [0, 0]
+        if (BsToggle.checked){
+            WeaponShiftEffect[0] = 0.25;
+            WeaponShiftEffect[1] = 0;
+        }else if (MsToggle.checked){
+            WeaponShiftEffect[1] = 3;
+            WeaponShiftEffect[0] = 0;
+        }else {
+            WeaponShiftEffect[0] = 0;
+            WeaponShiftEffect[1] = 0;
+        }
         if (!(WeaponKey === "none" || jsondata == 'none')) {
             //リロード配列の処理
             if (typeof jsondata[WeaponKey]["Reload"] === 'undefined') {
@@ -320,10 +345,10 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[20] = Math.round((Ench[3] + Oe[3]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[21] = Math.round((Ench[4] + Oe[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[20] = Math.round((Ench[3] + Oe[3] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[21] = Math.round((Ench[4] + Oe[4] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[22] = Math.round((2 + Ench[5] + Oe[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[23] = Math.round((Ench[6] + Oe[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
         //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20AveDef 21HiDef 22Mana 23Dodge
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
@@ -420,22 +445,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 document.getElementById("MobileDisplayDps").textContent = (Result[7])
             };
         } else {
-            document.getElementById("DisplayAverageDmg").textContent = 0
-            document.getElementById("DisplayAverageHsDmg").textContent = 0
-            document.getElementById("DisplayHighestDmg").textContent = 0
-            document.getElementById("DisplayHighestHsDmg").textContent = 0
-            document.getElementById("DisplayDps").textContent = 0
-            document.getElementById("MobileDisplayAverageDmg").textContent = 0
-            document.getElementById("MobileDisplayAverageHsDmg").textContent = 0
-            document.getElementById("MobileDisplayHighestDmg").textContent = 0
-            document.getElementById("MobileDisplayHighestHsDmg").textContent = 0
-            document.getElementById("MobileDisplayDps").textContent = 0
+            document.getElementById("DisplayAverageDmg").textContent = (Result[0])
+            document.getElementById("DisplayAverageHsDmg").textContent = (Result[1])
+            document.getElementById("DisplayHighestDmg").textContent = (Result[2])
+            document.getElementById("DisplayHighestHsDmg").textContent = (Result[3])
+            document.getElementById("DisplayDps").textContent = (Result[7])
+            document.getElementById("MobileDisplayAverageDmg").textContent = (Result[0])
+            document.getElementById("MobileDisplayAverageHsDmg").textContent = (Result[1])
+            document.getElementById("MobileDisplayHighestDmg").textContent = (Result[2])
+            document.getElementById("MobileDisplayHighestHsDmg").textContent = (Result[3])
+            document.getElementById("MobileDisplayDps").textContent = (Result[7])
         }
-        if (Result[23] <= 0.6){
-            document.getElementById("DisplayDodge").textContent = (Result[23] * 100)
-            }else{
-                document.getElementById("DisplayDodge").textContent = 60
-            }
+        if (Result[23] <= 60) {
+            document.getElementById("DisplayDodge").textContent = (Result[23])
+        } else {
+            document.getElementById("DisplayDodge").textContent = 60;
+        }
     }
     const categorySelect2 = document.getElementById("TypeSelect")
     const subCategorySelect2 = document.getElementById("WeaponSelect")
@@ -473,7 +498,6 @@ document.addEventListener("DOMContentLoaded", () => {
             FrLabel.style.display = 'none';
             FrToggle.checked = false;
         };
-
         function EnchLevelsCalc(EnchName) {
             if (EnchLv == "EnchLev1") {
                 Ench[0] = EnchName[0] * EnchName[1];
@@ -490,7 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Ench[3] = EnchName[6] * EnchName[9];
                 Ench[4] = EnchName[6];
                 Ench[5] = EnchName[12];
-                Ench[6] = EnchName[14];
+                Ench[6] = EnchName[15];
             } else if (EnchLv == "EnchLev3") {
                 Ench[0] = EnchName[0] * EnchName[3];
                 Ench[1] = EnchName[0]
@@ -498,7 +522,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Ench[3] = EnchName[7] * EnchName[10];
                 Ench[4] = EnchName[7];
                 Ench[5] = EnchName[13];
-                Ench[6] = EnchName[14];
+                Ench[6] = EnchName[16];
             } else {
                 Ench[0] = 0;
                 Ench[1] = 0;
@@ -655,6 +679,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const CfToggle = document.getElementById("CfCheck");
         const SdToggle = document.getElementById("SdCheck");
         const WsToggle = document.getElementById("WsCheck");
+        const FfToggle = document.getElementById("FfCheck");
+        const IsToggle = document.getElementById("IsCheck");
         if (AE == "Bloodcraze") {
             BcLabel.style.display = 'inline-block';
         } else {
@@ -682,46 +708,77 @@ document.addEventListener("DOMContentLoaded", () => {
             WsLabel.style.display = 'none';
             WsToggle.checked = false;
         };
-
+        if (AE == "FleetFooted") {
+            FfLabel.style.display = 'inline-block';
+        } else {
+            FfLabel.style.display = 'none';
+            FfToggle.checked = false;
+        };
+        if (AE == "IndomitableSpirit") {
+            IsLabel.style.display = 'inline-block';
+        } else {
+            IsLabel.style.display = 'none';
+            IsToggle.checked = false;
+        };
         if (AE == "Bloodcraze" && BcToggle.checked) {
-            Ae[0] = BcDmg
-            Ae[1] = BcDmg
+            Ae[0] = Bc[0]
+            Ae[1] = Bc[0] * Bc[1]
+            Ae[3] = Bc[2]
         } else if (AE == "ElementalOverload" && myManaElem.value > 30) {
-            Ae[0] = EoDmg
-            Ae[1] = EoDmg
+            Ae[0] = Eo[0]
+            Ae[1] = Eo[0] * Eo[1]
+            Ae[3] = Eo[2]
         } else if (AE == "Mastercrafted") {
-            Ae[0] = McDmg
-            Ae[1] = McDmg
+            Ae[0] = Mc[0]
+            Ae[1] = Mc[0] * Mc[1]
+            Ae[3] = Mc[2]
         } else if (AE == "ConcentratedFire" && CfToggle.checked) {
-            Ae[0] = CfDmg
-            Ae[1] = CfDmg
+            Ae[0] = Cf[0]
+            Ae[1] = Cf[0] * Cf[1]
+            Ae[3] = Cf[2]
         } else if (AE == "SuddenDeath" && SdToggle.checked) {
-            Ae[0] = SdAverageDmg
-            Ae[1] = SdHighestDmg
+            Ae[0] = Sd[0]
+            Ae[1] = Sd[0] * Sd[1]
+            Ae[2] = Sd[2]
         } else if (AE == "ManaBurn" && enemyManaElem.value <= 35) {
-            Ae[0] = MbDmg
-            Ae[1] = MbDmg
+            Ae[0] = Mb[0]
+            Ae[1] = Mb[0] * Mb[1]
+            Ae[3] = Mb[2]
         } else if (AE == "Manaflood" && myManaElem.value == 100) {
-            Ae[0] = MflDmg2
-            Ae[1] = MflDmg2
+            Ae[0] = Mfl2[0]
+            Ae[1] = Mfl2[0] * Mfl2[1]
+            Ae[3] = Mfl2[2]
         } else if (AE == "Manaflood" && myManaElem.value >= 75) {
-            Ae[0] = MflDmg1
-            Ae[1] = MflDmg1
+            Ae[0] = Mfl1[0]
+            Ae[1] = Mfl1[0] * Mfl1[1]
+            Ae[3] = Mfl1[2]
         } else if (AE == "Manaflood" && myManaElem.value >= 50) {
-            Ae[0] = MflDmg0
-            Ae[1] = MflDmg0
+            Ae[0] = Mfl0[0]
+            Ae[1] = Mfl0[0] * Mfl0[1]
+            Ae[3] = Mfl0[2]
         } else if (AE == "EchoOfDeath" && EoDDmg >= 50) {
-            Ae[0] = EodDmg
-            Ae[1] = EodDmg
+            Ae[0] = Eod[0]
+            Ae[1] = Eod[0] * Eod[1]
+            Ae[3] = Eod[2]
         } else if (AE == "Windsong" && WsToggle.checked) {
-            Ae[0] = WsDmg
-            Ae[1] = WsDmg
+            Ae[0] = Ws[0]
+            Ae[1] = Ws[0] * Ws[1]
+            Ae[3] = Ws[2]
+        } else if (AE == "FleetFooted" && FfToggle.checked) {
+            Ae[0] = Ff[0]
+            Ae[1] = Ff[0] * Ff[1]
+            Ae[3] = Ff[2]
+        } else if (AE == "IndomitableSpirit" && IsToggle.checked) {
+            Ae[0] = Is[0]
+            Ae[1] = Is[0] * Is[1]
+            Ae[3] = Is[2]
         } else {
             Ae[0] = 0
             Ae[1] = 0
+            Ae[3] = 0
         }
         if (AE == "EchoOfDeath" && EoDHsDmg >= 50) {
-            Ae[2] = EodDmg
+            Ae[2] = Eod[0]
         } else {
             Ae[2] = 0
         }
@@ -913,7 +970,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const OeCheckOnChange = (e) => {
         CalcOE();
     }
-    const AeCheckOnChange = (e) => {
+    const renderOnChange = (e) => {
         render();
     }
     const AddonCheckOnChange = (e) => {
@@ -921,12 +978,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     document.getElementById("FrCheck").addEventListener('change', EnchCheckOnChange);
     document.getElementById("OeFrCheck").addEventListener('change', OeCheckOnChange);
-    document.getElementById("BcCheck").addEventListener('change', AeCheckOnChange);
-    document.getElementById("CfCheck").addEventListener('change', AeCheckOnChange);
-    document.getElementById("SdCheck").addEventListener('change', AeCheckOnChange);
-    document.getElementById("WsCheck").addEventListener('change', AeCheckOnChange);
+    document.getElementById("BcCheck").addEventListener('change', renderOnChange);
+    document.getElementById("CfCheck").addEventListener('change', renderOnChange);
+    document.getElementById("SdCheck").addEventListener('change', renderOnChange);
+    document.getElementById("WsCheck").addEventListener('change', renderOnChange);
+    document.getElementById("FfCheck").addEventListener('change', renderOnChange);
+    document.getElementById("IsCheck").addEventListener('change', renderOnChange);
     document.getElementById("SsaCheck").addEventListener('change', AddonCheckOnChange);
     document.getElementById("SbCheck").addEventListener('change', AddonCheckOnChange);
+    document.getElementById("BsCheck").addEventListener('change', renderOnChange);
+    document.getElementById("MsCheck").addEventListener('change', renderOnChange);
     fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
         [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
         console.log(res.concat())
