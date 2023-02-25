@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     //0Dmg 1Prob 2Cooldown 3Def 4Dodge
     const Ench = [0, 0, 0, 0, 0, 0, 0, 0]
     const Oe = [0, 0, 0, 0, 0, 0, 0, 0]
     const Ae = [0, 0, 0, 0]
     const Addon = [0, 0, 0, 0, 0, 1]
+    //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
+    const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const MpDmg = [0.25, 0.5, 1.0, 1.5]
     const HbAverageDmg = [0.4, 0.8, 1.2, 1.6]
@@ -345,10 +347,12 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[20] = Math.round((Ench[3] + Oe[3] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[21] = Math.round((Ench[4] + Oe[4] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[22] = Math.round((2 + Ench[5] + Oe[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[24] = Math.round(20 + Armor[0]);
+        Result[25] = Math.round(Armor[1]);
         //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20AveDef 21HiDef 22Mana 23Dodge
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
@@ -362,6 +366,9 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("DisplayAveDef").textContent = (Result[20])
         document.getElementById("DisplayHiDef").textContent = (Result[21])
         document.getElementById("DisplayMana").textContent = (Result[22])
+        document.getElementById("DisplayHp").textContent = (Result[24])
+        document.getElementById("DisplayAtk").textContent = (Result[25])
+
         //MobileDisplay
         document.getElementById("MobileDisplayRate").textContent = (Result[6])
         document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
@@ -943,6 +950,106 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         render()
     }
+
+    const CalcArmor = () => {
+        const ChestName = document.getElementById("ArmorForm").ChestSelect.value
+        const HandName = document.getElementById("ArmorForm").HandSelect.value
+        const BootsName = document.getElementById("ArmorForm").BootsSelect.value
+        let Chest = [0, 0, 0, 0, 0, 0, 0]
+        let Hand = [0, 0, 0, 0]
+        let Boots = [0, 0, 0, 0, 0, 0]
+        let ArmorFullSet = [0, 0, 0, 0, 0, 0, 0, 0]
+        function ChestSelectCalc(ChestKey) {
+            Chest[0] = ChestKey[0];
+            Chest[1] = ChestKey[1];
+            Chest[2] = ChestKey[2];
+            Chest[3] = ChestKey[3];
+            Chest[4] = ChestKey[4];
+            Chest[5] = ChestKey[5];
+            Chest[6] = ChestKey[6];
+        };
+        function HandSelectCalc (HandKey) {
+            Hand[0] = HandKey[0];
+            Hand[1] = HandKey[1];
+            Hand[2] = HandKey[2];
+            Hand[3] = HandKey[3];
+        };
+        function BootsSelectCalc (BootsKey) {
+            Boots[0] = BootsKey[0];
+            Boots[1] = BootsKey[1];
+            Boots[2] = BootsKey[2];
+            Boots[3] = BootsKey[3];
+            Boots[4] = BootsKey[4];
+            Boots[5] = BootsKey[5];
+        };
+        function ArmorFullSetCalc (ArmorFullSetKey) {
+            ArmorFullSet[0] = ArmorFullSetKey[0];
+            ArmorFullSet[1] = ArmorFullSetKey[1];
+            ArmorFullSet[2] = ArmorFullSetKey[2];
+            ArmorFullSet[3] = ArmorFullSetKey[3];
+            ArmorFullSet[4] = ArmorFullSetKey[4];
+            ArmorFullSet[5] = ArmorFullSetKey[5];
+            ArmorFullSet[6] = ArmorFullSetKey[6];
+            ArmorFullSet[7] = ArmorFullSetKey[7];
+        };
+        if (ChestName === "Cleric") {
+            ChestSelectCalc(CChest);
+        } else if (ChestName === "Fort") {
+            ChestSelectCalc(FChest);
+        } else if (ChestName === "Gladiator") {
+            ChestSelectCalc(GChest);
+        } else if (ChestName === "Pilgrim") {
+            ChestSelectCalc(PChest);
+        } else if (ChestName === "Ivory") {
+            ChestSelectCalc(IChest);
+        } else if (ChestName === "Slick") {
+            ChestSelectCalc(SChest);
+        } else {
+            Chest = [0, 0, 0, 0, 0, 0, 0];
+        };
+        if (HandName === "Cleric") {
+            HandSelectCalc(CHand);
+        } else if (HandName === "Gladiator") {
+            HandSelectCalc(GHand);
+        } else if (HandName === "Pilgrim") {
+            HandSelectCalc(PHand);
+        } else if (HandName === "Ivory") {
+            HandSelectCalc(IHand);
+        } else {
+            Hand = [0, 0, 0, 0];
+        };
+        if (BootsName === "Cleric") {
+            BootsSelectCalc(CBoots);
+        } else if (BootsName === "Gladiator") {
+            BootsSelectCalc(GBoots);
+        } else if (BootsName === "Pilgrim") {
+            BootsSelectCalc(PBoots);
+        } else if (BootsName === "Ivory") {
+            BootsSelectCalc(IBoots);
+        } else {
+            Boots = [0, 0, 0, 0, 0, 0];
+        };
+        if (ChestName === "Cleric" && ChestName === HandName === BootsName) {
+            ArmorFullSetCalc(CSet);
+        } else if (ChestName === "Gladiator" && ChestName === HandName === BootsName) {
+            ArmorFullSetCalc(GSet);
+        } else if (ChestName === "Pilgrim" && ChestName === HandName === BootsName) {
+            ArmorFullSetCalc(PSet);
+        } else if (ChestName === "Ivory" && ChestName === HandName === BootsName) {
+            ArmorFullSetCalc(ISet);
+        } else {
+            ArmorFullSet = [0, 0, 0, 0, 0, 0, 0, 0]
+        };
+        Armor[0] = Chest[0] + Hand[0] + Boots[0] + ArmorFullSet[0];
+        Armor[1] = Chest[1] + Hand[1] + Boots[1] + ArmorFullSet[1];
+        Armor[2] = Chest[2] + Hand[2] + Boots[2] + ArmorFullSet[2];
+        Armor[3] = Chest[3] + Hand[3] + Boots[3] + ArmorFullSet[3];
+        Armor[4] = Chest[4] + Boots[4] + ArmorFullSet[4];
+        Armor[5] = Chest[5] + Boots[5] + ArmorFullSet[5];
+        Armor[6] = Chest[6] + ArmorFullSet[6];
+        Armor[7] = ArmorFullSet[7];
+        render()
+    }
     const myManaElem = document.getElementById('myMana');
     const enemyManaElem = document.getElementById('enemyMana');
     const myManaValueElem = document.getElementById('myMana-value');
@@ -999,6 +1106,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("OeForm").onchange = () => CalcOE()
     document.getElementById("AncientEnchantForm").onchange = () => render()
     document.getElementById("AddonForm").onchange = () => CalcAddon()
+    document.getElementById("ArmorForm").onchange = () => CalcArmor()
     myManaElem.addEventListener('input', myManaOnChange);
     enemyManaElem.addEventListener('input', enemyManaOnChange);
     setMyManaValue(myManaElem.value);
