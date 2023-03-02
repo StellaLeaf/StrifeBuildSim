@@ -44,9 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let _objSecp
     let _objMelee
     let _objMeleep
-    let EffectTableOrder = 0;
     let EnchTableSwitch = 0;
     let OeTableSwitch = 0;
+    let AeTableSwitch = 0;
     const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
         method: "GET"
     }).then(response => {
@@ -736,49 +736,59 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (OeTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(EnchTableSwitch);
             OeTableSwitch = 0;
-            console.log(0);
         }
         render()
     };
     const CalcAE = (EoDDmg, EoDHsDmg) => {
-        const AE = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
+        const AeKey = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
         const BcToggle = document.getElementById("BcCheck");
         const CfToggle = document.getElementById("CfCheck");
         const SdToggle = document.getElementById("SdCheck");
         const WsToggle = document.getElementById("WsCheck");
         const FfToggle = document.getElementById("FfCheck");
         const IsToggle = document.getElementById("IsCheck");
-        if (AE == "Bloodcraze") {
+        function AeEffectFunc (AeTextKey) {
+            if (AeTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AeTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(AeTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(AeTextKey[1]));
+        }
+        if (AeKey == "Bloodcraze") {
             BcLabel.style.display = 'inline-block';
         } else {
             BcLabel.style.display = 'none';
             BcToggle.checked = false;
         };
-        if (AE == "ConcentratedFire") {
+        if (AeKey == "ConcentratedFire") {
             CfLabel.style.display = 'inline-block';
         } else {
             CfLabel.style.display = 'none';
             CfToggle.checked = false;
         };
-        if (AE == "SuddenDeath") {
+        if (AeKey == "SuddenDeath") {
             SdLabel.style.display = 'inline-block';
         } else {
             SdLabel.style.display = 'none';
             SdToggle.checked = false;
         };
-        if (AE == "Windsong") {
+        if (AeKey == "Windsong") {
             WsLabel.style.display = 'inline-block';
         } else {
             WsLabel.style.display = 'none';
             WsToggle.checked = false;
         };
-        if (AE == "FleetFooted") {
+        if (AeKey == "FleetFooted") {
             FfLabel.style.display = 'inline-block';
         } else {
             FfLabel.style.display = 'none';
             FfToggle.checked = false;
         };
-        if (AE == "IndomitableSpirit") {
+        if (AeKey == "IndomitableSpirit") {
             IsLabel.style.display = 'inline-block';
         } else {
             IsLabel.style.display = 'none';
@@ -789,41 +799,71 @@ document.addEventListener("DOMContentLoaded", () => {
             Ae[1] = AeName[0] * AeName[1]
             Ae[3] = AeName[2]
         }
-        if (AE == "Bloodcraze" && BcToggle.checked) {
+        if (AeKey == "Bloodcraze" && BcToggle.checked) {
             AeSet(Bc);
-        } else if (AE == "ElementalOverload" && myManaElem.value > 30) {
+        } else if (AeKey == "ElementalOverload" && myManaElem.value > 30) {
             AeSet(Eo);
-        } else if (AE == "Mastercrafted") {
+        } else if (AeKey == "Mastercrafted") {
             AeSet(Mc);
-        } else if (AE == "ConcentratedFire" && CfToggle.checked) {
+        } else if (AeKey == "ConcentratedFire" && CfToggle.checked) {
             AeSet(Cf);
-        } else if (AE == "SuddenDeath" && SdToggle.checked) {
+        } else if (AeKey == "SuddenDeath" && SdToggle.checked) {
             AeSet(Sd);
-        } else if (AE == "ManaBurn" && enemyManaElem.value <= 35) {
+        } else if (AeKey == "ManaBurn" && enemyManaElem.value <= 35) {
             AeSet(Mb);
-        } else if (AE == "Manaflood" && myManaElem.value == 100) {
+        } else if (AeKey == "Manaflood" && myManaElem.value == 100) {
             AeSet(Mfl2);
-        } else if (AE == "Manaflood" && myManaElem.value >= 75) {
+        } else if (AeKey == "Manaflood" && myManaElem.value >= 75) {
             AeSet(Mfl1);
-        } else if (AE == "Manaflood" && myManaElem.value >= 50) {
+        } else if (AeKey == "Manaflood" && myManaElem.value >= 50) {
             AeSet(Mfl0);
-        } else if (AE == "EchoOfDeath" && EoDDmg >= 50) {
+        } else if (AeKey == "EchoOfDeath" && EoDDmg >= 50) {
             AeSet(Eod);
-        } else if (AE == "Windsong" && WsToggle.checked) {
+        } else if (AeKey == "Windsong" && WsToggle.checked) {
             AeSet(Ws);
-        } else if (AE == "FleetFooted" && FfToggle.checked) {
+        } else if (AeKey == "FleetFooted" && FfToggle.checked) {
             AeSet(Ff);
-        } else if (AE == "IndomitableSpirit" && IsToggle.checked) {
+        } else if (AeKey == "IndomitableSpirit" && IsToggle.checked) {
             AeSet(Is);
         } else {
             Ae[0] = 0
             Ae[1] = 0
             Ae[3] = 0
         }
-        if (AE == "EchoOfDeath" && EoDHsDmg >= 50) {
+        if (AeKey == "EchoOfDeath" && EoDHsDmg >= 50) {
             Ae[2] = Eod[0]
         } else {
             Ae[2] = 0
+        }
+        if (AeKey == 'AmplifyMagic') {
+            AeEffectFunc(AmpText);
+        } else if (AeKey == 'ArcaneMeditation') {
+            AeEffectFunc(AmText);
+        } else if (AeKey == 'CursedPact') {
+            AeEffectFunc(CpText);
+        } else if (AeKey == 'DrainSoul') {
+            AeEffectFunc(DsText);
+        } else if (AeKey == 'EverlastingLife') {
+            AeEffectFunc(ElText);
+        } else if (AeKey == 'FragileBalance') {
+            AeEffectFunc(FbText);
+        } else if (AeKey == 'GolemProtection') {
+            AeEffectFunc(GpText);
+        } else if (AeKey == 'JoyOfWealth') {
+            AeEffectFunc(JowText);
+        } else if (AeKey == 'ManaEfficiency') {
+            AeEffectFunc(MeText);
+        } else if (AeKey == 'ManaBurn') {
+            AeEffectFunc(MbText);
+        } else if (AeKey == 'Regrowth') {
+            AeEffectFunc(RegText);
+        } else if (AeKey == 'TitanStance') {
+            AeEffectFunc(TsText);
+        } else if (AeKey == 'WheelOfFortune') {
+            AeEffectFunc(WofText);
+        } else if (AeTableSwitch === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
+            AeTableSwitch = 0;
         }
     }
 
