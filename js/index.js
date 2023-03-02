@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    var tableElem = document.getElementById('EffectTable');
     const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     //0Dmg 1Prob 2Cooldown 3Def 4Dodge
@@ -9,14 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
-    const MpDmg = [0.25, 0.5, 1.0, 1.5]
-    const HbAverageDmg = [0.4, 0.8, 1.2, 1.6]
-    const HbHighestDmg = [2, 4, 6, 8]
-    const EmCapacity = [2, 4, 6, 10]
-    const QpReload = [-4, -8, -12, -16]
-    const LkWeight = [0.004, 0.005, 0.010, 0.015]
-    const SsaDmg = [1.25, 1.5, 1.75, 2.2]
-    const SbDmg = [7, 8, 9, 10]
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
     const _pathSmg = "maps/3_SMG.json"
@@ -51,14 +44,15 @@ document.addEventListener("DOMContentLoaded", () => {
     let _objSecp
     let _objMelee
     let _objMeleep
-
+    let EffectTableOrder = 0;
+    let EnchTableSwitch = 0;
+    let OeTableSwitch = 0;
     const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
         method: "GET"
     }).then(response => {
         if (!response.ok) throw new Error("Network response was not ok")
         return response.json()
     })))
-
     const render = (renderCheck) => {
         let TypeKey = document.getElementById("TypeForm").TypeSelect.value
         let WeaponKey = document.getElementById("WeaponForm").WeaponSelect.value
@@ -499,6 +493,23 @@ document.addEventListener("DOMContentLoaded", () => {
         const EnchKey = document.getElementById("EnchantForm").EnchantSelect.value
         const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
         const FrToggle = document.getElementById("FrCheck");
+        function EnchEffectFunc (EnchTextKey) {
+            if (EnchTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(0);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(0);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            EnchTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(EnchTextKey[0]));
+            if (EnchLv == "EnchLev1"){
+                ProbElem.appendChild(document.createTextNode(EnchTextKey[1]));
+            } else if (EnchLv == "EnchLev2") {
+                ProbElem.appendChild(document.createTextNode(EnchTextKey[2]));
+            } else if (EnchLv == "EnchLev3") {
+                ProbElem.appendChild(document.createTextNode(EnchTextKey[3]));
+            };
+        }
         if (EnchKey == 'FlexibleResonance') {
             FrLabel.style.display = "inline-block";
         } else {
@@ -570,8 +581,6 @@ document.addEventListener("DOMContentLoaded", () => {
             EnchLevelsCalc(SiphonLife);
         } else if (EnchKey == 'Sunfire') {
             EnchLevelsCalc(Sunfire);
-        } else if (EnchKey == 'VictoryRush') {
-            EnchLevelsCalc(VictoryRush);
         } else if (EnchKey == 'ZephyrsBlessing') {
             EnchLevelsCalc(ZephyrsBlessing);
         } else if (EnchKey == 'ManaFountain') {
@@ -585,21 +594,53 @@ document.addEventListener("DOMContentLoaded", () => {
             Ench[5] = 0;
             Ench[6] = 0;
         }
+        if (EnchKey == 'LastStand') {
+            EnchEffectFunc(LsText);
+        } else if (EnchKey == 'VictoryRush') {
+            EnchEffectFunc(VrText);
+        }else if (EnchKey == 'PhoenixFlame') {
+            EnchEffectFunc(PfText);
+        }else if (EnchKey == 'ArcaneBrilliance') {
+            EnchEffectFunc(AbText);
+        }else if (EnchKey == 'NightStalker') {
+            EnchEffectFunc(NsText);
+        }else if (EnchKey == 'Evershade') {
+            EnchEffectFunc(EsText);
+        } else if (EnchTableSwitch === 1) {
+            tableElem.tBodies[0].deleteRow(0);
+            EnchTableSwitch = 0;
+        }       
         render()
     };
     const CalcOE = () => {
         const OeKey = document.getElementById("OeForm").OeSelect.value
-        const OELv = document.getElementById("OeForm").OeLevSelect.value
+        const OeLv = document.getElementById("OeForm").OeLevSelect.value
         const OeFrToggle = document.getElementById("OeFrCheck");
+        function OeEffectFunc (OeTextKey) {
+            if (OeTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            OeTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(OeTextKey[0]));
+            if (OeLv == "OeLev1"){
+                ProbElem.appendChild(document.createTextNode(OeTextKey[1]));
+            } else if (OeLv == "OeLev2") {
+                ProbElem.appendChild(document.createTextNode(OeTextKey[2]));
+            } else if (OeLv == "OeLev3") {
+                ProbElem.appendChild(document.createTextNode(OeTextKey[3]));
+            };
+        }
         if (OeKey == 'FlexibleResonance') {
             OeFrLabel.style.display = 'inline-block';
         } else {
             OeFrLabel.style.display = 'none'
             OeFrToggle.checked = false;
         };
-
         function OELevelsCalc(OeName) {
-            if (OELv == "OeLev1") {
+            if (OeLv == "OeLev1") {
                 Oe[0] = OeName[0] * OeName[1]
                 Oe[1] = OeName[0]
                 Oe[2] = OeName[4];
@@ -607,7 +648,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Oe[4] = OeName[5];
                 Oe[5] = OeName[11];
                 Oe[6] = OeName[14];
-            } else if (OELv == "OeLev2") {
+            } else if (OeLv == "OeLev2") {
                 Oe[0] = OeName[0] * OeName[2]
                 Oe[1] = OeName[0]
                 Oe[2] = OeName[4];
@@ -615,7 +656,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 Oe[4] = OeName[6];
                 Oe[5] = OeName[12];
                 Oe[6] = OeName[15];
-            } else if (OELv == "OeLev3") {
+            } else if (OeLv == "OeLev3") {
                 Oe[0] = OeName[0] * OeName[3]
                 Oe[1] = OeName[0]
                 Oe[2] = OeName[4];
@@ -663,12 +704,14 @@ document.addEventListener("DOMContentLoaded", () => {
             OELevelsCalc(SiphonLife);
         } else if (OeKey == 'Sunfire') {
             OELevelsCalc(Sunfire);
-        } else if (OeKey == 'VictoryRush') {
-            OELevelsCalc(VictoryRush);
         } else if (OeKey == 'ZephyrsBlessing') {
             OELevelsCalc(ZephyrsBlessing);
         } else if (OeKey == 'ManaFountain') {
             OELevelsCalc(ManaFountain);
+        } else if (OeKey == 'LastStand') {
+            OELevelsCalc(LastStand);
+        } else if (OeKey == 'VictoryRush') {
+            OELevelsCalc(VictoryRush);
         } else {
             Oe[0] = 0;
             Oe[1] = 0;
@@ -677,6 +720,23 @@ document.addEventListener("DOMContentLoaded", () => {
             Oe[4] = 0;
             Oe[5] = 0;
             Oe[6] = 0;
+        }
+        if (OeKey == 'LastStand') {
+            OeEffectFunc(LsText);
+        } else if (OeKey == 'VictoryRush') {
+            OeEffectFunc(VrText)
+        }else if (OeKey == 'PhoenixFlame') {
+            OeEffectFunc(PfText)
+        }else if (OeKey == 'ArcaneBrilliance') {
+            OeEffectFunc(AbText)
+        }else if (OeKey == 'NightStalker') {
+            OeEffectFunc(NsText)
+        }else if (OeKey == 'Evershade') {
+            OeEffectFunc(EsText);
+        } else if (OeTableSwitch === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch);
+            OeTableSwitch = 0;
+            console.log(0);
         }
         render()
     };
@@ -694,21 +754,18 @@ document.addEventListener("DOMContentLoaded", () => {
             BcLabel.style.display = 'none';
             BcToggle.checked = false;
         };
-
         if (AE == "ConcentratedFire") {
             CfLabel.style.display = 'inline-block';
         } else {
             CfLabel.style.display = 'none';
             CfToggle.checked = false;
         };
-
         if (AE == "SuddenDeath") {
             SdLabel.style.display = 'inline-block';
         } else {
             SdLabel.style.display = 'none';
             SdToggle.checked = false;
         };
-
         if (AE == "Windsong") {
             WsLabel.style.display = 'inline-block';
         } else {
@@ -727,58 +784,37 @@ document.addEventListener("DOMContentLoaded", () => {
             IsLabel.style.display = 'none';
             IsToggle.checked = false;
         };
+        function AeSet(AeName){
+            Ae[0] = AeName[0]
+            Ae[1] = AeName[0] * AeName[1]
+            Ae[3] = AeName[2]
+        }
         if (AE == "Bloodcraze" && BcToggle.checked) {
-            Ae[0] = Bc[0]
-            Ae[1] = Bc[0] * Bc[1]
-            Ae[3] = Bc[2]
+            AeSet(Bc);
         } else if (AE == "ElementalOverload" && myManaElem.value > 30) {
-            Ae[0] = Eo[0]
-            Ae[1] = Eo[0] * Eo[1]
-            Ae[3] = Eo[2]
+            AeSet(Eo);
         } else if (AE == "Mastercrafted") {
-            Ae[0] = Mc[0]
-            Ae[1] = Mc[0] * Mc[1]
-            Ae[3] = Mc[2]
+            AeSet(Mc);
         } else if (AE == "ConcentratedFire" && CfToggle.checked) {
-            Ae[0] = Cf[0]
-            Ae[1] = Cf[0] * Cf[1]
-            Ae[3] = Cf[2]
+            AeSet(Cf);
         } else if (AE == "SuddenDeath" && SdToggle.checked) {
-            Ae[0] = Sd[0]
-            Ae[1] = Sd[0] * Sd[1]
-            Ae[2] = Sd[2]
+            AeSet(Sd);
         } else if (AE == "ManaBurn" && enemyManaElem.value <= 35) {
-            Ae[0] = Mb[0]
-            Ae[1] = Mb[0] * Mb[1]
-            Ae[3] = Mb[2]
+            AeSet(Mb);
         } else if (AE == "Manaflood" && myManaElem.value == 100) {
-            Ae[0] = Mfl2[0]
-            Ae[1] = Mfl2[0] * Mfl2[1]
-            Ae[3] = Mfl2[2]
+            AeSet(Mfl2);
         } else if (AE == "Manaflood" && myManaElem.value >= 75) {
-            Ae[0] = Mfl1[0]
-            Ae[1] = Mfl1[0] * Mfl1[1]
-            Ae[3] = Mfl1[2]
+            AeSet(Mfl1);
         } else if (AE == "Manaflood" && myManaElem.value >= 50) {
-            Ae[0] = Mfl0[0]
-            Ae[1] = Mfl0[0] * Mfl0[1]
-            Ae[3] = Mfl0[2]
+            AeSet(Mfl0);
         } else if (AE == "EchoOfDeath" && EoDDmg >= 50) {
-            Ae[0] = Eod[0]
-            Ae[1] = Eod[0] * Eod[1]
-            Ae[3] = Eod[2]
+            AeSet(Eod);
         } else if (AE == "Windsong" && WsToggle.checked) {
-            Ae[0] = Ws[0]
-            Ae[1] = Ws[0] * Ws[1]
-            Ae[3] = Ws[2]
+            AeSet(Ws);
         } else if (AE == "FleetFooted" && FfToggle.checked) {
-            Ae[0] = Ff[0]
-            Ae[1] = Ff[0] * Ff[1]
-            Ae[3] = Ff[2]
+            AeSet(Ff);
         } else if (AE == "IndomitableSpirit" && IsToggle.checked) {
-            Ae[0] = Is[0]
-            Ae[1] = Is[0] * Is[1]
-            Ae[3] = Is[2]
+            AeSet(Is);
         } else {
             Ae[0] = 0
             Ae[1] = 0
