@@ -1076,13 +1076,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const HandName = document.getElementById("ArmorForm").HandSelect.value
         const BootsName = document.getElementById("ArmorForm").BootsSelect.value
         function ArmorEffectFunc (ArmorTextKey) {
-            if (ArmorTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
+            if (ArmorTableSwitch[0] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch);
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
-            ArmorTableSwitch = 1;
+            ArmorTableSwitch[0] = 1;
             NameElem.appendChild(document.createTextNode(ArmorTextKey[0]));
             ProbElem.appendChild(document.createTextNode(ArmorTextKey[1]));
         }
@@ -1160,13 +1160,13 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             Boots = [0, 0, 0, 0, 0, 0];
         };
-        if (ChestName === "Cleric" && ChestName === HandName === BootsName) {
+        if (ChestName === "Cleric" && ChestName === HandName && ChestName === BootsName) {
             ArmorFullSetCalc(CSet);
-        } else if (ChestName === "Gladiator" && ChestName === HandName === BootsName) {
+        } else if (ChestName === "Gladiator" && ChestName === HandName && ChestName === BootsName) {
             ArmorFullSetCalc(GSet);
-        } else if (ChestName === "Pilgrim" && ChestName === HandName === BootsName) {
+        } else if (ChestName === "Pilgrim" && ChestName === HandName && ChestName === BootsName) {
             ArmorFullSetCalc(PSet);
-        } else if (ChestName === "Ivory" && ChestName === HandName === BootsName) {
+        } else if (ChestName === "Ivory" && ChestName === HandName && ChestName === BootsName) {
             ArmorFullSetCalc(ISet);
         } else {
             ArmorFullSet = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -1180,19 +1180,28 @@ document.addEventListener("DOMContentLoaded", () => {
         Armor[6] = Chest[6] + ArmorFullSet[6];
         Armor[7] = ArmorFullSet[7];
         if (BootsName == 'Cleric') {
-            AeEffectFunc(CBootsText);
+            ArmorEffectFunc(CBootsText);
         } else if (BootsName == 'Pilgrim') {
-            AeEffectFunc(PBootsText);
+            ArmorEffectFunc(PBootsText);
         } else if (ArmorTableSwitch[0] === 1) {
             tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
-            AeTableSwitch[0] = 0;
-        }
-        if (ChestName === "Cleric" && ChestName === HandName === BootsName) {
-            AeEffectFunc(CSetText);
+            ArmorTableSwitch[0] = 0;
+        };
+        if (ChestName === "Cleric" && ChestName === HandName && ChestName === BootsName) {
+            if (ArmorTableSwitch[1] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0]);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0]);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            ArmorTableSwitch[1] = 1;
+            NameElem.appendChild(document.createTextNode(CSetText[0]));
+            ProbElem.appendChild(document.createTextNode(CSetText[1]));
         } else if (ArmorTableSwitch[1] === 1) {
             tableElem.tBodies[1].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0]);
-            AeTableSwitch[1] = 0;
-        }
+            ArmorTableSwitch[1] = 0;
+        };
+        render();
     }
     const myManaElem = document.getElementById('myMana');
     const enemyManaElem = document.getElementById('enemyMana');
