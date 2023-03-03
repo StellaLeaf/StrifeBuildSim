@@ -51,6 +51,7 @@ const MbText  = ['Mana Burn',         '攻撃時、相手のManaをdmgの半分(
 const RegText = ['Regrowth',          'HP・スタミナ自動回復のクールダウン削除']
 const TsText  = ['Titan Stance',      '発動中スタミナが減少 スタミナ0でスニーク時、dmg20%軽減']
 const WofText = ['Wheel of Fortune',  'キル時2%でCoin 0.5%でAS・LTB 0.02%でArmorBoxを入手']
+const ApText  = ['AP Rounds',         '70%でLastStand無効化', '75%でLastStand無効化', '80%でLastStand無効化', '85%でLastStand無効化']
 //AEdata 0Dmg 1Prob 2Dodge
 const Bc = [7, 1, 0]
 const Eo = [6, 1, 0]

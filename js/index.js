@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let EnchTableSwitch = 0;
     let OeTableSwitch = 0;
     let AeTableSwitch = 0;
+    let AddonTableSwitch = 0;
     const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
         method: "GET"
     }).then(response => {
@@ -1045,6 +1046,28 @@ document.addEventListener("DOMContentLoaded", () => {
             Addon[3] = 0
             Addon[4] = 0
             Addon[5] = 1
+        }
+        if (AddonKey == 'ApRound') {
+            if (AddonTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AddonTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(ApText[0]));
+            if (AddonLv == "AddonLev0"){
+                ProbElem.appendChild(document.createTextNode(ApText[1]));
+            }else if (AddonLv == "AddonLev1"){
+                ProbElem.appendChild(document.createTextNode(ApText[2]));
+            } else if (AddonLv == "AddonLev2") {
+                ProbElem.appendChild(document.createTextNode(ApText[3]));
+            } else if (AddonLv == "AddonLev3") {
+                ProbElem.appendChild(document.createTextNode(ApText[4]));
+            };
+        } else if (AddonTableSwitch === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
+            AddonTableSwitch = 0;
         }
         render()
     }
