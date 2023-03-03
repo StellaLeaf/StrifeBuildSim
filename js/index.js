@@ -493,7 +493,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const EnchKey = document.getElementById("EnchantForm").EnchantSelect.value
         const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
         const FrToggle = document.getElementById("FrCheck");
-        function EnchEffectFunc (EnchTextKey) {
+        function EnchEffectFunc0 (EnchTextKey) {
             if (EnchTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(0);
             };
@@ -509,6 +509,17 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (EnchLv == "EnchLev3") {
                 ProbElem.appendChild(document.createTextNode(EnchTextKey[3]));
             };
+        }
+        function EnchEffectFunc1 (EnchTextKey) {
+            if (EnchTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(0);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(0);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            EnchTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(EnchTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(EnchTextKey[1]));
         }
         if (EnchKey == 'FlexibleResonance') {
             FrLabel.style.display = "inline-block";
@@ -595,17 +606,17 @@ document.addEventListener("DOMContentLoaded", () => {
             Ench[6] = 0;
         }
         if (EnchKey == 'LastStand') {
-            EnchEffectFunc(LsText);
+            EnchEffectFunc0(LsText);
         } else if (EnchKey == 'VictoryRush') {
-            EnchEffectFunc(VrText);
+            EnchEffectFunc0(VrText);
         }else if (EnchKey == 'PhoenixFlame') {
-            EnchEffectFunc(PfText);
+            EnchEffectFunc0(PfText);
         }else if (EnchKey == 'ArcaneBrilliance') {
-            EnchEffectFunc(AbText);
+            EnchEffectFunc1(AbText);
         }else if (EnchKey == 'NightStalker') {
-            EnchEffectFunc(NsText);
+            EnchEffectFunc1(NsText);
         }else if (EnchKey == 'Evershade') {
-            EnchEffectFunc(EsText);
+            EnchEffectFunc0(EsText);
         } else if (EnchTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(0);
             EnchTableSwitch = 0;
@@ -616,7 +627,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const OeKey = document.getElementById("OeForm").OeSelect.value
         const OeLv = document.getElementById("OeForm").OeLevSelect.value
         const OeFrToggle = document.getElementById("OeFrCheck");
-        function OeEffectFunc (OeTextKey) {
+        function OeEffectFunc0 (OeTextKey) {
             if (OeTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(EnchTableSwitch);
             };
@@ -632,6 +643,17 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (OeLv == "OeLev3") {
                 ProbElem.appendChild(document.createTextNode(OeTextKey[3]));
             };
+        }
+        function OeEffectFunc1 (OeTextKey) {
+            if (OeTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            OeTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(OeTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(OeTextKey[1]));
         }
         if (OeKey == 'FlexibleResonance') {
             OeFrLabel.style.display = 'inline-block';
@@ -722,17 +744,17 @@ document.addEventListener("DOMContentLoaded", () => {
             Oe[6] = 0;
         }
         if (OeKey == 'LastStand') {
-            OeEffectFunc(LsText);
+            OeEffectFunc0(LsText);
         } else if (OeKey == 'VictoryRush') {
-            OeEffectFunc(VrText)
+            OeEffectFunc0(VrText)
         }else if (OeKey == 'PhoenixFlame') {
-            OeEffectFunc(PfText)
+            OeEffectFunc0(PfText)
         }else if (OeKey == 'ArcaneBrilliance') {
-            OeEffectFunc(AbText)
+            OeEffectFunc1(AbText)
         }else if (OeKey == 'NightStalker') {
-            OeEffectFunc(NsText)
+            OeEffectFunc1(NsText)
         }else if (OeKey == 'Evershade') {
-            OeEffectFunc(EsText);
+            OeEffectFunc0(EsText);
         } else if (OeTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(EnchTableSwitch);
             OeTableSwitch = 0;
