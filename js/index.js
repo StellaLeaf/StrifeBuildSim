@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let OeTableSwitch = 0;
     let AeTableSwitch = 0;
     let AddonTableSwitch = 0;
+    let ArmorTableSwitch = [0, 0];
     const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
         method: "GET"
     }).then(response => {
@@ -888,8 +889,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
             AeTableSwitch = 0;
         }
-    }
-
+    };
     const CalcAddon = () => {
         const AddonKey = document.getElementById("AddonForm").AddonSelect.value
         const AddonLv = document.getElementById("AddonForm").AddonLevSelect.value
@@ -1070,12 +1070,22 @@ document.addEventListener("DOMContentLoaded", () => {
             AddonTableSwitch = 0;
         }
         render()
-    }
-
+    };
     const CalcArmor = () => {
         const ChestName = document.getElementById("ArmorForm").ChestSelect.value
         const HandName = document.getElementById("ArmorForm").HandSelect.value
         const BootsName = document.getElementById("ArmorForm").BootsSelect.value
+        function ArmorEffectFunc (ArmorTextKey) {
+            if (ArmorTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            ArmorTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(ArmorTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(ArmorTextKey[1]));
+        }
         let Chest = [0, 0, 0, 0, 0, 0, 0]
         let Hand = [0, 0, 0, 0]
         let Boots = [0, 0, 0, 0, 0, 0]
@@ -1169,7 +1179,20 @@ document.addEventListener("DOMContentLoaded", () => {
         Armor[5] = Chest[5] + Boots[5] + ArmorFullSet[5];
         Armor[6] = Chest[6] + ArmorFullSet[6];
         Armor[7] = ArmorFullSet[7];
-        render()
+        if (BootsName == 'Cleric') {
+            AeEffectFunc(CBootsText);
+        } else if (BootsName == 'Pilgrim') {
+            AeEffectFunc(PBootsText);
+        } else if (ArmorTableSwitch[0] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
+            AeTableSwitch[0] = 0;
+        }
+        if (ChestName === "Cleric" && ChestName === HandName === BootsName) {
+            AeEffectFunc(CSetText);
+        } else if (ArmorTableSwitch[1] === 1) {
+            tableElem.tBodies[1].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0]);
+            AeTableSwitch[1] = 0;
+        }
     }
     const myManaElem = document.getElementById('myMana');
     const enemyManaElem = document.getElementById('enemyMana');
