@@ -225,6 +225,21 @@
                     </select>
                 </span>
             </form>
+            <form id="ElixirForm">
+                <span class="custom-pull">
+                    <select id="ElixirSelect" class="Selecter">
+                        <option value="none" selected>Elixirを選択</option>
+                        <option value="ECombust">Combust[赤]</option>
+                        <option value="ECritical">Critical[黄]</option>
+                        <option value="EFortitude">Fortitude[白]</option>
+                        <option value="EPumpkinCandy">Pumpkin Candy[飴]</option>
+                        <option value="EReflex">Reflex[橙]</option>
+                        <option value="ESpeed">Speed[桃]</option>
+                        <option value="EVoid">Void[紫]</option>
+                        <option value="EWisdom">Wisdom[青]</option>
+                    </select>
+                </span>
+            </form>
         </div>
         <div>
             <p class="formHead">詳細設定</p>
@@ -274,6 +289,9 @@
             <label for="SbCheck" class="SbLabel CheckLabel" id="SbLabel">
                 <input type="checkbox" id="SbCheck">Shield Breakerを発動
             </label>
+            <label for="EVoidCheck" class="EVoidLabel CheckLabel" id="EVoidLabel">
+                <input type="checkbox" id="EVoidCheck">Elixir of Voidを発動
+            </label>
         </div>
         <div class="custom-table-desktop">
             <table class="WeaponTable">
@@ -318,7 +336,7 @@
                 </tr>
                 <tr>
                     <td><span id="DisplayHp">20</span></td>
-                    <td><span id="DisplayAtk">0</span></td>
+                    <td><span id="DisplayAveAtk">0</span>(<span id="DisplayHiAtk">0</span>)</td>
                     <td><span id="DisplayAveDef">0</span>(<span id="DisplayHiDef">0</span>)</td>
                     <td><span id="DisplayMana">2</span>%</td>
                     <td><span id="DisplayDodge">0</span>%</td>

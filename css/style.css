@@ -289,7 +289,8 @@ input[type="checkbox"] {
 .BsLabel,
 .MsLabel,
 .FfLabel,
-.IsLabel{
+.IsLabel,
+.EVoidLabel{
     display: none;
 }
 
