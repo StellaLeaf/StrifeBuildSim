@@ -9,7 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const Addon = [0, 0, 0, 0, 0, 1]
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
-    const Elixir = [0, 0, 0, 0, 0, 0]
+    const Elixir = [0, 0, 0, 0, 0, 0];
+    //Lev Atk DefDmg DefProb HP Mana Dodge PDodge　CC CD
+    const Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let AddonTableSwitch = 0;
     let ArmorTableSwitch = [0, 0];
     let ElixirTableSwitch = 0;
+    let AccessoryTableSwotch = [0, 0, 0]; 
     const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
         method: "GET"
     }).then(response => {
@@ -1269,6 +1272,22 @@ document.addEventListener("DOMContentLoaded", () => {
             ElixirTableSwitch = 0;
         };
         render();
+    }; 
+    const CalcAccessory = () => {
+        const Accy1Name = document.getElementById("AccessoryForm").Accessory1Select.value
+        const Accy2Name = document.getElementById("AccessoryForm").Accessory2Select.value
+        const Accy3Name = document.getElementById("AccessoryForm").Accessory3Select.value
+        function AccessoryEffectFunc (AccessoryTextKey) {
+            if (ArmorTableSwitch[0] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            ArmorTableSwitch[0] = 1;
+            NameElem.appendChild(document.createTextNode(ArmorTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(ArmorTextKey[1]));
+        }
     };
     const myManaElem = document.getElementById('myMana');
     const enemyManaElem = document.getElementById('enemyMana');
@@ -1282,8 +1301,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const myManaOnChange = (e) => {
         setMyManaValue(e.target.value);
-        render();
-    };
+     };
     const enemyManaOnChange = (e) => {
         setEnemyManaValue(e.target.value);
         CalcEnch();
@@ -1329,6 +1347,12 @@ document.addEventListener("DOMContentLoaded", () => {
         CalcEnch();
         CalcOE();
         CalcElixir();
+    };
+    document.getElementById("AccessoryForm").onchange = () => {
+        CalcEnch();
+        CalcOE();
+        CalcElixir();
+        CalcAccessory();
     };
     myManaElem.addEventListener('input', myManaOnChange);
     enemyManaElem.addEventListener('input', enemyManaOnChange);
