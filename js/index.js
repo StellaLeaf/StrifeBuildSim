@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
     //Lev Atk DefDmg DefProb HP Mana Dodge PDodge　CC CD pene Acc
-    const Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -1270,21 +1270,9 @@ document.addEventListener("DOMContentLoaded", () => {
             NameElem.appendChild(document.createTextNode(AccessoryTextKey[0]));
             ProbElem.appendChild(document.createTextNode(AccessoryTextKey[1]));
         };
-        let Accy1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let Accy2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let Accy3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         let Accy1Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         let Accy2Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         let Accy3Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        function Accy1SelectCalc(Accy1Key) {
-            Accy1 = Accy1Key;
-        };
-        function Accy2SelectCalc(Accy2Key) {
-            Accy2 = Accy2Key;
-        };
-        function Accy3SelectCalc(Accy3Key) {
-            Accy3 = Accy3Key;
-        };
         function Accy1AprSelectCalc(Accy1AprKey) {
             Accy1Apr = Accy1AprKey;
         };
@@ -1294,285 +1282,9 @@ document.addEventListener("DOMContentLoaded", () => {
         function Accy3AprSelectCalc(Accy3AprKey) {
             Accy3Apr = Accy3AprKey;
         };
-        if(Accy1Name === "NecklaceOfHeart") {
-            Accy1SelectCalc(NecklaceOfHeart);
-        }else if(Accy1Name === "RingOfLonelyHeart") {
-            Accy1SelectCalc(RingOfLonelyHeart);
-        }else if(Accy1Name === "VindicatorsPendant") {
-            Accy1SelectCalc(VindicatorsPendant);
-        }else if(Accy1Name === "NecklaceOfVoid") {
-            Accy1SelectCalc(NecklaceOfVoid);
-        }else if(Accy1Name === "TheBlindValor") {
-            Accy1SelectCalc(TheBlindValor);
-        }else if(Accy1Name === "AmuletOfGoldenGlow") {
-            Accy1SelectCalc(AmuletOfGoldenGlow);
-        }else if(Accy1Name === "NyrsTear") {
-            Accy1SelectCalc(NyrsTear);
-        }else if(Accy1Name === "TheLuckyStar") {
-            Accy1SelectCalc(TheLuckyStar);
-        }else if(Accy1Name === "RingOfNightmare") {
-            Accy1SelectCalc(RingOfNightmare);
-        }else if(Accy1Name === "SymbolOfWealth") {
-            Accy1SelectCalc(SymbolOfWealth);
-        }else if(Accy1Name === "CharmOfFortitude") {
-            Accy1SelectCalc(CharmOfFortitude);
-        }else if(Accy1Name === "PendantOfMastercrafter") {
-            Accy1SelectCalc(PendantOfMastercrafter);
-        }else if(Accy1Name === "ArcanaPendant") {
-            Accy1SelectCalc(ArcanaPendant);
-        }else if(Accy1Name === "TitanRing") {
-            Accy1SelectCalc(TitanRing);
-        }else if(Accy1Name === "RingOfNightrose") {
-            Accy1SelectCalc(RingOfNightrose);
-        }else if(Accy1Name === "BeggarOfDeath") {
-            Accy1SelectCalc(BeggarOfDeath);
-        }else if(Accy1Name === "StarlightPendant") {
-            Accy1SelectCalc(StarlightPendant);
-        }else if(Accy1Name === "RedNova") {
-            Accy1SelectCalc(RedNova);
-        }else if(Accy1Name === "RingOfCompetitor") {
-            Accy1SelectCalc(RingOfCompetitor);
-        }else if(Accy1Name === "MythrilRing") {
-            Accy1SelectCalc(MythrilRing);
-        }else if(Accy1Name === "RingOfSacramento") {
-            Accy1SelectCalc(RingOfSacramento);
-        }else if(Accy1Name === "RingOfCobraReflex") {
-            Accy1SelectCalc(RingOfCobraReflex);
-        }else if(Accy1Name === "NecklaceOfEffort") {
-            Accy1SelectCalc(NecklaceOfEffort);
-        }else if(Accy1Name === "LifelinkBracelet") {
-            Accy1SelectCalc(LifelinkBracelet);
-        }else if(Accy1Name === "GoldenDream") {
-            Accy1SelectCalc(GoldenDream);
-        }else if(Accy1Name === "NecklaceOfHelvys") {
-            Accy1SelectCalc(NecklaceOfHelvys);
-        }else if(Accy1Name === "PendantOfStardust") {
-            Accy1SelectCalc(PendantOfStardust);
-        }else if(Accy1Name === "ExplosiveEaring") {
-            Accy1SelectCalc(ExplosiveEaring);
-        }else if(Accy1Name === "PenetrationStone") {
-            Accy1SelectCalc(PenetrationStone);
-        }else if(Accy1Name === "FeedbackStone") {
-            Accy1SelectCalc(FeedbackStone);
-        }else if(Accy1Name === "Evergreen") {
-            Accy1SelectCalc(Evergreen);
-        }else if(Accy1Name === "TheRabbitFoot") {
-            Accy1SelectCalc(TheRabbitFoot);
-        }else if(Accy1Name === "PendantOfPurpleSeal") {
-            Accy1SelectCalc(PendantOfPurpleSeal);
-        }else if(Accy1Name === "NecklaceOfFaintVoice") {
-            Accy1SelectCalc(NecklaceOfFaintVoice);
-        }else if(Accy1Name === "NecklaceOfVigor") {
-            Accy1SelectCalc(NecklaceOfVigor);
-        }else if(Accy1Name === "ShieldChoker") {
-            Accy1SelectCalc(ShieldChoker);
-        }else if(Accy1Name === "EnchantedHematite") {
-            Accy1SelectCalc(EnchantedHematite);
-        }else if(Accy1Name === "NecklaceOfIcyMoon") {
-            Accy1SelectCalc(NecklaceOfIcyMoon);
-        }else if(Accy1Name === "ColdHeartRing") {
-            Accy1SelectCalc(ColdHeartRing);
-        }else if(Accy1Name === "RingOfBalance") {
-            Accy1SelectCalc(RingOfBalance);
-        }else if(Accy1Name === "RingOfLifeTree") {
-            Accy1SelectCalc(RingOfLifeTree);
-        }else if(Accy1Name === "EaringOfCursedMind") {
-            Accy1SelectCalc(EaringOfCursedMind);
-        }else if(Accy1Name === "RighteousCrescent") {
-            Accy1SelectCalc(RighteousCrescent);
-        }else if(Accy1Name === "SymbolOfSinful") {
-            Accy1SelectCalc(SymbolOfSinful);
-        }else if(Accy1Name === "TheEye") {
-            Accy1SelectCalc(TheEye);
-        }else{
-            Accy1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        };
-        if(Accy2Name === "NecklaceOfHeart") {
-            Accy2SelectCalc(NecklaceOfHeart);
-        }else if(Accy2Name === "RingOfLonelyHeart") {
-            Accy2SelectCalc(RingOfLonelyHeart);
-        }else if(Accy2Name === "VindicatorsPendant") {
-            Accy2SelectCalc(VindicatorsPendant);
-        }else if(Accy2Name === "NecklaceOfVoid") {
-            Accy2SelectCalc(NecklaceOfVoid);
-        }else if(Accy2Name === "TheBlindValor") {
-            Accy2SelectCalc(TheBlindValor);
-        }else if(Accy2Name === "AmuletOfGoldenGlow") {
-            Accy2SelectCalc(AmuletOfGoldenGlow);
-        }else if(Accy2Name === "NyrsTear") {
-            Accy2SelectCalc(NyrsTear);
-        }else if(Accy2Name === "TheLuckyStar") {
-            Accy2SelectCalc(TheLuckyStar);
-        }else if(Accy2Name === "RingOfNightmare") {
-            Accy2SelectCalc(RingOfNightmare);
-        }else if(Accy2Name === "SymbolOfWealth") {
-            Accy2SelectCalc(SymbolOfWealth);
-        }else if(Accy2Name === "CharmOfFortitude") {
-            Accy2SelectCalc(CharmOfFortitude);
-        }else if(Accy2Name === "PendantOfMastercrafter") {
-            Accy2SelectCalc(PendantOfMastercrafter);
-        }else if(Accy2Name === "ArcanaPendant") {
-            Accy2SelectCalc(ArcanaPendant);
-        }else if(Accy2Name === "TitanRing") {
-            Accy2SelectCalc(TitanRing);
-        }else if(Accy2Name === "RingOfNightrose") {
-            Accy2SelectCalc(RingOfNightrose);
-        }else if(Accy2Name === "BeggarOfDeath") {
-            Accy2SelectCalc(BeggarOfDeath);
-        }else if(Accy2Name === "StarlightPendant") {
-            Accy2SelectCalc(StarlightPendant);
-        }else if(Accy2Name === "RedNova") {
-            Accy2SelectCalc(RedNova);
-        }else if(Accy2Name === "RingOfCompetitor") {
-            Accy2SelectCalc(RingOfCompetitor);
-        }else if(Accy2Name === "MythrilRing") {
-            Accy2SelectCalc(MythrilRing);
-        }else if(Accy2Name === "RingOfSacramento") {
-            Accy2SelectCalc(RingOfSacramento);
-        }else if(Accy2Name === "RingOfCobraReflex") {
-            Accy2SelectCalc(RingOfCobraReflex);
-        }else if(Accy2Name === "NecklaceOfEffort") {
-            Accy2SelectCalc(NecklaceOfEffort);
-        }else if(Accy2Name === "LifelinkBracelet") {
-            Accy2SelectCalc(LifelinkBracelet);
-        }else if(Accy2Name === "GoldenDream") {
-            Accy2SelectCalc(GoldenDream);
-        }else if(Accy2Name === "NecklaceOfHelvys") {
-            Accy2SelectCalc(NecklaceOfHelvys);
-        }else if(Accy2Name === "PendantOfStardust") {
-            Accy2SelectCalc(PendantOfStardust);
-        }else if(Accy2Name === "ExplosiveEaring") {
-            Accy2SelectCalc(ExplosiveEaring);
-        }else if(Accy2Name === "PenetrationStone") {
-            Accy2SelectCalc(PenetrationStone);
-        }else if(Accy2Name === "FeedbackStone") {
-            Accy2SelectCalc(FeedbackStone);
-        }else if(Accy2Name === "Evergreen") {
-            Accy2SelectCalc(Evergreen);
-        }else if(Accy2Name === "TheRabbitFoot") {
-            Accy2SelectCalc(TheRabbitFoot);
-        }else if(Accy2Name === "PendantOfPurpleSeal") {
-            Accy2SelectCalc(PendantOfPurpleSeal);
-        }else if(Accy2Name === "NecklaceOfFaintVoice") {
-            Accy2SelectCalc(NecklaceOfFaintVoice);
-        }else if(Accy2Name === "NecklaceOfVigor") {
-            Accy2SelectCalc(NecklaceOfVigor);
-        }else if(Accy2Name === "ShieldChoker") {
-            Accy2SelectCalc(ShieldChoker);
-        }else if(Accy2Name === "EnchantedHematite") {
-            Accy2SelectCalc(EnchantedHematite);
-        }else if(Accy2Name === "NecklaceOfIcyMoon") {
-            Accy2SelectCalc(NecklaceOfIcyMoon);
-        }else if(Accy2Name === "ColdHeartRing") {
-            Accy2SelectCalc(ColdHeartRing);
-        }else if(Accy2Name === "RingOfBalance") {
-            Accy2SelectCalc(RingOfBalance);
-        }else if(Accy2Name === "RingOfLifeTree") {
-            Accy2SelectCalc(RingOfLifeTree);
-        }else if(Accy2Name === "EaringOfCursedMind") {
-            Accy2SelectCalc(EaringOfCursedMind);
-        }else if(Accy2Name === "RighteousCrescent") {
-            Accy2SelectCalc(RighteousCrescent);
-        }else if(Accy2Name === "SymbolOfSinful") {
-            Accy2SelectCalc(SymbolOfSinful);
-        }else if(Accy2Name === "TheEye") {
-            Accy2SelectCalc(TheEye);
-        }else{
-            Accy2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        };
-        if(Accy3Name === "NecklaceOfHeart") {
-            Accy3SelectCalc(NecklaceOfHeart);
-        }else if(Accy3Name === "RingOfLonelyHeart") {
-            Accy3SelectCalc(RingOfLonelyHeart);
-        }else if(Accy3Name === "VindicatorsPendant") {
-            Accy3SelectCalc(VindicatorsPendant);
-        }else if(Accy3Name === "NecklaceOfVoid") {
-            Accy3SelectCalc(NecklaceOfVoid);
-        }else if(Accy3Name === "TheBlindValor") {
-            Accy3SelectCalc(TheBlindValor);
-        }else if(Accy3Name === "AmuletOfGoldenGlow") {
-            Accy3SelectCalc(AmuletOfGoldenGlow);
-        }else if(Accy3Name === "NyrsTear") {
-            Accy3SelectCalc(NyrsTear);
-        }else if(Accy3Name === "TheLuckyStar") {
-            Accy3SelectCalc(TheLuckyStar);
-        }else if(Accy3Name === "RingOfNightmare") {
-            Accy3SelectCalc(RingOfNightmare);
-        }else if(Accy3Name === "SymbolOfWealth") {
-            Accy3SelectCalc(SymbolOfWealth);
-        }else if(Accy3Name === "CharmOfFortitude") {
-            Accy3SelectCalc(CharmOfFortitude);
-        }else if(Accy3Name === "PendantOfMastercrafter") {
-            Accy3SelectCalc(PendantOfMastercrafter);
-        }else if(Accy3Name === "ArcanaPendant") {
-            Accy3SelectCalc(ArcanaPendant);
-        }else if(Accy3Name === "TitanRing") {
-            Accy3SelectCalc(TitanRing);
-        }else if(Accy3Name === "RingOfNightrose") {
-            Accy3SelectCalc(RingOfNightrose);
-        }else if(Accy3Name === "BeggarOfDeath") {
-            Accy3SelectCalc(BeggarOfDeath);
-        }else if(Accy3Name === "StarlightPendant") {
-            Accy3SelectCalc(StarlightPendant);
-        }else if(Accy3Name === "RedNova") {
-            Accy3SelectCalc(RedNova);
-        }else if(Accy3Name === "RingOfCompetitor") {
-            Accy3SelectCalc(RingOfCompetitor);
-        }else if(Accy3Name === "MythrilRing") {
-            Accy3SelectCalc(MythrilRing);
-        }else if(Accy3Name === "RingOfSacramento") {
-            Accy3SelectCalc(RingOfSacramento);
-        }else if(Accy3Name === "RingOfCobraReflex") {
-            Accy3SelectCalc(RingOfCobraReflex);
-        }else if(Accy3Name === "NecklaceOfEffort") {
-            Accy3SelectCalc(NecklaceOfEffort);
-        }else if(Accy3Name === "LifelinkBracelet") {
-            Accy3SelectCalc(LifelinkBracelet);
-        }else if(Accy3Name === "GoldenDream") {
-            Accy3SelectCalc(GoldenDream);
-        }else if(Accy3Name === "NecklaceOfHelvys") {
-            Accy3SelectCalc(NecklaceOfHelvys);
-        }else if(Accy3Name === "PendantOfStardust") {
-            Accy3SelectCalc(PendantOfStardust);
-        }else if(Accy3Name === "ExplosiveEaring") {
-            Accy3SelectCalc(ExplosiveEaring);
-        }else if(Accy3Name === "PenetrationStone") {
-            Accy3SelectCalc(PenetrationStone);
-        }else if(Accy3Name === "FeedbackStone") {
-            Accy3SelectCalc(FeedbackStone);
-        }else if(Accy3Name === "Evergreen") {
-            Accy3SelectCalc(Evergreen);
-        }else if(Accy3Name === "TheRabbitFoot") {
-            Accy3SelectCalc(TheRabbitFoot);
-        }else if(Accy3Name === "PendantOfPurpleSeal") {
-            Accy3SelectCalc(PendantOfPurpleSeal);
-        }else if(Accy3Name === "NecklaceOfFaintVoice") {
-            Accy3SelectCalc(NecklaceOfFaintVoice);
-        }else if(Accy3Name === "NecklaceOfVigor") {
-            Accy3SelectCalc(NecklaceOfVigor);
-        }else if(Accy3Name === "ShieldChoker") {
-            Accy3SelectCalc(ShieldChoker);
-        }else if(Accy3Name === "EnchantedHematite") {
-            Accy3SelectCalc(EnchantedHematite);
-        }else if(Accy3Name === "NecklaceOfIcyMoon") {
-            Accy3SelectCalc(NecklaceOfIcyMoon);
-        }else if(Accy3Name === "ColdHeartRing") {
-            Accy3SelectCalc(ColdHeartRing);
-        }else if(Accy3Name === "RingOfBalance") {
-            Accy3SelectCalc(RingOfBalance);
-        }else if(Accy3Name === "RingOfLifeTree") {
-            Accy3SelectCalc(RingOfLifeTree);
-        }else if(Accy3Name === "EaringOfCursedMind") {
-            Accy3SelectCalc(EaringOfCursedMind);
-        }else if(Accy3Name === "RighteousCrescent") {
-            Accy3SelectCalc(RighteousCrescent);
-        }else if(Accy3Name === "SymbolOfSinful") {
-            Accy3SelectCalc(SymbolOfSinful);
-        }else if(Accy3Name === "TheEye") {
-            Accy3SelectCalc(TheEye);
-        }else{
-            Accy3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        };
+        let Accy1 = accyKeys[Accy1Name];
+        let Accy2 = accyKeys[Accy2Name];
+        let Accy3 = accyKeys[Accy3Name];
         if(Accy1AprName === "Meteoric") {
             Accy1AprSelectCalc(Meteoric);
         }else if(Accy1AprName === "Glorious") {
@@ -1690,6 +1402,9 @@ document.addEventListener("DOMContentLoaded", () => {
         Accessory[9] = Accy1[9] + Accy2[9] + Accy3[9] + Accy1Apr[9] + Accy2Apr[9] + Accy3Apr[9]
         Accessory[10] = Accy1[10] + Accy2[10] + Accy3[10] + Accy1Apr[10] + Accy2Apr[10] + Accy3Apr[10]
         Accessory[11] = Accy1[11] + Accy2[11] + Accy3[11] + Accy1Apr[11] + Accy2Apr[11] + Accy3Apr[11]
+        console.log(Accy1[11])
+        console.log(Accy2[11])
+        console.log(Accy3[11])
         console.log(Accessory)
         render();
     };
@@ -1731,7 +1446,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("EVoidCheck").addEventListener('change', ElixirCheckOnChange);
     fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
         [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
-        console.log(res.concat())
     })
     document.getElementById("TypeForm").onchange = () => render();
     document.getElementById("WeaponForm").onchange = () => render();

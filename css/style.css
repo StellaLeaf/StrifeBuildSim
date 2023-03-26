@@ -290,7 +290,20 @@ input[type="checkbox"] {
 .MsLabel,
 .FfLabel,
 .IsLabel,
-.EVoidLabel{
+.EVoidLabel,
+.NecklaceOfHeartLabel,
+.TheBlindValorLabel,
+.NyrsTearLabel,
+.TheLuckyStarLabel,
+.SymbolOfWealthLabel,
+.RingOfNightroseLabel,
+.RedNovaLabel,
+.RingOfSacramentoLabel,
+.NecklaceOfEffortLabel,
+.LifelinkBraceletLabel,
+.GoldenDreamLabel,
+.RingOfLifeTreeLabel
+{
     display: none;
 }
 
