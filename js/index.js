@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const Addon = [0, 0, 0, 0, 0, 1]
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
-    const Elixir = [0, 0, 0, 0, 0, 0]
+    const Elixir = [0, 0, 0, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let AddonTableSwitch = 0;
     let ArmorTableSwitch = [0, 0];
     let ElixirTableSwitch = 0;
+    let AccessoryTableSwitch = [0, 0, 0]; 
     const fetchAll = (urls) => Promise.all(urls.map(url => fetch(url, {
         method: "GET"
     }).then(response => {
@@ -345,14 +347,24 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0] + Elixir[4]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[24] = Math.round(20 + Armor[0] + Elixir[3]);
-        Result[25] = Math.round(Armor[1] + Elixir[0]);
-        Result[26] = Math.round(Armor[1] + Elixir[1]);
-        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20AveDef 21HiDef 22Mana 23Dodge 24Hp 25Avetk 26HiAtk
+        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4] + Accessory[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0] + Elixir[4] + Accessory[6]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[24] = Math.round(20 + Armor[0] + Elixir[3] + Accessory[4]);
+        Result[25] = Math.round(Armor[1] + Elixir[0] + Accessory[1]);
+        Result[26] = Math.round(Armor[1] + Elixir[1] + Accessory[1]);
+        Result[27] = Accessory[10]
+        Result[28] = Accessory[3]
+        Result[29] = Accessory[12]
+        Result[30] = Accessory[11]
+        Result[31] = Accessory[7]
+        Result[32] = 10 + Accessory[8]
+        Result[33] = 25 + Accessory[9]
+        //0Lev 1Atk 2DefDmg 3ShotDefProb 4HP 5Mana 6Dodge 7PDodge　8CC 9CD 10pene 11Acc 12ExplDefProb
+        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt
+        //11Duration 12WpnCC 13WpnCD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg20AveDef 21HiDef
+        //22Mana 23Dodge 24Hp 25AveAtk 26HiAtk 27pene 28ShotDefProb 29ExplDefProb 30Acc 31PDodge 32CC 33CD
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
         document.getElementById("DisplayCapacity").textContent = (Result[4])
@@ -368,7 +380,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("DisplayHp").textContent = (Result[24])
         document.getElementById("DisplayAveAtk").textContent = (Result[25])
         document.getElementById("DisplayHiAtk").textContent = (Result[26])
-
+        document.getElementById("DisplayPene").textContent = (Result[27])
+        document.getElementById("DisplayShotDefProb").textContent = (Result[28])
+        document.getElementById("DisplayExplDefProb").textContent = (Result[29])
+        document.getElementById("DisplayAcc").textContent = (Result[30])
+        document.getElementById("DisplayPerfectDodge").textContent = (Result[31])
+        document.getElementById("DisplayCritChance").textContent = (Result[32])
+        document.getElementById("DisplayCritDmg").textContent = (Result[33])
         //MobileDisplay
         document.getElementById("MobileDisplayRate").textContent = (Result[6])
         document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
@@ -1097,37 +1115,16 @@ document.addEventListener("DOMContentLoaded", () => {
         let Boots = [0, 0, 0, 0, 0, 0]
         let ArmorFullSet = [0, 0, 0, 0, 0, 0, 0, 0]
         function ChestSelectCalc(ChestKey) {
-            Chest[0] = ChestKey[0];
-            Chest[1] = ChestKey[1];
-            Chest[2] = ChestKey[2];
-            Chest[3] = ChestKey[3];
-            Chest[4] = ChestKey[4];
-            Chest[5] = ChestKey[5];
-            Chest[6] = ChestKey[6];
+            Chest = ChestKey;
         };
         function HandSelectCalc (HandKey) {
-            Hand[0] = HandKey[0];
-            Hand[1] = HandKey[1];
-            Hand[2] = HandKey[2];
-            Hand[3] = HandKey[3];
+            Hand = HandKey;
         };
         function BootsSelectCalc (BootsKey) {
-            Boots[0] = BootsKey[0];
-            Boots[1] = BootsKey[1];
-            Boots[2] = BootsKey[2];
-            Boots[3] = BootsKey[3];
-            Boots[4] = BootsKey[4];
-            Boots[5] = BootsKey[5];
+            Boots = BootsKey;
         };
         function ArmorFullSetCalc (ArmorFullSetKey) {
-            ArmorFullSet[0] = ArmorFullSetKey[0];
-            ArmorFullSet[1] = ArmorFullSetKey[1];
-            ArmorFullSet[2] = ArmorFullSetKey[2];
-            ArmorFullSet[3] = ArmorFullSetKey[3];
-            ArmorFullSet[4] = ArmorFullSetKey[4];
-            ArmorFullSet[5] = ArmorFullSetKey[5];
-            ArmorFullSet[6] = ArmorFullSetKey[6];
-            ArmorFullSet[7] = ArmorFullSetKey[7];
+            ArmorFullSet = ArmorFullSetKey;
         };
         if (ChestName === "Cleric") {
             ChestSelectCalc(CChest);
@@ -1269,6 +1266,36 @@ document.addEventListener("DOMContentLoaded", () => {
             ElixirTableSwitch = 0;
         };
         render();
+    }; 
+    const CalcAccessory = () => {
+        const Accy1Name = document.getElementById("Accy1Form").Accessory1Select.value
+        const Accy2Name = document.getElementById("Accy2Form").Accessory2Select.value
+        const Accy3Name = document.getElementById("Accy3Form").Accessory3Select.value
+        const Accy1AprName = document.getElementById("Accy1Form").Accy1AprSelect.value
+        const Accy2AprName = document.getElementById("Accy2Form").Accy2AprSelect.value
+        const Accy3AprName = document.getElementById("Accy3Form").Accy3AprSelect.value
+        function AccessoryEffectFunc (AccessoryTextKey) {
+            if (AccessoryTableSwitch[0] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AccessoryTableSwitch[0] = 1;
+            NameElem.appendChild(document.createTextNode(AccessoryTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(AccessoryTextKey[1]));
+        };
+        let Accy1 = accyKeys[Accy1Name];
+        let Accy2 = accyKeys[Accy2Name];
+        let Accy3 = accyKeys[Accy3Name];
+        let Accy1Apr = accyAprKeys[Accy1AprName];
+        let Accy2Apr = accyAprKeys[Accy2AprName];
+        let Accy3Apr = accyAprKeys[Accy3AprName];
+        for (let i = 0; i <= 12; i++) {
+            Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
+        };
+        console.log(Accessory)
+        render();
     };
     const myManaElem = document.getElementById('myMana');
     const enemyManaElem = document.getElementById('enemyMana');
@@ -1282,8 +1309,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const myManaOnChange = (e) => {
         setMyManaValue(e.target.value);
-        render();
-    };
+     };
     const enemyManaOnChange = (e) => {
         setEnemyManaValue(e.target.value);
         CalcEnch();
@@ -1309,7 +1335,6 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("EVoidCheck").addEventListener('change', ElixirCheckOnChange);
     fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
         [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
-        console.log(res.concat())
     })
     document.getElementById("TypeForm").onchange = () => render();
     document.getElementById("WeaponForm").onchange = () => render();
@@ -1329,6 +1354,24 @@ document.addEventListener("DOMContentLoaded", () => {
         CalcEnch();
         CalcOE();
         CalcElixir();
+    };
+    document.getElementById("Accy1Form").onchange = () => {
+        CalcEnch();
+        CalcOE();
+        CalcElixir();
+        CalcAccessory();
+    };
+    document.getElementById("Accy2Form").onchange = () => {
+        CalcEnch();
+        CalcOE();
+        CalcElixir();
+        CalcAccessory();
+    };
+    document.getElementById("Accy3Form").onchange = () => {
+        CalcEnch();
+        CalcOE();
+        CalcElixir();
+        CalcAccessory();
     };
     myManaElem.addEventListener('input', myManaOnChange);
     enemyManaElem.addEventListener('input', enemyManaOnChange);
