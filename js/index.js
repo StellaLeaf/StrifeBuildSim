@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
-    //Lev Atk DefDmg DefProb HP Mana Dodge PDodge　CC CD pene Acc
     let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
@@ -348,14 +347,24 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0] + Elixir[4]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[24] = Math.round(20 + Armor[0] + Elixir[3]);
-        Result[25] = Math.round(Armor[1] + Elixir[0]);
-        Result[26] = Math.round(Armor[1] + Elixir[1]);
-        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20AveDef 21HiDef 22Mana 23Dodge 24Hp 25Avetk 26HiAtk
+        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4] + Accessory[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0] + Elixir[4] + Accessory[6]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[24] = Math.round(20 + Armor[0] + Elixir[3] + Accessory[4]);
+        Result[25] = Math.round(Armor[1] + Elixir[0] + Accessory[1]);
+        Result[26] = Math.round(Armor[1] + Elixir[1] + Accessory[1]);
+        Result[27] = Accessory[10]
+        Result[28] = Accessory[3]
+        Result[29] = Accessory[12]
+        Result[30] = Accessory[11]
+        Result[31] = Accessory[7]
+        Result[32] = 10 + Accessory[8]
+        Result[33] = 25 + Accessory[9]
+        //0Lev 1Atk 2DefDmg 3ShotDefProb 4HP 5Mana 6Dodge 7PDodge　8CC 9CD 10pene 11Acc 12ExplDefProb
+        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt
+        //11Duration 12WpnCC 13WpnCD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg20AveDef 21HiDef
+        //22Mana 23Dodge 24Hp 25AveAtk 26HiAtk 27pene 28ShotDefProb 29ExplDefProb 30Acc 31PDodge 32CC 33CD
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
         document.getElementById("DisplayCapacity").textContent = (Result[4])
@@ -371,7 +380,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("DisplayHp").textContent = (Result[24])
         document.getElementById("DisplayAveAtk").textContent = (Result[25])
         document.getElementById("DisplayHiAtk").textContent = (Result[26])
-
+        document.getElementById("DisplayPene").textContent = (Result[27])
+        document.getElementById("DisplayShotDefProb").textContent = (Result[28])
+        document.getElementById("DisplayExplDefProb").textContent = (Result[29])
+        document.getElementById("DisplayAcc").textContent = (Result[30])
+        document.getElementById("DisplayPerfectDodge").textContent = (Result[31])
+        document.getElementById("DisplayCritChance").textContent = (Result[32])
+        document.getElementById("DisplayCritDmg").textContent = (Result[33])
         //MobileDisplay
         document.getElementById("MobileDisplayRate").textContent = (Result[6])
         document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
@@ -1270,22 +1285,13 @@ document.addEventListener("DOMContentLoaded", () => {
             NameElem.appendChild(document.createTextNode(AccessoryTextKey[0]));
             ProbElem.appendChild(document.createTextNode(AccessoryTextKey[1]));
         };
-        function Accy1AprSelectCalc(Accy1AprKey) {
-            Accy1Apr = Accy1AprKey;
-        };
-        function Accy2AprSelectCalc(Accy2AprKey) {
-            Accy2Apr = Accy2AprKey;
-        };
-        function Accy3AprSelectCalc(Accy3AprKey) {
-            Accy3Apr = Accy3AprKey;
-        };
         let Accy1 = accyKeys[Accy1Name];
         let Accy2 = accyKeys[Accy2Name];
         let Accy3 = accyKeys[Accy3Name];
         let Accy1Apr = accyAprKeys[Accy1AprName];
         let Accy2Apr = accyAprKeys[Accy2AprName];
         let Accy3Apr = accyAprKeys[Accy3AprName];
-        for (let i = 0; i <= 11; i++) {
+        for (let i = 0; i <= 12; i++) {
             Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
         };
         console.log(Accessory)
