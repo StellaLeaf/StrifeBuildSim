@@ -1270,9 +1270,6 @@ document.addEventListener("DOMContentLoaded", () => {
             NameElem.appendChild(document.createTextNode(AccessoryTextKey[0]));
             ProbElem.appendChild(document.createTextNode(AccessoryTextKey[1]));
         };
-        let Accy1Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let Accy2Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        let Accy3Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         function Accy1AprSelectCalc(Accy1AprKey) {
             Accy1Apr = Accy1AprKey;
         };
@@ -1285,6 +1282,9 @@ document.addEventListener("DOMContentLoaded", () => {
         let Accy1 = accyKeys[Accy1Name];
         let Accy2 = accyKeys[Accy2Name];
         let Accy3 = accyKeys[Accy3Name];
+        let Accy1Apr = accyAprKeys[Accy1AprName];
+        let Accy2Apr = accyAprKeys[Accy2AprName];
+        let Accy3Apr = accyAprKeys[Accy3AprName];
         if(Accy1AprName === "Meteoric") {
             Accy1AprSelectCalc(Meteoric);
         }else if(Accy1AprName === "Glorious") {
@@ -1390,21 +1390,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }else{
             Accy3Apr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         };
-        Accessory[0] = Accy1[0] + Accy2[0] + Accy3[0] + Accy1Apr[0] + Accy2Apr[0] + Accy3Apr[0]
-        Accessory[1] = Accy1[1] + Accy2[1] + Accy3[1] + Accy1Apr[1] + Accy2Apr[1] + Accy3Apr[1]
-        Accessory[2] = Accy1[2] + Accy2[2] + Accy3[2] + Accy1Apr[2] + Accy2Apr[2] + Accy3Apr[2]
-        Accessory[3] = Accy1[3] + Accy2[3] + Accy3[3] + Accy1Apr[3] + Accy2Apr[3] + Accy3Apr[3] 
-        Accessory[4] = Accy1[4] + Accy2[4] + Accy3[4] + Accy1Apr[4] + Accy2Apr[4] + Accy3Apr[4]
-        Accessory[5] = Accy1[5] + Accy2[5] + Accy3[5] + Accy1Apr[5] + Accy2Apr[5] + Accy3Apr[5]
-        Accessory[6] = Accy1[6] + Accy2[6] + Accy3[6] + Accy1Apr[6] + Accy2Apr[6] + Accy3Apr[6]
-        Accessory[7] = Accy1[7] + Accy2[7] + Accy3[7] + Accy1Apr[7] + Accy2Apr[7] + Accy3Apr[7]
-        Accessory[8] = Accy1[8] + Accy2[8] + Accy3[8] + Accy1Apr[8] + Accy2Apr[8] + Accy3Apr[8]
-        Accessory[9] = Accy1[9] + Accy2[9] + Accy3[9] + Accy1Apr[9] + Accy2Apr[9] + Accy3Apr[9]
-        Accessory[10] = Accy1[10] + Accy2[10] + Accy3[10] + Accy1Apr[10] + Accy2Apr[10] + Accy3Apr[10]
-        Accessory[11] = Accy1[11] + Accy2[11] + Accy3[11] + Accy1Apr[11] + Accy2Apr[11] + Accy3Apr[11]
-        console.log(Accy1[11])
-        console.log(Accy2[11])
-        console.log(Accy3[11])
+        for (let i = 0; i <= 11; i++) {
+            Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
+        };
         console.log(Accessory)
         render();
     };

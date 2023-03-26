@@ -207,7 +207,8 @@ const Piercing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0]
 const Impact = [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0]
 const Brunt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0]
 const Skillful = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]
-const Masters = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,12]
+const Masters = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12]
+const accyAprNone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 const Ar11 = ["Frontline Warrior", ]
 const Ar12 = ["Bulletproof Armor", ]
 const Ar21 = ["No Escape", ]
@@ -327,3 +328,22 @@ const accyKeys = {
     "TheEye": TheEye,
     "none": accyNone,
     };
+const accyAprKeys = {
+    "Meteoric": Meteoric,
+    "Glorious": Glorious,
+    "Mightly": Mightly,
+    "Blessed": Blessed,
+    "Strong": Strong,
+    "Sturdy": Sturdy,
+    "Spiteful": Spiteful,
+    "Assassins": Assassins,
+    "Mages": Mages,
+    "Infusing": Infusing,
+    "Penetrative": Penetrative,
+    "Piercing": Piercing,
+    "Impact": Impact,
+    "Brunt": Brunt,
+    "Skillful": Skillful,
+    "Masters": Masters,
+    "none": accyAprNone,
+};
