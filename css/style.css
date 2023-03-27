@@ -278,37 +278,9 @@ input[type="checkbox"] {
     text-align: center;
 }
 
-.BcLabel,
-.CfLabel,
-.SdLabel,
-.WsLabel,
-.FrLabel,
-.OeFrLabel,
-.SsaLabel,
-.SbLabel,
-.BsLabel,
-.MsLabel,
-.FfLabel,
-.IsLabel,
-.EVoidLabel,
-.NecklaceOfHeartLabel,
-.TheBlindValorLabel,
-.NyrsTearLabel,
-.TheLuckyStarLabel,
-.SymbolOfWealthLabel,
-.RingOfNightroseLabel,
-.RedNovaLabel,
-.RingOfSacramentoLabel,
-.NecklaceOfEffortLabel,
-.LifelinkBraceletLabel,
-.GoldenDreamLabel,
-.RingOfLifeTreeLabel
-{
-    display: none;
-}
-
 .CheckLabel {
     width: 100%;
+    display: none;
 }
 
 .ChangeDmgTable {

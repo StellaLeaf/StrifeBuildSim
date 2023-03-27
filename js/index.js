@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
-    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -1268,13 +1268,25 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
     }; 
     const CalcAccessory = () => {
-        const Accy1Name = document.getElementById("Accy1Form").Accessory1Select.value
-        const Accy2Name = document.getElementById("Accy2Form").Accessory2Select.value
-        const Accy3Name = document.getElementById("Accy3Form").Accessory3Select.value
+        let Accy1Name = document.getElementById("Accy1Form").Accessory1Select.value
+        let Accy2Name = document.getElementById("Accy2Form").Accessory2Select.value
+        let Accy3Name = document.getElementById("Accy3Form").Accessory3Select.value
         const Accy1AprName = document.getElementById("Accy1Form").Accy1AprSelect.value
         const Accy2AprName = document.getElementById("Accy2Form").Accy2AprSelect.value
         const Accy3AprName = document.getElementById("Accy3Form").Accy3AprSelect.value
-        function AccessoryEffectFunc (AccessoryTextKey) {
+        const NecklaceOfHeartToggle = document.getElementById("NecklaceOfHeartCheck");
+        const TheBlindValorToggle = document.getElementById("TheBlindValorCheck");
+        const NyrsTearToggle = document.getElementById("NyrsTearCheck");
+        const TheLuckyStarToggle = document.getElementById("TheLuckyStarCheck");
+        const SymbolOfWealthToggle = document.getElementById("SymbolOfWealthCheck");
+        const RingOfNightroseToggle = document.getElementById("RingOfNightroseCheck");
+        const RedNovaToggle = document.getElementById("RedNovaCheck");
+        const RingOfSacramentoToggle = document.getElementById("RingOfSacramentoCheck");
+        const NecklaceOfEffortToggle = document.getElementById("NecklaceOfEffortCheck");
+        const LifelinkBraceletToggle = document.getElementById("LifelinkBraceletCheck");
+        const GoldenDreamToggle = document.getElementById("GoldenDreamCheck");
+        const RingOfLifeTreeToggle = document.getElementById("RingOfLifeTreeCheck");
+        function AccyEffectFunc (AccyTextKey) {
             if (AccessoryTableSwitch[0] === 1) {
                 tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
             };
@@ -1282,9 +1294,38 @@ document.addEventListener("DOMContentLoaded", () => {
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AccessoryTableSwitch[0] = 1;
-            NameElem.appendChild(document.createTextNode(AccessoryTextKey[0]));
-            ProbElem.appendChild(document.createTextNode(AccessoryTextKey[1]));
+            NameElem.appendChild(document.createTextNode(AccyTextKey[0]));
+            ProbElem.appendChild(document.createTextNode(AccyTextKey[1]));
         };
+        const checkAccessories = [
+            { name: "NecklaceOfHeart", label: NecklaceOfHeartLabel, toggle: NecklaceOfHeartToggle },
+            { name: "TheBlindValor", label: TheBlindValorLabel, toggle: TheBlindValorToggle },
+            { name: "NyrsTear", label: NyrsTearLabel, toggle: NyrsTearToggle },
+            { name: "TheLuckyStar", label: TheLuckyStarLabel, toggle: TheLuckyStarToggle },
+            { name: "SymbolOfWealth", label: SymbolOfWealthLabel, toggle: SymbolOfWealthToggle },
+            { name: "RingOfNightrose", label: RingOfNightroseLabel, toggle: RingOfNightroseToggle },
+            { name: "RedNova", label: RedNovaLabel, toggle: RedNovaToggle },
+            { name: "RingOfSacramento", label: RingOfSacramentoLabel, toggle: RingOfSacramentoToggle },
+            { name: "NecklaceOfEffort", label: NecklaceOfEffortLabel, toggle: NecklaceOfEffortToggle },
+            { name: "LifelinkBracelet", label: LifelinkBraceletLabel, toggle: LifelinkBraceletToggle },
+            { name: "GoldenDream", label: GoldenDreamLabel, toggle: GoldenDreamToggle },
+            { name: "RingOfLifeTree", label: RingOfLifeTreeLabel, toggle: RingOfLifeTreeToggle }
+          ];
+        checkAccessories.forEach((checkAccessory) => {
+            if (Accy1Name === checkAccessory.name || Accy2Name === checkAccessory.name || Accy3Name === checkAccessory.name) {
+                checkAccessory.label.style.display = 'inline-block';
+            } else {
+                checkAccessory.label.style.display = 'none';
+                checkAccessory.toggle.checked = false;
+            };
+            if (Accy1Name === checkAccessory.name && checkAccessory.toggle.checked) {
+                Accy1Name = Accy1Name + "2"
+            } else if (Accy2Name === checkAccessory.name && checkAccessory.toggle.checked) {
+                Accy2Name = Accy2Name + "2"
+            } else if (Accy3Name === checkAccessory.name && checkAccessory.toggle.checked) {
+                Accy3Name = Accy3Name + "2"
+            };
+          });
         let Accy1 = accyKeys[Accy1Name];
         let Accy2 = accyKeys[Accy2Name];
         let Accy3 = accyKeys[Accy3Name];
@@ -1294,7 +1335,6 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i <= 12; i++) {
             Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
         };
-        console.log(Accessory)
         render();
     };
     const myManaElem = document.getElementById('myMana');
@@ -1320,6 +1360,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderOnChange = (e) => render()
     const AddonCheckOnChange = (e) => CalcAddon()
     const ElixirCheckOnChange = (e) => CalcElixir()
+    const AccessoryCheckOnChange = (e) => CalcAccessory()
     document.getElementById("FrCheck").addEventListener('change', EnchCheckOnChange);
     document.getElementById("OeFrCheck").addEventListener('change', OeCheckOnChange);
     document.getElementById("BcCheck").addEventListener('change', renderOnChange);
@@ -1333,6 +1374,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("BsCheck").addEventListener('change', renderOnChange);
     document.getElementById("MsCheck").addEventListener('change', renderOnChange);
     document.getElementById("EVoidCheck").addEventListener('change', ElixirCheckOnChange);
+    document.getElementById("NecklaceOfHeartCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("TheBlindValorCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("NyrsTearCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("TheLuckyStarCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("SymbolOfWealthCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RingOfNightroseCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RedNovaCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RingOfSacramentoCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("NecklaceOfEffortCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("LifelinkBraceletCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("GoldenDreamCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RingOfLifeTreeCheck").addEventListener('change', AccessoryCheckOnChange);
+
     fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
         [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
     })
