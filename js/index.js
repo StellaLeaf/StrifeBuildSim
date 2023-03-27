@@ -10,8 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
-    //Lev Atk DefDmg DefProb HP Mana Dodge PDodge　CC CD pene Acc
-    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -348,14 +347,24 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0] + Elixir[4]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[24] = Math.round(20 + Armor[0] + Elixir[3]);
-        Result[25] = Math.round(Armor[1] + Elixir[0]);
-        Result[26] = Math.round(Armor[1] + Elixir[1]);
-        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt 11Duration 12CC 13CD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg 20AveDef 21HiDef 22Mana 23Dodge 24Hp 25Avetk 26HiAtk
+        Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4] + Accessory[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[23] = Math.round(((Ench[6] + Oe[6] + Ae[3] + WeaponShiftEffect[0] + Elixir[4] + Accessory[6]) * 100) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[24] = Math.round(20 + Armor[0] + Elixir[3] + Accessory[4]);
+        Result[25] = Math.round(Armor[1] + Elixir[0] + Accessory[1]);
+        Result[26] = Math.round(Armor[1] + Elixir[1] + Accessory[1]);
+        Result[27] = Accessory[10]
+        Result[28] = Accessory[3]
+        Result[29] = Accessory[12]
+        Result[30] = Accessory[11]
+        Result[31] = Accessory[7]
+        Result[32] = 10 + Accessory[8]
+        Result[33] = 25 + Accessory[9]
+        //0Lev 1Atk 2DefDmg 3ShotDefProb 4HP 5Mana 6Dodge 7PDodge　8CC 9CD 10pene 11Acc 12ExplDefProb
+        //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt
+        //11Duration 12WpnCC 13WpnCD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg20AveDef 21HiDef
+        //22Mana 23Dodge 24Hp 25AveAtk 26HiAtk 27pene 28ShotDefProb 29ExplDefProb 30Acc 31PDodge 32CC 33CD
         //DesktopDisplay
         document.getElementById("DisplayRate").textContent = (Result[6])
         document.getElementById("DisplayCapacity").textContent = (Result[4])
@@ -371,7 +380,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("DisplayHp").textContent = (Result[24])
         document.getElementById("DisplayAveAtk").textContent = (Result[25])
         document.getElementById("DisplayHiAtk").textContent = (Result[26])
-
+        document.getElementById("DisplayPene").textContent = (Result[27])
+        document.getElementById("DisplayShotDefProb").textContent = (Result[28])
+        document.getElementById("DisplayExplDefProb").textContent = (Result[29])
+        document.getElementById("DisplayAcc").textContent = (Result[30])
+        document.getElementById("DisplayPerfectDodge").textContent = (Result[31])
+        document.getElementById("DisplayCritChance").textContent = (Result[32])
+        document.getElementById("DisplayCritDmg").textContent = (Result[33])
         //MobileDisplay
         document.getElementById("MobileDisplayRate").textContent = (Result[6])
         document.getElementById("MobileDisplayCapacity").textContent = (Result[4])
@@ -1056,7 +1071,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Addon[4] = 0
             Addon[5] = 1
         }
-        if (AddonKey == 'ApRound') {
+        if (AddonKey == 'ApRounds') {
             if (AddonTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
             };
@@ -1253,13 +1268,63 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
     }; 
     const CalcAccessory = () => {
-        const Accy1Name = document.getElementById("Accy1Form").Accessory1Select.value
-        const Accy2Name = document.getElementById("Accy2Form").Accessory2Select.value
-        const Accy3Name = document.getElementById("Accy3Form").Accessory3Select.value
+        let Accy1Name = document.getElementById("Accy1Form").Accessory1Select.value
+        let Accy2Name = document.getElementById("Accy2Form").Accessory2Select.value
+        let Accy3Name = document.getElementById("Accy3Form").Accessory3Select.value
         const Accy1AprName = document.getElementById("Accy1Form").Accy1AprSelect.value
         const Accy2AprName = document.getElementById("Accy2Form").Accy2AprSelect.value
         const Accy3AprName = document.getElementById("Accy3Form").Accy3AprSelect.value
-        function AccessoryEffectFunc (AccessoryTextKey) {
+        const NecklaceOfHeartToggle = document.getElementById("NecklaceOfHeartCheck");
+        const TheBlindValorToggle = document.getElementById("TheBlindValorCheck");
+        const NyrsTearToggle = document.getElementById("NyrsTearCheck");
+        const TheLuckyStarToggle = document.getElementById("TheLuckyStarCheck");
+        const SymbolOfWealthToggle = document.getElementById("SymbolOfWealthCheck");
+        const RingOfNightroseToggle = document.getElementById("RingOfNightroseCheck");
+        const RedNovaToggle = document.getElementById("RedNovaCheck");
+        const RingOfSacramentoToggle = document.getElementById("RingOfSacramentoCheck");
+        const NecklaceOfEffortToggle = document.getElementById("NecklaceOfEffortCheck");
+        const LifelinkBraceletToggle = document.getElementById("LifelinkBraceletCheck");
+        const GoldenDreamToggle = document.getElementById("GoldenDreamCheck");
+        const RingOfLifeTreeToggle = document.getElementById("RingOfLifeTreeCheck");
+        const checkAccessories = [
+            { name: "NecklaceOfHeart", label: NecklaceOfHeartLabel, toggle: NecklaceOfHeartToggle },
+            { name: "TheBlindValor", label: TheBlindValorLabel, toggle: TheBlindValorToggle },
+            { name: "NyrsTear", label: NyrsTearLabel, toggle: NyrsTearToggle },
+            { name: "TheLuckyStar", label: TheLuckyStarLabel, toggle: TheLuckyStarToggle },
+            { name: "SymbolOfWealth", label: SymbolOfWealthLabel, toggle: SymbolOfWealthToggle },
+            { name: "RingOfNightrose", label: RingOfNightroseLabel, toggle: RingOfNightroseToggle },
+            { name: "RedNova", label: RedNovaLabel, toggle: RedNovaToggle },
+            { name: "RingOfSacramento", label: RingOfSacramentoLabel, toggle: RingOfSacramentoToggle },
+            { name: "NecklaceOfEffort", label: NecklaceOfEffortLabel, toggle: NecklaceOfEffortToggle },
+            { name: "LifelinkBracelet", label: LifelinkBraceletLabel, toggle: LifelinkBraceletToggle },
+            { name: "GoldenDream", label: GoldenDreamLabel, toggle: GoldenDreamToggle },
+            { name: "RingOfLifeTree", label: RingOfLifeTreeLabel, toggle: RingOfLifeTreeToggle }
+          ];
+        checkAccessories.forEach((checkAccessory) => {
+            if (Accy1Name === checkAccessory.name || Accy2Name === checkAccessory.name || Accy3Name === checkAccessory.name) {
+                checkAccessory.label.style.display = 'inline-block';
+            } else {
+                checkAccessory.label.style.display = 'none';
+                checkAccessory.toggle.checked = false;
+            };
+            if (Accy1Name === checkAccessory.name && checkAccessory.toggle.checked) {
+                Accy1Name = Accy1Name + "2"
+            } else if (Accy2Name === checkAccessory.name && checkAccessory.toggle.checked) {
+                Accy2Name = Accy2Name + "2"
+            } else if (Accy3Name === checkAccessory.name && checkAccessory.toggle.checked) {
+                Accy3Name = Accy3Name + "2"
+            };
+          });
+        let Accy1 = accyKeys[Accy1Name];
+        let Accy2 = accyKeys[Accy2Name];
+        let Accy3 = accyKeys[Accy3Name];
+        let Accy1Apr = accyAprKeys[Accy1AprName];
+        let Accy2Apr = accyAprKeys[Accy2AprName];
+        let Accy3Apr = accyAprKeys[Accy3AprName];
+        for (let i = 0; i <= 12; i++) {
+            Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
+        };
+        if (accyTextKeys[Accy1Name]) {
             if (AccessoryTableSwitch[0] === 1) {
                 tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
             };
@@ -1267,28 +1332,43 @@ document.addEventListener("DOMContentLoaded", () => {
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AccessoryTableSwitch[0] = 1;
-            NameElem.appendChild(document.createTextNode(AccessoryTextKey[0]));
-            ProbElem.appendChild(document.createTextNode(AccessoryTextKey[1]));
+            NameElem.appendChild(document.createTextNode(accyTextKeys[Accy1Name][0]));
+            ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy1Name][1]));
+        } else if (AccessoryTableSwitch[0] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            AccessoryTableSwitch[0] = 0;
         };
-        function Accy1AprSelectCalc(Accy1AprKey) {
-            Accy1Apr = Accy1AprKey;
+        if (accyTextKeys[Accy2Name]) {
+            if (AccessoryTableSwitch[1] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AccessoryTableSwitch[1] = 1;
+            NameElem.appendChild(document.createTextNode(accyTextKeys[Accy2Name][0]));
+            ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy2Name][1]));
+        } else if (AccessoryTableSwitch[1] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            AccessoryTableSwitch[1] = 0;
         };
-        function Accy2AprSelectCalc(Accy2AprKey) {
-            Accy2Apr = Accy2AprKey;
+        if (accyTextKeys[Accy3Name]) {
+            if (AccessoryTableSwitch[2] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AccessoryTableSwitch[2] = 1;
+            NameElem.appendChild(document.createTextNode(accyTextKeys[Accy3Name][0]));
+            ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy3Name][1]));
+        } else if (AccessoryTableSwitch[2] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            AccessoryTableSwitch[2] = 0;
         };
-        function Accy3AprSelectCalc(Accy3AprKey) {
-            Accy3Apr = Accy3AprKey;
-        };
-        let Accy1 = accyKeys[Accy1Name];
-        let Accy2 = accyKeys[Accy2Name];
-        let Accy3 = accyKeys[Accy3Name];
-        let Accy1Apr = accyAprKeys[Accy1AprName];
-        let Accy2Apr = accyAprKeys[Accy2AprName];
-        let Accy3Apr = accyAprKeys[Accy3AprName];
-        for (let i = 0; i <= 11; i++) {
-            Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
-        };
-        console.log(Accessory)
+        console.log(accyTextKeys[Accy1Name])
+        console.log(accyTextKeys[Accy2Name])
+        console.log(accyTextKeys[Accy3Name])
         render();
     };
     const myManaElem = document.getElementById('myMana');
@@ -1314,6 +1394,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const renderOnChange = (e) => render()
     const AddonCheckOnChange = (e) => CalcAddon()
     const ElixirCheckOnChange = (e) => CalcElixir()
+    const AccessoryCheckOnChange = (e) => CalcAccessory()
     document.getElementById("FrCheck").addEventListener('change', EnchCheckOnChange);
     document.getElementById("OeFrCheck").addEventListener('change', OeCheckOnChange);
     document.getElementById("BcCheck").addEventListener('change', renderOnChange);
@@ -1327,6 +1408,19 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("BsCheck").addEventListener('change', renderOnChange);
     document.getElementById("MsCheck").addEventListener('change', renderOnChange);
     document.getElementById("EVoidCheck").addEventListener('change', ElixirCheckOnChange);
+    document.getElementById("NecklaceOfHeartCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("TheBlindValorCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("NyrsTearCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("TheLuckyStarCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("SymbolOfWealthCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RingOfNightroseCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RedNovaCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RingOfSacramentoCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("NecklaceOfEffortCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("LifelinkBraceletCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("GoldenDreamCheck").addEventListener('change', AccessoryCheckOnChange);
+    document.getElementById("RingOfLifeTreeCheck").addEventListener('change', AccessoryCheckOnChange);
+
     fetchAll([_pathAr, _pathArp, _pathSmg, _pathSmgp, _pathLmg, _pathLmgp, _pathSr, _pathSrp, _pathCar, _pathCarp, _pathExpl, _pathExplp, _pathSec, _pathSecp, _pathMelee, _pathMeleep]).then((res) => {
         [_objAr, _objArp, _objSmg, _objSmgp, _objLmg, _objLmgp, _objSr, _objSrp, _objCar, _objCarp, _objExpl, _objExplp, _objSec, _objSecp, _objMelee, _objMeleep] = res
     })

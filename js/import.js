@@ -110,105 +110,226 @@ const EVoid = [4, 0.75, 0, 0, 0]
 const EWisdom = [0, 0, 0, 0, 0]
 //Accessory
 const TheMagicalTributeText = ["The Magical Tribute", "キル時MSを入手"]
-const LonelyHeartText = ["Ring of Lonely Heart", "ダウン時Mana75%減少"]
-const BlindValorText = ["The Blind Valor", "Rune of LevitationのUnluck時間半減"]
-const MastercrafterText = ["Pendant of Mastercrafter", "キル時Toolboxを入手"]
-const StarlightText = ["Starlight Pendant", "Hikoboshi系投擲時Mana20%回復"]
-const CompetitorText = ["Ring of Competitor", "爆弾設置後復活時間を1sに短縮 キル時10%でポイント二倍 cap時Mana全快"]
+const RingOfLonelyHeartText = ["Ring of Lonely Heart", "ダウン時Mana75%減少"]
+const TheBlindValorText = ["The Blind Valor", "Rune of LevitationのUnluck時間半減"]
+const PendantOfMastercrafterText = ["Pendant of Mastercrafter", "キル時Toolboxを入手"]
+const StarlightPendantText = ["Starlight Pendant", "Hikoboshi系投擲時Mana20%回復"]
+const RingOfCompetitorText = ["Ring of Competitor", "爆弾設置後復活時間を1sに短縮 キル時10%でポイント二倍 cap時Mana全快"]
 const MythrilRingText = ["Mythril Ring", "Rune of Levitation使用時50%でUnluck付与無効化 Healing OrbCD無効化"]
-const SacramentoText = ["Ring of Sacramento", "20以下のダメージを2軽減"]
-const CobraReflexText = ["Ring of Cobra Reflex", "Backstepを前方向に変更"]
-const EffortText = ["Necklace of Effort", "キル時獲得EXP+5"]
+const RingOfSacramentoText = ["Ring of Sacramento", "20以下のダメージを2軽減"]
+const RingOfCobraReflexText = ["Ring of Cobra Reflex", "Backstepを前方向に変更"]
+const NecklaceOfEffortText = ["Necklace of Effort", "キル時獲得EXP+5"]
 const GoldenDreamText = ["Golden Dream", "エリクサーでの体力上昇無効化"]
-const StardustText = ["Pendant of Stardust", "Hikoboshi,Hikoboshi2,0の投擲数5倍,Hi-K0 Launcher発射数3倍"]
+const PendantOfStardustText = ["Pendant of Stardust", "Hikoboshi,Hikoboshi2,0の投擲数5倍,Hi-K0 Launcher発射数3倍"]
 const ExplosiveEaringText =["Explosive Earing","FragGranadeCD半減 Dynamite投擲数10倍"]
-const FeedbackText = ["Feedback Stone", "射撃以外のダメージ25%軽減"]
+const FeedbackStoneText = ["Feedback Stone", "射撃以外のダメージ25%軽減"]
 const EvergreenText = ["Evergreen", "ダウン時20HP回復して蘇生 CD30s"]
-const PurpleSealText = ["Pendant of Purple Seal", "射撃以外の攻撃力+5"]
-const FaintVoiceText = ["Necklace of Faint Voice", "マナ消費オフハンド使用後5秒間マナ回復量1.5倍"]
-const VigorText = ["Necklace of Vigor", "体力自動回復停止"]
-const ShieldChokerText = ["Shield Choker", "被ダメージ時Mana1%消費"]
-const IcyMoonText = ["Necklace of Icy Moon", "発動時マナ-5%"]
-const ColdHeartText = ["Cold Heart Ring", "味方の自分へのスポーン回避 回避前自分のHP全快"]
-const LifeTreeText = ["Ring of Life Tree", "体力自然回復時貫通無効の防御力+4"]
-const LifeTree_RegText = ["Ring of Life Tree", "体力自然回復時Mana回復量+1.5%"]
-const CursedMindText = ["Earing of Cursed Mind", "最大体力を6,Mana最大値を50%に変更"]
-const SinfulText = ["Symbol of Sinful", "攻撃後2秒以内にオフハンド使用で相手を爆破"]
+const PendantOfPurpleSealText = ["Pendant of Purple Seal", "射撃以外の攻撃力+5"]
+const NecklaceOfFaintVoiceText = ["Necklace of Faint Voice", "マナ消費オフハンド使用後5秒間マナ回復量1.5倍"]
+const NecklaceOfVigorText = ["Necklace of Vigor", "体力自動回復停止"]
+const ShieldChokerText = ["Shield Choker", "貫通抵抗+5 被ダメージ時Mana1%消費"]
+const NecklaceOfIcyMoonText = ["Necklace of Icy Moon", "発動時マナ-5%"]
+const ColdHeartRingText = ["Cold Heart Ring", "味方の自分へのスポーン回避 回避前自分のHP全快"]
+const RingOfLifeTreeText = ["Ring of Life Tree", "体力自然回復時貫通無効の防御力+4"]
+const RingOfLifeTree2Text = ["Ring of Life Tree", "体力自然回復時Mana回復量+1.5%"]
+const EaringOfCursedMindText = ["Earing of Cursed Mind", "最大体力を6,Mana最大値を50%に変更"]
+const SymbolOfSinfulText = ["Symbol of Sinful", "攻撃後2秒以内にオフハンド使用で相手を爆破"]
 const TheEyeText = ["The Eye", "30Kill毎にSoulShardを入手 Lv2000以下の相手との与ダメージ-50%受ダメージが+50%"]
-//Lev Atk DefDmg DefProb HP Mana Dodge PDodge　CC CD pene　Acc
-const NecklaceOfHeart       = [75, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfHeart_500   = [75, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0]
-const RingOfLonelyHeart     = [325, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const VindicatorsPendant    = [675, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0]
-const VindicatorsPendant_Es = [675, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfVoid        = [150, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfVoid_Ns     = [150, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const TheMagicalTribute     = [50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const TheBlindValor         = [350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const TheBlindValor_Levi    = [350, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const AmuletOfGoldenGlow    = [250, 0, 0, 25, 0, 0, 25, 0, 0, 0, 0, 0]
-const NyrsTear              = [275, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const TheLuckyStar          = [25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfNightmare       = [1000, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0]
-const SymbolOfWealth        = [225, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const CharmOfFortitude       = [120, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0]
-const PendantOfMastercrafter = [50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const ArcanaPendant          = [325, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0]
-const TitanRing              = [675, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfNightrose        = [75, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const BeggarOfDeath = [850, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const StarlightPendant = [350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const RedNova = [625, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfCompetitor = [425, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const MythrilRing = [400, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfSacramento = [1500, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfCobraReflex = [385, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0]
-const RingOfCobraReflex_Sg = [385, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0]
-const NecklaceOfEffort = [100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfEffort_1000 = [100, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0]
-const LifelinkBracelet = [925, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const LifelinkBracelet_low = [925, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const GoldenDream = [2000, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0]
-const GoldenDream_3000 = [2000, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfHelvys = [3000, 2, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0]
-const PendantOfStardust = [350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const ExplosiveEaring = [200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const PenetrationStone = [250, 1, 0, 0, 0, 0, 0, 0, 5, 0, 0]
-const FeedbackStone = [825, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Evergreen = [1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const TheRabbitFoot = [1000, 0, 0, 0, 0, 0, 2, 10, 0, 0, 0, 0]
-const PendantOfPurpleSeal = [825, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfFaintVoice = [1250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfVigor = [1250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const ShieldChoker = [1000, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const EnchantedHematite = [1500, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const NecklaceOfIcyMoon = [1250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const ColdHeartRing = [1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfBalance = [3500, 1, 0, 0, 4, 0, 2, 0, 0, 2, 0, 0]
-const RingOfLifeTree = [2000, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
-const RingOfLifeTree_Reg = [2000, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0]
-const EaringOfCursedMind = [2500, 5, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0]
-const RighteousCrescent = [2500, 0, 0, 0, 0, 0, 0, 10, 20, 0, 0, 0]
-const SymbolOfSinful = [2500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const TheEye = [4500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const accyNone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Meteoric = [0, 0.75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Glorious = [0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Mightly = [0, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Blessed = [0, 0, 0.75, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Strong = [0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Sturdy = [0, 0, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-const Spiteful = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0]
-const Assassins = [0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0]
-const Mages = [0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0]
-const Infusing = [0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0]
-const Penetrative = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0]
-const Piercing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0]
-const Impact = [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0]
-const Brunt = [0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0]
-const Skillful = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8]
-const Masters = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12]
-const accyAprNone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+//Lev Atk DefDmg ShotDefProb HP Mana Dodge PDodge　CC CD pene　Acc ExplDefProb
+const NecklaceOfHeart        = [75, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfHeart2       = [75, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0]
+const RingOfLonelyHeart      = [325, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const VindicatorsPendant     = [675, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0]
+const VindicatorsPendant2    = [675, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfVoid         = [150, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfVoid2        = [150, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheMagicalTribute      = [50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheBlindValor          = [350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheBlindValor2         = [350, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const AmuletOfGoldenGlow     = [250, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0]
+const NyrsTear               = [275, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const NyrsTear2              = [275, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheLuckyStar           = [25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheLuckyStar2          = [25, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfNightmare        = [1000, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0]
+const SymbolOfWealth         = [225, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const SymbolOfWealth2        = [225, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const CharmOfFortitude       = [120, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0]
+const PendantOfMastercrafter = [50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const ArcanaPendant          = [325, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0]
+const TitanRing              = [675, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 25]
+const RingOfNightrose        = [75, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfNightrose2       = [75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const BeggarOfDeath          = [850, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const StarlightPendant       = [350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RedNova                = [625, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RedNova2               = [625, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfCompetitor       = [425, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const MythrilRing            = [400, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfSacramento       = [1500, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfSacramento2      = [1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfCobraReflex      = [385, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0]
+const RingOfCobraReflex2     = [385, 3, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0]
+const NecklaceOfEffort       = [100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfEffort2      = [100, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0]
+const LifelinkBracelet       = [925, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const LifelinkBracelet2      = [925, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const GoldenDream            = [2000, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0]
+const GoldenDream2           = [2000, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfHelvys       = [3000, 2, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0]
+const PendantOfStardust      = [350, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const ExplosiveEaring        = [200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const PenetrationStone       = [250, 1, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0]
+const FeedbackStone          = [825, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 25]
+const Evergreen              = [1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheRabbitFoot          = [1000, 0, 0, 0, 0, 0, 0, 2, 10, 0, 0, 0, 0]
+const PendantOfPurpleSeal    = [825, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfFaintVoice   = [1250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfVigor        = [1250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const ShieldChoker           = [1000, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const EnchantedHematite      = [1500, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const NecklaceOfIcyMoon      = [1250, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const ColdHeartRing          = [1500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfBalance          = [3500, 1, 0, 0, 4, 1, 0, 2, 0, 0, 2, 0, 0]
+const RingOfLifeTree         = [2000, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const RingOfLifeTree2        = [2000, 0, 0, 2, 0, 1.5, 0, 0, 0, 0, 0, 0, 0]
+const EaringOfCursedMind     = [2500, 5, 0, 0, 0, 0, 0,  0, 20, 0, 0, 0, 0]
+const RighteousCrescent      = [2500, 0, 0, 0, 0, 0, 0, 0, 10, 20, 0, 0, 0]
+const SymbolOfSinful         = [2500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const TheEye                 = [4500, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const accyNone               = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Meteoric    = [0, 0.75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Glorious    = [0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Mightly     = [0, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Blessed     = [0, 0, 0.75, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Strong      = [0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Sturdy      = [0, 0, 0.25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const Spiteful    = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0]
+const Assassins   = [0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0]
+const Mages       = [0, 0, 0, 0, 0, 0.3, 0, 0, 0, 0, 0, 0, 0]
+const Infusing    = [0, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0, 0, 0]
+const Penetrative = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]
+const Piercing    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1.5, 0, 0]
+const Impact      = [0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0]
+const Brunt       = [0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0]
+const Skillful    = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0]
+const Masters     = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0]
+const accyAprNone = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+const accyKeys = {
+    "NecklaceOfHeart": NecklaceOfHeart,
+    "NecklaceOfHeart2": NecklaceOfHeart2,
+    "RingOfLonelyHeart": RingOfLonelyHeart,
+    "VindicatorsPendant": VindicatorsPendant,
+    "VindicatorsPendant2": VindicatorsPendant2,
+    "TheMagicalTribute": TheMagicalTribute,
+    "NecklaceOfVoid": NecklaceOfVoid,
+    "NecklaceOfVoid2": NecklaceOfVoid2,
+    "TheBlindValor": TheBlindValor,
+    "TheBlindValor2": TheBlindValor2,
+    "AmuletOfGoldenGlow": AmuletOfGoldenGlow,
+    "NyrsTear": NyrsTear,
+    "NyrsTear2": NyrsTear2,
+    "TheLuckyStar": TheLuckyStar,
+    "TheLuckyStar2": TheLuckyStar2,
+    "RingOfNightmare": RingOfNightmare,
+    "SymbolOfWealth": SymbolOfWealth,
+    "SymbolOfWealth2": SymbolOfWealth2,
+    "CharmOfFortitude": CharmOfFortitude,
+    "PendantOfMastercrafter": PendantOfMastercrafter,
+    "ArcanaPendant": ArcanaPendant,
+    "TitanRing": TitanRing,
+    "RingOfNightrose": RingOfNightrose,
+    "RingOfNightrose2": RingOfNightrose2,
+    "BeggarOfDeath": BeggarOfDeath,
+    "StarlightPendant": StarlightPendant,
+    "RedNova": RedNova,
+    "RedNova2": RedNova2,
+    "RingOfCompetitor": RingOfCompetitor,
+    "MythrilRing": MythrilRing,
+    "RingOfSacramento": RingOfSacramento,
+    "RingOfSacramento2": RingOfSacramento2,
+    "RingOfCobraReflex": RingOfCobraReflex,
+    "RingOfCobraReflex2": RingOfCobraReflex2,
+    "NecklaceOfEffort": NecklaceOfEffort,
+    "NecklaceOfEffort2": NecklaceOfEffort2,
+    "LifelinkBracelet": LifelinkBracelet,
+    "LifelinkBracelet2": LifelinkBracelet2,
+    "GoldenDream": GoldenDream,
+    "GoldenDream2": GoldenDream2,
+    "NecklaceOfHelvys": NecklaceOfHelvys,
+    "PendantOfStardust": PendantOfStardust,
+    "ExplosiveEaring": ExplosiveEaring,
+    "PenetrationStone": PenetrationStone,
+    "FeedbackStone": FeedbackStone,
+    "Evergreen": Evergreen,
+    "TheRabbitFoot": TheRabbitFoot,
+    "PendantOfPurpleSeal": PendantOfPurpleSeal,
+    "NecklaceOfFaintVoice": NecklaceOfFaintVoice,
+    "NecklaceOfVigor": NecklaceOfVigor,
+    "ShieldChoker": ShieldChoker,
+    "EnchantedHematite": EnchantedHematite,
+    "NecklaceOfIcyMoon": NecklaceOfIcyMoon,
+    "ColdHeartRing": ColdHeartRing,
+    "RingOfBalance": RingOfBalance,
+    "RingOfLifeTree": RingOfLifeTree,
+    "RingOfLifeTree2": RingOfLifeTree2,
+    "EaringOfCursedMind": EaringOfCursedMind,
+    "RighteousCrescent": RighteousCrescent,
+    "SymbolOfSinful": SymbolOfSinful,
+    "TheEye": TheEye,
+    "none": accyNone,
+    };
+const accyAprKeys = {
+    "Meteoric": Meteoric,
+    "Glorious": Glorious,
+    "Mightly": Mightly,
+    "Blessed": Blessed,
+    "Strong": Strong,
+    "Sturdy": Sturdy,
+    "Spiteful": Spiteful,
+    "Assassins": Assassins,
+    "Mages": Mages,
+    "Infusing": Infusing,
+    "Penetrative": Penetrative,
+    "Piercing": Piercing,
+    "Impact": Impact,
+    "Brunt": Brunt,
+    "Skillful": Skillful,
+    "Masters": Masters,
+    "none": accyAprNone,
+};
+const accyTextKeys = {
+     "TheMagicalTribute": TheMagicalTributeText ,
+     "RingOfLonelyHeart": RingOfLonelyHeart ,
+     "TheBlindValor": TheBlindValorText ,
+     "PendantOfMastercrafter": PendantOfMastercrafterText ,
+     "StarlightPendant": StarlightPendantText ,
+     "RingOfCompetitor": RingOfCompetitorText ,
+     "MythrilRing": MythrilRingText ,
+     "RingOfSacramento": RingOfSacramentoText ,
+     "RingOfSacramento2": RingOfSacramentoText ,
+     "RingOfCobraReflex": RingOfCobraReflexText ,
+     "RingOfCobraReflex2": RingOfCobraReflexText ,
+     "NecklaceOfEffort": NecklaceOfEffortText ,
+     "NecklaceOfEffort2": NecklaceOfEffortText ,
+     "GoldenDream": GoldenDreamText ,
+     "GoldenDream2": GoldenDreamText ,
+     "PendantOfStardust": PendantOfStardustText ,
+     "ExplosiveEaring": ExplosiveEaringText ,
+     "FeedbackStone": FeedbackStoneText ,
+     "Evergreen": EvergreenText ,
+     "PendantOfPurpleSeal": PendantOfPurpleSealText ,
+     "NecklaceOfFaintVoice": NecklaceOfFaintVoiceText ,
+     "NecklaceOfVigor": NecklaceOfVigorText ,
+     "ShieldChoker": ShieldChokerText ,
+     "NecklaceOfIcyMoon": NecklaceOfIcyMoonText ,
+     "ColdHeartRing": ColdHeartRingText ,
+     "RingOfLifeTree": RingOfLifeTreeText ,
+     "RingOfLifeTree2": RingOfLifeTree2Text ,
+     "EaringOfCursedMind": EaringOfCursedMindText ,
+     "SymbolOfSinful": SymbolOfSinfulText ,
+     "TheEye": TheEyeText ,
+};
 const Ar11 = ["Frontline Warrior", ]
 const Ar12 = ["Bulletproof Armor", ]
 const Ar21 = ["No Escape", ]
@@ -280,73 +401,6 @@ const St42 = ["Tranquility", ]
 const St51 = ["Endermage", ]
 const St52 = ["Call Thunder", ]
 
-const accyKeys = {
-    "NecklaceOfHeart": NecklaceOfHeart,
-    "RingOfLonelyHeart": RingOfLonelyHeart,
-    "VindicatorsPendant": VindicatorsPendant,
-    "NecklaceOfVoid": NecklaceOfVoid,
-    "TheBlindValor": TheBlindValor,
-    "AmuletOfGoldenGlow": AmuletOfGoldenGlow,
-    "NyrsTear": NyrsTear,
-    "TheLuckyStar": TheLuckyStar,
-    "RingOfNightmare": RingOfNightmare,
-    "SymbolOfWealth": SymbolOfWealth,
-    "CharmOfFortitude": CharmOfFortitude,
-    "PendantOfMastercrafter": PendantOfMastercrafter,
-    "ArcanaPendant": ArcanaPendant,
-    "TitanRing": TitanRing,
-    "RingOfNightrose": RingOfNightrose,
-    "BeggarOfDeath": BeggarOfDeath,
-    "StarlightPendant": StarlightPendant,
-    "RedNova": RedNova,
-    "RingOfCompetitor": RingOfCompetitor,
-    "MythrilRing": MythrilRing,
-    "RingOfSacramento": RingOfSacramento,
-    "RingOfCobraReflex": RingOfCobraReflex,
-    "NecklaceOfEffort": NecklaceOfEffort,
-    "LifelinkBracelet": LifelinkBracelet,
-    "GoldenDream": GoldenDream,
-    "NecklaceOfHelvys": NecklaceOfHelvys,
-    "PendantOfStardust": PendantOfStardust,
-    "ExplosiveEaring": ExplosiveEaring,
-    "PenetrationStone": PenetrationStone,
-    "FeedbackStone": FeedbackStone,
-    "Evergreen": Evergreen,
-    "TheRabbitFoot": TheRabbitFoot,
-    "PendantOfPurpleSeal": PendantOfPurpleSeal,
-    "NecklaceOfFaintVoice": NecklaceOfFaintVoice,
-    "NecklaceOfVigor": NecklaceOfVigor,
-    "ShieldChoker": ShieldChoker,
-    "EnchantedHematite": EnchantedHematite,
-    "NecklaceOfIcyMoon": NecklaceOfIcyMoon,
-    "ColdHeartRing": ColdHeartRing,
-    "RingOfBalance": RingOfBalance,
-    "RingOfLifeTree": RingOfLifeTree,
-    "EaringOfCursedMind": EaringOfCursedMind,
-    "RighteousCrescent": RighteousCrescent,
-    "SymbolOfSinful": SymbolOfSinful,
-    "TheEye": TheEye,
-    "none": accyNone,
-    };
-const accyAprKeys = {
-    "Meteoric": Meteoric,
-    "Glorious": Glorious,
-    "Mightly": Mightly,
-    "Blessed": Blessed,
-    "Strong": Strong,
-    "Sturdy": Sturdy,
-    "Spiteful": Spiteful,
-    "Assassins": Assassins,
-    "Mages": Mages,
-    "Infusing": Infusing,
-    "Penetrative": Penetrative,
-    "Piercing": Piercing,
-    "Impact": Impact,
-    "Brunt": Brunt,
-    "Skillful": Skillful,
-    "Masters": Masters,
-    "none": accyAprNone,
-};
 const mappings = [
     "maps/1_AR.json",
     "maps/1_AR_CSP.json",

@@ -175,6 +175,7 @@
                 <span class="custom-pull">
                     <select id="AddonSelect" class="Selecter">
                         <option value="none" selected>Addonを選択</option>
+                        <option value="ApRounds">AP Rounds</option>
                         <option value="ManaPowder">Mana Powder</option>
                         <option value="HeavyBullets">Heavy Bullets</option>
                         <option value="ExtendedMagazine">Extended Magazine</option>
@@ -586,31 +587,37 @@
                     <td><span id="DisplayChangeDmgMax">0</span></td>
                 </tr>
                 <tr>
-                    <th>HP</th>
                     <th>Atk</th>
                     <th>Def</th>
+                    <th>HP</th>
                     <th>Mana回復</th>
-                    <th>Dodge</th>
+                    <th>回避率</th>
+                    <th>CritChance</th>
                 </tr>
                 <tr>
-                    <td><span id="DisplayHp">20</span></td>
                     <td><span id="DisplayAveAtk">0</span>(<span id="DisplayHiAtk">0</span>)</td>
                     <td><span id="DisplayAveDef">0</span>(<span id="DisplayHiDef">0</span>)</td>
+                    <td><span id="DisplayHp">20</span></td>
                     <td><span id="DisplayMana">2</span>%</td>
                     <td><span id="DisplayDodge">0</span>%</td>
-                </tr>
-                <!-- <tr>
-                    <th>HP</th>
-                    <th>Atk</th>
-                    <th>Def</th>
-                    <th>Mana回復</th>
+                    <td><span id="DisplayCritChance">10</span>%</td>
                 </tr>
                 <tr>
-                    <td><span id="DisplayHp">0</span></td>
-                    <td><span id="DisplayAtk">0</span></td>
-                    <td><span id="DisplayDef">0</span></td>
-                    <td><span id="DisplayMana">0</span>%</td>
-                </tr>  -->
+                    <th>貫通力</th>
+                    <th>実弾軽減率</th>
+                    <th>爆発等軽減率</th>
+                    <th>命中率</th>
+                    <th>完全回避率</th>
+                    <th>CritDamage</th>
+                </tr>
+                <tr>
+                    <td><span id="DisplayPene">0</span></td>
+                    <td><span id="DisplayShotDefProb">0</span>%</td>
+                    <td><span id="DisplayExplDefProb">0</span>%</td>
+                    <td><span id="DisplayAcc">0</span>%</td>
+                    <td><span id="DisplayPerfectDodge">0</span>%</td>
+                    <td><span id="DisplayCritDmg">25</span>%</td>
+                </tr>
             </table>
         </div>
         <div class="custom-table-mobile0">
