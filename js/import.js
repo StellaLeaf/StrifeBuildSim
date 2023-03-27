@@ -347,3 +347,21 @@ const accyAprKeys = {
     "Masters": Masters,
     "none": accyAprNone,
 };
+const mappings = [
+    "maps/1_AR.json",
+    "maps/1_AR_CSP.json",
+    "maps/3_SMG.json",
+    "maps/3_SMG_CSP.json",
+    "maps/9_LMG.json",
+    "maps/9_LMG_CSP.json",
+    "maps/5_SR.json",
+    "maps/5_SR_CSP.json",
+    "maps/12_CARBINE.json",
+    "maps/12_CARBINE_CSP.json",
+    "maps/7_EXPLOSIVE.json",
+    "maps/7_EXPLOSIVE_CSP.json",
+    "maps/6_PISTOL.json",
+    "maps/6_PISTOL_CSP.json",
+    "maps/4_SG.json",
+    "maps/4_SG_CSP.json",
+];
