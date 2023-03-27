@@ -1071,7 +1071,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Addon[4] = 0
             Addon[5] = 1
         }
-        if (AddonKey == 'ApRound') {
+        if (AddonKey == 'ApRounds') {
             if (AddonTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
             };
@@ -1286,17 +1286,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const LifelinkBraceletToggle = document.getElementById("LifelinkBraceletCheck");
         const GoldenDreamToggle = document.getElementById("GoldenDreamCheck");
         const RingOfLifeTreeToggle = document.getElementById("RingOfLifeTreeCheck");
-        function AccyEffectFunc (AccyTextKey) {
-            if (AccessoryTableSwitch[0] === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
-            };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
-            let NameElem = TrElem.insertCell(0);
-            let ProbElem = TrElem.insertCell(1);
-            AccessoryTableSwitch[0] = 1;
-            NameElem.appendChild(document.createTextNode(AccyTextKey[0]));
-            ProbElem.appendChild(document.createTextNode(AccyTextKey[1]));
-        };
         const checkAccessories = [
             { name: "NecklaceOfHeart", label: NecklaceOfHeartLabel, toggle: NecklaceOfHeartToggle },
             { name: "TheBlindValor", label: TheBlindValorLabel, toggle: TheBlindValorToggle },
@@ -1335,6 +1324,51 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i <= 12; i++) {
             Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
         };
+        if (accyTextKeys[Accy1Name]) {
+            if (AccessoryTableSwitch[0] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AccessoryTableSwitch[0] = 1;
+            NameElem.appendChild(document.createTextNode(accyTextKeys[Accy1Name][0]));
+            ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy1Name][1]));
+        } else if (AccessoryTableSwitch[0] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            AccessoryTableSwitch[0] = 0;
+        };
+        if (accyTextKeys[Accy2Name]) {
+            if (AccessoryTableSwitch[1] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AccessoryTableSwitch[1] = 1;
+            NameElem.appendChild(document.createTextNode(accyTextKeys[Accy2Name][0]));
+            ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy2Name][1]));
+        } else if (AccessoryTableSwitch[1] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            AccessoryTableSwitch[1] = 0;
+        };
+        if (accyTextKeys[Accy3Name]) {
+            if (AccessoryTableSwitch[2] === 1) {
+                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            AccessoryTableSwitch[2] = 1;
+            NameElem.appendChild(document.createTextNode(accyTextKeys[Accy3Name][0]));
+            ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy3Name][1]));
+        } else if (AccessoryTableSwitch[2] === 1) {
+            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            AccessoryTableSwitch[2] = 0;
+        };
+        console.log(accyTextKeys[Accy1Name])
+        console.log(accyTextKeys[Accy2Name])
+        console.log(accyTextKeys[Accy3Name])
         render();
     };
     const myManaElem = document.getElementById('myMana');
