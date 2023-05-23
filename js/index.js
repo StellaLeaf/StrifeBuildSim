@@ -515,60 +515,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const CalcEnch = () => {
         let enchName = document.getElementById("EnchantForm").EnchantSelect.value
+        let oeName = document.getElementById("OeForm").OeSelect.value
         const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
+        const OeLv = document.getElementById("OeForm").OeLevSelect.value
         const FrToggle = document.getElementById("FrCheck");
-        if (enchName === 'FlexibleResonance') {
+        if ((enchName === 'FlexibleResonance') || (oeName === 'FlexibleResonance')) {
             FrLabel.style.display = "inline-block";
         } else {
             FrLabel.style.display = 'none';
             FrToggle.checked = false;
         };
-        if (enchName === 'FlexibleResonance' && FrToggle.checked) {
-            enchName = enchName + "2"
+        const calcEnchEfct = (name) => {
+            if (name === 'FlexibleResonance' && FrToggle.checked) {name = name + "2"};
+            if (name === 'ShadowStrike' && enemyManaElem.value < 50) {
+                name = name + "0"
+            }else if(name === 'ShadowStrike' && enemyManaElem.value < 75) {
+                name = name + "1"
+            }else if(name === 'ShadowStrike' && enemyManaElem.value <= 100) {
+                name = name + "2"
+            };
+            return(name);
         };
-        if (enchName === 'ShadowStrike' && enemyManaElem.value < 50) {
-            enchName = enchName + "0"
-        }else if(enchName === 'ShadowStrike' && enemyManaElem.value < 75) {
-            enchName = enchName + "1"
-        }else if(enchName === 'ShadowStrike' && enemyManaElem.value <= 100) {
-            enchName = enchName + "2"
-        };
-        EnchLevelsCalc(enchKeys[enchName])
-        function EnchLevelsCalc(EnchName) {
-            if (EnchLv == "EnchLev1") {
-                Ench[0] = EnchName[0] * EnchName[1];
-                Ench[1] = EnchName[0];
-                Ench[2] = EnchName[4];
-                Ench[3] = EnchName[5] * EnchName[8];
-                Ench[4] = EnchName[5];
-                Ench[5] = EnchName[11];
-                Ench[6] = EnchName[14];
-            } else if (EnchLv == "EnchLev2") {
-                Ench[0] = EnchName[0] * EnchName[2];
-                Ench[1] = EnchName[0]
-                Ench[2] = EnchName[4];
-                Ench[3] = EnchName[6] * EnchName[9];
-                Ench[4] = EnchName[6];
-                Ench[5] = EnchName[12];
-                Ench[6] = EnchName[15];
-            } else if (EnchLv == "EnchLev3") {
-                Ench[0] = EnchName[0] * EnchName[3];
-                Ench[1] = EnchName[0]
-                Ench[2] = EnchName[4];
-                Ench[3] = EnchName[7] * EnchName[10];
-                Ench[4] = EnchName[7];
-                Ench[5] = EnchName[13];
-                Ench[6] = EnchName[16];
+        enchName = calcEnchEfct(enchName);
+        oeName = calcEnchEfct(oeName);
+        const EnchLevelsCalc = (ench,name,lv) => {
+            if (lv == "EnchLev1") {
+                ench[0] = name[0] * name[1];
+                ench[1] = name[0];
+                ench[2] = name[4];
+                ench[3] = name[5] * name[8];
+                ench[4] = name[5];
+                ench[5] = name[11];
+                ench[6] = name[14];
+            } else if (lv == "EnchLev2") {
+                ench[0] = name[0] * name[2];
+                ench[1] = name[0]
+                ench[2] = name[4];
+                ench[3] = name[6] * name[9];
+                ench[4] = name[6];
+                ench[5] = name[12];
+                ench[6] = name[15];
+            } else if (lv == "EnchLev3") {
+                ench[0] = name[0] * name[3];
+                ench[1] = name[0]
+                ench[2] = name[4];
+                ench[3] = name[7] * name[10];
+                ench[4] = name[7];
+                ench[5] = name[13];
+                ench[6] = name[16];
             } else {
-                Ench[0] = 0;
-                Ench[1] = 0;
-                Ench[2] = 0;
-                Ench[3] = 0;
-                Ench[4] = 0;
-                Ench[5] = 0;
-                Ench[6] = 0;
+                ench[0] = 0;
+                ench[1] = 0;
+                ench[2] = 0;
+                ench[3] = 0;
+                ench[4] = 0;
+                ench[5] = 0;
+                ench[6] = 0;
             }
+            return(ench);
         };
+        EnchLevelsCalc(Ench,enchKeys[enchName],EnchLv)
+        EnchLevelsCalc(Oe,enchKeys[oeName],OeLv)
         if (enchTextKeys[enchName]) {
             if (enchTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(0);
@@ -583,66 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tableElem.tBodies[0].deleteRow(0);
             enchTableSwitch = 0;
         };
-        CalcElixir();
-        render();
-    };
-    const CalcOE = () => {
-        let oeName = document.getElementById("OeForm").OeSelect.value
-        const OeLv = document.getElementById("OeForm").OeLevSelect.value
-        const FrToggle = document.getElementById("FrCheck");
-        if (oeName === 'FlexibleResonance') {
-            FrLabel.style.display = "inline-block";
-        } else {
-            FrLabel.style.display = 'none';
-            FrToggle.checked = false;
-        };
-        if (oeName === 'FlexibleResonance' && FrToggle.checked) {
-            oeName = oeName + "2"
-        };
-        if (oeName === 'ShadowStrike' && enemyManaElem.value < 50) {
-            oeName = oeName + "0"
-        }else if(oeName === 'ShadowStrike' && enemyManaElem.value < 75) {
-            oeName = oeName + "1"
-        }else if(enchName === 'ShadowStrike' && enemyManaElem.value <= 100) {
-            oeName = oeName + "2"
-        };
-        OeLevelsCalc(enchKeys[oeName])
-        function OeLevelsCalc(oeName) {
-            if (OeLv == "OeLev1") {
-                Oe[0] = oeName[0] * oeName[1]
-                Oe[1] = oeName[0]
-                Oe[2] = oeName[4];
-                Oe[3] = oeName[5] * oeName[8];
-                Oe[4] = oeName[5];
-                Oe[5] = oeName[11];
-                Oe[6] = oeName[14];
-            } else if (OeLv == "OeLev2") {
-                Oe[0] = oeName[0] * oeName[2]
-                Oe[1] = oeName[0]
-                Oe[2] = oeName[4];
-                Oe[3] = oeName[6] * oeName[9];
-                Oe[4] = oeName[6];
-                Oe[5] = oeName[12];
-                Oe[6] = oeName[15];
-            } else if (OeLv == "OeLev3") {
-                Oe[0] = oeName[0] * oeName[3]
-                Oe[1] = oeName[0]
-                Oe[2] = oeName[4];
-                Oe[3] = oeName[7] * oeName[10];
-                Oe[4] = oeName[7];
-                Oe[5] = oeName[13];
-                Oe[6] = oeName[16];
-            } else {
-                Oe[0] = 0;
-                Oe[1] = 0;
-                Oe[2] = 0;
-                Oe[3] = 0;
-                Oe[4] = 0;
-                Oe[5] = 0;
-                Oe[6] = 0;
-            }
-        };
-        if (enchTextKeys[oeName]) {
+        if (enchTextKeys[oeName] && (enchTextKeys[enchName][enchTextLvKeys[EnchLv]] != enchTextKeys[oeName][enchTextLvKeys[OeLv]])) {
             if (OeTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch);
             };
@@ -652,7 +600,7 @@ document.addEventListener("DOMContentLoaded", () => {
             OeTableSwitch = 1;
             NameElem.appendChild(document.createTextNode(enchTextKeys[oeName][0]));
             ProbElem.appendChild(document.createTextNode(enchTextKeys[oeName][enchTextLvKeys[OeLv]]));
-        } else if (enchTableSwitch === 1) {
+        } else if (OeTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(enchTableSwitch);
             OeTableSwitch = 0;
         };
@@ -1256,16 +1204,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const enemyManaOnChange = (e) => {
         setEnemyManaValue(e.target.value);
         CalcEnch();
-        CalcOE();
     };
     const EnchCheckOnChange = (e) => CalcEnch()
-    const OeCheckOnChange = (e) => CalcOE()
     const renderOnChange = (e) => render()
     const AddonCheckOnChange = (e) => CalcAddon()
     const ElixirCheckOnChange = (e) => CalcElixir()
     const AccessoryCheckOnChange = (e) => CalcAccessory()
     document.getElementById("FrCheck").addEventListener('change', EnchCheckOnChange);
-    document.getElementById("OeFrCheck").addEventListener('change', OeCheckOnChange);
     document.getElementById("BcCheck").addEventListener('change', renderOnChange);
     document.getElementById("CfCheck").addEventListener('change', renderOnChange);
     document.getElementById("SdCheck").addEventListener('change', renderOnChange);
@@ -1301,7 +1246,7 @@ document.addEventListener("DOMContentLoaded", () => {
         CalcElixir();
     };
     document.getElementById("OeForm").onchange = () => {
-        CalcOE();
+        CalcEnch();
         CalcElixir();
     };
     document.getElementById("AncientEnchantForm").onchange = () => render();
@@ -1309,24 +1254,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("ArmorForm").onchange = () => CalcArmor();
     document.getElementById("ElixirForm").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
     };
     document.getElementById("Accy1Form").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
         CalcAccessory();
     };
     document.getElementById("Accy2Form").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
         CalcAccessory();
     };
     document.getElementById("Accy3Form").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
         CalcAccessory();
     };

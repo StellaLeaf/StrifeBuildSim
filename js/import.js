@@ -23,6 +23,7 @@ const NorthernWind      = [5,  0.45, 0.5,  0.55, 0.1,  0, 0,    0,   0,   0,    
 const FlexibleResonance = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const FlexibleResonance2= [4,  0.65, 0.70, 0.75, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0.2,  0.225, 0.25, ]
 const PhoenixFlame      = [10, 0.05, 0.06, 0.07, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
+const ShadowStrike      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ShadowStrike0     = [6,  0.7,  0.75, 0.8,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ShadowStrike1     = [2,  0.7,  0.75, 0.8,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ShadowStrike2     = [2,  0.4,  0.45, 0.5,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
@@ -64,8 +65,10 @@ const enchKeys = {
     "DemonPower":DemonPower,
     "Evershade":Evershade,
     "FlexibleResonance":FlexibleResonance,
+    "FlexibleResonance2":FlexibleResonance2,
     "NorthernWind":NorthernWind,
     "PhoenixFlame":PhoenixFlame,
+    "ShadowStrike":ShadowStrike,
     "ShadowStrike0":ShadowStrike0,
     "ShadowStrike1":ShadowStrike1,
     "ShadowStrike2":ShadowStrike2,
