@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let _objSecp
     let _objMelee
     let _objMeleep
-    let EnchTableSwitch = 0;
+    let enchTableSwitch = 0;
     let OeTableSwitch = 0;
     let AeTableSwitch = 0;
     let AddonTableSwitch = 0;
@@ -334,10 +334,10 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[16] = WeaponCs[14]
         Result[17] = WeaponCs[15]
         Weapon[9] = WeaponCs[13]
-        Result[0] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[1] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Result[12] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[2] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[3] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Result[13] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[0] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[1] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[2] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[3] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[4] = Weapon[2] + Mod[2] + Addon[2]
         Result[5] = Weapon[3] + Mod[3] + Addon[3]
         Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -359,9 +359,9 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[29] = Accessory[12]
         Result[30] = Accessory[11]
         Result[31] = Accessory[7]
-        Result[32] = 10 + Accessory[8]
-        Result[33] = 25 + Accessory[9]
-        //0Lev 1Atk 2DefDmg 3ShotDefProb 4HP 5Mana 6Dodge 7PDodge　8CC 9CD 10pene 11Acc 12ExplDefProb
+        Result[32] = Accessory[8]
+        Result[33] = Accessory[9]
+        //0Lev 1Atk 2DefDmg 3ShotDefProb 4HP 5Mana 6Dodge 7PDodge 8CC 9CD 10pene 11Acc 12ExplDefProb
         //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt
         //11Duration 12WpnCC 13WpnCD 14C10m 15Cmax 16ExplDmg 17ExplRadius 18AddAveDmg 19addHiDmg20AveDef 21HiDef
         //22Mana 23Dodge 24Hp 25AveAtk 26HiAtk 27pene 28ShotDefProb 29ExplDefProb 30Acc 31PDodge 32CC 33CD
@@ -514,276 +514,96 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     const CalcEnch = () => {
-        const EnchKey = document.getElementById("EnchantForm").EnchantSelect.value
+        let enchName = document.getElementById("EnchantForm").EnchantSelect.value
+        let oeName = document.getElementById("OeForm").OeSelect.value
         const EnchLv = document.getElementById("EnchantForm").EnchantLevSelect.value
+        const OeLv = document.getElementById("OeForm").OeLevSelect.value
         const FrToggle = document.getElementById("FrCheck");
-        function EnchEffectFunc0 (EnchTextKey) {
-            if (EnchTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(0);
-            };
-            let TrElem = tableElem.tBodies[0].insertRow(0);
-            let NameElem = TrElem.insertCell(0);
-            let ProbElem = TrElem.insertCell(1);
-            EnchTableSwitch = 1;
-            NameElem.appendChild(document.createTextNode(EnchTextKey[0]));
-            if (EnchLv == "EnchLev1"){
-                ProbElem.appendChild(document.createTextNode(EnchTextKey[1]));
-            } else if (EnchLv == "EnchLev2") {
-                ProbElem.appendChild(document.createTextNode(EnchTextKey[2]));
-            } else if (EnchLv == "EnchLev3") {
-                ProbElem.appendChild(document.createTextNode(EnchTextKey[3]));
-            };
-        }
-        function EnchEffectFunc1 (EnchTextKey) {
-            if (EnchTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(0);
-            };
-            let TrElem = tableElem.tBodies[0].insertRow(0);
-            let NameElem = TrElem.insertCell(0);
-            let ProbElem = TrElem.insertCell(1);
-            EnchTableSwitch = 1;
-            NameElem.appendChild(document.createTextNode(EnchTextKey[0]));
-            ProbElem.appendChild(document.createTextNode(EnchTextKey[1]));
-        }
-        if (EnchKey == 'FlexibleResonance') {
+        if ((enchName === 'FlexibleResonance') || (oeName === 'FlexibleResonance')) {
             FrLabel.style.display = "inline-block";
         } else {
             FrLabel.style.display = 'none';
             FrToggle.checked = false;
         };
-        function EnchLevelsCalc(EnchName) {
-            if (EnchLv == "EnchLev1") {
-                Ench[0] = EnchName[0] * EnchName[1];
-                Ench[1] = EnchName[0];
-                Ench[2] = EnchName[4];
-                Ench[3] = EnchName[5] * EnchName[8];
-                Ench[4] = EnchName[5];
-                Ench[5] = EnchName[11];
-                Ench[6] = EnchName[14];
-            } else if (EnchLv == "EnchLev2") {
-                Ench[0] = EnchName[0] * EnchName[2];
-                Ench[1] = EnchName[0]
-                Ench[2] = EnchName[4];
-                Ench[3] = EnchName[6] * EnchName[9];
-                Ench[4] = EnchName[6];
-                Ench[5] = EnchName[12];
-                Ench[6] = EnchName[15];
-            } else if (EnchLv == "EnchLev3") {
-                Ench[0] = EnchName[0] * EnchName[3];
-                Ench[1] = EnchName[0]
-                Ench[2] = EnchName[4];
-                Ench[3] = EnchName[7] * EnchName[10];
-                Ench[4] = EnchName[7];
-                Ench[5] = EnchName[13];
-                Ench[6] = EnchName[16];
-            } else {
-                Ench[0] = 0;
-                Ench[1] = 0;
-                Ench[2] = 0;
-                Ench[3] = 0;
-                Ench[4] = 0;
-                Ench[5] = 0;
-                Ench[6] = 0;
-            }
+        const calcEnchEfct = (name) => {
+            if (name === 'FlexibleResonance' && FrToggle.checked) {name = name + "2"};
+            if (name === 'ShadowStrike' && enemyManaElem.value < 50) {
+                name = name + "0"
+            }else if(name === 'ShadowStrike' && enemyManaElem.value < 75) {
+                name = name + "1"
+            }else if(name === 'ShadowStrike' && enemyManaElem.value <= 100) {
+                name = name + "2"
+            };
+            return(name);
         };
-        if (EnchKey == "ArcaneBrilliance") {
-            EnchLevelsCalc(ArcaneBrilliance);
-        } else if (EnchKey == 'DeathsRuin') {
-            EnchLevelsCalc(DeathsRuin);
-        } else if (EnchKey == 'DemonPower') {
-            EnchLevelsCalc(DemonPower);
-        } else if (EnchKey == 'Evershade') {
-            EnchLevelsCalc(Evershade);
-        } else if (EnchKey == 'FlexibleResonance' && FrToggle.checked) {
-            EnchLevelsCalc(FlexibleResonance);
-        } else if (EnchKey == 'ManaFountain') {
-            EnchLevelsCalc(ManaFountain);
-        } else if (EnchKey == 'NightStalker') {
-            EnchLevelsCalc(NightStalker);
-        } else if (EnchKey == 'NorthernWind') {
-            EnchLevelsCalc(NorthernWind);
-        } else if (EnchKey == 'PhoenixFlame') {
-            EnchLevelsCalc(PhoenixFlame);
-        } else if (EnchKey == 'ShadowStrike' && enemyManaElem.value < 50) {
-            EnchLevelsCalc(ShadowStrike0);
-        } else if (EnchKey == 'ShadowStrike' && enemyManaElem.value < 75) {
-            EnchLevelsCalc(ShadowStrike1);
-        } else if (EnchKey == 'ShadowStrike' && enemyManaElem.value <= 100) {
-            EnchLevelsCalc(ShadowStrike2);
-        } else if (EnchKey == 'ShieldWall') {
-            EnchLevelsCalc(ShieldWall);
-        } else if (EnchKey == 'SiphonLife') {
-            EnchLevelsCalc(SiphonLife);
-        } else if (EnchKey == 'Sunfire') {
-            EnchLevelsCalc(Sunfire);
-        } else if (EnchKey == 'ZephyrsBlessing') {
-            EnchLevelsCalc(ZephyrsBlessing);
-        } else if (EnchKey == 'ManaFountain') {
-            EnchLevelsCalc(ManaFountain);
-        } else {
-            Ench[0] = 0;
-            Ench[1] = 0;
-            Ench[2] = 0;
-            Ench[3] = 0;
-            Ench[4] = 0;
-            Ench[5] = 0;
-            Ench[6] = 0;
-        }
-        if (EnchKey == 'LastStand') {
-            EnchEffectFunc0(LsText);
-        } else if (EnchKey == 'VictoryRush') {
-            EnchEffectFunc0(VrText);
-        }else if (EnchKey == 'PhoenixFlame') {
-            EnchEffectFunc0(PfText);
-        }else if (EnchKey == 'ArcaneBrilliance') {
-            EnchEffectFunc1(AbText);
-        }else if (EnchKey == 'NightStalker') {
-            EnchEffectFunc1(NsText);
-        }else if (EnchKey == 'Evershade') {
-            EnchEffectFunc0(EsText);
-        } else if (EnchTableSwitch === 1) {
+        enchName = calcEnchEfct(enchName);
+        oeName = calcEnchEfct(oeName);
+        const EnchLevelsCalc = (ench,name,lv) => {
+            if (lv == "EnchLev1") {
+                ench[0] = name[0] * name[1];
+                ench[1] = name[0];
+                ench[2] = name[4];
+                ench[3] = name[5] * name[8];
+                ench[4] = name[5];
+                ench[5] = name[11];
+                ench[6] = name[14];
+            } else if (lv == "EnchLev2") {
+                ench[0] = name[0] * name[2];
+                ench[1] = name[0]
+                ench[2] = name[4];
+                ench[3] = name[6] * name[9];
+                ench[4] = name[6];
+                ench[5] = name[12];
+                ench[6] = name[15];
+            } else if (lv == "EnchLev3") {
+                ench[0] = name[0] * name[3];
+                ench[1] = name[0]
+                ench[2] = name[4];
+                ench[3] = name[7] * name[10];
+                ench[4] = name[7];
+                ench[5] = name[13];
+                ench[6] = name[16];
+            } else {
+                ench[0] = 0;
+                ench[1] = 0;
+                ench[2] = 0;
+                ench[3] = 0;
+                ench[4] = 0;
+                ench[5] = 0;
+                ench[6] = 0;
+            }
+            return(ench);
+        };
+        EnchLevelsCalc(Ench,enchKeys[enchName],EnchLv)
+        EnchLevelsCalc(Oe,enchKeys[oeName],OeLv)
+        if (enchTextKeys[enchName]) {
+            if (enchTableSwitch === 1) {
+                tableElem.tBodies[0].deleteRow(0);
+            };
+            let TrElem = tableElem.tBodies[0].insertRow(0);
+            let NameElem = TrElem.insertCell(0);
+            let ProbElem = TrElem.insertCell(1);
+            enchTableSwitch = 1;
+            NameElem.appendChild(document.createTextNode(enchTextKeys[enchName][0]));
+            ProbElem.appendChild(document.createTextNode(enchTextKeys[enchName][enchTextLvKeys[EnchLv]]));
+        } else if (enchTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(0);
-            EnchTableSwitch = 0;
-        };       
-        CalcElixir();
-        render();
-    };
-    const CalcOE = () => {
-        const OeKey = document.getElementById("OeForm").OeSelect.value
-        const OeLv = document.getElementById("OeForm").OeLevSelect.value
-        const OeFrToggle = document.getElementById("OeFrCheck");
-        function OeEffectFunc0 (OeTextKey) {
+            enchTableSwitch = 0;
+        };
+        if (enchTextKeys[oeName] && (enchTextKeys[enchName][enchTextLvKeys[EnchLv]] != enchTextKeys[oeName][enchTextLvKeys[OeLv]])) {
             if (OeTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             OeTableSwitch = 1;
-            NameElem.appendChild(document.createTextNode(OeTextKey[0]));
-            if (OeLv == "OeLev1"){
-                ProbElem.appendChild(document.createTextNode(OeTextKey[1]));
-            } else if (OeLv == "OeLev2") {
-                ProbElem.appendChild(document.createTextNode(OeTextKey[2]));
-            } else if (OeLv == "OeLev3") {
-                ProbElem.appendChild(document.createTextNode(OeTextKey[3]));
-            };
-        }
-        function OeEffectFunc1 (OeTextKey) {
-            if (OeTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch);
-            };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch);
-            let NameElem = TrElem.insertCell(0);
-            let ProbElem = TrElem.insertCell(1);
-            OeTableSwitch = 1;
-            NameElem.appendChild(document.createTextNode(OeTextKey[0]));
-            ProbElem.appendChild(document.createTextNode(OeTextKey[1]));
-        }
-        if (OeKey == 'FlexibleResonance') {
-            OeFrLabel.style.display = 'inline-block';
-        } else {
-            OeFrLabel.style.display = 'none'
-            OeFrToggle.checked = false;
-        };
-        function OELevelsCalc(OeName) {
-            if (OeLv == "OeLev1") {
-                Oe[0] = OeName[0] * OeName[1]
-                Oe[1] = OeName[0]
-                Oe[2] = OeName[4];
-                Oe[3] = OeName[5] * OeName[8];
-                Oe[4] = OeName[5];
-                Oe[5] = OeName[11];
-                Oe[6] = OeName[14];
-            } else if (OeLv == "OeLev2") {
-                Oe[0] = OeName[0] * OeName[2]
-                Oe[1] = OeName[0]
-                Oe[2] = OeName[4];
-                Oe[3] = OeName[6] * OeName[9];
-                Oe[4] = OeName[6];
-                Oe[5] = OeName[12];
-                Oe[6] = OeName[15];
-            } else if (OeLv == "OeLev3") {
-                Oe[0] = OeName[0] * OeName[3]
-                Oe[1] = OeName[0]
-                Oe[2] = OeName[4];
-                Oe[3] = OeName[7] * OeName[10];
-                Oe[4] = OeName[7];
-                Oe[5] = OeName[13];
-                Oe[6] = OeName[16];
-            } else {
-                Oe[0] = 0;
-                Oe[1] = 0;
-                Oe[2] = 0;
-                Oe[3] = 0;
-                Oe[4] = 0;
-                Oe[5] = 0;
-                Oe[6] = 0;
-            }
-        };
-        if (OeKey == "ArcaneBrilliance") {
-            OELevelsCalc(ArcaneBrilliance);
-        } else if (OeKey == 'DeathsRuin') {
-            OELevelsCalc(DeathsRuin);
-        } else if (OeKey == 'DemonPower') {
-            OELevelsCalc(DemonPower);
-        } else if (OeKey == 'Evershade') {
-            OELevelsCalc(Evershade);
-        } else if (OeKey == 'FlexibleResonance' && OeFrToggle.checked) {
-            OELevelsCalc(FlexibleResonance);
-        } else if (OeKey == 'ManaFountain') {
-            OELevelsCalc(ManaFountain);
-        } else if (OeKey == 'NightStalker') {
-            OELevelsCalc(NightStalker);
-        } else if (OeKey == 'NorthernWind') {
-            OELevelsCalc(NorthernWind);
-        } else if (OeKey == 'PhoenixFlame') {
-            OELevelsCalc(PhoenixFlame);
-        } else if (OeKey == 'ShadowStrike' && enemyManaElem.value < 50) {
-            OELevelsCalc(ShadowStrike0);
-        } else if (OeKey == 'ShadowStrike' && enemyManaElem.value < 75) {
-            OELevelsCalc(ShadowStrike1);
-        } else if (OeKey == 'ShadowStrike' && enemyManaElem.value <= 100) {
-            OELevelsCalc(ShadowStrike2);
-        } else if (OeKey == 'ShieldWall') {
-            OELevelsCalc(ShieldWall);
-        } else if (OeKey == 'SiphonLife') {
-            OELevelsCalc(SiphonLife);
-        } else if (OeKey == 'Sunfire') {
-            OELevelsCalc(Sunfire);
-        } else if (OeKey == 'ZephyrsBlessing') {
-            OELevelsCalc(ZephyrsBlessing);
-        } else if (OeKey == 'ManaFountain') {
-            OELevelsCalc(ManaFountain);
-        } else if (OeKey == 'LastStand') {
-            OELevelsCalc(LastStand);
-        } else if (OeKey == 'VictoryRush') {
-            OELevelsCalc(VictoryRush);
-        } else {
-            Oe[0] = 0;
-            Oe[1] = 0;
-            Oe[2] = 0;
-            Oe[3] = 0;
-            Oe[4] = 0;
-            Oe[5] = 0;
-            Oe[6] = 0;
-        }
-        if (OeKey == 'LastStand') {
-            OeEffectFunc0(LsText);
-        } else if (OeKey == 'VictoryRush') {
-            OeEffectFunc0(VrText)
-        }else if (OeKey == 'PhoenixFlame') {
-            OeEffectFunc0(PfText)
-        }else if (OeKey == 'ArcaneBrilliance') {
-            OeEffectFunc1(AbText)
-        }else if (OeKey == 'NightStalker') {
-            OeEffectFunc1(NsText)
-        }else if (OeKey == 'Evershade') {
-            OeEffectFunc0(EsText);
+            NameElem.appendChild(document.createTextNode(enchTextKeys[oeName][0]));
+            ProbElem.appendChild(document.createTextNode(enchTextKeys[oeName][enchTextLvKeys[OeLv]]));
         } else if (OeTableSwitch === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch);
             OeTableSwitch = 0;
-        }
+        };
         CalcElixir();
         render();
     };
@@ -797,9 +617,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const IsToggle = document.getElementById("IsCheck");
         function AeEffectFunc (AeTextKey) {
             if (AeTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AeTableSwitch = 1;
@@ -910,7 +730,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (AeKey == 'WheelOfFortune') {
             AeEffectFunc(WofText);
         } else if (AeTableSwitch === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch);
             AeTableSwitch = 0;
         }
     };
@@ -1073,9 +893,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (AddonKey == 'ApRounds') {
             if (AddonTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AddonTableSwitch = 1;
@@ -1090,7 +910,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 ProbElem.appendChild(document.createTextNode(ApText[4]));
             };
         } else if (AddonTableSwitch === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             AddonTableSwitch = 0;
         }
         render()
@@ -1101,9 +921,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const BootsName = document.getElementById("ArmorForm").BootsSelect.value
         function ArmorEffectFunc (ArmorTextKey) {
             if (ArmorTableSwitch[0] === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             ArmorTableSwitch[0] = 1;
@@ -1187,28 +1007,28 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (BootsName == 'Pilgrim') {
             ArmorEffectFunc(PBootsText);
         } else if (ArmorTableSwitch[0] === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch);
             ArmorTableSwitch[0] = 0;
         };
         if (ChestName === "Cleric" && ChestName === HandName && ChestName === BootsName) {
             if (ArmorTableSwitch[1] === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0]);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0]);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0]);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0]);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             ArmorTableSwitch[1] = 1;
             NameElem.appendChild(document.createTextNode(CSetText[0]));
             ProbElem.appendChild(document.createTextNode(CSetText[1]));
         } else if (ArmorTableSwitch[1] === 1) {
-            tableElem.tBodies[1].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0]);
+            tableElem.tBodies[1].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0]);
             ArmorTableSwitch[1] = 0;
         };
         render();
     };
     const CalcElixir = () => {
-        const EnchKey = document.getElementById("EnchantForm").EnchantSelect.value
-        const OeKey = document.getElementById("OeForm").OeSelect.value
+        const enchName = document.getElementById("EnchantForm").EnchantSelect.value
+        const oeName = document.getElementById("OeForm").OeSelect.value
         const ElixirKey = document.getElementById("ElixirForm").ElixirSelect.value
         const EVoidToggle = document.getElementById("EVoidCheck");
         if (ElixirKey == 'EVoid') {
@@ -1225,7 +1045,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Elixir[4] = ElixirName[4];
         };
         if (ElixirKey === "ECombust") {
-            if (EnchKey === "Sunfire" || OeKey === "Sunfire"){
+            if (enchName === "Sunfire" || oeName === "Sunfire"){
                 ElixirSet(ECombust_Sf);
             } else {
                 ElixirSet(ECombust); 
@@ -1253,16 +1073,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (ElixirKey === "EWisdom") {
             if (ElixirTableSwitch === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             ElixirTableSwitch = 1;
             NameElem.appendChild(document.createTextNode(EWisdomText[0]));
             ProbElem.appendChild(document.createTextNode(EWisdomText[1]));
         } else if (ElixirTableSwitch === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
             ElixirTableSwitch = 0;
         };
         render();
@@ -1299,7 +1119,7 @@ document.addEventListener("DOMContentLoaded", () => {
             { name: "LifelinkBracelet", label: LifelinkBraceletLabel, toggle: LifelinkBraceletToggle },
             { name: "GoldenDream", label: GoldenDreamLabel, toggle: GoldenDreamToggle },
             { name: "RingOfLifeTree", label: RingOfLifeTreeLabel, toggle: RingOfLifeTreeToggle }
-          ];
+        ];
         checkAccessories.forEach((checkAccessory) => {
             if (Accy1Name === checkAccessory.name || Accy2Name === checkAccessory.name || Accy3Name === checkAccessory.name) {
                 checkAccessory.label.style.display = 'inline-block';
@@ -1314,7 +1134,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else if (Accy3Name === checkAccessory.name && checkAccessory.toggle.checked) {
                 Accy3Name = Accy3Name + "2"
             };
-          });
+        });
         let Accy1 = accyKeys[Accy1Name];
         let Accy2 = accyKeys[Accy2Name];
         let Accy3 = accyKeys[Accy3Name];
@@ -1326,49 +1146,46 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         if (accyTextKeys[Accy1Name]) {
             if (AccessoryTableSwitch[0] === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AccessoryTableSwitch[0] = 1;
             NameElem.appendChild(document.createTextNode(accyTextKeys[Accy1Name][0]));
             ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy1Name][1]));
         } else if (AccessoryTableSwitch[0] === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
             AccessoryTableSwitch[0] = 0;
         };
         if (accyTextKeys[Accy2Name]) {
             if (AccessoryTableSwitch[1] === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AccessoryTableSwitch[1] = 1;
             NameElem.appendChild(document.createTextNode(accyTextKeys[Accy2Name][0]));
             ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy2Name][1]));
         } else if (AccessoryTableSwitch[1] === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0]);
             AccessoryTableSwitch[1] = 0;
         };
         if (accyTextKeys[Accy3Name]) {
             if (AccessoryTableSwitch[2] === 1) {
-                tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+                tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
             };
-            let TrElem = tableElem.tBodies[0].insertRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            let TrElem = tableElem.tBodies[0].insertRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AccessoryTableSwitch[2] = 1;
             NameElem.appendChild(document.createTextNode(accyTextKeys[Accy3Name][0]));
             ProbElem.appendChild(document.createTextNode(accyTextKeys[Accy3Name][1]));
         } else if (AccessoryTableSwitch[2] === 1) {
-            tableElem.tBodies[0].deleteRow(EnchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
+            tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch + AccessoryTableSwitch[0] + AccessoryTableSwitch[1]);
             AccessoryTableSwitch[2] = 0;
         };
-        console.log(accyTextKeys[Accy1Name])
-        console.log(accyTextKeys[Accy2Name])
-        console.log(accyTextKeys[Accy3Name])
         render();
     };
     const myManaElem = document.getElementById('myMana');
@@ -1383,20 +1200,17 @@ document.addEventListener("DOMContentLoaded", () => {
     };
     const myManaOnChange = (e) => {
         setMyManaValue(e.target.value);
-     };
+    };
     const enemyManaOnChange = (e) => {
         setEnemyManaValue(e.target.value);
         CalcEnch();
-        CalcOE();
     };
     const EnchCheckOnChange = (e) => CalcEnch()
-    const OeCheckOnChange = (e) => CalcOE()
     const renderOnChange = (e) => render()
     const AddonCheckOnChange = (e) => CalcAddon()
     const ElixirCheckOnChange = (e) => CalcElixir()
     const AccessoryCheckOnChange = (e) => CalcAccessory()
     document.getElementById("FrCheck").addEventListener('change', EnchCheckOnChange);
-    document.getElementById("OeFrCheck").addEventListener('change', OeCheckOnChange);
     document.getElementById("BcCheck").addEventListener('change', renderOnChange);
     document.getElementById("CfCheck").addEventListener('change', renderOnChange);
     document.getElementById("SdCheck").addEventListener('change', renderOnChange);
@@ -1432,7 +1246,7 @@ document.addEventListener("DOMContentLoaded", () => {
         CalcElixir();
     };
     document.getElementById("OeForm").onchange = () => {
-        CalcOE();
+        CalcEnch();
         CalcElixir();
     };
     document.getElementById("AncientEnchantForm").onchange = () => render();
@@ -1440,24 +1254,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("ArmorForm").onchange = () => CalcArmor();
     document.getElementById("ElixirForm").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
     };
     document.getElementById("Accy1Form").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
         CalcAccessory();
     };
     document.getElementById("Accy2Form").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
         CalcAccessory();
     };
     document.getElementById("Accy3Form").onchange = () => {
         CalcEnch();
-        CalcOE();
         CalcElixir();
         CalcAccessory();
     };

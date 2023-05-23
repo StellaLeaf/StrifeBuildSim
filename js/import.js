@@ -20,8 +20,10 @@ const SiphonLife        = [2,  0.4,  0.5,  0.6,  0,    0, 0,    0,   0,   0,    
 const DeathsRuin        = [6,  0.55, 0.6,  0.65, 0.15, 0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ArcaneBrilliance  = [3,  0.35, 0.45, 0.55, 0.2,  0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const NorthernWind      = [5,  0.45, 0.5,  0.55, 0.1,  0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
-const FlexibleResonance = [4,  0.65, 0.70, 0.75, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0.2,  0.225, 0.25, ]
+const FlexibleResonance = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
+const FlexibleResonance2= [4,  0.65, 0.70, 0.75, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0.2,  0.225, 0.25, ]
 const PhoenixFlame      = [10, 0.05, 0.06, 0.07, 0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
+const ShadowStrike      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ShadowStrike0     = [6,  0.7,  0.75, 0.8,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ShadowStrike1     = [2,  0.7,  0.75, 0.8,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const ShadowStrike2     = [2,  0.4,  0.45, 0.5,  0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
@@ -32,11 +34,12 @@ const ManaFountain      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    
 const NightStalker      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0.08, 0.09,  0.1,  ]
 const VictoryRush       = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const LastStand         = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
-const LsText     = ['Last Stand',        '現在ハートx9%', '現在ハートx9.25%', '現在ハートx9.5%']
+const enchNone          = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
+const LsText     = ['Last Stand',        '現在ハートx9%でダメージを1/20に軽減', '現在ハートx9.25%でダメージを1/20に軽減', '現在ハートx9.5%でダメージを1/20に軽減']
 const VrText     = ['Victory Rush',      'キル時70%で1pt付与(3ptでHP+8)', 'キル時75%で1pt付与(3ptでHP+8)', 'キル時80%で1pt付与(3ptでHP+8)']
 const PfText     = ['Phoenix Flame',     '20%でダウンを回避、全回復', '22.5%でダウンを回避、全回復', '25%でダウンを回避、全回復']
-const AbText     = ['Arcane Brilliance', '攻撃時、相手に発光3s']
-const NsText     = ['Night Stalker',     'Divine以外のglow無効化']
+const AbText     = ['Arcane Brilliance', '攻撃時、相手に発光3s','攻撃時、相手に発光3s','攻撃時、相手に発光3s']
+const NsText     = ['Night Stalker',     'Divine以外のglow無効化','Divine以外のglow無効化','Divine以外のglow無効化']
 const EsText     = ['Evershade',         '90%でScroll of Glowingを無効化', '95%でScroll of Glowingを無効化', '100%でScroll of Glowingを無効化']
 const AmpText    = ['Amplify Magic',     'Scroll of Glowing+4s Rune of Levitation速度二倍']
 const AmText     = ['Arcane Meditation', 'HP自然回復停止 静止でHP・スタミナ即時全快']
@@ -56,6 +59,42 @@ const CBootsText = ['Cleric Shoes',      'スタミナ回復+1']
 const PBootsText = ['Pilgrim Walkers',   'スタミナ回復+1']
 const CSetText   = ['Clericフルセット',    'RegenerationⅢ3s']
 const EWisdomText= ['Elixir of Wisdom',    'キル時の獲得マナが25%に増加']
+const enchKeys = {
+    "ArcaneBrilliance":ArcaneBrilliance,
+    "DeathsRuin":DeathsRuin,
+    "DemonPower":DemonPower,
+    "Evershade":Evershade,
+    "FlexibleResonance":FlexibleResonance,
+    "FlexibleResonance2":FlexibleResonance2,
+    "NorthernWind":NorthernWind,
+    "PhoenixFlame":PhoenixFlame,
+    "ShadowStrike":ShadowStrike,
+    "ShadowStrike0":ShadowStrike0,
+    "ShadowStrike1":ShadowStrike1,
+    "ShadowStrike2":ShadowStrike2,
+    "ShieldWall":ShieldWall,
+    "SiphonLife":SiphonLife,
+    "Sunfire":Sunfire,
+    "ZephyrsBlessing":ZephyrsBlessing,
+    "ManaFountain":ManaFountain,
+    "NightStalker":NightStalker,
+    "VictoryRush":VictoryRush,
+    "LastStand":LastStand,
+    "none":enchNone
+};
+const enchTextKeys = {
+    "ArcaneBrilliance":AbText,
+    "Evershade":EsText,
+    "NightStalker":NsText,
+    "PhoenixFlame":PfText,
+    "VictoryRush":VrText,
+    "LastStand":LsText
+}
+const enchTextLvKeys = {
+    "EnchLev1":1,
+    "EnchLev2":2,
+    "EnchLev3":3,
+}
 //AEdata 0Dmg 1Prob 2Dodge
 const Bc = [7, 1, 0]
 const Eo = [6, 1, 0]
@@ -278,7 +317,7 @@ const accyKeys = {
     "SymbolOfSinful": SymbolOfSinful,
     "TheEye": TheEye,
     "none": accyNone,
-    };
+};
 const accyAprKeys = {
     "Meteoric": Meteoric,
     "Glorious": Glorious,
@@ -299,36 +338,36 @@ const accyAprKeys = {
     "none": accyAprNone,
 };
 const accyTextKeys = {
-     "TheMagicalTribute": TheMagicalTributeText ,
-     "RingOfLonelyHeart": RingOfLonelyHeart ,
-     "TheBlindValor": TheBlindValorText ,
-     "PendantOfMastercrafter": PendantOfMastercrafterText ,
-     "StarlightPendant": StarlightPendantText ,
-     "RingOfCompetitor": RingOfCompetitorText ,
-     "MythrilRing": MythrilRingText ,
-     "RingOfSacramento": RingOfSacramentoText ,
-     "RingOfSacramento2": RingOfSacramentoText ,
-     "RingOfCobraReflex": RingOfCobraReflexText ,
-     "RingOfCobraReflex2": RingOfCobraReflexText ,
-     "NecklaceOfEffort": NecklaceOfEffortText ,
-     "NecklaceOfEffort2": NecklaceOfEffortText ,
-     "GoldenDream": GoldenDreamText ,
-     "GoldenDream2": GoldenDreamText ,
-     "PendantOfStardust": PendantOfStardustText ,
-     "ExplosiveEaring": ExplosiveEaringText ,
-     "FeedbackStone": FeedbackStoneText ,
-     "Evergreen": EvergreenText ,
-     "PendantOfPurpleSeal": PendantOfPurpleSealText ,
-     "NecklaceOfFaintVoice": NecklaceOfFaintVoiceText ,
-     "NecklaceOfVigor": NecklaceOfVigorText ,
-     "ShieldChoker": ShieldChokerText ,
-     "NecklaceOfIcyMoon": NecklaceOfIcyMoonText ,
-     "ColdHeartRing": ColdHeartRingText ,
-     "RingOfLifeTree": RingOfLifeTreeText ,
-     "RingOfLifeTree2": RingOfLifeTree2Text ,
-     "EaringOfCursedMind": EaringOfCursedMindText ,
-     "SymbolOfSinful": SymbolOfSinfulText ,
-     "TheEye": TheEyeText ,
+    "TheMagicalTribute": TheMagicalTributeText ,
+    "RingOfLonelyHeart": RingOfLonelyHeart ,
+    "TheBlindValor": TheBlindValorText ,
+    "PendantOfMastercrafter": PendantOfMastercrafterText ,
+    "StarlightPendant": StarlightPendantText ,
+    "RingOfCompetitor": RingOfCompetitorText ,
+    "MythrilRing": MythrilRingText ,
+    "RingOfSacramento": RingOfSacramentoText ,
+    "RingOfSacramento2": RingOfSacramentoText ,
+    "RingOfCobraReflex": RingOfCobraReflexText ,
+    "RingOfCobraReflex2": RingOfCobraReflexText ,
+    "NecklaceOfEffort": NecklaceOfEffortText ,
+    "NecklaceOfEffort2": NecklaceOfEffortText ,
+    "GoldenDream": GoldenDreamText ,
+    "GoldenDream2": GoldenDreamText ,
+    "PendantOfStardust": PendantOfStardustText ,
+    "ExplosiveEaring": ExplosiveEaringText ,
+    "FeedbackStone": FeedbackStoneText ,
+    "Evergreen": EvergreenText ,
+    "PendantOfPurpleSeal": PendantOfPurpleSealText ,
+    "NecklaceOfFaintVoice": NecklaceOfFaintVoiceText ,
+    "NecklaceOfVigor": NecklaceOfVigorText ,
+    "ShieldChoker": ShieldChokerText ,
+    "NecklaceOfIcyMoon": NecklaceOfIcyMoonText ,
+    "ColdHeartRing": ColdHeartRingText ,
+    "RingOfLifeTree": RingOfLifeTreeText ,
+    "RingOfLifeTree2": RingOfLifeTree2Text ,
+    "EaringOfCursedMind": EaringOfCursedMindText ,
+    "SymbolOfSinful": SymbolOfSinfulText ,
+    "TheEye": TheEyeText ,
 };
 const Ar11 = ["Frontline Warrior", ]
 const Ar12 = ["Bulletproof Armor", ]
@@ -400,3 +439,22 @@ const St41 = ["Mana Feed", ]
 const St42 = ["Tranquility", ]
 const St51 = ["Endermage", ]
 const St52 = ["Call Thunder", ]
+
+const mappings = [
+    "maps/1_AR.json",
+    "maps/1_AR_CSP.json",
+    "maps/3_SMG.json",
+    "maps/3_SMG_CSP.json",
+    "maps/9_LMG.json",
+    "maps/9_LMG_CSP.json",
+    "maps/5_SR.json",
+    "maps/5_SR_CSP.json",
+    "maps/12_CARBINE.json",
+    "maps/12_CARBINE_CSP.json",
+    "maps/7_EXPLOSIVE.json",
+    "maps/7_EXPLOSIVE_CSP.json",
+    "maps/6_PISTOL.json",
+    "maps/6_PISTOL_CSP.json",
+    "maps/4_SG.json",
+    "maps/4_SG_CSP.json",
+];
