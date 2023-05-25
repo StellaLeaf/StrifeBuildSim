@@ -89,35 +89,102 @@ const enchTextKeys = {
     "PhoenixFlame":PfText,
     "VictoryRush":VrText,
     "LastStand":LsText
-}
+};
 const enchTextLvKeys = {
+    "none":0,
     "EnchLev1":1,
     "EnchLev2":2,
     "EnchLev3":3,
-}
+};
 //AEdata 0Dmg 1Prob 2Dodge
-const Bc = [7, 1, 0]
-const Eo = [6, 1, 0]
-const Mc = [1, 1, 0]
-const Cf = [4, 1, 0]
-const Mb = [5, 1, 0]
-const Ws = [2, 1, 0]
-const Sd = [20, 0.05, 0]
-const Mfl0 = [1, 1, 0]
-const Mfl1 = [2, 1, 0]
-const Mfl2 = [3, 1, 0]
-const Eod = [100, 1, 0]
-const Ff = [0, 0, 0.25]
-const Is = [0, 0, 0.15]
-//Addon
-const MpDmg = [0.25, 0.5, 1.0, 1.5]
-const HbAverageDmg = [0.4, 0.8, 1.2, 1.6]
-const HbHighestDmg = [2, 4, 6, 8]
-const EmCapacity = [2, 4, 6, 10]
-const QpReload = [-4, -8, -12, -16]
-const LkWeight = [0.004, 0.005, 0.010, 0.015]
-const SsaDmg = [1.25, 1.5, 1.75, 2.2]
-const SbDmg = [7, 8, 9, 10]
+const Bloodcraze        = [0,   0,    0]
+const Bloodcraze2       = [7,   1,    0]
+const ElementalOverload = [0,   0,    0]
+const ElementalOverload2= [6,   1,    0]
+const Mastercrafted     = [1,   1,    0]
+const ConcentratedFire  = [0,   0,    0]
+const ConcentratedFire2 = [4,   1,    0]
+const ManaBurn          = [0,   0,    0]
+const ManaBurn2         = [5,   1,    0]
+const Windsong          = [0,   0,    0]
+const Windsong2         = [2,   1,    0]
+const SuddenDeath       = [0,   0,    0]
+const SuddenDeath2      = [20,  0.05, 0]
+const Manaflood         = [0,   0,    0]
+const Manaflood0        = [1,   1,    0]
+const Manaflood1        = [2,   1,    0]
+const Manaflood2        = [3,   1,    0]
+const EchoOfDeath       = [100, 1,    0]
+const FleetFooted       = [0,   0,    0]
+const FleetFooted2      = [0,   0,    0.25]
+const IndomitableSpirit = [0,   0,    0]
+const IndomitableSpirit2= [0,   0,    0.15]
+const aeNone            = [0,   0,    0]
+const aeKeys = {
+    "Bloodcraze":Bloodcraze,
+    "ElementalOverload":ElementalOverload,
+    "ElementalOverload2":ElementalOverload2,
+    "Mastercrafted":Mastercrafted,
+    "ConcentratedFire":ConcentratedFire,
+    "ManaBurn":ManaBurn,
+    "ManaBurn2":ManaBurn2,
+    "Windsong":Windsong,
+    "SuddenDeath":SuddenDeath,
+    "Manaflood":Manaflood,
+    "Manaflood0":Manaflood0,
+    "Manaflood1":Manaflood1,
+    "Manaflood2":Manaflood2,
+    "EchoOfDeath":EchoOfDeath,
+    "FleetFooted":FleetFooted,
+    "IndomitableSpirit":IndomitableSpirit,
+    "none":aeNone
+};
+const aeTextKeys = {
+    "AmplifyMagic": AmpText,
+    'ArcaneMeditation': AmText,
+    'CursedPact': CpText,
+    'DrainSoul': DsText,
+    'EverlastingLife': ElText,
+    'FragileBalance': FbText,
+    'GolemProtection': GpText,
+    'JoyOfWealth': JowText,
+    'ManaEfficiency': MeText,
+    'ManaBurn': MbText,
+    'Regrowth': RegText,
+    'TitanStance': TsText,
+    'WheelOfFortune': WofText
+};
+//Addon 0dmg 4DmgProb 5Cap 9rel 13Wt 17DmgMag
+const ManaPowder        = [0.25, 0.5, 1.0, 1.5,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const HeavyBullets      = [   2,   4,   6,   8, 0.2, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const ExtendedMagazine  = [   0,   0,   0,   0,   1, 2, 4, 6, 10,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const QuickPull         = [   0,   0,   0,   0,   1, 0, 0, 0,  0, -4, -8, -12, -16,     0,     0,     0,     0,    1,   1,    1,   1]
+const LightweightKit    = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0, 0.004, 0.005, 0.010, 0.015,    1,   1,    1,   1]
+const SupersonicAmmo    = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const SupersonicAmmo2   = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0, 1.25, 1.5, 1.75, 2.2]
+const ShieldBreaker     = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const ShieldBreaker2    = [   7,   8,   9,  10,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const ApRounds          = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const addonNone         = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const addonKeys = {
+    "ManaPowder":ManaPowder,
+    "HeavyBullets":HeavyBullets,
+    "ExtendedMagazine":ExtendedMagazine,
+    "QuickPull":QuickPull,
+    "LightweightKit":LightweightKit,
+    "SupersonicAmmo":SupersonicAmmo,
+    "SupersonicAmmo2":SupersonicAmmo2,
+    "ShieldBreaker":ShieldBreaker,
+    "ShieldBreaker2":ShieldBreaker2,
+    "ApRounds":ApRounds,
+    "none":addonNone
+};
+const addonTextLvKeys = {
+    "AddonLev0":1,
+    "AddonLev1":2,
+    "AddonLev2":3,
+    "AddonLev3":4,
+};
 //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6 MaxSta 7Regene
 const PChest = [0, 0, 2, 0, 0, 0, 0]
 const PHand = [0, 1, 0, 0]

@@ -576,7 +576,7 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         EnchLevelsCalc(Ench,enchKeys[enchName],EnchLv)
         EnchLevelsCalc(Oe,enchKeys[oeName],OeLv)
-        if (enchTextKeys[enchName]) {
+        if (enchTextKeys[enchName] && EnchLv != "none") {
             if (enchTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(0);
             };
@@ -590,7 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
             tableElem.tBodies[0].deleteRow(0);
             enchTableSwitch = 0;
         };
-        if (enchTextKeys[oeName] && (enchTextKeys[enchName][enchTextLvKeys[EnchLv]] != enchTextKeys[oeName][enchTextLvKeys[OeLv]])) {
+        if (enchTextKeys[oeName] && (enchTextKeys[enchName][enchTextLvKeys[EnchLv]] != enchTextKeys[oeName][enchTextLvKeys[OeLv]]) && (OeLv != "none")) {
             if (OeTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch);
             };
@@ -608,14 +608,51 @@ document.addEventListener("DOMContentLoaded", () => {
         render();
     };
     const CalcAE = (EoDDmg, EoDHsDmg) => {
-        const AeKey = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
+        let aeName = document.getElementById("AncientEnchantForm").AncientEnchantSelect.value
         const BcToggle = document.getElementById("BcCheck");
         const CfToggle = document.getElementById("CfCheck");
         const SdToggle = document.getElementById("SdCheck");
         const WsToggle = document.getElementById("WsCheck");
         const FfToggle = document.getElementById("FfCheck");
         const IsToggle = document.getElementById("IsCheck");
-        function AeEffectFunc (AeTextKey) {
+        const checkAncientEnchants = [
+            { name: "Bloodcraze", label: BcLabel, toggle: BcToggle },
+            { name: "ConcentratedFire", label: CfLabel, toggle: CfToggle },
+            { name: "SuddenDeath", label: SdLabel, toggle: SdToggle },
+            { name: "Windsong", label: WsLabel, toggle: WsToggle },
+            { name: "FleetFooted", label: FfLabel, toggle: FfToggle },
+            { name: "IndomitableSpirit", label: IsLabel, toggle: IsToggle }
+        ];
+        checkAncientEnchants.forEach((checkAncientEnchant) => {
+            if (aeName === checkAncientEnchant.name){
+                checkAncientEnchant.label.style.display = 'inline-block';
+            } else {
+                checkAncientEnchant.label.style.display = "none";
+                checkAncientEnchant.toggle.checked = false;
+            };
+            if (aeName === checkAncientEnchant.name && checkAncientEnchant.toggle.checked) {
+                aeName = aeName + "2"
+            };
+        });
+        if (aeName == "ElementalOverload" && myManaElem.value > 30) { aeName = aeName + "2" };
+        if (aeName == "ManaBurn" && enemyManaElem.value <= 35) { aeName = aeName + "2" };
+        if (aeName == "EchoOfDeath" && EoDDmg >= 50) { aeName = aeName + "2" };
+        if (aeName == "Manaflood" && myManaElem.value == 100) {
+            aeName = aeName + "2" 
+        } else if (aeName == "Manaflood" && myManaElem.value >= 75 ) {
+            aeName = aeName + "1" 
+        } else if (aeName == "Manaflood" && myManaElem.value >= 50 ) {
+            aeName = aeName + "0" 
+        };
+        Ae[0] = aeKeys[aeName][0]
+        Ae[1] = aeKeys[aeName][1]
+        Ae[3] = aeKeys[aeName][2]
+        if (aeName == "EchoOfDeath" && EoDHsDmg >= 50) {
+            Ae[2] = EchoOfDeath[0]
+        } else {
+            Ae[2] = 0
+        };
+        if (aeTextKeys[aeName]) {
             if (AeTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch);
             };
@@ -623,266 +660,61 @@ document.addEventListener("DOMContentLoaded", () => {
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AeTableSwitch = 1;
-            NameElem.appendChild(document.createTextNode(AeTextKey[0]));
-            ProbElem.appendChild(document.createTextNode(AeTextKey[1]));
-        }
-        if (AeKey == "Bloodcraze") {
-            BcLabel.style.display = 'inline-block';
-        } else {
-            BcLabel.style.display = 'none';
-            BcToggle.checked = false;
-        };
-        if (AeKey == "ConcentratedFire") {
-            CfLabel.style.display = 'inline-block';
-        } else {
-            CfLabel.style.display = 'none';
-            CfToggle.checked = false;
-        };
-        if (AeKey == "SuddenDeath") {
-            SdLabel.style.display = 'inline-block';
-        } else {
-            SdLabel.style.display = 'none';
-            SdToggle.checked = false;
-        };
-        if (AeKey == "Windsong") {
-            WsLabel.style.display = 'inline-block';
-        } else {
-            WsLabel.style.display = 'none';
-            WsToggle.checked = false;
-        };
-        if (AeKey == "FleetFooted") {
-            FfLabel.style.display = 'inline-block';
-        } else {
-            FfLabel.style.display = 'none';
-            FfToggle.checked = false;
-        };
-        if (AeKey == "IndomitableSpirit") {
-            IsLabel.style.display = 'inline-block';
-        } else {
-            IsLabel.style.display = 'none';
-            IsToggle.checked = false;
-        };
-        function AeSet(AeName){
-            Ae[0] = AeName[0]
-            Ae[1] = AeName[0] * AeName[1]
-            Ae[3] = AeName[2]
-        }
-        if (AeKey == "Bloodcraze" && BcToggle.checked) {
-            AeSet(Bc);
-        } else if (AeKey == "ElementalOverload" && myManaElem.value > 30) {
-            AeSet(Eo);
-        } else if (AeKey == "Mastercrafted") {
-            AeSet(Mc);
-        } else if (AeKey == "ConcentratedFire" && CfToggle.checked) {
-            AeSet(Cf);
-        } else if (AeKey == "SuddenDeath" && SdToggle.checked) {
-            AeSet(Sd);
-        } else if (AeKey == "ManaBurn" && enemyManaElem.value <= 35) {
-            AeSet(Mb);
-        } else if (AeKey == "Manaflood" && myManaElem.value == 100) {
-            AeSet(Mfl2);
-        } else if (AeKey == "Manaflood" && myManaElem.value >= 75) {
-            AeSet(Mfl1);
-        } else if (AeKey == "Manaflood" && myManaElem.value >= 50) {
-            AeSet(Mfl0);
-        } else if (AeKey == "EchoOfDeath" && EoDDmg >= 50) {
-            AeSet(Eod);
-        } else if (AeKey == "Windsong" && WsToggle.checked) {
-            AeSet(Ws);
-        } else if (AeKey == "FleetFooted" && FfToggle.checked) {
-            AeSet(Ff);
-        } else if (AeKey == "IndomitableSpirit" && IsToggle.checked) {
-            AeSet(Is);
-        } else {
-            Ae[0] = 0
-            Ae[1] = 0
-            Ae[3] = 0
-        }
-        if (AeKey == "EchoOfDeath" && EoDHsDmg >= 50) {
-            Ae[2] = Eod[0]
-        } else {
-            Ae[2] = 0
-        }
-        if (AeKey == 'AmplifyMagic') {
-            AeEffectFunc(AmpText);
-        } else if (AeKey == 'ArcaneMeditation') {
-            AeEffectFunc(AmText);
-        } else if (AeKey == 'CursedPact') {
-            AeEffectFunc(CpText);
-        } else if (AeKey == 'DrainSoul') {
-            AeEffectFunc(DsText);
-        } else if (AeKey == 'EverlastingLife') {
-            AeEffectFunc(ElText);
-        } else if (AeKey == 'FragileBalance') {
-            AeEffectFunc(FbText);
-        } else if (AeKey == 'GolemProtection') {
-            AeEffectFunc(GpText);
-        } else if (AeKey == 'JoyOfWealth') {
-            AeEffectFunc(JowText);
-        } else if (AeKey == 'ManaEfficiency') {
-            AeEffectFunc(MeText);
-        } else if (AeKey == 'ManaBurn') {
-            AeEffectFunc(MbText);
-        } else if (AeKey == 'Regrowth') {
-            AeEffectFunc(RegText);
-        } else if (AeKey == 'TitanStance') {
-            AeEffectFunc(TsText);
-        } else if (AeKey == 'WheelOfFortune') {
-            AeEffectFunc(WofText);
+            NameElem.appendChild(document.createTextNode(aeTextKeys[aeName][0]));
+            ProbElem.appendChild(document.createTextNode(aeTextKeys[aeName][1]));
         } else if (AeTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch);
             AeTableSwitch = 0;
-        }
+        };
     };
     const CalcAddon = () => {
-        const AddonKey = document.getElementById("AddonForm").AddonSelect.value
+        let addonName = document.getElementById("AddonForm").AddonSelect.value
         const AddonLv = document.getElementById("AddonForm").AddonLevSelect.value
         const SsaToggle = document.getElementById("SsaCheck");
         const SbToggle = document.getElementById("SbCheck");
-        if (AddonKey == 'SupersonicAmmo') {
-            SsaLabel.style.display = 'inline-block';
-        } else {
-            SsaLabel.style.display = 'none';
-            SsaToggle.checked = false;
-        };
-        if (AddonKey == 'ShieldBreaker') {
-            SbLabel.style.display = 'inline-block';
-        } else {
-            SbLabel.style.display = 'none';
-            SbToggle.checked = false;
-        };
-        if (AddonKey == "ManaPowder") {
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            Addon[5] = 1
-            if (AddonLv == "AddonLev0") {
-                Addon[0] = MpDmg[0]
-                Addon[1] = MpDmg[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[0] = MpDmg[1]
-                Addon[1] = MpDmg[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[0] = MpDmg[2]
-                Addon[1] = MpDmg[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[0] = MpDmg[3]
-                Addon[1] = MpDmg[3]
+        const checkAddons = [
+            { name: "SupersonicAmmo", label: SsaLabel, toggle: SsaToggle },
+            { name: "ShieldBreaker", label: SbLabel, toggle: SbToggle }
+        ];
+        checkAddons.forEach((checkAddon) => {
+            if (addonName === checkAddon.name){
+                checkAddon.label.style.display = 'inline-block';
             } else {
-                Addon[0] = 0
-                Addon[1] = 0
-            }
-        } else if (AddonKey == "HeavyBullets") {
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            Addon[5] = 1
-            if (AddonLv == "AddonLev0") {
-                Addon[0] = HbAverageDmg[0]
-                Addon[1] = HbHighestDmg[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[0] = HbAverageDmg[1]
-                Addon[1] = HbHighestDmg[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[0] = HbAverageDmg[2]
-                Addon[1] = HbHighestDmg[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[0] = HbAverageDmg[3]
-                Addon[1] = HbHighestDmg[3]
-            } else {
-                Addon[0] = 0
-                Addon[1] = 0
-            }
-        } else if (AddonKey == "ExtendedMagazine") {
-            Addon[0] = 0
-            Addon[1] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            Addon[5] = 1
-            if (AddonLv == "AddonLev0") {
-                Addon[2] = EmCapacity[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[2] = EmCapacity[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[2] = EmCapacity[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[2] = EmCapacity[3]
-            } else {
-                Addon[2] = 0
-            }
-        } else if (AddonKey == "QuickPull") {
-            Addon[0] = 0
-            Addon[1] = 0
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            Addon[5] = 1
-            if (AddonLv == "AddonLev0") {
-                Addon[3] = QpReload[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[3] = QpReload[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[3] = QpReload[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[3] = QpReload[3]
-            } else {
-                Addon[3] = 0
-            }
-        } else if (AddonKey == "LightweightKit") {
-            Addon[0] = 0
-            Addon[1] = 0
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[5] = 1
-            if (AddonLv == "AddonLev0") {
-                Addon[4] = LkWeight[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[4] = LkWeight[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[4] = LkWeight[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[4] = LkWeight[3]
-            } else {
-                Addon[4] = 0
-            }
-        } else if (AddonKey == "SupersonicAmmo" && SsaToggle.checked) {
-            Addon[0] = 0
-            Addon[1] = 0
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            if (AddonLv == "AddonLev0") {
-                Addon[5] = SsaDmg[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[5] = SsaDmg[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[5] = SsaDmg[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[5] = SsaDmg[3]
-            } else {
-                Addon[5] = 1
-            }
-        } else if (AddonKey == "ShieldBreaker" && SbToggle.checked) {
-            Addon[2] = 0
-            Addon[3] = 0
-            Addon[4] = 0
-            Addon[5] = 1
-            if (AddonLv == "AddonLev0") {
-                Addon[0] = SbDmg[0]
-                Addon[1] = SbDmg[0]
-            } else if (AddonLv == "AddonLev1") {
-                Addon[0] = SbDmg[1]
-                Addon[1] = SbDmg[1]
-            } else if (AddonLv == "AddonLev2") {
-                Addon[0] = SbDmg[2]
-                Addon[1] = SbDmg[2]
-            } else if (AddonLv == "AddonLev3") {
-                Addon[0] = SbDmg[3]
-                Addon[1] = SbDmg[3]
-            } else {
-                Addon[0] = 0;
-                Addon[1] = 0;
-            }
+                checkAddon.label.style.display = "none";
+                checkAddon.toggle.checked = false;
+            };
+            if (addonName === checkAddon.name && checkAddon.toggle.checked) {
+                addonName = addonName + "2"
+            };
+        });
+        if (AddonLv == "AddonLev0") {
+            Addon[0] = addonKeys[addonName][0]
+            Addon[1] = addonKeys[addonName][0] * addonKeys[addonName][4]
+            Addon[2] = addonKeys[addonName][5]
+            Addon[3] = addonKeys[addonName][9]
+            Addon[4] = addonKeys[addonName][13]
+            Addon[5] = addonKeys[addonName][17]
+        } else if (AddonLv == "AddonLev1") {
+            Addon[0] = addonKeys[addonName][1]
+            Addon[1] = addonKeys[addonName][1] * addonKeys[addonName][4]
+            Addon[2] = addonKeys[addonName][6]
+            Addon[3] = addonKeys[addonName][10]
+            Addon[4] = addonKeys[addonName][14]
+            Addon[5] = addonKeys[addonName][18]
+        } else if (AddonLv == "AddonLev2") {
+            Addon[0] = addonKeys[addonName][2]
+            Addon[1] = addonKeys[addonName][2] * addonKeys[addonName][4]
+            Addon[2] = addonKeys[addonName][7]
+            Addon[3] = addonKeys[addonName][11]
+            Addon[4] = addonKeys[addonName][15]
+            Addon[5] = addonKeys[addonName][19]
+        } else if (AddonLv == "AddonLev3") {
+            Addon[0] = addonKeys[addonName][3]
+            Addon[1] = addonKeys[addonName][3] * addonKeys[addonName][4]
+            Addon[2] = addonKeys[addonName][8]
+            Addon[3] = addonKeys[addonName][12]
+            Addon[4] = addonKeys[addonName][16]
+            Addon[5] = addonKeys[addonName][20]
         } else {
             Addon[0] = 0
             Addon[1] = 0
@@ -891,7 +723,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Addon[4] = 0
             Addon[5] = 1
         }
-        if (AddonKey == 'ApRounds') {
+        if (addonName == 'ApRounds' && AddonLv != "none") {
             if (AddonTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             };
@@ -900,15 +732,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let ProbElem = TrElem.insertCell(1);
             AddonTableSwitch = 1;
             NameElem.appendChild(document.createTextNode(ApText[0]));
-            if (AddonLv == "AddonLev0"){
-                ProbElem.appendChild(document.createTextNode(ApText[1]));
-            }else if (AddonLv == "AddonLev1"){
-                ProbElem.appendChild(document.createTextNode(ApText[2]));
-            } else if (AddonLv == "AddonLev2") {
-                ProbElem.appendChild(document.createTextNode(ApText[3]));
-            } else if (AddonLv == "AddonLev3") {
-                ProbElem.appendChild(document.createTextNode(ApText[4]));
-            };
+            ProbElem.appendChild(document.createTextNode(ApText[addonTextLvKeys[AddonLv]]));
         } else if (AddonTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             AddonTableSwitch = 0;
