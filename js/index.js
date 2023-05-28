@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
-    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 10, 25, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -327,10 +327,8 @@ document.addEventListener("DOMContentLoaded", () => {
         Weapon[6] = WeaponCs[6]
         Weapon[7] = WeaponCs[7]
         Weapon[8] = WeaponCs[8]
-        Accessory[8] += 10;
-        Accessory[9] += 25;
         let crit4Calc = [0, 0]
-        crit4Calc[0] = Accessory[8] * (Accessory[9] / 100) / 100 + 1;
+        crit4Calc[0] = Accessory[9] * ((Accessory[8] + Armor[3]) / 100) / 100 + 1;
         crit4Calc[1] = Accessory[9] / 100 + 1;
         Result[12] = (WeaponCs[9] * WeaponCs[10])
         Result[13] = WeaponCs[10]
@@ -364,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[29] = Accessory[12]
         Result[30] = Accessory[11]
         Result[31] = Accessory[7]
-        Result[32] = Accessory[8]
+        Result[32] = Accessory[8] + Armor[3]
         Result[33] = Accessory[9]
         //0Lev 1Atk 2DefDmg 3ShotDefProb 4HP 5Mana 6Dodge 7PDodge 8CC 9CD 10pene 11Acc 12ExplDefProb
         //Result 0AveDmg 1AveHsDmg 2HiDmg 3HiHsDmg 4Capacity 5Reload 6Rate 7Dps 8Sprd 9Ads 10Wt
@@ -973,6 +971,8 @@ document.addEventListener("DOMContentLoaded", () => {
         for (let i = 0; i <= 12; i++) {
             Accessory[i] = Accy1[i] + Accy2[i] + Accy3[i] + Accy1Apr[i] + Accy2Apr[i] + Accy3Apr[i]
         };
+        Accessory[8] += 10;
+        Accessory[9] += 25;
         if (accyTextKeys[Accy1Name]) {
             if (AccessoryTableSwitch[0] === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch + AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1] + ElixirTableSwitch);
