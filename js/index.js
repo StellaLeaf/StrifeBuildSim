@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
-    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 10, 25, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 10, 25, 0, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -204,8 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 WeaponExplDmg = 0
                 WeaponExplRadius = 0
-            }
-
+            };
             if (typeof jsondata[WeaponKey]["Damage_Based_On_Flight_Time"] === "undefined") {
                 WeaponC10mKey = 0
                 WeaponCmaxKey = 0
@@ -318,6 +317,35 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             EnchActive[1] = 1 / (Math.ceil(Oe[2] * Result[6]));
         };
+        const enchNwCheck = document.getElementById("EnchantForm").EnchantSelect.value;
+        const oeNwCheck = document.getElementById("OeForm").OeSelect.value;
+        const Accy1NwCheck = document.getElementById("Accy1Form").Accessory1Select.value;
+        const Accy2NwCheck = document.getElementById("Accy2Form").Accessory2Select.value;
+        const Accy3NwCheck = document.getElementById("Accy3Form").Accessory3Select.value;
+        const icyNwDmg = (enchNwCheck === "NorthernWind" || oeNwCheck === "NorthernWind") ? 10 : 5;
+        const Icymoon = [0, 0, 0, 0, 0, 0];
+        if (Accy1NwCheck === "NecklaceOfIcyMoon") {
+            Icymoon[3] = icyNwDmg;
+            Icymoon[0] = (Result[6] === 0) ? icyNwDmg * 0.55 : icyNwDmg * 0.55 * 1 / (Math.ceil(0.1 * Result[6]));
+        } else {
+            Icymoon[0] = 0;
+            Icymoon[3] = 0;
+        };
+        if (Accy2NwCheck === "NecklaceOfIcyMoon") {
+            Icymoon[4] = icyNwDmg;
+            Icymoon[1] = (Result[6] === 0) ? icyNwDmg * 0.55 : icyNwDmg * 0.55 * 1 / (Math.ceil(0.1 * Result[6]));
+        } else {
+            Icymoon[1] = 0;
+            Icymoon[4] = 0;
+        };
+        if (Accy3NwCheck === "NecklaceOfIcyMoon") {
+            Icymoon[5] = icyNwDmg;
+            Icymoon[2] = (Result[6] === 0) ? icyNwDmg * 0.55 : icyNwDmg * 0.55 * 1 / (Math.ceil(0.1 * Result[6]));
+        } else {
+            Icymoon[2] = 0;
+            Icymoon[5] = 0;
+        };
+        const icy4Calc = [Icymoon[0] + Icymoon[1] + Icymoon[2], Icymoon[3] + Icymoon[4] + Icymoon[5]];
         CalcAE(WeaponDmg + ModDmg, WeaponDmg + WeaponHsBonus + ModDmg + ModHsBonus);
         Weapon[0] = WeaponCs[0]
         Weapon[1] = WeaponCs[1]
@@ -337,10 +365,10 @@ document.addEventListener("DOMContentLoaded", () => {
         Result[16] = WeaponCs[14]
         Result[17] = WeaponCs[15]
         Weapon[9] = WeaponCs[13]
-        Result[0] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[1] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[2] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[3] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[0] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + icy4Calc[0]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[1] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + icy4Calc[0] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[2] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13] + icy4Calc[1]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[3] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13] + icy4Calc[1] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[4] = Weapon[2] + Mod[2] + Addon[2]
         Result[5] = Weapon[3] + Mod[3] + Addon[3]
         Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -1104,4 +1132,4 @@ document.addEventListener("DOMContentLoaded", () => {
     enemyManaElem.addEventListener('input', enemyManaOnChange);
     setMyManaValue(myManaElem.value);
     setEnemyManaValue(enemyManaElem.value);
-})
+});
