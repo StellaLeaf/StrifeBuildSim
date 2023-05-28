@@ -186,24 +186,58 @@ const addonTextLvKeys = {
     "AddonLev3":4,
 };
 //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6 MaxSta 7Regene
-const PChest = [0, 0, 2, 0, 0, 0, 0]
-const PHand = [0, 1, 0, 0]
-const PBoots = [0, 0, 0, 0, 0, 1]
-const PSet = [8, 0, 0, 0, 0, 0, 0, 0]
-const CChest = [2, 0, 0, 0, 0, 0, 0]
-const CHand = [0, 0, 1, 0]
-const CBoots = [0, 0, 0, 0, 0, 1]
-const CSet = [0, 0, 0, 0, 0, 0, 0, 1]
-const GChest = [4, 0, 0, 0, 0, 0, 0]
-const GHand = [0, 2, 0, 0]
-const GBoots = [0, 0, 1, 0, 0, 0]
-const GSet = [0, 0, 2, 0, 0, 0, 0, 0]
-const IChest = [4, 0, 0, 0, 0, 0, 0] 
-const IHand = [0, 0, 0, 5]
-const IBoots = [0, 0, 0, 0, 1, 0]
-const ISet = [0, 0, 0, 10, 0, 0, 0, 0]
-const FChest = [0, 0, 6, 0, 0, 0, -7]
-const SChest = [0, 0, 6, 0, 0, 0, 0]
+const PChest = [0, 0, 2, 0,  0, 0, 0,  0]
+const PHand  = [0, 1, 0, 0,  0, 0, 0,  0]
+const PBoots = [0, 0, 0, 0,  0, 1, 0,  0]
+const PSet   = [8, 0, 0, 0,  0, 0, 0,  0]
+const CChest = [2, 0, 0, 0,  0, 0, 0,  0]
+const CHand  = [0, 0, 1, 0,  0, 0, 0,  0]
+const CBoots = [0, 0, 0, 0,  0, 1, 0,  0]
+const CSet   = [0, 0, 0, 0,  0, 0, 0,  1]
+const GChest = [4, 0, 0, 0,  0, 0, 0,  0]
+const GHand  = [0, 2, 0, 0,  0, 0, 0,  0]
+const GBoots = [0, 0, 1, 0,  0, 0, 0,  0]
+const GSet   = [0, 0, 2, 0,  0, 0, 0,  0]
+const IChest = [4, 0, 0, 0,  0, 0, 0,  0] 
+const IHand  = [0, 0, 0, 5,  0, 0, 0,  0]
+const IBoots = [0, 0, 0, 0,  1, 0, 0,  0]
+const ISet   = [0, 0, 0, 10, 0, 0, 0,  0]
+const FChest = [0, 0, 6, 0,  0, 0, -7, 0]
+const SChest = [0, 0, 6, 0,  0, 0, 0,  0]
+const NChest = [0, 0, 0, 0,  0, 0, 0,  0]
+const NHand  = [0, 0, 0, 0,  0, 0, 0,  0]
+const NBoots = [0, 0, 0, 0,  0, 0, 0,  0]
+const NSet   = [0, 0, 0, 0,  0, 0, 0,  0]
+const ChestKeys = {
+    "Cleric":CChest,
+    "Fort":FChest,
+    "Gladiator":GChest,
+    "Pilgrim":PChest,
+    "Ivory":IChest,
+    "Slick":SChest,
+    "none":NChest
+};
+const HandKeys = {
+    "Cleric":CHand,
+    "Gladiator":GHand,
+    "Pilgrim":PHand,
+    "Ivory":IHand,
+    "none":NHand
+};
+const BootsKeys = {
+    "Cleric":CBoots,
+    "Gladiator":GBoots,
+    "Pilgrim":PBoots,
+    "Ivory":IBoots,
+    "none":NBoots
+};
+const SetKeys = {
+    "Cleric":CSet,
+    "Gladiator":GSet,
+    "Pilgrim":PSet,
+    "Ivory":ISet,
+    "none":NSet
+};
 //Elixir 0Dmg 1Prob 2Wt 3HP 4Dodge
 const ECombust = [10 ,0.075, 0, 0, 0]
 const ECombust_Sf = [10, 0.15, 0, 0, 0]
