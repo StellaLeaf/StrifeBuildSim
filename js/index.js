@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6MaxSta 7Regene
     const Armor = [0, 0, 0, 0, 0, 0, 0, 0];
     const Elixir = [0, 0, 0, 0, 0, 0];
-    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 10, 25, 0, 0, 0, 0];
+    let Accessory = [0, 0, 0, 0, 0, 0, 0, 0, 10, 25, 0, 0, 0];
     const EnchActive = [0, 0];
     const _pathAr = "maps/1_AR.json"
     const _pathArp = "maps/1_AR_CSP.json"
@@ -785,78 +785,13 @@ document.addEventListener("DOMContentLoaded", () => {
             NameElem.appendChild(document.createTextNode(ArmorTextKey[0]));
             ProbElem.appendChild(document.createTextNode(ArmorTextKey[1]));
         }
-        let Chest = [0, 0, 0, 0, 0, 0, 0]
-        let Hand = [0, 0, 0, 0]
-        let Boots = [0, 0, 0, 0, 0, 0]
         let ArmorFullSet = [0, 0, 0, 0, 0, 0, 0, 0]
-        function ChestSelectCalc(ChestKey) {
-            Chest = ChestKey;
+        if (ChestName === HandName && ChestName === BootsName) {
+            ArmorFullSet = SetKeys[ChestName];
         };
-        function HandSelectCalc (HandKey) {
-            Hand = HandKey;
+        for (let i = 0; i <= 7; i++) {
+            Armor[i] = ChestKeys[ChestName][i] + HandKeys[HandName][i] + BootsKeys[BootsName][i] + ArmorFullSet[i]
         };
-        function BootsSelectCalc (BootsKey) {
-            Boots = BootsKey;
-        };
-        function ArmorFullSetCalc (ArmorFullSetKey) {
-            ArmorFullSet = ArmorFullSetKey;
-        };
-        if (ChestName === "Cleric") {
-            ChestSelectCalc(CChest);
-        } else if (ChestName === "Fort") {
-            ChestSelectCalc(FChest);
-        } else if (ChestName === "Gladiator") {
-            ChestSelectCalc(GChest);
-        } else if (ChestName === "Pilgrim") {
-            ChestSelectCalc(PChest);
-        } else if (ChestName === "Ivory") {
-            ChestSelectCalc(IChest);
-        } else if (ChestName === "Slick") {
-            ChestSelectCalc(SChest);
-        } else {
-            Chest = [0, 0, 0, 0, 0, 0, 0];
-        };
-        if (HandName === "Cleric") {
-            HandSelectCalc(CHand);
-        } else if (HandName === "Gladiator") {
-            HandSelectCalc(GHand);
-        } else if (HandName === "Pilgrim") {
-            HandSelectCalc(PHand);
-        } else if (HandName === "Ivory") {
-            HandSelectCalc(IHand);
-        } else {
-            Hand = [0, 0, 0, 0];
-        };
-        if (BootsName === "Cleric") {
-            BootsSelectCalc(CBoots);
-        } else if (BootsName === "Gladiator") {
-            BootsSelectCalc(GBoots);
-        } else if (BootsName === "Pilgrim") {
-            BootsSelectCalc(PBoots);
-        } else if (BootsName === "Ivory") {
-            BootsSelectCalc(IBoots);
-        } else {
-            Boots = [0, 0, 0, 0, 0, 0];
-        };
-        if (ChestName === "Cleric" && ChestName === HandName && ChestName === BootsName) {
-            ArmorFullSetCalc(CSet);
-        } else if (ChestName === "Gladiator" && ChestName === HandName && ChestName === BootsName) {
-            ArmorFullSetCalc(GSet);
-        } else if (ChestName === "Pilgrim" && ChestName === HandName && ChestName === BootsName) {
-            ArmorFullSetCalc(PSet);
-        } else if (ChestName === "Ivory" && ChestName === HandName && ChestName === BootsName) {
-            ArmorFullSetCalc(ISet);
-        } else {
-            ArmorFullSet = [0, 0, 0, 0, 0, 0, 0, 0]
-        };
-        Armor[0] = Chest[0] + Hand[0] + Boots[0] + ArmorFullSet[0];
-        Armor[1] = Chest[1] + Hand[1] + Boots[1] + ArmorFullSet[1];
-        Armor[2] = Chest[2] + Hand[2] + Boots[2] + ArmorFullSet[2];
-        Armor[3] = Chest[3] + Hand[3] + Boots[3] + ArmorFullSet[3];
-        Armor[4] = Chest[4] + Boots[4] + ArmorFullSet[4];
-        Armor[5] = Chest[5] + Boots[5] + ArmorFullSet[5];
-        Armor[6] = Chest[6] + ArmorFullSet[6];
-        Armor[7] = ArmorFullSet[7];
         if (BootsName == 'Cleric') {
             ArmorEffectFunc(CBootsText);
         } else if (BootsName == 'Pilgrim') {
