@@ -58,7 +58,6 @@ const ApText     = ['AP Rounds',         '70%でLastStand無効化', '75%でLast
 const CBootsText = ['Cleric Shoes',      'スタミナ回復+1']
 const PBootsText = ['Pilgrim Walkers',   'スタミナ回復+1']
 const CSetText   = ['Clericフルセット',    'RegenerationⅢ3s']
-const EWisdomText= ['Elixir of Wisdom',    'キル時の獲得マナが25%に増加']
 const enchKeys = {
     "ArcaneBrilliance":ArcaneBrilliance,
     "DeathsRuin":DeathsRuin,
@@ -239,15 +238,31 @@ const SetKeys = {
     "none":NSet
 };
 //Elixir 0Dmg 1Prob 2Wt 3HP 4Dodge
-const ECombust = [10 ,0.075, 0, 0, 0]
-const ECombust_Sf = [10, 0.15, 0, 0, 0]
-const ECritical = [3, 0.5, 0, 0, 0]
-const EFortitude = [0, 0, 0, 12, 0]
-const EPumpkinCandy = [0, 0, 0, 14, 0]
-const EReflex = [0, 0, 0, 0, 0.15]
-const ESpeed = [0, 0, 0.15, 0, 0]
-const EVoid = [4, 0.75, 0, 0, 0]
-const EWisdom = [0, 0, 0, 0, 0]
+const ECombust      = [10, 0.075, 0,    0,  0]
+const ECombust2     = [10, 0.15,  0,    0,  0]
+const ECritical     = [3,  0.5,   0,    0,  0]
+const EFortitude    = [0,  0,     0,    12, 0]
+const EPumpkinCandy = [0,  0,     0,    14, 0]
+const EReflex       = [0,  0,     0,    0,  0.15]
+const ESpeed        = [0,  0,     0.15, 0,  0]
+const EVoid         = [1,  0.2,   0,    0,  0]
+const EVoid2        = [4,  0.75,  0,    0,  0]
+const EWisdom       = [0,  0,     0,    0,  0]
+const ENone         = [0,  0,     0,    0,  0]
+const EWisdomText= ['Elixir of Wisdom',    'キル時の獲得マナが25%に増加']
+const elixirKeys = {
+    "ECombust":ECombust,
+    "ECombust2":ECombust2,
+    "ECritical":ECritical,
+    "EFortitude":EFortitude,
+    "EPumpkinCandy":EPumpkinCandy,
+    "EReflex":EReflex,
+    "ESpeed":ESpeed,
+    "EVoid":EVoid,
+    "EVoid2":EVoid2,
+    "EWisdom":EWisdom,
+    "none":ENone
+};
 //Accessory
 const TheMagicalTributeText = ["The Magical Tribute", "キル時MSを入手"]
 const RingOfLonelyHeartText = ["Ring of Lonely Heart", "ダウン時Mana75%減少"]

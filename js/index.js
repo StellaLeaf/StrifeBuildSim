@@ -819,49 +819,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const CalcElixir = () => {
         const enchName = document.getElementById("EnchantForm").EnchantSelect.value
         const oeName = document.getElementById("OeForm").OeSelect.value
-        const ElixirKey = document.getElementById("ElixirForm").ElixirSelect.value
+        let elixirName = document.getElementById("ElixirForm").ElixirSelect.value
         const EVoidToggle = document.getElementById("EVoidCheck");
-        if (ElixirKey == 'EVoid') {
+        if (elixirName == 'EVoid') {
             EVoidLabel.style.display = 'inline-block';
         } else {
             EVoidLabel.style.display = 'none';
             EVoidToggle.checked = false;
         };
-        function ElixirSet(ElixirName) {
-            Elixir[0] = ElixirName[0] * ElixirName[1];
-            Elixir[1] = ElixirName[0];
-            Elixir[2] = ElixirName[2];
-            Elixir[3] = ElixirName[3];
-            Elixir[4] = ElixirName[4];
+        if (elixirName == 'ECombust' && enchName === "Sunfire" || oeName === "Sunfire"){
+            elixirName = elixirName + "2"
+        } else if (elixirName === "EVoid" && EVoidToggle.checked) {
+            elixirName = elixirName + "2"
         };
-        if (ElixirKey === "ECombust") {
-            if (enchName === "Sunfire" || oeName === "Sunfire"){
-                ElixirSet(ECombust_Sf);
-            } else {
-                ElixirSet(ECombust); 
-            };
-        } else if (ElixirKey === "ECritical") {
-            ElixirSet(ECritical);
-        } else if (ElixirKey === "EFortitude") {
-            ElixirSet(EFortitude);
-        } else if (ElixirKey === "EPumpkinCandy") {
-            ElixirSet(EPumpkinCandy);
-        } else if (ElixirKey === "EReflex") {
-            ElixirSet(EReflex);
-        } else if (ElixirKey === "ESpeed") {
-            ElixirSet(ESpeed);
-        } else if (ElixirKey === "EVoid" && EVoidToggle.checked) {
-            ElixirSet(EVoid);
-        } else if (ElixirKey === "EWisdom") {
-            ElixirSet(EWisdom);
-        } else {
-            Elixir[0] = 0;
-            Elixir[1] = 0;
-            Elixir[2] = 0;
-            Elixir[3] = 0;
-            Elixir[4] = 0;
-        }
-        if (ElixirKey === "EWisdom") {
+        Elixir[0] = elixirKeys[elixirName][0] * elixirKeys[elixirName][1];
+        Elixir[1] = elixirKeys[elixirName][0];
+        Elixir[2] = elixirKeys[elixirName][2];
+        Elixir[3] = elixirKeys[elixirName][3];
+        Elixir[4] = elixirKeys[elixirName][4];
+        if (elixirName === "EWisdom") {
             if (ElixirTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch +AddonTableSwitch + ArmorTableSwitch[0] + ArmorTableSwitch[1]);
             };
