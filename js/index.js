@@ -427,6 +427,19 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
         document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
         document.getElementById("MobileDisplayWeight").textContent = (Result[10])
+        document.getElementById("MobileDisplayAveDef").textContent = (Result[20])
+        document.getElementById("MobileDisplayHiDef").textContent = (Result[21])
+        document.getElementById("MobileDisplayMana").textContent = (Result[22])
+        document.getElementById("MobileDisplayHp").textContent = (Result[24])
+        document.getElementById("MobileDisplayAveAtk").textContent = (Result[25])
+        document.getElementById("MobileDisplayHiAtk").textContent = (Result[26])
+        document.getElementById("MobileDisplayPene").textContent = (Result[27])
+        document.getElementById("MobileDisplayShotDefProb").textContent = (Result[28])
+        document.getElementById("MobileDisplayExplDefProb").textContent = (Result[29])
+        document.getElementById("MobileDisplayAcc").textContent = (Result[30])
+        document.getElementById("MobileDisplayPerfectDodge").textContent = (Result[31])
+        document.getElementById("MobileDisplayCritChance").textContent = (Result[32])
+        document.getElementById("MobileDisplayCritDmg").textContent = (Result[33])
         //if系
         if (Result[11] > 0) {
             document.getElementById("DisplayDuration").textContent = (Result[11])
@@ -514,8 +527,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (Result[23] <= 60) {
             document.getElementById("DisplayDodge").textContent = (Result[23])
+            document.getElementById("MobileDisplayDodge").textContent = (Result[23])
+
         } else {
             document.getElementById("DisplayDodge").textContent = 60;
+            document.getElementById("MobileDisplayDodge").textContent = 60;
         }
     }
     const categorySelect2 = document.getElementById("TypeSelect")

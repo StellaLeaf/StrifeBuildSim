@@ -133,7 +133,9 @@ select {
     }
 
     .custom-table-mobile0,
-    .custom-table-mobile1 {
+    .custom-table-mobile1,
+    .custom-table-mobile2,
+    .custom-table-mobile3 {
         display: block;
     }
 
@@ -185,7 +187,9 @@ select {
     }
 
     .custom-table-mobile0,
-    .custom-table-mobile1 {
+    .custom-table-mobile1,
+    .custom-table-mobile2,
+    .custom-table-mobile3 {
         display: none;
     }
 
