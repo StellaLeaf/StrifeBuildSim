@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
     var tableElem = document.getElementById('EffectTable');
     const Result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    const Weapon = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     //0Dmg 1Prob 2Cooldown 3Def 4Dodge
     const Ench = [0, 0, 0, 0, 0, 0, 0, 0]
     const Oe = [0, 0, 0, 0, 0, 0, 0, 0]
@@ -111,22 +110,6 @@ document.addEventListener("DOMContentLoaded", () => {
             MsLabel.style.display = 'none';
             MsToggle.checked = false;
         };
-        let WeaponReloadStyle = 0
-        let WeaponRateKey = 0
-        let WeaponAdsKey = 0
-        let WeaponCcKey = 0
-        let WeaponCdKey = 0
-        let WeaponC10mKey = 0
-        let WeaponCmaxKey = 0
-        let WeaponDmg = 0
-        let WeaponHsBonus = 0
-        let WeaponReloadAmount = 0
-        let WeaponReloadDuration = 0
-        let WeaponPellets = 0
-        let WeaponSpread = 0
-        let WeaponWeight = 0
-        let WeaponExplDmg = 0
-        let WeaponExplRadius = 0
         let WeaponShiftEffect = [0, 0]
         if (BsToggle.checked){
             WeaponShiftEffect[0] = 0.25;
@@ -138,175 +121,163 @@ document.addEventListener("DOMContentLoaded", () => {
             WeaponShiftEffect[0] = 0;
             WeaponShiftEffect[1] = 0;
         }
+        let weaponDmg = 0;          
+        let weaponHsBonus = 0;       
+        let weaponCapa = 0; 
+        let weaponRelDura = 0;
+        let weaponRelStyle = 0;  
+        let weaponRateKey = 0;      
+        let weaponPellets = 0;   
+        let weaponSprd = 0;       
+        let weaponAdsSprd = 0;       
+        let weaponCc = 0;      
+        let weaponCd = 0;        
+        let weaponCrit10m = 0;    
+        let weaponCritMax = 0;    
+        let weaponWt = 0;        
+        let weaponExplDmg = 0;       
+        let weaponExplRadius = 0;
         if (!(WeaponKey === "none" || jsondata == 'none')) {
             //リロード配列の処理
             if (typeof jsondata[WeaponKey]["Reload"] === 'undefined') {
-                WeaponReloadStyle = 0
-                WeaponReloadAmount = 0
-                WeaponReloadDuration = 0
+                weaponRelStyle = 0
+                weaponCapa = 0
+                weaponRelDura = 0
             } else {
                 if (typeof jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === 'undefined') {
-                    WeaponReloadStyle = 0
+                    weaponRelStyle = 0
                     document.getElementById("DisplayReloadStyle").textContent = null
                 } else if (jsondata[WeaponKey]["Reload"]["Reload_Bullets_Individually"] === true) {
-                    WeaponReloadStyle = 1
+                    weaponRelStyle = 1
                     document.getElementById("DisplayReloadStyle").textContent = ("/発")
                 } else {
-                    WeaponReloadStyle = 0
+                    weaponRelStyle = 0
                     document.getElementById("DisplayReloadStyle").textContent = null
                 }
-                WeaponReloadAmount = jsondata[WeaponKey]["Reload"]["Reload_Amount"]
-                WeaponReloadDuration = jsondata[WeaponKey]["Reload"]["Reload_Duration"]
+                weaponCapa = jsondata[WeaponKey]["Reload"]["Reload_Amount"]
+                weaponRelDura = jsondata[WeaponKey]["Reload"]["Reload_Duration"]
             };
             //セミ・バーストの処理
             const notFullauto = () => {
                 if (typeof jsondata[WeaponKey]["Burstfire"] === 'undefined') {
-                    WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
+                    weaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
                 } else if (jsondata[WeaponKey]["Burstfire"]["Enable"] === true) {
-                    WeaponRateKey = (20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]) * jsondata[WeaponKey]["Burstfire"]["Shots_Per_Burst"]
+                    weaponRateKey = (20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]) * jsondata[WeaponKey]["Burstfire"]["Shots_Per_Burst"]
                 } else {
-                    WeaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
+                    weaponRateKey = 20 / jsondata[WeaponKey]["Shooting"]["Delay_Between_Shots"]
                 }
             }
             //フルオートとか
             if (typeof jsondata[WeaponKey]["Fully_Automatic"] === "undefined") {
                 notFullauto()
             } else if (jsondata[WeaponKey]["Fully_Automatic"]["Enable"] === true) {
-                WeaponRateKey = jsondata[WeaponKey]["Fully_Automatic"]["Fire_Rate"] + 4
+                weaponRateKey = jsondata[WeaponKey]["Fully_Automatic"]["Fire_Rate"] + 4
             } else {
                 notFullauto()
             }
             if (typeof jsondata[WeaponKey]["Sneak"] === "undefined") {
-                WeaponAdsKey = 0
+                weaponAdsSprd = 0
             } else if (jsondata[WeaponKey]["Sneak"]["Enable"] === true) {
-                WeaponAdsKey = jsondata[WeaponKey]["Sneak"]["Zoom_Bullet_Spread"]
+                weaponAdsSprd = jsondata[WeaponKey]["Sneak"]["Zoom_Bullet_Spread"]
             } else {
-                WeaponAdsKey = 0
+                weaponAdsSprd = 0
             }
             //Crit
             if (typeof jsondata[WeaponKey]["Critical_Hits"] === "undefined") {
-                WeaponCcKey = 0
-                WeaponCdKey = 0
+                weaponCc = 0
+                weaponCd = 0
             } else if (jsondata[WeaponKey]["Critical_Hits"]["Enable"] === true) {
-                WeaponCcKey = jsondata[WeaponKey]["Critical_Hits"]["Chance"] / 100
-                WeaponCdKey = jsondata[WeaponKey]["Critical_Hits"]["Bonus_Damage"]
+                weaponCc = jsondata[WeaponKey]["Critical_Hits"]["Chance"] / 100
+                weaponCd = jsondata[WeaponKey]["Critical_Hits"]["Bonus_Damage"]
             } else {
-                WeaponCcKey = 0
-                WeaponCdKey = 0
+                weaponCc = 0
+                weaponCd = 0
             }
             //ExplDmg
             if (typeof jsondata[WeaponKey]["Explosions"] === "undefined") {
-                WeaponExplDmg = 0
-                WeaponExplRadius = 0
+                weaponExplDmg = 0
+                weaponExplRadius = 0
             } else if (jsondata[WeaponKey]["Explosions"]["Enable"] === true) {
-                WeaponExplDmg = jsondata[WeaponKey]["Explosions"]["Damage_Multiplier"]
-                WeaponExplRadius = jsondata[WeaponKey]["Explosions"]["Explosion_Radius"]
+                weaponExplDmg = jsondata[WeaponKey]["Explosions"]["Damage_Multiplier"]
+                weaponExplRadius = jsondata[WeaponKey]["Explosions"]["Explosion_Radius"]
             } else {
-                WeaponExplDmg = 0
-                WeaponExplRadius = 0
+                weaponExplDmg = 0
+                weaponExplRadius = 0
             };
             if (typeof jsondata[WeaponKey]["Damage_Based_On_Flight_Time"] === "undefined") {
-                WeaponC10mKey = 0
-                WeaponCmaxKey = 0
+                weaponCrit10m = 0
+                weaponCritMax = 0
             } else if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Enable"] === true) {
                 if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"] > 0 && jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] > 0) {
-                    WeaponC10mKey = (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] / (jsondata[WeaponKey]["Shooting"]["Projectile_Speed"] / 10)) * 10
-                    WeaponCmaxKey = jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"]
+                    weaponCrit10m = (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] / (jsondata[WeaponKey]["Shooting"]["Projectile_Speed"] / 10)) * 10
+                    weaponCritMax = jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"]
                 } else if (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"] < 0 && jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] < 0) {
-                    WeaponC10mKey = (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] / (jsondata[WeaponKey]["Shooting"]["Projectile_Speed"] / 10)) * 10
-                    WeaponCmaxKey = jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"]
+                    weaponCrit10m = (jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Bonus_Damage_Per_Tick"] / (jsondata[WeaponKey]["Shooting"]["Projectile_Speed"] / 10)) * 10
+                    weaponCritMax = jsondata[WeaponKey]["Damage_Based_On_Flight_Time"]["Maximum_Damage"]
                 } else {
-                    WeaponC10mKey = 0
-                    WeaponCmaxKey = 0
+                    weaponCrit10m = 0
+                    weaponCritMax = 0
                 }
             } else {
-                WeaponC10mKey = 0
-                WeaponCmaxKey = 0
+                weaponCrit10m = 0
+                weaponCritMax = 0
             }
             if (typeof jsondata[WeaponKey]["Headshot"] === 'undefined') {
-                WeaponHsBonus = 0;
+                weaponHsBonus = 0;
             } else {
-                WeaponHsBonus = jsondata[WeaponKey]["Headshot"]["Bonus_Damage"]
+                weaponHsBonus = jsondata[WeaponKey]["Headshot"]["Bonus_Damage"]
             };
             if (typeof jsondata[WeaponKey]["Shooting"]["Projectile_Damage"] === 'undefined') {
-                WeaponDmg = 0;
+                weaponDmg = 0;
             } else {
-                WeaponDmg = jsondata[WeaponKey]["Shooting"]["Projectile_Damage"]
+                weaponDmg = jsondata[WeaponKey]["Shooting"]["Projectile_Damage"]
             };
             if (typeof jsondata[WeaponKey]["Shooting"]["Bullet_Spread"] === 'undefined') {
-                WeaponSpread = 0;
+                weaponSprd = 0;
             } else {
-                WeaponSpread = jsondata[WeaponKey]["Shooting"]["Bullet_Spread"]
+                weaponSprd = jsondata[WeaponKey]["Shooting"]["Bullet_Spread"]
             };
-            WeaponPellets = jsondata[WeaponKey]["Shooting"]["Projectile_Amount"]
-            WeaponWeight = jsondata2[WeaponKey]["itemHoldEffects"]["GunWeight"]
-        }
-        let ModCapacity = 0
-        let ModReload = 0
-        let ModWeight = 0
-        let ModHsBonus = 0
-        let ModRate = 0
-        let ModSpread = 0
-        let ModDmg = 0
+            weaponPellets = jsondata[WeaponKey]["Shooting"]["Projectile_Amount"]
+            weaponWt = jsondata2[WeaponKey]["itemHoldEffects"]["GunWeight"]
+        };
+        let modCapa = 0
+        let modRelDura = 0
+        let modWt = 0
+        let modHsBonus = 0
+        let modRate = 0
+        let modSprd = 0
+        let modDmg = 0
         if (!(ModKey === "none" || WeaponKey === "none" || jsondata2 == 'none')) {
             let cspAry = null
             for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
                 cspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
                 if (cspAry[1] === ModKey && cspAry[0] === "CAPACITY") {
-                    ModCapacity = Number(cspAry[2])
+                    modCapa = Number(cspAry[2])
                 }
                 if (cspAry[1] === ModKey && cspAry[0] === "RELOAD") {
-                    ModReload = Number(cspAry[2])
+                    modRelDura = Number(cspAry[2])
                 }
                 if (cspAry[1] === ModKey && cspAry[0] === "GUNWEIGHT") {
-                    ModWeight = Number(cspAry[2])
+                    modWt = Number(cspAry[2])
                 }
                 if (cspAry[1] === ModKey && cspAry[0] === "HEADSHOT") {
-                    ModHsBonus = Number(cspAry[2])
+                    modHsBonus = Number(cspAry[2])
                 }
                 if (cspAry[1] === ModKey && cspAry[0] === "FIRERATE") {
-                    ModRate = Number(cspAry[2])
+                    modRate = Number(cspAry[2])
                 }
                 if (cspAry[1] === ModKey && cspAry[0] === "PRESHOOT") {
-                    ModSpread = Number(cspAry[2])
+                    modSprd = Number(cspAry[2])
                 }
                 if (cspAry[1] === ModKey && cspAry[0] === "DAMAGE") {
-                    ModDmg = Number(cspAry[2])
+                    modDmg = Number(cspAry[2])
                 }
             }
         }
-        const WeaponCs = [
-            WeaponDmg,
-            WeaponHsBonus,
-            WeaponReloadAmount,
-            WeaponReloadDuration,
-            WeaponReloadStyle,
-            WeaponRateKey,
-            WeaponPellets,
-            WeaponSpread,
-            WeaponAdsKey,
-            WeaponCcKey,
-            WeaponCdKey,
-            WeaponC10mKey,
-            WeaponCmaxKey,
-            WeaponWeight,
-            WeaponExplDmg,
-            WeaponExplRadius
-        ]
-        const Mod = [
-            ModDmg,
-            ModHsBonus,
-            ModCapacity,
-            ModReload,
-            ModRate,
-            ModSpread,
-            ModWeight
-        ]
-        Weapon[5] = WeaponCs[5]
-        if (Weapon[5] === Infinity) {
-            Weapon[5] = 20;
+        if (weaponRateKey === Infinity) {
+            weaponRateKey = 20;
         }
-        Result[6] = Math.round((Weapon[5] + Mod[4]) * Math.pow(10, 2)) / Math.pow(10, 2);
+        Result[6] = Math.round((weaponRateKey + modRate) * Math.pow(10, 2)) / Math.pow(10, 2);
         if (Result[6] === 0 || Ench[2] === 0) {
             EnchActive[0] = 1;
         } else {
@@ -346,38 +317,25 @@ document.addEventListener("DOMContentLoaded", () => {
             Icymoon[5] = 0;
         };
         const icy4Calc = [Icymoon[0] + Icymoon[1] + Icymoon[2], Icymoon[3] + Icymoon[4] + Icymoon[5]];
-        CalcAE(WeaponDmg + ModDmg, WeaponDmg + WeaponHsBonus + ModDmg + ModHsBonus);
-        Weapon[0] = WeaponCs[0]
-        Weapon[1] = WeaponCs[1]
-        Weapon[2] = WeaponCs[2]
-        Weapon[3] = WeaponCs[3]
-        Weapon[4] = WeaponCs[4]
-        Weapon[6] = WeaponCs[6]
-        Weapon[7] = WeaponCs[7]
-        Weapon[8] = WeaponCs[8]
+        CalcAE(weaponDmg + modDmg, weaponDmg + weaponHsBonus + modDmg + modHsBonus);
         let crit4Calc = [0, 0]
         crit4Calc[0] = Accessory[9] * ((Accessory[8] + Armor[3]) / 100) / 100 + 1;
         crit4Calc[1] = Accessory[9] / 100 + 1;
-        Result[12] = (WeaponCs[9] * WeaponCs[10])
-        Result[13] = WeaponCs[10]
-        Result[14] = Math.round(WeaponCs[11] * Math.pow(10, 2)) / Math.pow(10, 2)
-        Result[15] = WeaponCs[12]
-        Result[16] = WeaponCs[14]
-        Result[17] = WeaponCs[15]
-        Weapon[9] = WeaponCs[13]
-        Result[0] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + icy4Calc[0]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[1] = Math.round(((Weapon[0] + Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + icy4Calc[0] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[2] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13] + icy4Calc[1]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[3] = Math.round(((Weapon[0] + Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + Result[13] + icy4Calc[1] + Weapon[1] + Mod[1] + Ae[2]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[4] = Weapon[2] + Mod[2] + Addon[2]
-        Result[5] = Weapon[3] + Mod[3] + Addon[3]
+        Result[12] = (weaponCc * weaponCd)
+        Result[14] = Math.round(weaponCrit10m * Math.pow(10, 2)) / Math.pow(10, 2)
+        Result[0] = Math.round(((weaponDmg + modDmg + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + icy4Calc[0]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[1] = Math.round(((weaponDmg + modDmg + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Armor[1] + Elixir[0] + Accessory[1] + Result[12] + icy4Calc[0] + weaponHsBonus + modHsBonus + Ae[2]) * Addon[5] * crit4Calc[0]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[2] = Math.round(((weaponDmg + modDmg + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + weaponCd + icy4Calc[1]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[3] = Math.round(((weaponDmg + modDmg + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Armor[1] + Elixir[1] + Accessory[1] + weaponCd + icy4Calc[1] + weaponHsBonus + modHsBonus + Ae[2]) * Addon[5] * crit4Calc[1]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[4] = weaponCapa + modCapa + Addon[2]
+        Result[5] = weaponRelDura + modRelDura + Addon[3]
         Result[7] = Math.round((Result[0] * Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[8] = Math.round(Math.abs(Weapon[7] - Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
-        Result[9] = Math.round(Math.abs(Weapon[8] - Mod[5]) * Math.pow(10, 2)) / Math.pow(10, 2)
-        Result[10] = Math.round(((0.2 + Weapon[9] + Mod[6] + Addon[4] + Elixir[2]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
+        Result[8] = Math.round(Math.abs(weaponSprd - modSprd) * Math.pow(10, 2)) / Math.pow(10, 2)
+        Result[9] = Math.round(Math.abs(weaponAdsSprd - modSprd) * Math.pow(10, 2)) / Math.pow(10, 2)
+        Result[10] = Math.round(((0.2 + weaponWt + modWt + Addon[4] + Elixir[2]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
         Result[11] = Math.round((Result[4] / Result[6]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[18] = Math.round(((Mod[0] + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
-        Result[19] = Math.round(((Mod[0] + Ench[1] + Oe[1] + Ae[1] + Addon[1] + Result[13]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[18] = Math.round(((modDmg + Ench[0] * EnchActive[0] + Oe[0] * EnchActive[1] + Ae[0] + Addon[0] + Result[12]) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
+        Result[19] = Math.round(((modDmg + Ench[1] + Oe[1] + Ae[1] + Addon[1] + weaponCd) * Addon[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[20] = Math.round((Ench[3] + Oe[3] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[21] = Math.round((Ench[4] + Oe[4] + Armor[2] + WeaponShiftEffect[1] + Accessory[2]) * Math.pow(10, 1)) / Math.pow(10, 1)
         Result[22] = Math.round((2 + Ench[5] + Oe[5] + Armor[4] + Accessory[5]) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -403,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("DisplaySpread").textContent = (Result[8])
         document.getElementById("DisplayAdsSpread").textContent = (Result[9])
         document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
-        document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
+        document.getElementById("DisplayChangeDmgMax").textContent = (weaponCritMax)
         document.getElementById("DisplayWeight").textContent = (Result[10])
         document.getElementById("DisplayAveDef").textContent = (Result[20])
         document.getElementById("DisplayHiDef").textContent = (Result[21])
@@ -425,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("MobileDisplaySpread").textContent = (Result[8])
         document.getElementById("MobileDisplayAdsSpread").textContent = (Result[9])
         document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
-        document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
+        document.getElementById("MobileDisplayChangeDmgMax").textContent = (weaponCritMax)
         document.getElementById("MobileDisplayWeight").textContent = (Result[10])
         document.getElementById("MobileDisplayAveDef").textContent = (Result[20])
         document.getElementById("MobileDisplayHiDef").textContent = (Result[21])
@@ -448,15 +406,15 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("DisplayDuration").textContent = 0
             document.getElementById("MobileDisplayDuration").textContent = 0
         };
-        if (Result[16] > 0) {
+        if (weaponExplDmg > 0) {
             document.getElementById("DisplayChangeDmgStyle").textContent = ('爆発dmg')
             document.getElementById("MobileDisplayChangeDmgStyle").textContent = ('爆発dmg')
             document.getElementById("DisplayChangeMaxStyle").textContent = ('爆発半径')
             document.getElementById("MobileDisplayChangeMaxStyle").textContent = ('爆発半径')
-            document.getElementById("DisplayChangeDmg10m").textContent = (Result[16] + '%')
-            document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[16] + '%')
-            document.getElementById("DisplayChangeDmgMax").textContent = (Result[17])
-            document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[17])
+            document.getElementById("DisplayChangeDmg10m").textContent = (weaponExplDmg + '%')
+            document.getElementById("MobileDisplayChangeDmg10m").textContent = (weaponExplDmg + '%')
+            document.getElementById("DisplayChangeDmgMax").textContent = (weaponExplRadius)
+            document.getElementById("MobileDisplayChangeDmgMax").textContent = (weaponExplRadius)
             document.getElementById("DisplayAddDmg").textContent = ("+" + Result[18] + "(" + Result[19] + ")")
             document.getElementById("MobileDisplayAddDmg").textContent = ("+" + Result[18] + "(" + Result[19] + ")")
         } else if (Result[14] > 0) {
@@ -465,9 +423,9 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("DisplayChangeMaxStyle").textContent = ('最大増幅量')
             document.getElementById("MobileDisplayChangeMaxStyle").textContent = ('最大増幅量')
             document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
-            document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
+            document.getElementById("DisplayChangeDmgMax").textContent = (weaponCritMax)
             document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
-            document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
+            document.getElementById("MobileDisplayChangeDmgMax").textContent = (weaponCritMax)
             document.getElementById("DisplayAddDmg").textContent = null
             document.getElementById("MobileDisplayAddDmg").textContent = null
         } else {
@@ -476,15 +434,15 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("DisplayChangeMaxStyle").textContent = ('最大減衰量')
             document.getElementById("MobileDisplayChangeMaxStyle").textContent = ('最大減衰量')
             document.getElementById("DisplayChangeDmg10m").textContent = (Result[14])
-            document.getElementById("DisplayChangeDmgMax").textContent = (Result[15])
+            document.getElementById("DisplayChangeDmgMax").textContent = (weaponCritMax)
             document.getElementById("MobileDisplayChangeDmg10m").textContent = (Result[14])
-            document.getElementById("MobileDisplayChangeDmgMax").textContent = (Result[15])
+            document.getElementById("MobileDisplayChangeDmgMax").textContent = (weaponCritMax)
             document.getElementById("DisplayAddDmg").textContent = null
             document.getElementById("MobileDisplayAddDmg").textContent = null
         };
-        if (Weapon[6] > 1) {
-            document.getElementById("DisplayPellets").textContent = ("x" + Weapon[6])
-            document.getElementById("MobileDisplayPellets").textContent = ("x" + Weapon[6])
+        if (weaponPellets > 1) {
+            document.getElementById("DisplayPellets").textContent = ("x" + weaponPellets)
+            document.getElementById("MobileDisplayPellets").textContent = ("x" + weaponPellets)
         } else {
             document.getElementById("DisplayPellets").textContent = (null)
             document.getElementById("MobileDisplayPellets").textContent = (null)
