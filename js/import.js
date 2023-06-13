@@ -11,6 +11,7 @@ const WeaponTypes = [
     "Secondary",
     "Melee"
 ]
+
 //EnchData
 //0Dmg 1ProbLv1 2ProbLv2 3ProbLv3 4Cooldown 5DefLv1 6DefLv2 7DefLv3 8DefProbLv1 9DefProbLv2 10DefProbLv3
 //    Name              = [Dmg,DmgLv     ,     , CD,   DefLv  ,    , DefProbLv     , ManaLv , DodgeLv,      ,    ]
@@ -42,27 +43,27 @@ const AbText     = ['Arcane Brilliance', '攻撃時、相手に発光3s', '攻�
 const NsText     = ['Night Stalker',     'Divine以外のglow無効化', 'Divine以外のglow無効化', 'Divine以外のglow無効化']
 const EsText     = ['Evershade',         '90%でScroll of Glowingを無効化', '95%でScroll of Glowingを無効化', '100%でScroll of Glowingを無効化']
 const enchKeys = {
-    "ArcaneBrilliance":ArcaneBrilliance,
-    "DeathsRuin":DeathsRuin,
-    "DemonPower":DemonPower,
-    "Evershade":Evershade,
-    "FlexibleResonance":FlexibleResonance,
-    "FlexibleResonance2":FlexibleResonance2,
-    "NorthernWind":NorthernWind,
-    "PhoenixFlame":PhoenixFlame,
-    "ShadowStrike":ShadowStrike,
-    "ShadowStrike0":ShadowStrike0,
-    "ShadowStrike1":ShadowStrike1,
-    "ShadowStrike2":ShadowStrike2,
-    "ShieldWall":ShieldWall,
-    "SiphonLife":SiphonLife,
-    "Sunfire":Sunfire,
-    "ZephyrsBlessing":ZephyrsBlessing,
-    "ManaFountain":ManaFountain,
-    "NightStalker":NightStalker,
-    "VictoryRush":VictoryRush,
-    "LastStand":LastStand,
-    "none":enchNone
+    "ArcaneBrilliance"   :ArcaneBrilliance,
+    "DeathsRuin"         :DeathsRuin,
+    "DemonPower"         :DemonPower,
+    "Evershade"          :Evershade,
+    "FlexibleResonance"  :FlexibleResonance,
+    "FlexibleResonance2" :FlexibleResonance2,
+    "NorthernWind"       :NorthernWind,
+    "PhoenixFlame"       :PhoenixFlame,
+    "ShadowStrike"       :ShadowStrike,
+    "ShadowStrike0"      :ShadowStrike0,
+    "ShadowStrike1"      :ShadowStrike1,
+    "ShadowStrike2"      :ShadowStrike2,
+    "ShieldWall"         :ShieldWall,
+    "SiphonLife"         :SiphonLife,
+    "Sunfire"            :Sunfire,
+    "ZephyrsBlessing"    :ZephyrsBlessing,
+    "ManaFountain"       :ManaFountain,
+    "NightStalker"       :NightStalker,
+    "VictoryRush"        :VictoryRush,
+    "LastStand"          :LastStand,
+    "none"               :enchNone
 };
 const enchTextKeys = {
     "ArcaneBrilliance":AbText,
@@ -182,30 +183,31 @@ const addonTextLvKeys = {
     "AddonLev3":4,
 };
 //Armor 0HP 1Atk 2Def 3CC 4Mana 5Stamina 6 MaxSta 7Regene
-const PChest = [0, 0, 2, 0,  0, 0, 0,  0]
-const PHand  = [0, 1, 0, 0,  0, 0, 0,  0]
-const PBoots = [0, 0, 0, 0,  0, 1, 0,  0]
-const PSet   = [8, 0, 0, 0,  0, 0, 0,  0]
-const CChest = [2, 0, 0, 0,  0, 0, 0,  0]
-const CHand  = [0, 0, 1, 0,  0, 0, 0,  0]
-const CBoots = [0, 0, 0, 0,  0, 1, 0,  0]
-const CSet   = [0, 0, 0, 0,  0, 0, 0,  1]
-const GChest = [4, 0, 0, 0,  0, 0, 0,  0]
-const GHand  = [0, 2, 0, 0,  0, 0, 0,  0]
-const GBoots = [0, 0, 1, 0,  0, 0, 0,  0]
-const GSet   = [0, 0, 2, 0,  0, 0, 0,  0]
-const IChest = [4, 0, 0, 0,  0, 0, 0,  0] 
-const IHand  = [0, 0, 0, 5,  0, 0, 0,  0]
-const IBoots = [0, 0, 0, 0,  1, 0, 0,  0]
-const ISet   = [0, 0, 0, 10, 0, 0, 0,  0]
-const FChest = [0, 0, 6, 0,  0, 0, -7, 0]
-const SChest = [0, 0, 6, 0,  0, 0, 0,  0]
-const NChest = [0, 0, 0, 0,  0, 0, 0,  0]
-const NHand  = [0, 0, 0, 0,  0, 0, 0,  0]
-const NBoots = [0, 0, 0, 0,  0, 0, 0,  0]
-const NSet   = [0, 0, 0, 0,  0, 0, 0,  0]
+const PChest = [0, 0, 2, 0,  0]
+const PHand  = [0, 1, 0, 0,  0]
+const PBoots = [0, 0, 0, 0,  0]
+const PSet   = [8, 0, 0, 0,  0]
+const CChest = [2, 0, 0, 0,  0]
+const CHand  = [0, 0, 1, 0,  0]
+const CBoots = [0, 0, 0, 0,  0]
+const CSet   = [0, 0, 0, 0,  0]
+const GChest = [4, 0, 0, 0,  0]
+const GHand  = [0, 2, 0, 0,  0]
+const GBoots = [0, 0, 1, 0,  0]
+const GSet   = [0, 0, 2, 0,  0]
+const IChest = [4, 0, 0, 0,  0] 
+const IHand  = [0, 0, 0, 5,  0]
+const IBoots = [0, 0, 0, 0,  1]
+const ISet   = [0, 0, 0, 10, 0]
+const FChest = [0, 0, 6, 0,  0]
+const SChest = [0, 0, 6, 0,  0]
+const NChest = [0, 0, 0, 0,  0]
+const NHand  = [0, 0, 0, 0,  0]
+const NBoots = [0, 0, 0, 0,  0]
+const NSet   = [0, 0, 0, 0,  0]
 const CBootsText = ['Cleric Shoes',      'スタミナ回復+1']
 const PBootsText = ['Pilgrim Walkers',   'スタミナ回復+1']
+const FChestText = ['Fort Armor',        '最大スタミナを3に変更']
 const CSetText   = ['Clericフルセット',    'RegenerationⅢ3s']
 const ChestKeys = {
     "Cleric":CChest,
