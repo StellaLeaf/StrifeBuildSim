@@ -59,8 +59,7 @@ const render = () => {
         : (TypeKey   === "Secondary")    ? _objSecp
         : (TypeKey   === "Melee")        ? _objMeleep
         : "none";
-    
-    //ShiftActions
+//ShiftActions
     if(TypeKey == "SMG") {BsLabel.style.display = "inline-block";}
     else if (TypeKey == "LMG") {MsLabel.style.display = "inline-block";}
     else {
