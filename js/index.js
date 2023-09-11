@@ -53,8 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const _pathSecp = "maps/6_PISTOL_CSP.json"
     const _pathMelee = "maps/4_SG.json"
     const _pathMeleep = "maps/4_SG_CSP.json"
-    let jsondata
-    let jsondata2
     let _objAr
     let _objArp
     let _objSmg
@@ -90,40 +88,39 @@ document.addEventListener("DOMContentLoaded", () => {
         const ModKey = document.getElementById("ModForm").ModSelect.value
         const BsToggle = document.getElementById("BsCheck");
         const MsToggle = document.getElementById("MsCheck");
-        if (TypeKey === "none") {
-            jsondata = 'none';
-            jsondata2 = 'none';
-        } else if (WeaponKey === 'graveless' || WeaponKey === 'Helheim' || WeaponKey === 'horizon' || WeaponKey === 'thirdeye' || WeaponKey === 'Coldfang') {
-            jsondata = _objSr
-            jsondata2 = _objArp
-        } else if (WeaponKey === 'minigun' || WeaponKey === 'awr') {
-            jsondata = _objExpl
-            jsondata2 = _objLmgp
-        } else if (TypeKey === "AssaultRifle") {
-            jsondata = _objAr
-            jsondata2 = _objArp
-        } else if (TypeKey === "SMG" || TypeKey === "Shotgun") {
-            jsondata = _objSmg
-            jsondata2 = _objSmgp
-        } else if (TypeKey === "LMG") {
-            jsondata = _objLmg
-            jsondata2 = _objLmgp
-        } else if (TypeKey === "SniperRifle") {
-            jsondata = _objSr
-            jsondata2 = _objSrp
-        } else if (TypeKey === "Carbine") {
-            jsondata = _objCar
-            jsondata2 = _objCarp
-        } else if (TypeKey === "Special" || TypeKey === "Staves") {
-            jsondata = _objExpl
-            jsondata2 = _objExplp
-        } else if (TypeKey === "Secondary") {
-            jsondata = _objSec
-            jsondata2 = _objSecp
-        } else if (TypeKey === "Melee") {
-            jsondata = _objMelee
-            jsondata2 = _objMeleep
-        }
+        const jsondata =
+        (  TypeKey   === "none")         ? "none"
+        : (TypeKey   === "AssaultRifle") ? _objAr
+        : (TypeKey   === "SMG")          ? _objSmg
+        : (TypeKey   === "Shotgun")      ? _objSmg
+        : (TypeKey   === "LMG")          ? _objLmg
+        : (TypeKey   === "SniperRifle")  ? _objSr
+        : (TypeKey   === "Carbine")      ? _objCar
+        : (TypeKey   === "Special")      ? _objExpl
+        : (TypeKey   === "Staves")       ? _objExpl
+        : (TypeKey   === "Secondary")    ? _objSec
+        : (TypeKey   === "Melee")        ? _objMelee
+        : "none";
+    const jsondata2 = 
+        (  TypeKey   === "none")         ? "none"
+        : (WeaponKey === "graveless")    ? _objArp
+        : (WeaponKey === "Helheim")      ? _objArp
+        : (WeaponKey === "horizon")      ? _objArp
+        : (WeaponKey === "thirdeye")     ? _objArp
+        : (WeaponKey === 'Coldfang')     ? _objArp
+        : (WeaponKey === 'minigun')      ? _objLmgp
+        : (WeaponKey === 'awr')          ? _objLmgp
+        : (TypeKey   === "AssaultRifle") ? _objArp
+        : (TypeKey   === "SMG")          ? _objSmgp
+        : (TypeKey   === "Shotgun")      ? _objSmgp
+        : (TypeKey   === "LMG")          ? _objLmgp
+        : (TypeKey   === "SniperRifle")  ? _objSrp
+        : (TypeKey   === "Carbine")      ? _objCarp
+        : (TypeKey   === "Special")      ? _objExplp
+        : (TypeKey   === "Staves")       ? _objExplp
+        : (TypeKey   === "Secondary")    ? _objSecp
+        : (TypeKey   === "Melee")        ? _objMeleep
+        : "none";
         if(TypeKey == "SMG") {BsLabel.style.display = "inline-block";}
         else {BsLabel.style.display = 'none';
             BsToggle.checked = false;};

@@ -80,28 +80,40 @@ const enchTextLvKeys = {
     "EnchLev3":3,
 };
 //AEdata 0Dmg 1Prob 2Dodge
+const AmplifyMagic      = [0,   0,    0]
+const ArcaneMeditation  = [0,   0,    0]
 const Bloodcraze        = [0,   0,    0]
 const Bloodcraze2       = [7,   1,    0]
-const ElementalOverload = [0,   0,    0]
-const ElementalOverload2= [6,   1,    0]
-const Mastercrafted     = [1,   1,    0]
 const ConcentratedFire  = [0,   0,    0]
 const ConcentratedFire2 = [4,   1,    0]
-const ManaBurn          = [0,   0,    0]
-const ManaBurn2         = [5,   1,    0]
-const Windsong          = [0,   0,    0]
-const Windsong2         = [2,   1,    0]
-const SuddenDeath       = [0,   0,    0]
-const SuddenDeath2      = [20,  0.05, 0]
+const CursedPact        = [0,   0,    0]
+const DrainSoul         = [0,   0,    0]
+const EchoOfDeath       = [100, 1,    0]
+const ElementalOverload = [0,   0,    0]
+const ElementalOverload2= [6,   1,    0]
+const EverlastingLife   = [0,   0,    0]
+const FleetFooted       = [0,   0,    0]
+const FleetFooted2      = [0,   0,    0.25]
+const FragileBalance    = [0,   0,    0]
+const GolemProtection   = [0,   0,    0]
+const IndomitableSpirit = [0,   0,    0]
+const IndomitableSpirit2= [0,   0,    0.15]
+const JoyOfWealth       = [0,   0,    0]
+const ManaEfficiency    = [0,   0,    0]
+const Mastercrafted     = [1,   1,    0]
 const Manaflood         = [0,   0,    0]
 const Manaflood0        = [1,   1,    0]
 const Manaflood1        = [2,   1,    0]
 const Manaflood2        = [3,   1,    0]
-const EchoOfDeath       = [100, 1,    0]
-const FleetFooted       = [0,   0,    0]
-const FleetFooted2      = [0,   0,    0.25]
-const IndomitableSpirit = [0,   0,    0]
-const IndomitableSpirit2= [0,   0,    0.15]
+const ManaBurn          = [0,   0,    0]
+const ManaBurn2         = [5,   1,    0]
+const Regrowth          = [0,   0,    0]
+const SuddenDeath       = [0,   0,    0]
+const SuddenDeath2      = [20,  0.05, 0]
+const TitanStance       = [0,   0,    0]
+const WheelOfFortune    = [0,   0,    0]
+const Windsong          = [0,   0,    0]
+const Windsong2         = [2,   1,    0]
 const aeNone            = [0,   0,    0]
 const AmpText    = ['Amplify Magic',     'Scroll of Glowing+4s Rune of Levitation速度二倍']
 const AmText     = ['Arcane Meditation', 'HP自然回復停止 静止でHP・スタミナ即時全快']
@@ -117,22 +129,40 @@ const RegText    = ['Regrowth',          'HP・スタミナ自動回復のクー
 const TsText     = ['Titan Stance',      '発動中スタミナが減少 スタミナ0でスニーク時、dmg20%軽減']
 const WofText    = ['Wheel of Fortune',  'キル時2%でCoin 0.5%でAS・LTB 0.02%でArmorBoxを入手']
 const aeKeys = {
+    "AmplifyMagic":AmplifyMagic,
+    "ArcaneMeditation":ArcaneMeditation,
     "Bloodcraze":Bloodcraze,
+    "Bloodcraze2":Bloodcraze2,
+    "ConcentratedFire":ConcentratedFire,
+    "ConcentratedFire2":ConcentratedFire2,
+    "CursedPact":CursedPact,
+    "DrainSoul":DrainSoul,
+    "EchoOfDeath":EchoOfDeath,
     "ElementalOverload":ElementalOverload,
     "ElementalOverload2":ElementalOverload2,
+    "EverlastingLife":EverlastingLife,
+    "FleetFooted":FleetFooted,
+    "FleetFooted2":FleetFooted2,
+    "FragileBalance":FragileBalance,
+    "GolemProtection":GolemProtection,
+    "IndomitableSpirit":IndomitableSpirit,
+    "IndomitableSpirit2":IndomitableSpirit2,
+    "JoyOfWealth":JoyOfWealth,
+    "ManaEfficiency":ManaEfficiency,
     "Mastercrafted":Mastercrafted,
-    "ConcentratedFire":ConcentratedFire,
-    "ManaBurn":ManaBurn,
-    "ManaBurn2":ManaBurn2,
-    "Windsong":Windsong,
-    "SuddenDeath":SuddenDeath,
     "Manaflood":Manaflood,
     "Manaflood0":Manaflood0,
     "Manaflood1":Manaflood1,
     "Manaflood2":Manaflood2,
-    "EchoOfDeath":EchoOfDeath,
-    "FleetFooted":FleetFooted,
-    "IndomitableSpirit":IndomitableSpirit,
+    "ManaBurn":ManaBurn,
+    "ManaBurn2":ManaBurn2,
+    "Regrowth":Regrowth,
+    "SuddenDeath":SuddenDeath,
+    "SuddenDeath2":SuddenDeath2,
+    "TitanStance":TitanStance,
+    "WheelOfFortune":WheelOfFortune,
+    "Windsong":Windsong,
+    "Windsong2":Windsong2,
     "none":aeNone
 };
 const aeTextKeys = {
