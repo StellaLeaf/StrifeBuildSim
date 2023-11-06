@@ -35,6 +35,8 @@ const ManaFountain      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    
 const NightStalker      = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0.08, 0.09,  0.1,  ]
 const VictoryRush       = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const LastStand         = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
+const KnightMod         = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
+const ChampionMod       = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const enchNone          = [0,  0,    0,    0,    0,    0, 0,    0,   0,   0,    0,   0, 0, 0, 0,    0,     0,    ]
 const LsText     = ['Last Stand',        '現在ハートx9%でダメージを1/20に軽減', '現在ハートx9.25%でダメージを1/20に軽減', '現在ハートx9.5%でダメージを1/20に軽減']
 const VrText     = ['Victory Rush',      'キル時70%で1pt付与(3ptでHP+8)', 'キル時75%で1pt付与(3ptでHP+8)', 'キル時80%で1pt付与(3ptでHP+8)']
@@ -63,6 +65,8 @@ const enchKeys = {
     "NightStalker"       :NightStalker,
     "VictoryRush"        :VictoryRush,
     "LastStand"          :LastStand,
+    "KnightMod"          :KnightMod,
+    "ChampionMod"        :ChampionMod,
     "none"               :enchNone
 };
 const enchTextKeys = {
@@ -191,8 +195,11 @@ const SupersonicAmmo2   = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,  
 const ShieldBreaker     = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
 const ShieldBreaker2    = [   7,   8,   9,  10,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
 const ApRounds          = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const EmperorMod        = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
+const AdWheelOfFortune  = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
 const addonNone         = [   0,   0,   0,   0,   1, 0, 0, 0,  0,  0,  0,   0,   0,     0,     0,     0,     0,    1,   1,    1,   1]
 const ApText     = ['AP Rounds', '70%でLastStand無効化', '75%でLastStand無効化', '80%でLastStand無効化', '85%でLastStand無効化']
+const AdWofText  = ['Wheel of Fortune', 'キル時2%でCoin 0.5%でAS・LTB 0.02%でArmorBoxを入手', 'キル時2%でCoin 0.5%でAS・LTB 0.02%でArmorBoxを入手', 'キル時2%でCoin 0.5%でAS・LTB 0.02%でArmorBoxを入手', 'キル時2%でCoin 0.5%でAS・LTB 0.02%でArmorBoxを入手']
 const addonKeys = {
     "ManaPowder":ManaPowder,
     "HeavyBullets":HeavyBullets,
@@ -204,8 +211,14 @@ const addonKeys = {
     "ShieldBreaker":ShieldBreaker,
     "ShieldBreaker2":ShieldBreaker2,
     "ApRounds":ApRounds,
+    "EmperorMod":EmperorMod,
+    'AdWheelOfFortune':AdWheelOfFortune,
     "none":addonNone
 };
+const addonTextKeys = {
+    'APRounds':ApText,
+    'AdWheelOfFortune':AdWofText
+}
 const addonTextLvKeys = {
     "AddonLev0":1,
     "AddonLev1":2,

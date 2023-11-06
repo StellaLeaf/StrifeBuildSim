@@ -86,6 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const TypeKey = document.getElementById("TypeForm").TypeSelect.value
         const WeaponKey = document.getElementById("WeaponForm").WeaponSelect.value
         const ModKey = document.getElementById("ModForm").ModSelect.value
+        let addonName = document.getElementById("AddonForm").AddonSelect.value
+        let enchName = document.getElementById("EnchantForm").EnchantSelect.value
+        let oeName = document.getElementById("OeForm").OeSelect.value
         const BsToggle = document.getElementById("BsCheck");
         const MsToggle = document.getElementById("MsCheck");
         const jsondata =
@@ -243,8 +246,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let modRate = 0
         let modSprd = 0
         let modDmg = 0
+        let limModCapa = 0;
+        let limModHsBonus = 0;
+        let limModWt = 0;
         if (!(ModKey === "none" || WeaponKey === "none" || jsondata2 == 'none')) {
             let cspAry = null
+            if (ModKey === "Sunfire Ⅲ"){modDmg = 3 * 0.77};
             for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
                 cspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
                 if (cspAry[1] === ModKey && cspAry[0] === "CAPACITY")   {modCapa    = Number(cspAry[2])};
@@ -254,6 +261,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (cspAry[1] === ModKey && cspAry[0] === "FIRERATE")   {modRate    = Number(cspAry[2])};
                 if (cspAry[1] === ModKey && cspAry[0] === "PRESHOOT")   {modSprd    = Number(cspAry[2])};
                 if (cspAry[1] === ModKey && cspAry[0] === "DAMAGE")     {modDmg     = Number(cspAry[2])};
+            };
+        };
+        if (!(WeaponKey === "none" || jsondata2 == 'none')){
+            if (enchName === "KnightMod"){
+                let limCspAry = null
+                for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
+                    limCspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
+                    if (limCspAry[1] === "Knight Mod" && limCspAry[0] === "CAPACITY")  {limModCapa = Number(limCspAry[2])};
+                };
+            };
+            if (oeName === "ChampionMod"){
+                let limCspAry = null
+                for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
+                    limCspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
+                    if (limCspAry[1] === "Champion Mod" && limCspAry[0] === "GUNWEIGHT")  {limModWt = Number(limCspAry[2])};
+                };
+            };
+            if (addonName === "EmperorMod"){
+                let limCspAry = null
+                for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
+                    limCspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
+                    if (limCspAry[1] === "Emperor Mod" && limCspAry[0] === "CAPACITY")   {limModCapa    += Number(limCspAry[2])};
+                    if (limCspAry[1] === "Emperor Mod" && limCspAry[0] === "GUNWEIGHT")  {limModWt      += Number(limCspAry[2])};
+                    if (limCspAry[1] === "Emperor Mod" && limCspAry[0] === "HEADSHOT")   {limModHsBonus += Number(limCspAry[2])};
+                };
             };
         };
         const weaponAveCrit = (weaponCc * weaponCd)
@@ -291,21 +323,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const icyMaxDmgAccy3 = (Accy3NwCheck === "NecklaceOfIcyMoon") ? icyNwDmg : 0;
         const icyAveDmg = icyAveDmgAccy1 + icyAveDmgAccy2 + icyAveDmgAccy3;
         const icyMaxDmg = icyMaxDmgAccy1 + icyMaxDmgAccy2 + icyMaxDmgAccy3;
-        CalcAE(weaponDmg + modDmg, weaponDmg + weaponHsBonus + modDmg + modHsBonus);
+        CalcAE(weaponDmg + modDmg, weaponDmg + weaponHsBonus + modDmg + modHsBonus + limModHsBonus);
         const resultAveCritProb = Accessory[9] * ((Accessory[8] + armorCc) / 100) / 100 + 1;
         const resultMaxCritProb = Accessory[9] / 100 + 1;
         const resultAtt10m      = Math.round(weaponAtt10m * Math.pow(10, 2)) / Math.pow(10, 2)
         const resultAttMax      = Math.round(weaponAttMax * Math.pow(10, 2)) / Math.pow(10, 2)
         const resultAveDmg      = Math.round(((weaponDmg + modDmg + enchAveDmg * enchActiveRate + oeAveDmg * oeActiveRate + aeAveDmg + addonAveDmg + armorAtk + Elixir[0] + Accessory[1] + weaponAveCrit + icyAveDmg) * addonSsaDmgMag * resultAveCritProb) * Math.pow(10, 1)) / Math.pow(10, 1)
-        const resultAveHsDmg    = Math.round(((weaponDmg + modDmg + enchAveDmg * enchActiveRate + oeAveDmg * oeActiveRate + aeAveDmg + addonAveDmg + armorAtk + Elixir[0] + Accessory[1] + weaponAveCrit + icyAveDmg + weaponHsBonus + modHsBonus + aeEodHsDmg) * addonSsaDmgMag * resultAveCritProb) * Math.pow(10, 1)) / Math.pow(10, 1)
+        const resultAveHsDmg    = Math.round(((weaponDmg + modDmg + enchAveDmg * enchActiveRate + oeAveDmg * oeActiveRate + aeAveDmg + addonAveDmg + armorAtk + Elixir[0] + Accessory[1] + weaponAveCrit + icyAveDmg + weaponHsBonus + modHsBonus + limModHsBonus + aeEodHsDmg) * addonSsaDmgMag * resultAveCritProb) * Math.pow(10, 1)) / Math.pow(10, 1)
         const resultMaxDmg      = Math.round(((weaponDmg + modDmg + enchMaxDmg + oeMaxDmg + aeMaxDmg + addonMaxDmg + armorAtk + Elixir[1] + Accessory[1] + weaponCd + icyMaxDmg) * addonSsaDmgMag * resultMaxCritProb) * Math.pow(10, 1)) / Math.pow(10, 1)
-        const resultMaxHsDmg    = Math.round(((weaponDmg + modDmg + enchMaxDmg + oeMaxDmg + aeMaxDmg + addonMaxDmg + armorAtk + Elixir[1] + Accessory[1] + weaponCd + icyMaxDmg + weaponHsBonus + modHsBonus + aeEodHsDmg) * addonSsaDmgMag * resultMaxCritProb) * Math.pow(10, 1)) / Math.pow(10, 1)
-        const resultCapa        = weaponCapa + modCapa + addonCapa
+        const resultMaxHsDmg    = Math.round(((weaponDmg + modDmg + enchMaxDmg + oeMaxDmg + aeMaxDmg + addonMaxDmg + armorAtk + Elixir[1] + Accessory[1] + weaponCd + icyMaxDmg + weaponHsBonus + modHsBonus + limModHsBonus + aeEodHsDmg) * addonSsaDmgMag * resultMaxCritProb) * Math.pow(10, 1)) / Math.pow(10, 1)
+        const resultCapa        = weaponCapa + modCapa + limModCapa + addonCapa
         const resultRelDura     = weaponRelDura + modRelDura + addonRelDura
         const resultDps         = Math.round((resultAveDmg * resultRate) * Math.pow(10, 1)) / Math.pow(10, 1)
         const resultSprd        = Math.round(Math.abs(weaponSprd - modSprd) * Math.pow(10, 2)) / Math.pow(10, 2)
         const resultAdsSprd     = Math.round(Math.abs(weaponAdsSprd - modSprd) * Math.pow(10, 2)) / Math.pow(10, 2)
-        const resultWt          = Math.round(((0.2 + weaponWt + modWt + addonWt + Elixir[2]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
+        const resultWt          = Math.round(((0.2 + weaponWt + modWt + limModWt + addonWt + Elixir[2]) / 0.2) * Math.pow(10, 2)) / Math.pow(10, 2)
         const resultDura        = Math.round((resultCapa / resultRate) * Math.pow(10, 1)) / Math.pow(10, 1)
         const resultAddAveDmg   = Math.round(((modDmg + enchAveDmg * EnchActive[0] + oeAveDmg * oeActiveRate + aeAveDmg + addonAveDmg + weaponAveCrit) * addonSsaDmgMag) * Math.pow(10, 1)) / Math.pow(10, 1)
         const resultAddMaxDmg   = Math.round(((modDmg + enchMaxDmg + oeMaxDmg + aeMaxDmg + addonMaxDmg + weaponCd) * addonSsaDmgMag) * Math.pow(10, 1)) / Math.pow(10, 1)
@@ -650,7 +682,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (AddonLv == "AddonLev1") {addonAssg(1);}
         else if (AddonLv == "AddonLev2") {addonAssg(2);}
         else if (AddonLv == "AddonLev3") {addonAssg(3);};
-        if (addonName == 'ApRounds' && AddonLv != "none") {
+        if (addonTextKeys[addonName] && AddonLv != "none") {
             if (AddonTableSwitch === 1) {
                 tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             };
@@ -658,8 +690,8 @@ document.addEventListener("DOMContentLoaded", () => {
             let NameElem = TrElem.insertCell(0);
             let ProbElem = TrElem.insertCell(1);
             AddonTableSwitch = 1;
-            NameElem.appendChild(document.createTextNode(ApText[0]));
-            ProbElem.appendChild(document.createTextNode(ApText[addonTextLvKeys[AddonLv]]));
+            NameElem.appendChild(document.createTextNode(addonTextKeys[addonName][0]));
+            ProbElem.appendChild(document.createTextNode(addonTextKeys[addonName][addonTextLvKeys[AddonLv]]));
         } else if (AddonTableSwitch === 1) {
             tableElem.tBodies[0].deleteRow(enchTableSwitch + OeTableSwitch + AeTableSwitch);
             AddonTableSwitch = 0;
@@ -752,7 +784,6 @@ document.addEventListener("DOMContentLoaded", () => {
         };
         render();
     };
-
     const CalcAccessory = () => {
         let Accy1Name = document.getElementById("Accy1Form").Accessory1Select.value
         let Accy2Name = document.getElementById("Accy2Form").Accessory2Select.value
