@@ -264,21 +264,21 @@ document.addEventListener("DOMContentLoaded", () => {
             };
         };
         if (!(WeaponKey === "none" || jsondata2 == 'none')){
-            if (enchName === "KnightMod"){
+            if (enchName === "KnightMod" && ModKey != "Knight Mod"){
                 let limCspAry = null
                 for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
                     limCspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
                     if (limCspAry[1] === "Knight Mod" && limCspAry[0] === "CAPACITY")  {limModCapa = Number(limCspAry[2])};
                 };
             };
-            if (oeName === "ChampionMod"){
+            if (oeName === "ChampionMod" && ModKey != "Champion Mod"){
                 let limCspAry = null
                 for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
                     limCspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
                     if (limCspAry[1] === "Champion Mod" && limCspAry[0] === "GUNWEIGHT")  {limModWt = Number(limCspAry[2])};
                 };
             };
-            if (addonName === "EmperorMod"){
+            if (addonName === "EmperorMod" && ModKey != "Emperor Mod"){
                 let limCspAry = null
                 for (const i in jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"]) {
                     limCspAry = jsondata2[WeaponKey]["Attachments"]["AttachmentsAffect"][i].split(":")
@@ -561,7 +561,9 @@ document.addEventListener("DOMContentLoaded", () => {
             else if (lv == "EnchLev3") {oeAssg(2)};
         };
         enchLevelsCalc(enchKeys[enchName], EnchLv)
-        oeLevelsCalc(enchKeys[oeName],OeLv)
+        if(enchName != oeName){
+            oeLevelsCalc(enchKeys[oeName],OeLv)
+        };
         console.log(enchAveDmg)
         if (enchTextKeys[enchName] && EnchLv != "none") {
             if (enchTableSwitch === 1) {
